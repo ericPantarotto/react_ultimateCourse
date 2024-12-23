@@ -4,7 +4,9 @@
 
 ## Welcome
 
-### Building our first React App
+### Read before you start
+
+**<span style='color: #a3842c'>Link:** (<https://github.com/ericPantarotto/react_completeGuide/tree/main/_notes>)
 
 <!---
 [comment]: it works with text, you can rename it how you want
