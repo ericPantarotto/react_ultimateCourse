@@ -21,6 +21,14 @@ we would really need to create a lot of extra code that, with React, we don't ha
 So React is basically a huge **abstraction away from the DOM** so that we never have to work with a DOM directly as we would with vanilla JavaScript.
 
 So we simply tell React what we want to happen when some data changes, but not how to do it. And again, we do that using **JSX**.
+
+### Pure React
+
+So, we have no modules here, we have no way of converting JSX, we have no HTTP server which automatically reloads the application and so on.
+
+### React's Official Documentation
+
+**<span style='color: #a3842c'>Link:** [https://react.dev/reference/react]
 <!---
 [comment]: it works with text, you can rename it how you want
 
