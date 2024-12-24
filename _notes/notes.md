@@ -8,6 +8,13 @@
 
 **<span style='color: #a3842c'>Link:** (<https://github.com/ericPantarotto/react_completeGuide/tree/main/_notes>)
 
+## A first Look at React
+
+### React vs. Vanilla JavaScript
+
+**<span style='color: #875c5c'>IMPORTANT:** *React* and all these other front-end frameworks are really good at keeping the data automatically in sync with the user interface.
+
+we would really need to create a lot of extra code that, with React, we don't have to, again, because it automatically takes care of keeping the data in sync with the user interface.
 <!---
 [comment]: it works with text, you can rename it how you want
 
