@@ -15,6 +15,12 @@
 **<span style='color: #875c5c'>IMPORTANT:** *React* and all these other front-end frameworks are really good at keeping the data automatically in sync with the user interface.
 
 we would really need to create a lot of extra code that, with React, we don't have to, again, because it automatically takes care of keeping the data in sync with the user interface.
+
+### What is React?
+
+So React is basically a huge **abstraction away from the DOM** so that we never have to work with a DOM directly as we would with vanilla JavaScript.
+
+So we simply tell React what we want to happen when some data changes, but not how to do it. And again, we do that using **JSX**.
 <!---
 [comment]: it works with text, you can rename it how you want
 
