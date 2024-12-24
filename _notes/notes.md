@@ -29,6 +29,21 @@ So, we have no modules here, we have no way of converting JSX, we have no HTTP s
 ### React's Official Documentation
 
 **<span style='color: #a3842c'>Link:** [https://react.dev/reference/react]
+
+### Setting up a new React project: The Options
+
+#### Vite: hot module replacement (hmr) and fast bundling
+
+#### React Frameworks
+
+In *React* documentation, you might have read that the React team now advises developers to use a so-called React framework like Next.js or Remix to build new projects.
+
+So essentially, a React framework is a framework built on top of the React library and which is gonna make it even easier to build applications than with just vanilla React itself:
+
+- routing
+- data fetching
+- server-side rendering
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
