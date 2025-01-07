@@ -361,6 +361,7 @@ const sortedByPages = books
 sortedByPages;
 */
 
+/*
 // NOTE: Immutable Array
 const books = getBooks();
 books;
@@ -389,12 +390,14 @@ booksAfterUpdate;
 const _ = require('lodash');
 const deepCopy = _.cloneDeep(booksAfterUpdate);
 deepCopy;
+*/
 
-// fetch("https://jsonplaceholder.typicode.com/todos")
-//   .then((res) => res.json())
-//   .then((data) => console.log(data));
+// NOTE: Asynchronous JS Promises
+fetch("https://jsonplaceholder.typicode.com/todos")
+  .then((res) => res.json())
+  .then((data) => console.log(data[0]));
 
-// console.log("jonas");
+console.log("jonas");
 
 // async function getTodos() {
 //   const res = await fetch('https://jsonplaceholder.typicode.com/todos');
