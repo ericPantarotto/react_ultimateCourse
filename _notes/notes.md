@@ -96,6 +96,10 @@ That's why it's quite common to combine with `.slice()` method
 **<span style='color: #a3842c'>Link:** [https://lodash.com/]
 
 `npm i --save lodash`
+
+### Asynchronous JavaScript
+
+**<span style='color: #a3842c'>Link:** [https://jsonplaceholder.typicode.com/]
 <!---
 [comment]: it works with text, you can rename it how you want
 

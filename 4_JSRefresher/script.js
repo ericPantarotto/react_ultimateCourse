@@ -392,22 +392,29 @@ const deepCopy = _.cloneDeep(booksAfterUpdate);
 deepCopy;
 */
 
+/*
 // NOTE: Asynchronous JS Promises
 fetch("https://jsonplaceholder.typicode.com/todos")
   .then((res) => res.json())
   .then((data) => console.log(data[0]));
 
 console.log("jonas");
+*/
 
-// async function getTodos() {
-//   const res = await fetch('https://jsonplaceholder.typicode.com/todos');
-//   const data = await res.json();
-//   console.log(data);
+// NOTE: Asynchronous JS Async/Await
+async function getTodos() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos');
+  const data = await res.json();
+  // INFO: will be printed LAST
+  console.log(data);
 
-//   return data;
-// }
+  return data;
+}
 
-// const todos = getTodos();
-// console.log(todos);
+const todos = getTodos();
+// INFO: will be printed first (a promise)
+// WARN: This order if we change the above line by: const todos = AWAIT getTodos();
+console.log(todos);
 
-// console.log('jonas');
+// INFO: will be printed second
+console.log('jonas');
