@@ -67,6 +67,12 @@ const updatedBook = {
 ```
 
 **<span style='color: #875c5c'>IMPORTANT:** when spreading on an object/ array, depending where the new property is placed, here `pages` is after the spread object so it would override.
+
+### Arrow Functions
+
+#### IIFE using Arrow Function with parameter
+
+**<span style='color: #a3842c'>Link:** [https://medium.com/@rabailzaheer/iife-explained-immediately-invoked-function-expressions-fccd8f53123d]
 <!---
 [comment]: it works with text, you can rename it how you want
 
