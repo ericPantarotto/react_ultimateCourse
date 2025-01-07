@@ -229,6 +229,7 @@ pagesRange;
 console.log(`The book has ${pagesRange} pages`);
 */
 
+/*
 // NOTE: Arrow Functions inside an IIFE
 const book = getBook(3);
 book;
@@ -237,7 +238,14 @@ const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
   
 const iifeParameter = ((str) => str.split('-')[0])(publicationDate);
 iifeParameter;
-/*
+*/
+
+// NOTE: Short-circuiting and Logical Operators
+const book = getBook(2);
+book;
+const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
+  book;
+
 console.log(true && "Some string");
 console.log(false && "Some string");
 console.log(hasMovieAdaptation && "This book has a movie");
@@ -254,13 +262,16 @@ console.log(book.translations.spanish);
 const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
 spanishTranslation;
 
-// console.log(book.reviews.librarything.reviewsCount);
-// const countWrong = book.reviews.librarything.reviewsCount || "no data";
-// countWrong;
+// NOTE: this use of Nullish Coalescing operator works with book 2 as the object has this property,
+// ERROR: this would however fail with book 3 which doesn't have such property; this is where you have to use Optional chaining
+console.log(book.reviews.librarything.reviewsCount);
+const countWrong = book.reviews.librarything.reviewsCount || "no data";
+countWrong;
 
-// const count = book.reviews.librarything.reviewsCount ?? "no data";
-// count;
+const count = book.reviews.librarything.reviewsCount ?? "no data";
+count;
 
+/*
 function getTotalReviewCount(book) {
   const goodreads = book.reviews?.goodreads?.reviewsCount;
   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
