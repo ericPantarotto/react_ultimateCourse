@@ -85,6 +85,17 @@ That's why it's quite common to combine with `.slice()` method
 
 `const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);`
 
+### Working with Immutable Arrays
+
+- spread operator
+- JSON (parse & stringify methods)
+- Lodash DeepClone
+
+#### lodash
+
+**<span style='color: #a3842c'>Link:** [https://lodash.com/]
+
+`npm i --save lodash`
 <!---
 [comment]: it works with text, you can rename it how you want
 

@@ -344,6 +344,7 @@ const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
 pagesAllBooks;
 */
 
+/*
 // NOTE: Array Reduce method
 const arr = [3, 7, 1, 9, 6];
 const sorted = arr.slice().sort((a, b) => a - b);
@@ -358,8 +359,12 @@ const sortedByPages = books
   .sort((a, b) => a.pages - b.pages)
   .map((book) => ({ title: book.title, pages: book.pages }));
 sortedByPages;
+*/
 
-/*
+// NOTE: Immutable Array
+const books = getBooks();
+books;
+
 // 1) Add book object to array
 const newBook = {
   id: 6,
@@ -374,11 +379,16 @@ const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
 booksAfterDelete;
 
 // 3) Update book object in the array
+// INFO: we just want to update the number of pages for book1 and keep all other properties of that book identical , and same for other books
 const booksAfterUpdate = booksAfterDelete.map((book) =>
   book.id === 1 ? { ...book, pages: 1210 } : book
 );
 booksAfterUpdate;
-*/
+
+// INFO: using lodash
+const _ = require('lodash');
+const deepCopy = _.cloneDeep(booksAfterUpdate);
+deepCopy;
 
 // fetch("https://jsonplaceholder.typicode.com/todos")
 //   .then((res) => res.json())
