@@ -6,7 +6,7 @@
 
 ### Read before you start
 
-**<span style='color: #a3842c'>Link:** (<https://github.com/ericPantarotto/react_completeGuide/tree/main/_notes>)
+**<span style='color: #a3842c'>Link:** (<https://github.com/jonasschmedtmann/ultimate-react-course>)
 
 ## A first Look at React
 
@@ -43,6 +43,13 @@ So essentially, a React framework is a framework built on top of the React libra
 - routing
 - data fetching
 - server-side rendering
+
+## Review of Essential JavaScript for React
+
+**<span style='color: #495fcb'> Note:** to run simple *Javascript* without any HTML file:
+
+- `node script.js`
+- use **quokka**: Open the command palette in VSCode by pressing `Ctrl + Shift + P`, select *Quokka.js: Start on current file*
 
 <!---
 [comment]: it works with text, you can rename it how you want
