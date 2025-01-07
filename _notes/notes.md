@@ -73,6 +73,10 @@ const updatedBook = {
 #### IIFE using Arrow Function with parameter
 
 **<span style='color: #a3842c'>Link:** [https://medium.com/@rabailzaheer/iife-explained-immediately-invoked-function-expressions-fccd8f53123d]
+
+### Array filter method
+
+If the result of the condition is true, then that element will go into the filtered array, if false it's filtered out
 <!---
 [comment]: it works with text, you can rename it how you want
 
