@@ -318,6 +318,7 @@ const essentialData = books.map((book) => ({
 essentialData;
 */
 
+/*
 // NOTE: Array filter method
 const books = getBooks();
 books;
@@ -332,11 +333,16 @@ const adventureBooks = books
   .filter((books) => books.genres.includes("adventure"))
   .map((book) => book.title);
 adventureBooks;
+*/
 
-/*
+// NOTE: Array Reduce method
+const books = getBooks();
+books;
+
 const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
 pagesAllBooks;
 
+/*
 const arr = [3, 7, 1, 9, 6];
 const sorted = arr.slice().sort((a, b) => a - b);
 sorted;
