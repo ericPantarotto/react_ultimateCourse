@@ -51,6 +51,22 @@ So essentially, a React framework is a framework built on top of the React libra
 - `node script.js`
 - use **quokka**: Open the command palette in VSCode by pressing `Ctrl + Shift + P`, select *Quokka.js: Start on current file*
 
+### Rest/Spread Operator
+
+It can be confusing that the syntax is the same for both *rest* and *spread* operators: `...`
+
+```javascript
+const updatedBook = {
+  ...book,
+  // Adding a new property
+  moviePublicationDate: '2001-12-19',
+
+  // Overwriting an existing property
+  pages: 1210,
+};
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** when spreading on an object/ array, depending where the new property is placed, here `pages` is after the spread object so it would override.
 <!---
 [comment]: it works with text, you can rename it how you want
 

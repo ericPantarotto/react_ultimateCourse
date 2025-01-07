@@ -142,7 +142,9 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+// -----------------------------------------------------------------------------------------------------------------
 
+/*
 //NOTE: Destructuring
 const books = getBooks();
 books;
@@ -165,28 +167,40 @@ console.log(author, title, genres);
 const [primaryGenre, secondaryGenre] = genres;
 console.log(primaryGenre, secondaryGenre);
 
-/*
-const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
+*/
+
+// NOTE: Rest/Spread Operator
+const book = getBook(3);
+book;
+const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
+  book;
+console.log(genres);
+
+
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres; //INFO: rest; creating a new array
 console.log(primaryGenre, secondaryGenre, otherGenres);
 
-const newGenres = ["epic fantasy", ...genres];
+const newGenres = ['epic fantasy', ...genres]; //INFO: spread operator on array
 newGenres;
 
+//INFO: spread operator on object
 const updatedBook = {
   ...book,
   // Adding a new property
-  moviePublicationDate: "2001-12-19",
+  moviePublicationDate: '2001-12-19',
 
   // Overwriting an existing property
   pages: 1210,
 };
+
 updatedBook;
 
+/*
 // function getYear(str) {
 //   return str.split("-")[0];
 // }
 
-const getYear = (str) => str.split("-")[0];
+const getYear = (str) => str.split('-')[0];
 console.log(getYear(publicationDate));
 
 const summary = `${title}, a ${pages}-page long book, was written by ${author} and published in ${getYear(
