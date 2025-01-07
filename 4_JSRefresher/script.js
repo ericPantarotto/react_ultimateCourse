@@ -197,6 +197,7 @@ const updatedBook = {
 updatedBook;
 */
 
+/*
 // NOTE: Template literals
 const book = getBook(3);
 book;
@@ -213,12 +214,20 @@ const summary = `${title}, a ${pages}-page long book, was written by ${author} a
   publicationDate
 )}. The book has ${hasMovieAdaptation ? "" : "not"} been adapted as a movie`;
 summary;
+*/
 
-/*
+// NOTE: Ternaries
+const book = getBook(3);
+book;
+const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
+  book;
+
+
 const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
 pagesRange;
 console.log(`The book has ${pagesRange} pages`);
 
+/*
 console.log(true && "Some string");
 console.log(false && "Some string");
 console.log(hasMovieAdaptation && "This book has a movie");
@@ -250,7 +259,6 @@ function getTotalReviewCount(book) {
 }
 
 console.log(getTotalReviewCount(book));
-*/
 
 /*
 function getTotalReviewCount(book) {
