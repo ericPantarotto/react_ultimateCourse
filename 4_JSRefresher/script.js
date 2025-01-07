@@ -335,22 +335,31 @@ const adventureBooks = books
 adventureBooks;
 */
 
+/*
 // NOTE: Array Reduce method
 const books = getBooks();
 books;
 
 const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
 pagesAllBooks;
+*/
 
-/*
+// NOTE: Array Reduce method
 const arr = [3, 7, 1, 9, 6];
 const sorted = arr.slice().sort((a, b) => a - b);
 sorted;
 arr;
 
-const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
+const books = getBooks();
+books;
+
+const sortedByPages = books
+  .slice()
+  .sort((a, b) => a.pages - b.pages)
+  .map((book) => ({ title: book.title, pages: book.pages }));
 sortedByPages;
 
+/*
 // 1) Add book object to array
 const newBook = {
   id: 6,

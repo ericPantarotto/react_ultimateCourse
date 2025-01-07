@@ -77,6 +77,14 @@ const updatedBook = {
 ### Array filter method
 
 If the result of the condition is true, then that element will go into the filtered array, if false it's filtered out
+
+### Array sort method
+
+if you use the `.sort()` directly on your array, it gets mutated.
+That's why it's quite common to combine with `.slice()` method
+
+`const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
