@@ -240,6 +240,7 @@ const iifeParameter = ((str) => str.split('-')[0])(publicationDate);
 iifeParameter;
 */
 
+/*
 // NOTE: Short-circuiting and Logical Operators
 const book = getBook(2);
 book;
@@ -270,25 +271,31 @@ countWrong;
 
 const count = book.reviews.librarything.reviewsCount ?? "no data";
 count;
+*/
 
-/*
+// NOTE: Optional Chaining
+// INFO: test with book 1 & 3
+const book = getBook(1);
+book;
+
 function getTotalReviewCount(book) {
-  const goodreads = book.reviews?.goodreads?.reviewsCount;
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
-  librarything;
-  return goodreads + librarything;
+  const goodReads = book.reviews?.goodreads?.reviewsCount;
+  goodReads;
+  const libraryThing = book.reviews?.librarything?.reviewsCount ?? 0; //INFO: using both optional chaining and Nullish Coalescing to set a default value
+  libraryThing;
+  return goodReads + libraryThing;
 }
 
 console.log(getTotalReviewCount(book));
 
-/*
-function getTotalReviewCount(book) {
-  const goodreads = book.reviews?.goodreads?.reviewsCount;
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
-  librarything;
-  return goodreads + librarything;
-}
+// function getTotalReviewCount(book) {
+//   const goodreads = book.reviews?.goodreads?.reviewsCount;
+//   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+//   librarything;
+//   return goodreads + librarything;
+// }
 
+/*
 const books = getBooks();
 books;
 
