@@ -27,6 +27,12 @@ function Menu() {
 }
 
 function Footer() {
+  const hour = new Date().getHours();
+  const isOpen = hour >= 12 && hour <= 22;
+  console.log(isOpen);
+
+  // console.log('We\'re currently open!');
+
   return (
     <footer>
       {new Date().toLocaleDateString()}: We&apos;re currently open!
