@@ -100,6 +100,28 @@ That's why it's quite common to combine with `.slice()` method
 ### Asynchronous JavaScript
 
 **<span style='color: #a3842c'>Link:** [https://jsonplaceholder.typicode.com/]
+
+## 
+
+### What is JSX?
+
+Remember that JSX is just an extension of JavaScript, which means that there is a simple way of converting JSX to JavaScript. This is done by a tool called Babel, which was automatically included in our React application.
+
+This *Babel* conversion is necessary because browsers of course, do not understand JSX. They only understand HTML. So behind the scenes, all the *JSX* that we write is converted into many nested `React.createElement` function calls. And these function calls are what in the end, create the HTML elements that we see on the screen.
+
+Now, what this means is that we could actually use React without JSX at all. So, we could just manually write these createElement functions instead of JSX.
+
+**<span style='color: #875c5c'>IMPORTANT:** *JSX* is a **declarative** syntax.
+
+So in the imperative approach, we basically tell the browser exactly how to do things. And remember that that's the reason why frameworks like React exist in the first place and it's why React chose to use a declarative approach to building user interfaces.
+
+So, a declarative approach is to simply describe what the UI should look like at all times, always based on the current data (`props` and `states`) that's in the component.
+
+With *declarative approach*, there are no DOM manipulation at all., so, there are no `document.querySelectors`, no `addEventListeners`, because in fact, **React is basically a huge abstraction away from the DOM, so that we, developers never have to touch the DOM directly**.
+
+**<span style='color: #875c5c'>IMPORTANT:** Instead, we think of the UI as a reflection of the current data and let React automatically synchronize the UI with that data.
+
+So in essence, the difference between imperative and declarative is that in the declarative approach, we use JSX to tell React what we want to see on the screen but not how to achieve it step-by-step. React can figure that out on its own, basically
 <!---
 [comment]: it works with text, you can rename it how you want
 
