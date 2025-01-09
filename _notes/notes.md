@@ -122,6 +122,26 @@ With *declarative approach*, there are no DOM manipulation at all., so, there ar
 **<span style='color: #875c5c'>IMPORTANT:** Instead, we think of the UI as a reflection of the current data and let React automatically synchronize the UI with that data.
 
 So in essence, the difference between imperative and declarative is that in the declarative approach, we use JSX to tell React what we want to see on the screen but not how to achieve it step-by-step. React can figure that out on its own, basically
+
+### Separation of Concerns
+
+However, as pages got more and more interactive, they became single-page applications, where the JavaScript started to determine the user interface and the content in general. Or in other words, JavaScript became more and more in charge of the HTML.
+
+If the JavaScript is in charge of the HTML anyway, so if the logic and the UI are so tightly coupled together, then why should we keep them separated in these different files and in different code blocks? Well, the answer to that question is what gave us React components and JSX.
+
+So the fact that logic and UI are so coupled in modern web applications, is really the reason why a React component contains the data, the logic and the appearance of one piece of the UI. In fact, it's the fundamental reason why React is all about components.
+
+So content and logic are tightly coupled together and so it makes sense that they are co-located here. And co-located simply means that things that change together should be located as close as possible together. And in the case of React apps, that means that instead of one technology profile, we have one component profile. So one component that contains data logic and appearance, all mixed together.
+
+At first developers hated this JSX approach. And they hated that we are throwing separations of concerns out of the window. But actually, are we really? Is there really no separation of concerns in React?
+
+React does actually have separation of concerns. It's just not one concern per file, as we had traditionally but one concern per component.
+
+So each component is in fact, only concerned with one piece of the UI. Then within each of these components, of course we still have the three concerns of HTML, CSS and JavaScript all mixed up, as we have been discussing.
+
+**So compared to the traditional separation of concerns, this is a completely new paradigm that many people were really not used to in the beginning.**
+
+**<span style='color: #495fcb'> Note:** React does actually have separation of concerns. Just a different separation of concerns.
 <!---
 [comment]: it works with text, you can rename it how you want
 
