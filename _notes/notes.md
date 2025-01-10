@@ -202,6 +202,10 @@ JSX expressions must have one parent element. And so this is exactly what we lea
 So a **React Fragment** basically lets us group some elements without leaving any trace in the HTML tree, so in the DOM.
 
 React Fragments is a very simple concept, which basically allows us to have more than just one element inside a piece of JSX.
+
+### Section Summary
+
+![image info](./5_sc2.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
