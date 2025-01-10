@@ -1,5 +1,6 @@
 // import React from 'react';
 import PropTypes from 'prop-types';
+import { pizzaData } from '../data';
 import './App.css';
 
 function App() {
@@ -32,18 +33,12 @@ function Menu() {
   return (
     <main className='menu'>
       <h2>Our menu</h2>
-      <Pizza
-        name='Pizza Spinaci'
-        ingredients='Tomato, mozzarella, spinach, and ricotta cheese'
-        photoName='../pizzas/spinaci.jpg'
-        price={10}
-      />
-      <Pizza
-        name='Pizza Funghi'
-        ingredients='Tomato, mozzarella, and mushrooms'
-        photoName='../pizzas/funghi.jpg'
-        price={9.5}
-      />
+
+      <ul className='pizzas'>
+        {pizzaData.map((pizza) => (
+          <Pizza key={pizza.name} pizzaObject={pizza} />
+        ))}
+      </ul>
     </main>
   );
 }
@@ -64,21 +59,17 @@ function Footer() {
 
 function Pizza(props) {
   return (
-    <div className='pizza'>
-      <img src={props.photoName} alt='pizza spinaci' />
+    <li className='pizza'>
+      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price}</span>
+        <h3>{props.pizzaObject.name}</h3>
+        <p>{props.pizzaObject.ingredients}</p>
+        <span>{props.pizzaObject.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
-
 Pizza.propTypes = {
-  name: PropTypes.string,
-  ingredients: PropTypes.string,
-  photoName: PropTypes.string,
-  price: PropTypes.integer,
+  pizzaObject: PropTypes.object,
 };
 export default App;
