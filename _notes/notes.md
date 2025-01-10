@@ -152,6 +152,12 @@ when passing any props type different than `string`, you should use JavaScript `
 ![image info](./5_sc1.png)
 
 Props are a **one-way dataflow**, from top to bottom.
+
+### Conditional Rendering with && 
+
+*React* will not render `true/false` as a result of a JSX component, but it will render `integer` for example, so be careful when using **short-circuiting** that the test value doesn't return `0`! 
+
+**<span style='color: #875c5c'>IMPORTANT:** when returning UI JSX content with short-circuiting, always use `Boolean` and not `integer`.
 <!---
 [comment]: it works with text, you can rename it how you want
 
