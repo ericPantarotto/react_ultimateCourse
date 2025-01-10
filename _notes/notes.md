@@ -142,6 +142,16 @@ So each component is in fact, only concerned with one piece of the UI. Then with
 **So compared to the traditional separation of concerns, this is a completely new paradigm that many people were really not used to in the beginning.**
 
 **<span style='color: #495fcb'> Note:** React does actually have separation of concerns. Just a different separation of concerns.
+
+### Passing & Receiving Props
+
+when passing any props type different than `string`, you should use JavaScript `{}`.
+
+#### Props are read-only!
+
+![image info](./5_sc1.png)
+
+Props are a **one-way dataflow**, from top to bottom.
 <!---
 [comment]: it works with text, you can rename it how you want
 
