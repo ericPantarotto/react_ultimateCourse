@@ -56,6 +56,15 @@ function Footer() {
   const isOpen = hour >= openHour && hour <= closeHour;
   // console.log('We\'re currently open!');
 
+  // if (!isOpen) {
+  //   return (
+  //     <p>
+  //       We&apos;re happy to welcome you between {openHour}:00 and {closeHour}
+  //       :00.
+  //     </p>
+  //   );
+  // }
+
   return (
     <footer className='footer'>
       {isOpen ? (
@@ -82,6 +91,8 @@ function Footer() {
 }
 
 function Pizza(props) {
+  if (props.pizzaObject.soldOut) return null;
+
   return (
     <li className='pizza'>
       <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name} />

@@ -186,6 +186,10 @@ function Menu() {
 ```
 
 you might be wondering why we cannot simply use an `if-else` statement right above. The reason is, once again, because of what we learned in the lecture on the **rules of JSX**, which is that inside this JavaScript mode, we cannot write any JavaScript. What we need to do here is to write something that actually produces a value and an if-else statement does not produce a value
+
+### Conditional Rendering With Multiple Returns
+
+usually this early `return`, combined with an `if` statement, is more useful when we want to render entire components conditionally but not just some pieces of JSX, as this will involve a lot of code duplication.
 <!---
 [comment]: it works with text, you can rename it how you want
 
