@@ -190,6 +190,10 @@ you might be wondering why we cannot simply use an `if-else` statement right abo
 ### Conditional Rendering With Multiple Returns
 
 usually this early `return`, combined with an `if` statement, is more useful when we want to render entire components conditionally but not just some pieces of JSX, as this will involve a lot of code duplication.
+
+### Destructuring Props
+
+**<span style='color: #495fcb'> Note:** With destructuring, in the component definition, we can immediately see that we will receive as props. That's a really big advantage of immediately destructuring props.
 <!---
 [comment]: it works with text, you can rename it how you want
 
