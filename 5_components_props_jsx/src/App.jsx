@@ -51,30 +51,14 @@ function Menu() {
 
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 12;
+  const openHour = 10;
   const closeHour = 20;
   const isOpen = hour >= openHour && hour <= closeHour;
-  // console.log('We\'re currently open!');
-
-  // if (!isOpen) {
-  //   return (
-  //     <p>
-  //       We&apos;re happy to welcome you between {openHour}:00 and {closeHour}
-  //       :00.
-  //     </p>
-  //   );
-  // }
 
   return (
     <footer className='footer'>
       {isOpen ? (
-        <div className='order'>
-          <p>
-            {new Date().toLocaleDateString()}: We&apos;re open until {closeHour}
-            :00. Come visit us or order online.
-          </p>
-          <button className='btn'>Order</button>
-        </div>
+        <Order closeHour={closeHour} />
       ) : (
         <p>
           We&apos;re happy to welcome you between {openHour}:00 and {closeHour}
@@ -89,6 +73,22 @@ function Footer() {
   );
   // return React.createElement('footer', null, 'We\'re currently open! ')
 }
+
+function Order(props) {
+  return (
+    <div className='order'>
+      <p>
+        {new Date().toLocaleDateString()}: We&apos;re open until{' '}
+        {props.closeHour}
+        :00. Come visit us or order online.
+      </p>
+      <button className='btn'>Order</button>
+    </div>
+  );
+}
+Order.propTypes = {
+  closeHour: PropTypes.string,
+};
 
 function Pizza(props) {
   if (props.pizzaObject.soldOut) return null;
@@ -107,4 +107,5 @@ function Pizza(props) {
 Pizza.propTypes = {
   pizzaObject: PropTypes.object,
 };
+
 export default App;
