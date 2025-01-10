@@ -194,6 +194,14 @@ usually this early `return`, combined with an `if` statement, is more useful whe
 ### Destructuring Props
 
 **<span style='color: #495fcb'> Note:** With destructuring, in the component definition, we can immediately see that we will receive as props. That's a really big advantage of immediately destructuring props.
+
+### React Fragment
+
+JSX expressions must have one parent element. And so this is exactly what we learned in the Rules of JSX lecture.
+
+So a **React Fragment** basically lets us group some elements without leaving any trace in the HTML tree, so in the DOM.
+
+React Fragments is a very simple concept, which basically allows us to have more than just one element inside a piece of JSX.
 <!---
 [comment]: it works with text, you can rename it how you want
 
