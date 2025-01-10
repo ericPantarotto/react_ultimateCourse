@@ -158,6 +158,34 @@ Props are a **one-way dataflow**, from top to bottom.
 *React* will not render `true/false` as a result of a JSX component, but it will render `integer` for example, so be careful when using **short-circuiting** that the test value doesn't return `0`! 
 
 **<span style='color: #875c5c'>IMPORTANT:** when returning UI JSX content with short-circuiting, always use `Boolean` and not `integer`.
+
+### Conditional Rendering With Ternaries
+
+**<span style='color: #a8c62c'> App.jsx**
+
+```javascript
+function Menu() {
+  const pizzas = pizzaData;
+
+  return (
+    <main className='menu'>
+      <h2>Our menu</h2>
+
+      {pizzas.length > 0 ? (
+        <ul className='pizzas'>
+          {pizzas.map((pizza) => (
+            <Pizza key={pizza.name} pizzaObject={pizza} />
+          ))}
+        </ul>
+      ) : (
+        <p>We&apos;re still working on our menu. Please come back later. </p>
+      )}
+    </main>
+  );
+}
+```
+
+you might be wondering why we cannot simply use an `if-else` statement right above. The reason is, once again, because of what we learned in the lecture on the **rules of JSX**, which is that inside this JavaScript mode, we cannot write any JavaScript. What we need to do here is to write something that actually produces a value and an if-else statement does not produce a value
 <!---
 [comment]: it works with text, you can rename it how you want
 

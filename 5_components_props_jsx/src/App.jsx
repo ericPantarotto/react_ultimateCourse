@@ -36,12 +36,14 @@ function Menu() {
     <main className='menu'>
       <h2>Our menu</h2>
 
-      {pizzas.length > 0 && (
+      {pizzas.length > 0 ? (
         <ul className='pizzas'>
           {pizzas.map((pizza) => (
             <Pizza key={pizza.name} pizzaObject={pizza} />
           ))}
         </ul>
+      ) : (
+        <p>We&apos;re still working on our menu. Please come back later. </p>
       )}
     </main>
   );
@@ -56,7 +58,7 @@ function Footer() {
 
   return (
     <footer className='footer'>
-      {isOpen && (
+      {isOpen ? (
         <div className='order'>
           <p>
             {new Date().toLocaleDateString()}: We&apos;re open until {closeHour}
@@ -64,6 +66,11 @@ function Footer() {
           </p>
           <button className='btn'>Order</button>
         </div>
+      ) : (
+        <p>
+          We&apos;re happy to welcome you between {openHour}:00 and {closeHour}
+          :00.
+        </p>
       )}
     </footer>
 
