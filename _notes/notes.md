@@ -101,7 +101,7 @@ That's why it's quite common to combine with `.slice()` method
 
 **<span style='color: #a3842c'>Link:** [https://jsonplaceholder.typicode.com/]
 
-## 
+## Working with Components, Props, and JSX
 
 ### What is JSX?
 
@@ -147,15 +147,15 @@ So each component is in fact, only concerned with one piece of the UI. Then with
 
 when passing any props type different than `string`, you should use JavaScript `{}`.
 
-#### Props are read-only!
+#### Props are read-only
 
 ![image info](./5_sc1.png)
 
 Props are a **one-way dataflow**, from top to bottom.
 
-### Conditional Rendering with && 
+### Conditional Rendering with &&
 
-*React* will not render `true/false` as a result of a JSX component, but it will render `integer` for example, so be careful when using **short-circuiting** that the test value doesn't return `0`! 
+*React* will not render `true/false` as a result of a JSX component, but it will render `integer` for example, so be careful when using **short-circuiting** that the test value doesn't return `0`!
 
 **<span style='color: #875c5c'>IMPORTANT:** when returning UI JSX content with short-circuiting, always use `Boolean` and not `integer`.
 
@@ -212,6 +212,34 @@ React Fragments is a very simple concept, which basically allows us to have more
 ### Handling Events the React Way
 
 Handling events in React is actually pretty straightforward. So, as you can imagine, we are not going to use the `addEventListener` because that is the imperative way of building UIs. But here in React we use a more declarative approach. So we do not manually select DOM elements, and so therefore, we do also not use `addEventListener`.
+
+### What is State in React?
+
+We have learned how to pass data into a component by using props, which is data that's coming from outside the component.
+
+- But what if a component needs to actually hold its own data, and also hold it over time?
+- Also, what if we actually want to make our app interactive changing the UI as a result of an action?
+
+Well, that's where, finally, state comes into play. So state is basically data that a component can hold over time, and we use it for information that a component needs to remember throughout its lifecycle.
+
+**<span style='color: #495fcb'> Note:** Therefore, we can think of state as being the memory of a component.
+
+**<span style='color: #875c5c'>IMPORTANT:** the most important aspect of state, which is the fact that updating state triggers React to re-render the component.
+
+whenever we update a piece of state in a component, this will make React re-render that component in the user interface. So it will create a new updated view for that component. And a component's view is basically just the component visually rendered on the screen, so in the user interface.
+
+**<span style='color: #495fcb'> Note:**
+
+- when one single component is rendered, we call that a **view**.
+- so all the views combined together then make up the final user interface.
+
+So state is how React keeps the user interface in sync with data. We change the state, we change the UI.
+
+**<span style='color: #875c5c'>Summary:** State allows developers to:
+
+- update the component's view; by re-rendering it
+- persists local variable between renders
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
