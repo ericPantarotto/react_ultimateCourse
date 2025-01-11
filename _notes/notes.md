@@ -240,6 +240,13 @@ So state is how React keeps the user interface in sync with data. We change the 
 - update the component's view; by re-rendering it
 - persists local variable between renders
 
+### Creating a State Variable With useState
+
+`useState` function is what we call a hook in React. And we can identify hooks because they start with this *use* keyword.
+
+**<span style='color: #9e5231'>Error:** we can only call hooks like `useState`, **on the top level of the function**. So only here is it allowed to call use state not inside an if statement, or inside another function, or inside a loop.
+
+**<span style='color: #495fcb'> Note:** we should really only update state using the `setter` function.
 <!---
 [comment]: it works with text, you can rename it how you want
 
