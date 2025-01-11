@@ -206,6 +206,12 @@ React Fragments is a very simple concept, which basically allows us to have more
 ### Section Summary
 
 ![image info](./5_sc2.png)
+
+## State, Events, and Forms: Interactive components
+
+### Handling Events the React Way
+
+Handling events in React is actually pretty straightforward. So, as you can imagine, we are not going to use the `addEventListener` because that is the imperative way of building UIs. But here in React we use a more declarative approach. So we do not manually select DOM elements, and so therefore, we do also not use `addEventListener`.
 <!---
 [comment]: it works with text, you can rename it how you want
 

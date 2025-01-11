@@ -8,6 +8,15 @@ const messages = [
 
 function App() {
   const step = 1;
+
+  function handlePrevious() {
+    console.log('prev');
+  }
+  
+  function handleNext() {
+    () => console.log('next');
+  }
+
   return (
     <div className='steps'>
       <div className='numbers'>
@@ -24,12 +33,14 @@ function App() {
         <button
           style={{ backgroundColor: '#7950f2', color: '#fff' }}
           className='previous'
+          onClick={() => handlePrevious}
         >
           Previous
         </button>
         <button
           style={{ backgroundColor: '#7950f2', color: '#fff' }}
           className='next'
+          onClick={handleNext}
         >
           Next
         </button>
