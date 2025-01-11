@@ -10,6 +10,7 @@ const messages = [
 function App() {
   const [step, setStep] = useState(1);
   // const step = 1;
+  const [person, setPerson] = useState({ name: 'Eric' });
 
   function handlePrevious() {
     // console.log('prev');
@@ -19,6 +20,10 @@ function App() {
   function handleNext() {
     // () => console.log('next');
     if (step < 3) setStep(step + 1);
+
+    // ERROR: bad practice
+    // person.name = 'Jonas'
+    setPerson({ name: 'Fred' });
   }
 
   return (
@@ -31,6 +36,7 @@ function App() {
 
       <p className='message'>
         Step {step}: {messages[step - 1]}
+        <span>{person.name}</span>
       </p>
 
       <div className='buttons'>

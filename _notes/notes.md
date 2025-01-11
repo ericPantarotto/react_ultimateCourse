@@ -247,6 +247,14 @@ So state is how React keeps the user interface in sync with data. We change the 
 **<span style='color: #9e5231'>Error:** we can only call hooks like `useState`, **on the top level of the function**. So only here is it allowed to call use state not inside an if statement, or inside another function, or inside a loop.
 
 **<span style='color: #495fcb'> Note:** we should really only update state using the `setter` function.
+
+### Don't Set State Manually
+
+When we don' use the `useState setter` function, we are directly mutating the state variable. But React is a framework which is all about immutability (and functional state update). And so, therefore, we can only update the state using the tools that React gives us, which ensure immutability.
+
+**<span style='color: #9e5231'>Error:** Never update a state variable which is an object, by not using the `setter` function, this could mutate the object in certain (*more complex*) situation, and this is a very bad practice.
+
+**<span style='color: #875c5c'>IMPORTANT:** So, always treat state as immutable in React. So, as something that you cannot change directly, but that you can only change using the tools that *React* gives.
 <!---
 [comment]: it works with text, you can rename it how you want
 
