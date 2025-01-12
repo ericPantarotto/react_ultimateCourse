@@ -36,6 +36,16 @@ body {
   color: #fff;
 }
 
+.numbers button {
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: bold;
+
+}
+
 .message {
   text-align: center;
   font-size: 20px;

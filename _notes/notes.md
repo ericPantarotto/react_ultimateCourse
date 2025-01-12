@@ -259,6 +259,8 @@ When we don' use the `useState setter` function, we are directly mutating the st
 ### The Mechanics of State
 
 ![image info](./6_sc1.png)
+
+**<span style='color: #875c5c'>IMPORTANT:** This mechanic is so fundamental, that it is the reason why it's called **React**: React reacts to state changes by re-rendering the UI, and explains how React framework keeps UI in sync with data.
 <!---
 [comment]: it works with text, you can rename it how you want
 
