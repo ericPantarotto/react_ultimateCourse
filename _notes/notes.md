@@ -275,6 +275,14 @@ you can change the value of the hooks inside the `Component` view. This can be c
 Instead of passing a value, we should use a callback function, receiving as an argument the current value of the state.
 
 `if (step > 1) setStep((prev) => prev - 1);`
+
+### More Thoughts About State + State Guidelines
+
+**<span style='color: #875c5c'>IMPORTANT:** Each component has and manages **its own state**, no matter how many times we render the same component. So, state really is isolated inside of each component.
+
+We can basically think of the entire application view, so, the entire user interface, as a **function of state**: `UI = f(state)`.
+
+Or, in other words, the entire UI is always a representation of all the current states in all components.
 <!---
 [comment]: it works with text, you can rename it how you want
 
