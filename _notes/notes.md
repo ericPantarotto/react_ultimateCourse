@@ -287,6 +287,11 @@ Or, in other words, the entire UI is always a representation of all the current 
 ### A Vanilla JavaScript Implementation
 
 The Vanilla JavaScript implementation is inside an HTML file where here we have first the *HTML* and then separated the *JavaScript*.
+
+### Building a Form & handling Submissions
+
+in a single page application, like we want to build with React, we usually can submit a form without the page reloading, by disabling the default *HTML* behavior.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
