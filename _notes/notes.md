@@ -265,6 +265,16 @@ When we don' use the `useState setter` function, we are directly mutating the st
 ### React Developer Tools
 
 you can change the value of the hooks inside the `Component` view. This can be convinient to change some state variables not accessible via the UI.
+
+### Updating State based on Current State
+
+**<span style='color: #9e5231'>Error:** We shouldn't update state based on the current state as we have done so far:
+
+`if (step > 1) setStep(step - 1);`
+
+Instead of passing a value, we should use a callback function, receiving as an argument the current value of the state.
+
+`if (step > 1) setStep((prev) => prev - 1);`
 <!---
 [comment]: it works with text, you can rename it how you want
 

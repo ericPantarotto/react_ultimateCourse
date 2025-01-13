@@ -15,12 +15,22 @@ function App() {
 
   function handlePrevious() {
     // console.log('prev');
-    if (step > 1) setStep(step - 1);
+
+    // FIX: this is not the correct way of doing
+    // if (step > 1) setStep(step - 1);
+
+    // ERROR: this wouldn't work
+    // if (step > 1) {
+    //   setStep(step - 1);
+    //   setStep(step - 1);
+    // }
+
+    if (step > 1) setStep((prev) => prev - 1);
   }
 
   function handleNext() {
     // () => console.log('next');
-    if (step < 3) setStep(step + 1);
+    if (step < 3) setStep((prev) => prev + 1);
 
     // ERROR: bad practice
     // person.name = 'Jonas'
@@ -28,7 +38,7 @@ function App() {
   }
 
   function reset() {
-    setStep(1)
+    setStep(1);
   }
 
   return (
