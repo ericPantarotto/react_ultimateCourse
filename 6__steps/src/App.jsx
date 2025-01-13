@@ -7,7 +7,17 @@ const messages = [
   'Invest your new income 🤑',
 ];
 
+// INFO: Each steps component has a completely isolated state
 function App() {
+  return (
+    <>
+      <Steps />
+      <Steps />
+    </>
+  );
+}
+
+function Steps() {
   const [step, setStep] = useState(1);
   // const step = 1;
   // const [person, setPerson] = useState({ name: 'Eric' });

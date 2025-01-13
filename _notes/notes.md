@@ -283,6 +283,10 @@ Instead of passing a value, we should use a callback function, receiving as an a
 We can basically think of the entire application view, so, the entire user interface, as a **function of state**: `UI = f(state)`.
 
 Or, in other words, the entire UI is always a representation of all the current states in all components.
+
+### A Vanilla JavaScript Implementation
+
+The Vanilla JavaScript implementation is inside an HTML file where here we have first the *HTML* and then separated the *JavaScript*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
