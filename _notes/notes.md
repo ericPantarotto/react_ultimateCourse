@@ -292,6 +292,29 @@ The Vanilla JavaScript implementation is inside an HTML file where here we have 
 
 in a single page application, like we want to build with React, we usually can submit a form without the page reloading, by disabling the default *HTML* behavior.
 
+### Controlled Elements
+
+what we need to understand is that by default these input fields like this `input` and also this `select`,  they maintain their own state inside the **DOM**. So basically inside the HTML element itself.
+
+Now this makes it hard to read their values and it also leaves this state right here in the DOM which for many reasons is not ideal.
+
+So in React, we usually like to keep all this state in just one central place. So inside the React application and not inside the DOM, using **controlled elements**. Because that form data of course changes over time and we also want to maintain our application in sync with it.
+
+- create `state`
+- listen for the change event `onChange()`. **<span style='color: #495fcb'> Note:**, you can check the values in Dev Tools, *Components*
+- 
+
+**<span style='color: #875c5c'>IMPORTANT:** `e.target.value` is always a **STRING**! This can be discovered using the *Dev Tools*, showing how useful they are.
+
+```javascript
+<select
+  value={quantity}
+  onChange={(e) => setQuantity(Number(e.target.value))}
+>
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** data via `props` can only flow down the tree but not up or sideways. And so this is where we really need to start thinking more about state and state management.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
