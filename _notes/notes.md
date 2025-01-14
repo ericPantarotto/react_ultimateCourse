@@ -314,6 +314,13 @@ So in React, we usually like to keep all this state in just one central place. S
 
 **<span style='color: #875c5c'>IMPORTANT:** data via `props` can only flow down the tree but not up or sideways. And so this is where we really need to start thinking more about state and state management.
 
+## Thinking in React: State Management
+
+### Fundamentals of State Management
+
+#### State: When and Where?
+
+![image info](./7_sc1.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
