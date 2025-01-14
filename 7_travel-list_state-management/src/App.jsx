@@ -32,8 +32,12 @@ function App() {
     <div className='app'>
       <Logo />
       <Form onAddItem={handleAddItems} />
-      <PackingList items={items} onDeleteItem={handleDeleteItem} onToggleItem={handleToggleItem} />
-      <Stats />
+      <PackingList
+        items={items}
+        onDeleteItem={handleDeleteItem}
+        onToggleItem={handleToggleItem}
+      />
+      <Stats items={items} />
     </div>
   );
 }
@@ -133,11 +137,30 @@ Item.propTypes = {
   onToggleItem: PropTypes.func,
 };
 
-function Stats() {
+function Stats({ items }) {
+  if (!items.length)
+    return (
+      <p className='stats'>
+        <em>Start adding some items to your packing list 🚀</em>
+      </p>
+    );
+
+  const numItems = items.length;
+  const numPacked = items.filter((item) => item.packed).length;
+  const percentage = Math.round((numPacked / numItems) * 100);
+
   return (
     <footer className='stats'>
-      💼 You have X items on your list, and you already packed Y (...%)
+      <em>
+        {percentage === 100
+          ? 'You got everything! Ready to go ✈️'
+          : `💼 You have ${numItems} items on your list, and you already packed ${numPacked} (${percentage}%)`}
+      </em>
     </footer>
   );
 }
+Stats.propTypes = {
+  items: PropTypes.array,
+};
+
 export default App;
