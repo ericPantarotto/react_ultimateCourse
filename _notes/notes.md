@@ -302,7 +302,6 @@ So in React, we usually like to keep all this state in just one central place. S
 
 - create `state`
 - listen for the change event `onChange()`. **<span style='color: #495fcb'> Note:**, you can check the values in Dev Tools, *Components*
-- 
 
 **<span style='color: #875c5c'>IMPORTANT:** `e.target.value` is always a **STRING**! This can be discovered using the *Dev Tools*, showing how useful they are.
 
