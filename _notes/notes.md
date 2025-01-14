@@ -321,6 +321,22 @@ So in React, we usually like to keep all this state in just one central place. S
 #### State: When and Where?
 
 ![image info](./7_sc1.png)
+
+### Thinking about State and Lifting State Up
+
+```javascript
+// ERROR: below would mutate our state object/array of items
+setItems((items) => items.push(item));
+
+// CORRECT:
+function handleAddItems(item) {
+  setItems((items) => [...items, item]);
+}
+```
+
+if we have a state, that we want to pass/share with a sibling component, we can't use `props`, *But data can only flow down the tree. It cannot flow up the tree or sideways.* We now need to **lift up the state** to the closest parent component.
+
+**<span style='color: #495fcb'> Note:** We can pass anything as a `prop` and that includes functions.
 <!---
 [comment]: it works with text, you can rename it how you want
 

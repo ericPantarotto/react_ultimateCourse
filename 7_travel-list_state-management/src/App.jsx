@@ -10,11 +10,17 @@ const initialItems = [
 ];
 
 function App() {
+  const [items, setItems] = useState(initialItems);
+
+  function handleAddItems(item) {
+    setItems((items) => [...items, item]);
+  }
+
   return (
     <div className='app'>
       <Logo />
-      <Form />
-      <PackingList />
+      <Form onAddItem={handleAddItems} />
+      <PackingList items={items} />
       <Stats />
     </div>
   );
@@ -24,10 +30,10 @@ function Logo() {
   return <h1>🏝️ Far Away 🧳</h1>;
 }
 
-function Form() {
+function Form({ onAddItem }) {
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState(1);
-  
+
   /**
    * @param {Event} event
    */
@@ -37,6 +43,8 @@ function Form() {
     if (!description) return;
     const newItem = { description, quantity, packed: false, id: uuidv4() };
     console.log(newItem);
+
+    onAddItem(newItem);
 
     setDescription('');
     setQuantity(1);
@@ -66,20 +74,24 @@ function Form() {
   );
 }
 Form.propTypes = {
-  item: PropTypes.object,
+  // item: PropTypes.object,
+  onAddItem: PropTypes.func.isRequired,
 };
 
-function PackingList() {
+function PackingList({ items }) {
   return (
     <div className='list'>
       <ul>
-        {initialItems.map((item) => (
+        {items.map((item) => (
           <Item key={item.id} item={item} />
         ))}
       </ul>
     </div>
   );
 }
+PackingList.propTypes = {
+  items: PropTypes.array,
+};
 
 function Item({ item }) {
   return (
