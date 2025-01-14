@@ -337,6 +337,14 @@ function handleAddItems(item) {
 if we have a state, that we want to pass/share with a sibling component, we can't use `props`, *But data can only flow down the tree. It cannot flow up the tree or sideways.* We now need to **lift up the state** to the closest parent component.
 
 **<span style='color: #495fcb'> Note:** We can pass anything as a `prop` and that includes functions.
+
+### Reviewing Lifting Up State
+
+#### Child-to-Parent Communication
+
+Child updating parent state = data flowing up
+
+![image info](./7_sc2.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 

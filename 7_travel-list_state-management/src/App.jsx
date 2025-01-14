@@ -16,11 +16,15 @@ function App() {
     setItems((items) => [...items, item]);
   }
 
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }
+
   return (
     <div className='app'>
       <Logo />
       <Form onAddItem={handleAddItems} />
-      <PackingList items={items} />
+      <PackingList items={items} onDeleteItem={handleDeleteItem} />
       <Stats />
     </div>
   );
@@ -78,12 +82,12 @@ Form.propTypes = {
   onAddItem: PropTypes.func.isRequired,
 };
 
-function PackingList({ items }) {
+function PackingList({ items, onDeleteItem }) {
   return (
     <div className='list'>
       <ul>
         {items.map((item) => (
-          <Item key={item.id} item={item} />
+          <Item key={item.id} item={item} onDeleteItem={onDeleteItem} />
         ))}
       </ul>
     </div>
@@ -91,20 +95,22 @@ function PackingList({ items }) {
 }
 PackingList.propTypes = {
   items: PropTypes.array,
+  onDeleteItem: PropTypes.func,
 };
 
-function Item({ item }) {
+function Item({ item, onDeleteItem }) {
   return (
     <li>
       <span style={item.packed ? { textDecoration: 'line-through' } : {}}>
         {item.quantity} {item.description}
       </span>
-      <button>❌</button>
+      <button onClick={() => onDeleteItem(item.id)}>❌</button>
     </li>
   );
 }
 Item.propTypes = {
   item: PropTypes.object,
+  onDeleteItem: PropTypes.func,
 };
 
 function Stats() {
