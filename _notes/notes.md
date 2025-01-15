@@ -345,6 +345,11 @@ if we have a state, that we want to pass/share with a sibling component, we can'
 Child updating parent state = data flowing up
 
 ![image info](./7_sc2.png)
+
+### Sorting Items
+
+To display the items sorted by whatever criteria we selected, we will just create a new *varialbe* which is then sorted by that criteria. **So we are not going to manipulate the original items array**. That state should stay unchanged. We will **not** create a *new state variable* here because that's totally unnecessary.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
