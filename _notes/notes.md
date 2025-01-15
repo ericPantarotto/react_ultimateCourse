@@ -350,6 +350,13 @@ Child updating parent state = data flowing up
 
 To display the items sorted by whatever criteria we selected, we will just create a new *varialbe* which is then sorted by that criteria. **So we are not going to manipulate the original items array**. That state should stay unchanged. We will **not** create a *new state variable* here because that's totally unnecessary.
 
+### The Children Prop: Making a Reusable Button
+
+What if we could pass simply some *JSX* into the component and then the component could use that *JSX* and simply display it?
+
+the children prop is a prop that each React component automatically receives. And the value of the children prop is exactly what is between the opening and the closing tag of the component.
+
+**<span style='color: #495fcb'> Note:** It's actually one of its most useful features. And the reason for that is that it allows us to make our components truly reusable.
 <!---
 [comment]: it works with text, you can rename it how you want
 
