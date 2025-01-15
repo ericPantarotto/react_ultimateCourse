@@ -28,6 +28,14 @@ function App() {
     );
   }
 
+  function handleClearList() {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete all items?'
+    );
+
+    if (confirmed) setItems([]);
+  }
+
   return (
     <div className='app'>
       <Logo />
@@ -36,6 +44,7 @@ function App() {
         items={items}
         onDeleteItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
+        onClearList={handleClearList}
       />
       <Stats items={items} />
     </div>
@@ -94,23 +103,23 @@ Form.propTypes = {
   onAddItem: PropTypes.func.isRequired,
 };
 
-function PackingList({ items, onDeleteItem, onToggleItem }) {
-   const [sortBy, setSortBy] = useState('input');
+function PackingList({ items, onDeleteItem, onToggleItem, onClearList }) {
+  const [sortBy, setSortBy] = useState('input');
 
-   let sortedItems;
+  let sortedItems;
 
-   if (sortBy === 'input') sortedItems = items;
+  if (sortBy === 'input') sortedItems = items;
 
-   if (sortBy === 'description')
-     sortedItems = items
-       .slice()
-       .sort((a, b) => a.description.localeCompare(b.description));
+  if (sortBy === 'description')
+    sortedItems = items
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
 
-   if (sortBy === 'packed')
-     sortedItems = items
-       .slice()
-       .sort((a, b) => Number(a.packed) - Number(b.packed));
-  
+  if (sortBy === 'packed')
+    sortedItems = items
+      .slice()
+      .sort((a, b) => Number(a.packed) - Number(b.packed));
+
   return (
     <div className='list'>
       <ul>
@@ -130,6 +139,7 @@ function PackingList({ items, onDeleteItem, onToggleItem }) {
           <option value='description'>Sort by description</option>
           <option value='packed'>Sort by packed status</option>
         </select>
+        <button onClick={onClearList}>Clear list</button>
       </div>
     </div>
   );
@@ -138,6 +148,7 @@ PackingList.propTypes = {
   items: PropTypes.array,
   onDeleteItem: PropTypes.func,
   onToggleItem: PropTypes.func,
+  onClearList: PropTypes.func,
 };
 
 function Item({ item, onDeleteItem, onToggleItem }) {
