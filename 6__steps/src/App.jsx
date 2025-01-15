@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Button from './components/Button';
+import StepMessage from './components/StepMessage';
 
 const messages = [
   'Learn React ⚛️',
@@ -67,10 +68,10 @@ function Steps() {
             <button onClick={reset}>Reset</button>
           </div>
 
-          <p className='message'>
+          <StepMessage step={step}>{messages[step - 1]}</StepMessage>
+          {/* <p className='message'>
             Step {step}: {messages[step - 1]}
-            {/* <span>{person.name}</span> */}
-          </p>
+          </p> */}
           <div className='buttons'>
             <Button textColor='#fff' bgColor='#7950f2' onClick={handlePrevious}>
               <span>👈 Previous</span>
