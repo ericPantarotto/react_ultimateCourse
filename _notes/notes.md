@@ -365,6 +365,13 @@ the children prop is a prop that each React component automatically receives. An
 We can create random id using the built-in browser `crypto.randomUUID()`.
 
 **<span style='color: #495fcb'> Note:** this wouldn't work in older browsers.
+
+### Creating Controlled Elements
+
+**<span style='color: #9e5231'>Error:** what happens when we click on one of these other friends, and we have already set values for the controlled variables within the `FormSplitBill`?  the state has not been reset, it is exactly the same when we click on other friends. that this happens because this component is rendered in exactly the same place in the component tree as before. The same component is rendered again in exactly the same position. So the component doesn't disappear in the meantime and so therefore it is not really re-rendered. And so that means that the state then stays the same.
+
+If we close a friend, and select a new one, then this component is re-rendered and the state is reset.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
