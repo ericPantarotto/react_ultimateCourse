@@ -357,6 +357,14 @@ What if we could pass simply some *JSX* into the component and then the componen
 the children prop is a prop that each React component automatically receives. And the value of the children prop is exactly what is between the opening and the closing tag of the component.
 
 **<span style='color: #495fcb'> Note:** It's actually one of its most useful features. And the reason for that is that it allows us to make our components truly reusable.
+
+## Practice Project: Eat-N-Split
+
+### Adding a new Friend
+
+We can create random id using the built-in browser `crypto.randomUUID()`.
+
+**<span style='color: #495fcb'> Note:** this wouldn't work in older browsers.
 <!---
 [comment]: it works with text, you can rename it how you want
 
