@@ -2,53 +2,27 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { average } from '../utils';
 
-const tempWatchedData = [
-  {
-    imdbID: 'tt1375666',
-    Title: 'Inception',
-    Year: '2010',
-    Poster:
-      'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
-    runtime: 148,
-    imdbRating: 8.8,
-    userRating: 10,
-  },
-  {
-    imdbID: 'tt0088763',
-    Title: 'Back to the Future',
-    Year: '1985',
-    Poster:
-      'https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
-    runtime: 116,
-    imdbRating: 8.5,
-    userRating: 9,
-  },
-];
-
 // Stateful
-export function WatchedBox() {
-  const [watched] = useState(tempWatchedData);
-  const [isOpen2, setIsOpen2] = useState(true);
+export function Box({ children }) {
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className='box'>
       <button
         className='btn-toggle'
-        onClick={() => setIsOpen2((open) => !open)}
+        onClick={() => setIsOpen((open) => !open)}
       >
-        {isOpen2 ? '–' : '+'}
+        {isOpen ? '–' : '+'}
       </button>
-      {isOpen2 && (
-        <>
-          <WatchedSummary watched={watched} />
-          <WatchedMoviesList watched={watched} />
-        </>
-      )}
+      {isOpen && children}
     </div>
   );
 }
+Box.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
-function WatchedSummary({ watched }) {
+export function WatchedSummary({ watched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
@@ -83,7 +57,7 @@ WatchedSummary.propTypes = {
 
 
 
-function WatchedMoviesList({ watched }) {
+export function WatchedMoviesList({ watched }) {
   return (
     <ul className='list'>
       {watched.map((movie) => (
