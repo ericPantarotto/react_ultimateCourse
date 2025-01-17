@@ -372,6 +372,21 @@ We can create random id using the built-in browser `crypto.randomUUID()`.
 
 If we close a friend, and select a new one, then this component is re-rendered and the state is reset.
 
+## Thinking in React: Components, Composition, and Reusability
+
+### How to Split a UI into Components
+
+**<span style='color: #495fcb'> Note:** Too many small components leads to too much abstraction: **creating something new to hide the implementation details of that object**.
+
+For example, when we create a button component, the user of that component might have no idea how the button actually does what it does, because the implementation details are hidden behind this abstraction, so behind this component. *So in a way, each new component we create is an abstraction*.
+
+4 criteria for splitting a UI into components:
+
+- logical separation of content / layout
+- reusability
+- responsibilities / complexity
+- person coding style (some prefer to work with smaller components)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
