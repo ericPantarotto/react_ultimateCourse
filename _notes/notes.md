@@ -398,6 +398,17 @@ For example, when we create a button component, the user of that component might
 So basically *prop drilling* means that we need to pass some prop through several nested child components in order to get that data into some deeply nested component.
 
 All intermediary components needed this `prop` for, was to then pass it down even further the tree. And so we end up with a lot of props that are really not needed at all. All they are needed for is to pass the data down even further into our component tree.
+
+### Component Composition
+
+it allows re-usability of a component by using the `{children}` prop, essentially similar to an empty slot that is passed to the re-usable component.
+
+**<span style='color: #495fcb'> Definition:** Component composition = combining different components using the **children** prop (or explicitly defined props). It is used:
+
+- create highly reusable and flexible components
+- fix prop drilling (great for layouts)
+
+**<span style='color: #875c5c'>IMPORTANT:** this is possible because components don't need to know their children in advance.
 <!---
 [comment]: it works with text, you can rename it how you want
 
