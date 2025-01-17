@@ -387,6 +387,12 @@ For example, when we create a button component, the user of that component might
 - responsibilities / complexity
 - person coding style (some prefer to work with smaller components)
 
+### Component Categories
+
+- Stateless / presentational components
+- Stateful components
+- Structural components (a result of components composition)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
