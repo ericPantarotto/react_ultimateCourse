@@ -2,17 +2,16 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 // Structural
-export function NavBar({ movies }) {
+export function NavBar({ children }) {
   return (
     <nav className='nav-bar'>
       <Logo />
-      <Search />
-      <NumResults movies={movies} />
+      {children}
     </nav>
   );
 }
 NavBar.propTypes = {
-  movies: PropTypes.array,
+  children: PropTypes.node.isRequired
 };
 
 // Stateless
@@ -26,7 +25,7 @@ function Logo() {
 }
 
 // StateFul
-function Search() {
+export function Search() {
   const [query, setQuery] = useState('');
 
   return (
@@ -41,7 +40,7 @@ function Search() {
 }
 
 // Stateless
-function NumResults({ movies }) {
+export function NumResults({ movies }) {
   return (
     <p className='num-results'>
       {/* Found <strong>{movies.length}</strong> results */}
