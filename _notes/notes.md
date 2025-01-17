@@ -403,12 +403,18 @@ All intermediary components needed this `prop` for, was to then pass it down eve
 
 it allows re-usability of a component by using the `{children}` prop, essentially similar to an empty slot that is passed to the re-usable component.
 
-**<span style='color: #495fcb'> Definition:** Component composition = combining different components using the **children** prop (or explicitly defined props). It is used:
+**<span style='color: #495fcb'> Definition:** Component composition = combining different components using the **children** prop,  or **explicitly defined props**. It is used:
 
 - create highly reusable and flexible components
 - fix prop drilling (great for layouts)
 
 **<span style='color: #875c5c'>IMPORTANT:** this is possible because components don't need to know their children in advance.
+
+### Passing Elements as Props (Alternative to children)
+
+that would be a perfect use case for passing a *prop* with a specific name instead of the *implicit children prop*.
+
+**<span style='color: #495fcb'> Note:** using `{children}` is clearly the preferred way of doing this inside React.
 <!---
 [comment]: it works with text, you can rename it how you want
 

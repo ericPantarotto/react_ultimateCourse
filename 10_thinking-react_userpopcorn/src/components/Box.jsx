@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { average } from '../utils';
 
 // Stateful
-export function Box({ children }) {
+// export function Box({ children }) {
+export function Box({ element }) {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -14,12 +15,14 @@ export function Box({ children }) {
       >
         {isOpen ? '–' : '+'}
       </button>
-      {isOpen && children}
+      {/* {isOpen && children} */}
+      {isOpen && element}
     </div>
   );
 }
 Box.propTypes = {
-  children: PropTypes.node.isRequired,
+//   children: PropTypes.node.isRequired,
+  element: PropTypes.node.isRequired,
 };
 
 export function WatchedSummary({ watched }) {
