@@ -1,11 +1,16 @@
+import PropTypes from 'prop-types';
 import { ListBox } from './ListBox';
 import { WatchedBox } from './WatchedBox';
 
-export function Main() {
+// Structural
+export function Main({ movies }) {
   return (
     <main className='main'>
-      <ListBox />
+      <ListBox movies={movies}/>
       <WatchedBox />
     </main>
   );
 }
+Main.propTypes = {
+  movies: PropTypes.array,
+};

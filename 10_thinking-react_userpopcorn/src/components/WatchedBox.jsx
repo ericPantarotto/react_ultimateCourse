@@ -25,6 +25,7 @@ const tempWatchedData = [
   },
 ];
 
+// Stateful
 export function WatchedBox() {
   const [watched] = useState(tempWatchedData);
   const [isOpen2, setIsOpen2] = useState(true);

@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { MovieList } from './MovieList';
 
-export function ListBox() {
+// Stateful
+export function ListBox({ movies }) {
   const [isOpen1, setIsOpen1] = useState(true);
 
   return (
@@ -12,7 +14,10 @@ export function ListBox() {
       >
         {isOpen1 ? '–' : '+'}
       </button>
-      {isOpen1 && <MovieList />}
+      {isOpen1 && <MovieList movies={movies} />}
     </div>
   );
 }
+ListBox.propTypes = {
+  movies: PropTypes.object,
+};

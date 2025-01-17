@@ -393,6 +393,11 @@ For example, when we create a button component, the user of that component might
 - Stateful components
 - Structural components (a result of components composition)
 
+### Prop Drilling
+
+So basically *prop drilling* means that we need to pass some prop through several nested child components in order to get that data into some deeply nested component.
+
+All intermediary components needed this `prop` for, was to then pass it down even further the tree. And so we end up with a lot of props that are really not needed at all. All they are needed for is to pass the data down even further into our component tree.
 <!---
 [comment]: it works with text, you can rename it how you want
 

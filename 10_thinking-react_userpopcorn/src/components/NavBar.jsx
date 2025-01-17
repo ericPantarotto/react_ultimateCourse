@@ -1,15 +1,21 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-export function NavBar() {
+// Structural
+export function NavBar({ movies }) {
   return (
     <nav className='nav-bar'>
       <Logo />
       <Search />
-      <NumResults />
+      <NumResults movies={movies} />
     </nav>
   );
 }
+NavBar.propTypes = {
+  movies: PropTypes.array,
+};
 
+// Stateless
 function Logo() {
   return (
     <div className='logo'>
@@ -19,6 +25,7 @@ function Logo() {
   );
 }
 
+// StateFul
 function Search() {
   const [query, setQuery] = useState('');
 
@@ -33,12 +40,15 @@ function Search() {
   );
 }
 
-
-function NumResults() {
+// Stateless
+function NumResults({ movies }) {
   return (
     <p className='num-results'>
       {/* Found <strong>{movies.length}</strong> results */}
-      Found <strong>X</strong> results
+      Found <strong>{movies.length}</strong> results
     </p>
   );
 }
+NumResults.propTypes = {
+  movies: PropTypes.array,
+};
