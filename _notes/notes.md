@@ -415,6 +415,10 @@ it allows re-usability of a component by using the `{children}` prop, essentiall
 that would be a perfect use case for passing a *prop* with a specific name instead of the *implicit children prop*.
 
 **<span style='color: #495fcb'> Note:** using `{children}` is clearly the preferred way of doing this inside React.
+
+### Building a reusable Star Rating component
+
+Setting default `props` in *React*: `export default function StarRating({ maxRating = 5 }) {}`
 <!---
 [comment]: it works with text, you can rename it how you want
 
