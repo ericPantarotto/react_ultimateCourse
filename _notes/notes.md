@@ -434,6 +434,27 @@ we now need to define a good **public API**  for this *star* component.
 
 **<span style='color: #875c5c'>IMPORTANT:** Now, maybe you heard or read that *we should never initialize state from props*. However, this is only true if you want the state variable to stay in sync with that passed in props, or in other words, if you want the state value to update in case that the prop value is also updated. However, that is clearly not the case here. So, we are really only using this defaultRating here basically as seed data, so really just as the initial state, and we don't care whether this value here maybe changes somewhere else in the application, so outside this component. And, therefore, this is perfectly fine and normal to do. so it's really no problem to initialize your state based on a prop. So this was more relevant in the old days of React before we had hooks, but now, that's really no longer a problem.
 
+### PropTypes
+
+So with proptypes, we can basically specify the type of value that we expect the consumer of the component to pass in for each of the props.
+
+Now, if you really care about this, you should actually just use **TypeScript** instead of JavaScript.  Developers these days don't really use `PropTypes` anymore but moved to `TypeScript`.
+
+there's no need to install this `proptypes` package because *vite / create-React-App* already comes with this package pre-installed.
+
+```javascript
+<StarRating
+  color='lightblue'
+  maxRating={'test'}
+  className={styles.forTest2}
+  onSetRating={setMovieRating}
+/>
+```
+
+![image info](./10_sc1.png)
+
+these warnings right here that will then allow other developers to catch bugs like this.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
