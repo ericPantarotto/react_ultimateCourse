@@ -419,6 +419,12 @@ that would be a perfect use case for passing a *prop* with a specific name inste
 ### Building a reusable Star Rating component
 
 Setting default `props` in *React*: `export default function StarRating({ maxRating = 5 }) {}`
+
+### Handling Hover Events
+
+So whenever we hover over these stars we get like a temporary rating here exactly with the number of stars that are currently being hovered.
+
+So the rating is set to five, but again whenever we hover over some other number of stars then that temporarily changes to that rating. So what that means is that now we need a *brand new piece of state* to basically store that temporary rating. And again, that makes sense because  something should happen on the screen. **So the component should re-render whenever there is some hover event**.
 <!---
 [comment]: it works with text, you can rename it how you want
 
