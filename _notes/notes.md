@@ -493,6 +493,11 @@ We would still get a `react.element` but not of type *DifferentContent` anymore,
 
 **<span style='color: #9e5231'>Error:** when we call a component directly, then React no longer sees it as a component instance, and it would not appear in the component tree. The state that this component manages is actually now inside the parent state or the parent component, same as any other hooks. So, for all these reasons, you should never ever do what we just did here because this will create multiple problems such as violating the rules of hooks
 
+### How Rendering Works: Overview
+
+In React, **rendering is not about updating the DOM** or displaying elements on the screen. Rendering only happens internally inside of React and so it does not produce any visual changes.
+
+Now, in all the previous sections, I have always used the term rendering with the meaning of displaying elements on the screen because that was just easy to understand and it just made sense.
 <!---
 [comment]: it works with text, you can rename it how you want
 
