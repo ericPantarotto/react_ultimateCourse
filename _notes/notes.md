@@ -534,6 +534,12 @@ And for each of these hosts we have a different package that we can use. And tha
 #### Recap
 
 ![image info](./11_sc1.png)
+
+### How Diffing Works
+
+**<span style='color: #875c5c'>IMPORTANT:** If it was not the **element type** that has changed, but simply an **attribute of an HTML element** or a **prop of a  component**, *React* is gonna simply mutate the DOM element attributes / React elements that will be passed in the new props. So React tries to be as efficient as possible and so the DOM elements themselves will stay the same. They're not removed from the DOM, and even more importantly the state will not be destroyed.
+
+Now sometimes we actually don't want this standard behavior but instead to create a brand new component instance with new state. And so that's where the `key prop` comes into play.
 <!---
 [comment]: it works with text, you can rename it how you want
 
