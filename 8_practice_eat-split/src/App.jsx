@@ -79,7 +79,7 @@ export default function App() {
         <FormSplitBill
           selectedFriend={selectedFriend}
           onSplitBill={handleSplitBill}
-          key={selectedFriend.id}
+          key={selectedFriend.id} //NOTE: forcing state reset in between re-renders
         />
       )}
     </div>

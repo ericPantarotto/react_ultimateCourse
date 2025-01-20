@@ -18,5 +18,5 @@ export function FriendsList({ friends, onSelection, selectedFriend }) {
 FriendsList.propTypes = {
   friends: PropTypes.array.isRequired,
   onSelection: PropTypes.func.isRequired,
-  selectedFriend: PropTypes.object.isRequired,
+  selectedFriend: PropTypes.object,
 };

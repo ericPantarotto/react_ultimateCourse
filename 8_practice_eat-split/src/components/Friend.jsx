@@ -30,5 +30,5 @@ export default function Friend({ friend, onSelection, selectedFriend }) {
 Friend.propTypes = {
   friend: PropTypes.object.isRequired,
   onSelection: PropTypes.func.isRequired,
-  selectedFriend: PropTypes.object.isRequired,
+  selectedFriend: PropTypes.object,
 };
