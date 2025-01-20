@@ -644,6 +644,31 @@ So in vanilla *JavaScript*, we simply get access to the native DOM event object,
 *Synthetic Events* have the same interface as native event objects and that includes the important methods: *stopPropagation*, *preventDefault*, they were added to fix some browser inconsistencies.
 
 The React team also decided that all of the most important synthetic events actually bubble, including the focus, blur, and change events, which usually do not bubble. The only exception here is the *scroll* event, which does also not bubble in React.
+
+### Framework vs. Library
+
+**React**, which is what we call a *View library*, view because all React does is to draw components onto a user interface, so onto a so-called *view*.
+
+Now, if you want to build a large scale single page application, you will need to include many external third party libraries for things like routing, styling, HTTP requests, and so on.
+
+So all these functionalities are not part of React itself unlike what happens with Angular and other frameworks.
+
+#### Frameworks built on top of React
+
+Now, many React developers actually do feel overwhelmed by having to take so many decisions and choosing between so many third party libraries.
+
+And so this fact, among some other reasons, has led to the development of multiple **opinionated React frameworks** such as:
+
+- Nextjs
+- Remix or
+- Gatsby
+
+So, Nextjs or Remix are React frameworks because they are actually built on top of React. So they basically extend React's functionality and they are opinionated because other developers basically included their own opinions into how to handle stuff like routing, state management, or styling into these frameworks.
+
+So, where in a traditional React app, we have to make decisions about what libraries to include in an app built with a React framework. Some of these important decisions have already been taken away from you, the developer. And so this makes project development much easier and much faster, and it can also lead to a better overall developer experience, offloading much of the setup work from the developer.
+
+In fact, we can even describe many of these frameworks as full stack React frameworks because they include so many features that we can actually build full stack apps with them,
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
