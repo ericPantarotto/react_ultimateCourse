@@ -569,6 +569,15 @@ Now sometimes of course, we do not want this behavior. , I actually expect that 
 **<span style='color: #875c5c'>IMPORTANT:** to avoid the default behavior of state being preserved under conditions (same element, same position in the tree), we can use the key prop to change this. By assigning a `key prop` to each components, So then each time that this *tabContent* component is re-rendered, it'll get a different key. And so then React will see it as a unique component instance.And therefore, then the old one will be destroyed, and the state will be reset.
 
 React now views this as a completely different instance of `tabContent`. And we can see that because now in *dev tools / components*, this key is displayed.
+
+### Rules for Render Logic: Pure Components
+
+**<span style='color: #875c5c'>IMPORTANT:**
+>
+- **Components must be pure when it comes to render logic**: given the same props (input), a component instance should always return the same JSX (output).
+- **render logic must produce no side effects**
+>
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
