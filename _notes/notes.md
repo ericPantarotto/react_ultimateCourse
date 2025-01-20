@@ -552,6 +552,12 @@ As we keep clicking around these tabs here, this component instance here is actu
 However if we click on *tab4*, where the `DifferentContent` component is rendered. So it's still in the same position of the tree but it's a different content, i.e. a different component. And so now if we go back to any of the first 3 tabs, the state has actually been reset. And so that's because the `tabContent` that we had here before has been completely destroyed and removed from the DOM in the meantime, while we were at the `differentContent`.
 
 Now sometimes of course, we do not want this behavior. , I actually expect that when I go to a new tab that it starts again with the default state, we use the `key prop`.
+
+### Key Prop
+
+`Key prop`:
+
+![image info](./11_sc2.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
