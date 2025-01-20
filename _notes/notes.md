@@ -507,9 +507,33 @@ Also, keep in mind once again that this does not mean that the entire DOM is upd
 
 What happens next is that this new virtual DOM that was created after the state update will get reconciled with the current so-called Fiber tree as it exists before the state update. this reconciliation is done in React's reconciler which is called Fiber.
 
+In the fiber tree, for each React element and DOM element, there is a fiber, and this fiber holds the actual component state, props, and a queue of work.
+
+The computation of these DOM updates is performed by a diffing algorithm, which step by step compares the elements in the new virtual DOM with the elements in the current fiber tree, so to see what has changed.
+
 Then the results of this reconciliation process is gonna be an updated Fiber tree, so a tree that will eventually be used to write to the DOM.
 
 And this process of comparing elements step-by-step based on their position in the tree is called **diffing**.
+
+**<span style='color: #495fcb'> Note:** it's important to note that the render face is asynchronous so fiber can prioritize and split work into chunks and pause and resume some work later. And this is necessary for concurrent features and also to prevent the JavaScript engine to be blocked by complex render processes.
+
+### How Rendering Works: The Commit Phase
+
+The *render phase* results in a **list of DOM updates**, which are used in the **commit phase**.
+
+Commit phase is when React writes to the DOM (so called, *changes are flushed to the DOM*): insertions, deletions and updates.
+
+Commit phase cannot be interrupted and so is synchronous.
+
+### How Rendering Works: The Commit Phase
+
+The React Library is not the one responsible for writing to the DOM, because the DOM is just one of many hosts to which React apps can be committed, so to which they can be output, basically.
+
+And for each of these hosts we have a different package that we can use. And that's why in our index.js file, we always import both `React` and `React DOM`.
+
+#### Recap
+
+![image info](./11_sc1.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
