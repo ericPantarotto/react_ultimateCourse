@@ -455,6 +455,27 @@ there's no need to install this `proptypes` package because *vite / create-React
 
 these warnings right here that will then allow other developers to catch bugs like this.
 
+## How React Works behind the scenes
+
+### Components, Instances and Elements
+
+Component can be seen as the template, the blue-print, while  an instance is the actual physical manifestation of a component living in the component tree.
+
+#### Components & Instances
+
+**<span style='color: #495fcb'> Note:** And we also say that a UI is made up of components, not of component instances, even though instances would technically be more accurate.
+
+#### Instances
+
+JSX get converted to multiple `React.createElement` function calls. Then as *React* calls these functions, the result will be a React element.
+
+So a React element is basically the result of using a component in our code. It's simply a big immutable JavaScript object that React keeps in memory.
+
+A **React element** basically contains all the information that is necessary in order to create DOM elements for the current component instance. And so it's this React element that will eventually be converted to actual **DOM elements**, and then painted onto the screen by the browser.
+
+So based on all this, the DOM elements are the actual, final and visual representation of the components instance in the browser. And again, it's not React elements that are rendered to the DOM. React elements just live inside the React app and have nothing to do with the DOM. They are simply converted to DOM elements when they are painted on the screen in this final step.
+
+So this is the journey from writing a single component to using it multiple times in our code as a blueprint all the way until it's converted to a React element, and then rendered as HTML elements into the DOM.
 <!---
 [comment]: it works with text, you can rename it how you want
 
