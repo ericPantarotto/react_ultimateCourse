@@ -578,6 +578,44 @@ React now views this as a completely different instance of `tabContent`. And we 
 - **render logic must produce no side effects**
 >
 
+### State Update Batching in practise
+
+**<span style='color: #a8c62c'> App.jsx / TabContent**
+
+```javascript
+function handleUndo() {
+  setShowDetails(true);
+  setLikes(0);
+  console.log(likes);
+}
+```
+
+**<span style='color: #495fcb'> Note:** the `console.log()` will return the previous value of the state, as the state is in fact actually only updated after the re-rendering, or basically during the re-rendering, but not immediately after we call this function `setLikes()`.
+
+**<span style='color: #875c5c'>IMPORTANT:** Re-Render will not even occur if the new state values are equal to the actual state values, React will not even try to attempt to update the state, and then of course, it will also not re-render the component instance.
+
+**<span style='color: #9e5231'>Error:** the state update is asynchronous and the updated state value can't be accessed on the next line of code, it's staled! We have to use a callback function, instead of just a value, **as in the callback function, we do actually get access to the latest updated state**.
+
+```javascript
+function handleTripleInc() {
+  // setLikes(likes + 1);
+  // setLikes(likes + 1);
+  // setLikes(likes + 1);
+
+  setLikes((likes) => likes + 1);
+  setLikes((likes) => likes + 1);
+  setLikes((likes) => likes + 1);
+}
+```
+
+**<span style='color: #495fcb'> Note:** let's just prove that automatic batching now works in *React 18* even outside of event handlers, , our component was only rendered once, a single 'render' string was logged.
+
+```javascript
+function handleUndoLater() {
+  setTimeout(handleUndo, 2000);
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
