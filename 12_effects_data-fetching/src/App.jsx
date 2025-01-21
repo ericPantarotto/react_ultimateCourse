@@ -1,3 +1,4 @@
+// import 'dotenv/config';
 import { useState } from 'react';
 import { Box, WatchedMoviesList, WatchedSummary } from './components/Box';
 import { Main } from './components/Main';
@@ -50,10 +51,19 @@ const tempWatchedData = [
   },
 ];
 
+// console.log(import.meta.env.VITE_OMDB);
+const KEY = import.meta.env.VITE_OMDB;
+
 // Structural
 export default function App() {
-  const [movies] = useState(tempMovieData);
-  const [watched] = useState(tempWatchedData);
+  const [movies, setMovies] = useState([]);
+  // const [watched] = useState(tempWatchedData);
+  const [watched] = useState([]);
+
+  fetch(`http://omdbapi.com/?apikey=${KEY}&s=interstellar`)
+    .then((res) => res.json())
+    .then((data) => console.log(data['Search']));
+  // .then((data) => setMovies(data['Search'])); // ERROR: Infinite loop of http resquests
 
   return (
     <>
@@ -65,7 +75,7 @@ export default function App() {
         <Box>
           <MovieList movies={movies} />
         </Box>
-         <Box>
+        <Box>
           <WatchedSummary watched={watched} />
           <WatchedMoviesList watched={watched} />
         </Box>

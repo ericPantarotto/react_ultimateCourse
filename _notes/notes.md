@@ -669,6 +669,71 @@ So, where in a traditional React app, we have to make decisions about what libra
 
 In fact, we can even describe many of these frameworks as full stack React frameworks because they include so many features that we can actually build full stack apps with them,
 
+## Effects and Data Fetching
+
+### How NOT to Fetch Data in React
+
+**<span style='color: #875c5c'>IMPORTANT:** We have learned before in the previous section, we should never update state in render logic.
+
+#### OMDB API
+
+**<span style='color: #a3842c'>Link:** [https://www.omdbapi.com/]
+
+#### How to fix `process` is not defined (React+Vite), when using `.env` file
+
+**<span style='color: #9e5231'>Error:** You should not use *dotenv* package with *React* (but with *Node*)
+
+in then `.env` file, prefix your key with `VITE_OMDB='test123'`
+
+in your `.js / .jsx` code: `console.log(import.meta.env.VITE_OMDB);`
+
+this data fetching that we're doing is actually introducing a side effect into the component's render logic. So it is clearly an interaction with the outside world, which should never be allowed in render logic.
+
+All this code at the top level of the function is of course code that will run as the component first mounts and therefore it is called render logic. And so again, here we should have no side effects.
+
+**<span style='color: #a8c62c'> App.jsx**
+
+```javascript
+export default function App() {
+  const [movies] = useState(tempMovieData);
+  const [watched] = useState(tempWatchedData);
+
+  fetch(`http://omdbapi.com/?apikey=${KEY}&s=interstellar`)
+    .then((res) => res.json())
+    .then((data) => setMovies(data['Search'])); // ERROR: Infinite loop of http resquests
+    // .then((data) => console.log(data));
+
+  return (
+    <>
+      <NavBar>
+        <Search />
+        <NumResults movies={movies} />
+      </NavBar>
+      <Main>
+        <Box>
+          <MovieList movies={movies} />
+        </Box>
+        <Box>
+          <WatchedSummary watched={watched} />
+          <WatchedMoviesList watched={watched} />
+        </Box>
+        {/* <Box element={<MovieList movies={movies} />} /> */}
+      </Main>
+    </>
+  );
+}
+```
+
+**<span style='color: #9e5231'>Error:** So we got some data from the API now showing up in our UI, but watch what happens when we check out the `Network` tab of the `Dev Tools`.
+
+So you see that it's basically running an infinite number of requests here, so it keeps going and it never really stops. So every second our app is firing off multiple fetch requests to this API, which of course is a really, really bad idea. 
+
+Why do you think all these fetch requests are being fired off?
+
+- Well, the reason is that setting the state here in the render logic will then immediately cause the component to re-render itself again. So that's just how state works, right?
+- However, as the component is re-rendered, the function here of course is executed again, which then will fetch again, which in turn will set the movies again as well. And then this whole thing starts over and over again.
+- **<span style='color: #875c5c'>IMPORTANT:** And so this really is an infinite loop of state setting and then the component re-rendering. And so **this is the reason why it is really not allowed to set state in render logic**.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
