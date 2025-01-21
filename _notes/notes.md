@@ -741,6 +741,10 @@ The idea of the `useEffect` hook is to give us a place where we can safely write
 the first argument is the side effect you want to be run, i.e. a *JavaScript function* and the second argument is the dependencies that will cause this hook to be run again, if you pass an empty array `[]`, it will only run when the component is mounted.
 
 **<span style='color: #495fcb'> Note:** in a larger, more real world application, we may use some external library for data fetching. But again, in a small application like this one, this is now a great way to fetch some data on mount, so when our application first loads.
+
+#### A First Look at Effects
+
+Event Handlers are the preferred way of creating side effects, we should use `useEffect` as little as possible.
 <!---
 [comment]: it works with text, you can rename it how you want
 
