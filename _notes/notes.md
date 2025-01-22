@@ -745,6 +745,28 @@ the first argument is the side effect you want to be run, i.e. a *JavaScript fun
 #### A First Look at Effects
 
 Event Handlers are the preferred way of creating side effects, we should use `useEffect` as little as possible.
+
+### Using an Async Function
+
+```javascript
+useEffect(function () {
+  async function fetchMovies() {
+    const res = await fetch(`http://omdbapi.com/?apikey=${KEY}&${query}`);
+    const data = res.json();
+    
+    setMovies(data['Search']);
+    // console.log(movies); //ERROR: above line is asyncrhonous, so we will get the prev. value of movies
+    console.log(data['Search']); //NOTE: OK
+  }
+
+  fetchMovies();
+}, []);
+```
+
+Remember that setting the `state` is an **immutable action**.  
+
+`setMovies(data['Search']);`:  after the state has been set in this line of code, or actually after we instructed React to set the state, that doesn't mean that this happens immediately. So instead, it will happen after this function here has been called.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
