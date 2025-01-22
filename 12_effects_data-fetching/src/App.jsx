@@ -1,6 +1,6 @@
-// import 'dotenv/config';
 import { useEffect, useState } from 'react';
 import { Box, WatchedMoviesList, WatchedSummary } from './components/Box';
+import { ErrorMessage } from './components/ErrorMessage';
 import { Loader } from './components/Loader';
 import { Main } from './components/Main';
 import { MovieList } from './components/MovieList';
@@ -60,20 +60,31 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const query = 's=interstellar';
+  // const query = 's=shouldThrowMovieNotFound';
 
   // NOTE: asynchronous
   useEffect(function () {
     async function fetchMovies() {
-      setIsLoading(true);
-      setTimeout(async () => {
+      try {
+        setIsLoading(true);
         const res = await fetch(`http://omdbapi.com/?apikey=${KEY}&${query}`);
+
+        if (!res.ok)
+          throw new Error('Something went wrong with fetching the movies.');
+
         const data = await res.json();
+        if (data.Response === 'False') throw new Error('Movie not found.');
 
         setMovies(data['Search']);
+      } catch (error) {
+        // console.error(error.message);
+        setError(error.message);
+      } finally {
         setIsLoading(false);
-      }, 2000);
+      }
     }
 
     fetchMovies();
@@ -93,7 +104,11 @@ export default function App() {
         <NumResults movies={movies} />
       </NavBar>
       <Main>
-        <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box>
+        <Box>
+          {isLoading && <Loader />}
+          {!isLoading && !error && <MovieList movies={movies} />}
+          {error && <ErrorMessage message={error} />}
+        </Box>
         <Box>
           <WatchedSummary watched={watched} />
           <WatchedMoviesList watched={watched} />
