@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 
 // Structural
 export function NavBar({ children }) {
@@ -11,7 +10,7 @@ export function NavBar({ children }) {
   );
 }
 NavBar.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 // Stateless
@@ -25,9 +24,7 @@ function Logo() {
 }
 
 // StateFul
-export function Search() {
-  const [query, setQuery] = useState('');
-
+export function Search({ query, setQuery }) {
   return (
     <input
       className='search'
@@ -48,6 +45,12 @@ export function NumResults({ movies }) {
     </p>
   );
 }
+
+Search.propTypes = {
+  query: PropTypes.string,
+  setQuery: PropTypes.func,
+};
+
 NumResults.propTypes = {
   movies: PropTypes.array,
 };

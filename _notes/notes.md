@@ -774,6 +774,18 @@ Remember that setting the `state` is an **immutable action**.
 Effects are actually only executed after the browser has painted the component instance on the screen. So, not immediately after render, as you might have thought initially. That's why we say that **effects run asynchronously** after the render has already been painted to the screen.
 
 And, the reasons why effect work this way is that effects may contain long-running processes, such as fetching data. So, in a situation like that, if React would execute the effect before the browser paints a new screen, it would block this entire process, and users would see an old version of the component for way too long.
+
+### Synchronizing Queries With Movie Data
+
+![image info](./12_sc1.png)
+
+`C` will be logged first when the component mounts, as this is read during the *render* step, component logic is indeed read/processed during the render phase, while `A` & `B` will be logged after, when the browser has repainted.
+
+**<span style='color: #495fcb'> Note:** if we type new text in the searchBar, then only `C` and `B` are logged again, but not `A`, which has an empty dependency while `B`, with no dependency defined will be executed/synchronised on each render, which is indeed triggered when `states` or `props` of a component change.
+
+These labels would clearly describe the above logic:
+
+![image info](./12_sc2.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
