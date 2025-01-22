@@ -5,13 +5,20 @@ import { Loader } from './Loader';
 
 const KEY = import.meta.env.VITE_OMDB;
 
-export function MovieDetails({ selectedId, onCloseMovie }) {
+export function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState('');
+
+  const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
+
+   const watchedUserRating = watched.find(
+     (movie) => movie.imdbID === selectedId
+   )?.userRating;
   
   const {
     Title: title,
-    // Year: year,
+    Year: year,
     Poster: poster,
     Runtime: runtime,
     imdbRating,
@@ -22,6 +29,21 @@ export function MovieDetails({ selectedId, onCloseMovie }) {
     Genre: genre,
   } = movie;
 
+  function handleAdd() {
+    const newWatchedMovie = {
+      imdbID: selectedId,
+      title,
+      year,
+      poster,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(' ').at(0)),
+      userRating,
+    };
+
+    onAddWatched(newWatchedMovie);
+    onCloseMovie();
+  }
+
   useEffect(
     function () {
       async function getMovieDetails() {
@@ -31,7 +53,7 @@ export function MovieDetails({ selectedId, onCloseMovie }) {
         );
         const data = await res.json();
         setMovie(data);
-          setIsLoading(false);
+        setIsLoading(false);
       }
 
       getMovieDetails();
@@ -64,7 +86,24 @@ export function MovieDetails({ selectedId, onCloseMovie }) {
           </header>
           <section>
             <div className='rating'>
-              <StarRating maxRating={10} size={24} />
+              {!isWatched ? (
+                <>
+                  <StarRating
+                    maxRating={10}
+                    size={24}
+                    onSetRating={setUserRating}
+                  />
+                  {userRating > 0 && (
+                    <button className='btn-add' onClick={handleAdd}>
+                      + Add to list
+                    </button>
+                  )}
+                </>
+              ) : (
+                <p>
+                  You rated with movie {watchedUserRating} <span>⭐️</span>
+                </p>
+              )}
             </div>
             <p>
               <em>{plot}</em>
@@ -81,4 +120,6 @@ export function MovieDetails({ selectedId, onCloseMovie }) {
 MovieDetails.propTypes = {
   selectedId: PropTypes.string,
   onCloseMovie: PropTypes.func,
+  onAddWatched: PropTypes.func,
+  watched: PropTypes.array,
 };

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { average } from '../utils';
+import { average, sum } from '../utils';
 
 // Stateful
 // export function Box({ element }) {
@@ -25,7 +25,7 @@ Box.propTypes = {
 export function WatchedSummary({ watched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
-  const avgRuntime = average(watched.map((movie) => movie.runtime));
+  const sumRuntime = sum(watched.map((movie) => movie.runtime));
 
   return (
     <div className='summary'>
@@ -37,15 +37,15 @@ export function WatchedSummary({ watched }) {
         </p>
         <p>
           <span>⭐️</span>
-          <span>{avgImdbRating}</span>
+          <span>{avgImdbRating.toFixed(1)}</span>
         </p>
         <p>
           <span>🌟</span>
-          <span>{avgUserRating}</span>
+          <span>{avgUserRating.toFixed(1)}</span>
         </p>
         <p>
           <span>⏳</span>
-          <span>{avgRuntime} min</span>
+          <span>{sumRuntime} min</span>
         </p>
       </div>
     </div>
@@ -55,24 +55,29 @@ WatchedSummary.propTypes = {
   watched: PropTypes.array,
 };
 
-export function WatchedMoviesList({ watched }) {
+export function WatchedMoviesList({ watched, onDeleteWatched }) {
   return (
     <ul className='list'>
       {watched.map((movie) => (
-        <WatchedMovie movie={movie} key={movie.imdbID} />
+        <WatchedMovie
+          movie={movie}
+          key={movie.imdbID}
+          onDeleteWatched={onDeleteWatched}
+        />
       ))}
     </ul>
   );
 }
 WatchedMoviesList.propTypes = {
   watched: PropTypes.array,
+  onDeleteWatched: PropTypes.func,
 };
 
-function WatchedMovie({ movie }) {
+function WatchedMovie({ movie, onDeleteWatched }) {
   return (
     <li key={movie.imdbID}>
-      <img src={movie.Poster} alt={`${movie.Title} poster`} />
-      <h3>{movie.Title}</h3>
+      <img src={movie.poster} alt={`${movie.title} poster`} />
+      <h3>{movie.title}</h3>
       <div>
         <p>
           <span>⭐️</span>
@@ -86,10 +91,17 @@ function WatchedMovie({ movie }) {
           <span>⏳</span>
           <span>{movie.runtime} min</span>
         </p>
+        <button
+          className='btn-delete'
+          onClick={() => onDeleteWatched(movie.imdbID)}
+        >
+          X
+        </button>
       </div>
     </li>
   );
 }
 WatchedMovie.propTypes = {
   movie: PropTypes.object,
+  onDeleteWatched: PropTypes.func,
 };

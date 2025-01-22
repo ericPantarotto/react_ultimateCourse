@@ -797,6 +797,21 @@ These labels would clearly describe the above logic:
 </button>
 ```
 
+### Adding a Watched Movie
+
+**<span style='color: #a8c62c'> WatchedMoviesList.jsx**
+
+```javascript
+<button
+    className='btn-delete'
+    onClick={() => onDeleteWatched(movie.imdbID)}
+>
+```
+
+Above in the `onClick` event, we need to pass a **function**, not a function call (Nb: this is anonymous function, itself calling our `onDeleteWatched` function in that instance)
+
+**<span style='color: #875c5c'>IMPORTANT:** when moving a lot of data up and down the tree and the same for some handler functions, the `components` menu of the `Dev Tools` is a great place to look at the structure of the web app.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
