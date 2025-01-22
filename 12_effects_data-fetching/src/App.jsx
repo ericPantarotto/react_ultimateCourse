@@ -1,6 +1,7 @@
 // import 'dotenv/config';
 import { useEffect, useState } from 'react';
 import { Box, WatchedMoviesList, WatchedSummary } from './components/Box';
+import { Loader } from './components/Loader';
 import { Main } from './components/Main';
 import { MovieList } from './components/MovieList';
 import { NavBar, NumResults, Search } from './components/NavBar';
@@ -58,20 +59,21 @@ const KEY = import.meta.env.VITE_OMDB;
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const query = 's=interstellar';
 
   // NOTE: asynchronous
   useEffect(function () {
     async function fetchMovies() {
-      const res = await fetch(
-        `http://omdbapi.com/?apikey=${KEY}&${query}`
-      );
-      const data = await res.json();
+      setIsLoading(true);
+      setTimeout(async () => {
+        const res = await fetch(`http://omdbapi.com/?apikey=${KEY}&${query}`);
+        const data = await res.json();
 
-      setMovies(data['Search']);
-      // console.log(movies);
-      console.log(data['Search']);
+        setMovies(data['Search']);
+        setIsLoading(false);
+      }, 2000);
     }
 
     fetchMovies();
@@ -91,9 +93,7 @@ export default function App() {
         <NumResults movies={movies} />
       </NavBar>
       <Main>
-        <Box>
-          <MovieList movies={movies} />
-        </Box>
+        <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box>
         <Box>
           <WatchedSummary watched={watched} />
           <WatchedMoviesList watched={watched} />
