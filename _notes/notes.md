@@ -786,6 +786,17 @@ And, the reasons why effect work this way is that effects may contain long-runni
 These labels would clearly describe the above logic:
 
 ![image info](./12_sc2.png)
+
+### Selecting a Movie
+
+**<span style='color: #a3842c'>Link:** HTML entity:
+
+```JavaScript
+<button className='btn-back' onClick={onCloseMovie}>
+  &larr;
+</button>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

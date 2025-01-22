@@ -3,6 +3,7 @@ import { Box, WatchedMoviesList, WatchedSummary } from './components/Box';
 import { ErrorMessage } from './components/ErrorMessage';
 import { Loader } from './components/Loader';
 import { Main } from './components/Main';
+import { MovieDetails } from './components/MovieDetails';
 import { MovieList } from './components/MovieList';
 import { NavBar, NumResults, Search } from './components/NavBar';
 
@@ -62,6 +63,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [query, setQuery] = useState('test');
+  const [selectedId, setSelectedId] = useState(null);
 
   // const query = 's=interstellar';
   // const query = 's=shouldThrowMovieNotFound';
@@ -111,6 +113,14 @@ export default function App() {
   //     .then((data) => setMovies(data['Search']));
   // }, []);
 
+  function handleSelectMovie(id) {
+    setSelectedId((selectedId) => (id === selectedId ? null : id));
+  }
+
+  function handleCloseMovie() {
+    setSelectedId(null);
+  }
+
   return (
     <>
       <NavBar>
@@ -120,12 +130,23 @@ export default function App() {
       <Main>
         <Box>
           {isLoading && <Loader />}
-          {!isLoading && !error && <MovieList movies={movies} />}
+          {!isLoading && !error && (
+            <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
+          )}
           {error && <ErrorMessage message={error} />}
         </Box>
         <Box>
-          <WatchedSummary watched={watched} />
-          <WatchedMoviesList watched={watched} />
+          {selectedId ? (
+            <MovieDetails
+              selectedId={selectedId}
+              onCloseMovie={handleCloseMovie}
+            />
+          ) : (
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchedMoviesList watched={watched} />
+            </>
+          )}
         </Box>
         {/* <Box element={<MovieList movies={movies} />} /> */}
       </Main>
