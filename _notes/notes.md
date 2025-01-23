@@ -933,6 +933,53 @@ setAvgRating(Number(imdbRating));
 setAvgRating((avgRating) => (avgRating + userRating) / 2);
 ```
 
+To persist the watch list in local storage in between refresh, we can:
+
+- store the data into local storage each time that a new movie is actually added: `handleAddWatched`
+- second option is to use `useEffect`
+
+**<span style='color: #a8c62c'> App.jsx**
+
+As the update of the watched state variable happens asynchronously with the `setter` method, to update our local storage we can't simply use `watched` variable but `[...watched, movie]` instead
+
+```JavaScript
+function handleAddWatched(movie) {
+  setWatched((watched) => [...watched, movie]);
+  
+  localStorage.setItem("watched", JSON.stringify([...watched, movie]));
+}
+```
+
+when using `useEffect`, we don't have to create any new array because this effect will only run after the watched state has already been updated (new state).
+
+```javascript
+useEffect(
+  function () {
+    localStorage.setItem('watched', JSON.stringify(watched));
+  },
+  [watched]
+);
+```
+
+To retrieve the localstorage data when the app mounts, instead of just passing in a value to our state,we can pass in a callback function.
+
+And so that's because the `useState` hook also accepts a callback function instead of just a single value. And so we can then initialize the state with whatever value this callback function will return.
+
+**<span style='color: #875c5c'>IMPORTANT:** And also just like the values that we pass in, React will only consider this function here on the initial render. So this function is only executed once on the initial render and is simply ignored on subsequent re-renders.
+
+```javascript
+ // const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(function () {
+    const storedValue = localStorage.getItem('watched');
+    return JSON.parse(storedValue);
+  });
+```
+
+**<span style='color: #9e5231'>Error:** passing a function inside `useState` is ok, but we cannot call a function inside `useState`! `useState(localStorage.getItem('watched'))`. Even though React would ignore the value of this it would still call this function on every render, which is not good.
+
+when we delete a movie from here, and you see that it actually automatically got removed here from the local storage as well. it's because thanks to our effect here we have effectively synchronized the watched state with our local storage. So when the watched state changes, our local storage changes as well.
+
+**<span style='color: #495fcb'> Note:** And so this is a great advantage of having used the `useEffect` hook instead of setting local stage right in the event handler, because we would also have to manually set the local storage here as we deleted a movie.
 <!---
 [comment]: it works with text, you can rename it how you want
 

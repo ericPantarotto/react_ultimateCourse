@@ -59,14 +59,16 @@ const KEY = import.meta.env.VITE_OMDB;
 // Structural
 export default function App() {
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState(null);
 
-  // const query = 's=interstellar';
-  // const query = 's=shouldThrowMovieNotFound';
+  // const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(function () {
+    const storedValue = localStorage.getItem('watched');
+    return JSON.parse(storedValue);
+  });
 
   useEffect(
     function () {
@@ -114,6 +116,13 @@ export default function App() {
     [query]
   );
 
+  useEffect(
+    function () {
+      localStorage.setItem('watched', JSON.stringify(watched));
+    },
+    [watched]
+  );
+
   // // NOTE: synchronous
   // useEffect(function () {
   //   fetch(`http://omdbapi.com/?apikey=${KEY}&s=interstellar`)
@@ -131,11 +140,13 @@ export default function App() {
 
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
+    // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
   }
 
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
+
   return (
     <>
       <NavBar>
