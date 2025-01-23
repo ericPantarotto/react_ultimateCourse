@@ -62,7 +62,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [query, setQuery] = useState('test');
+  const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState(null);
 
   // const query = 's=interstellar';
@@ -77,7 +77,9 @@ export default function App() {
         setError('');
         return;
       }
+
       setIsLoading(true);
+      handleCloseMovie();
 
       const waitFetch = setTimeout(async function fetchMovies() {
         try {

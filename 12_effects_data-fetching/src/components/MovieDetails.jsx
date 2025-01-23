@@ -1,21 +1,26 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import StarRating from './StarRating';
 import { Loader } from './Loader';
+import StarRating from './StarRating';
 
 const KEY = import.meta.env.VITE_OMDB;
 
-export function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
+export function MovieDetails({
+  selectedId,
+  onCloseMovie,
+  onAddWatched,
+  watched,
+}) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState('');
 
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
 
-   const watchedUserRating = watched.find(
-     (movie) => movie.imdbID === selectedId
-   )?.userRating;
-  
+  const watchedUserRating = watched.find(
+    (movie) => movie.imdbID === selectedId
+  )?.userRating;
+
   const {
     Title: title,
     Year: year,
@@ -46,6 +51,25 @@ export function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }
 
   useEffect(
     function () {
+      function callback(e) {
+        if (e.code === 'Escape') {
+          onCloseMovie();
+          // console.log('Closing');
+          
+        }
+      }
+
+      document.addEventListener('keydown', callback);
+
+      return function () {
+        document.removeEventListener('keydown', callback);
+      };
+    },
+    [onCloseMovie]
+  );
+
+  useEffect(
+    function () {
       async function getMovieDetails() {
         setIsLoading(true);
         const res = await fetch(
@@ -73,7 +97,7 @@ export function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }
     },
     [title]
   );
-  
+
   return (
     <div className='details'>
       {isLoading ? (

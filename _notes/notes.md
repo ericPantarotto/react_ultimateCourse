@@ -872,6 +872,35 @@ So each time that there is a new keystroke, the component gets re-rendered. Betw
 **<span style='color: #9e5231'>Error:** as soon as a request get canceled, JavaScript actually sees that as an error. So basically when a fetch request, as it is canceled, it'll throw an error, which will then immediately go here into our catch block, where the error is set.
 
 `ChatGPT` recommends `lodash`, relying on an external library.
+
+### One More Effect: Listening to a Keypress
+
+```javascript
+useEffect(
+  function () {
+    function callback(e) {
+      if (e.code === 'Escape') {
+        onCloseMovie();
+        // console.log('Closing');
+      }
+    }
+
+    document.addEventListener('keydown', callback);
+
+    return function () {
+      document.removeEventListener('keydown', callback);
+    };
+  },
+  [onCloseMovie]
+);
+```
+
+Without the `cleanup` function, we see that if we log a *closing* message, they keep on accumulating.
+
+The reason is that each time that this effect here is executed, it'll basically add one more event listener to the document.
+
+And so if we open up 10 movies and then close them all, we will end up with 10 of the same event listeners attached to the document. This is why we also need to clean up our event listeners.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
