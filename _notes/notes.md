@@ -901,6 +901,12 @@ The reason is that each time that this effect here is executed, it'll basically 
 
 And so if we open up 10 movies and then close them all, we will end up with 10 of the same event listeners attached to the document. This is why we also need to clean up our event listeners.
 
+## Custom Hooks, Refs, and more State
+
+### React Hooks and Their Rules
+
+**<span style='color: #495fcb'> Note:** **Hooks rely on call order**,  his is very convenient because by using the call order, we developers don't have to manually assign names to each hook, which would create multiple problems.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
