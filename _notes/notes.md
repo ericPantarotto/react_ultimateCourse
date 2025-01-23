@@ -918,6 +918,21 @@ From `Components` in the `Dev Tools`, each of the hooks is identified by React b
 You would get the same error if you include an **early return**.
 
 ![image info](./13_sc2.png)
+
+### More Details of useState
+
+**<span style='color: #495fcb'> Note:** The power and one of the great advantages of derived state, which is that it updates basically as the component gets re-rendered.
+
+**<span style='color: #495fcb'> Note:** we do not get access to the updated state right after we call the state updating function; this is called **asynchronous state setting**; we usually say that your state variable is **stale** at this point. So only once React is done processing this event handler it will then update all the state and re-render the UI.
+
+The solution is to use a callback function:
+
+```javascript
+setAvgRating(Number(imdbRating));
+// ERROR: setAvgRating((avgRating + userRating) / 2);
+setAvgRating((avgRating) => (avgRating + userRating) / 2);
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

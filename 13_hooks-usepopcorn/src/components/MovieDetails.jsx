@@ -34,6 +34,8 @@ export function MovieDetails({
     Genre: genre,
   } = movie;
 
+  // const [avgRating, setAvgRating] = useState(0);
+
   function handleAdd() {
     const newWatchedMovie = {
       imdbID: selectedId,
@@ -47,6 +49,9 @@ export function MovieDetails({
 
     onAddWatched(newWatchedMovie);
     onCloseMovie();
+
+    // setAvgRating(Number(imdbRating));
+    // setAvgRating((avgRating) => (avgRating + userRating) / 2);
   }
 
   // ERROR:L simulating violation of the Rules of Hook
@@ -125,6 +130,9 @@ export function MovieDetails({
               </p>
             </div>
           </header>
+
+          {/* <p>Avg Rating with user rating: {avgRating}</p> */}
+
           <section>
             <div className='rating'>
               {!isWatched ? (
