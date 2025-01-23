@@ -68,40 +68,46 @@ export default function App() {
   // const query = 's=interstellar';
   // const query = 's=shouldThrowMovieNotFound';
 
-  // NOTE: asynchronous
   useEffect(
     function () {
-      async function fetchMovies() {
-        try {
-          setIsLoading(true);
-          setError('');
-
-          const res = await fetch(
-            `http://omdbapi.com/?apikey=${KEY}&s=${query}`
-          );
-
-          if (!res.ok)
-            throw new Error('Something went wrong with fetching the movies.');
-
-          const data = await res.json();
-          if (data.Response === 'False') throw new Error('Movie not found.');
-
-          setMovies(data['Search']);
-        } catch (error) {
-          console.error(error.message);
-          setError(error.message);
-        } finally {
-          setIsLoading(false);
-        }
-      }
+      const controller = new AbortController();
 
       if (query.length < 4) {
         setMovies([]);
         setError('');
         return;
       }
+      setIsLoading(true);
 
-      fetchMovies();
+      const waitFetch = setTimeout(async function fetchMovies() {
+        try {
+          // setIsLoading(true);
+          setError('');
+          const res = await fetch(
+            `https://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`,
+            { signal: controller.signal }
+          );
+
+          if (!res.ok)
+            throw new Error('Something went wrong with fetching movies');
+
+          const data = await res.json();
+          if (data.Response === 'False') throw new Error('Movie not found');
+
+          setMovies(data.Search);
+          setIsLoading(false);
+          setError('');
+        } catch (err) {
+          if (err.name !== 'AbortError') setError(err.message);
+        } finally {
+          setIsLoading(false);
+        }
+      }, 1000);
+
+      return function () {
+        controller.abort();
+        clearTimeout(waitFetch);
+      };
     },
     [query]
   );

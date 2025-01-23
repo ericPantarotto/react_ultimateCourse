@@ -845,6 +845,33 @@ useEffect(
 But still our function here remembers the title. So how is that? Well, it's because of a **very important concept in JavaScript called a closure**. So basically a closure in JavaScript means that a function will always remember all the variables that were present at the time and the place data function was created.
 
 So in the case of our cleanup function here, it was created by the time this effect first was created here. And so by that time the title that was actually defined will be remembered.
+
+**<span style='color: #495fcb'> Note:** the cleanup function runs:
+
+- when the component unmounts
+- between component re-renders
+
+### Cleaning up Data Fetching
+
+**<span style='color: #9e5231'>Error:**at the moment, we send one http request per keystroke.
+
+- having so many requests at the same time will slow each of them down.
+- this means that we will end up downloading way too much data.
+- We always want exactly the last request of all to be the one that matters, and this is not guaranteed at the moment with potential **race condition**, which occurs if some intermediary request with broken search term takes longer, it would then be the wrong request displayed onto our UI.
+
+We can solve that issue by using a **native browser API, which is the abort controller**, which has nothing to do with *React*.
+
+With this *abort controller*:
+
+- all previous request which are not the last one, got canceled
+- we can also see that now we no longer have all these different requests happening at the same time.  there is basically only one request happening at a time, until it then got canceled by the next one.
+- the last one that we were actually interested in, was of course *not* canceled.
+
+So each time that there is a new keystroke, the component gets re-rendered. Between each of these re-renders, the cleanup function of our `useEffect`, will get called. So on each new keystroke, so a new re-render, our controller will abort the current fetch request. And so that is exactly what we want, to cancel the current request each time that a new one comes in.
+
+**<span style='color: #9e5231'>Error:** as soon as a request get canceled, JavaScript actually sees that as an error. So basically when a fetch request, as it is canceled, it'll throw an error, which will then immediately go here into our catch block, where the error is set.
+
+`ChatGPT` recommends `lodash`, relying on an external library.
 <!---
 [comment]: it works with text, you can rename it how you want
 
