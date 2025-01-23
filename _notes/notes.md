@@ -907,6 +907,17 @@ And so if we open up 10 movies and then close them all, we will end up with 10 o
 
 **<span style='color: #495fcb'> Note:** **Hooks rely on call order**,  his is very convenient because by using the call order, we developers don't have to manually assign names to each hook, which would create multiple problems.
 
+### The Rules of Hooks in Practice
+
+From `Components` in the `Dev Tools`, each of the hooks is identified by React by their order number, not some name.
+
+![image info](./13_sc1.png)
+
+**<span style='color: #9e5231'>Error:** If you introduce an `if` statement with a hook, you'll have to disable eslint `/* eslint-disable */`, on the next render, you'll get an error message that a change of order of Hooks has been detected.
+
+You would get the same error if you include an **early return**.
+
+![image info](./13_sc2.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 

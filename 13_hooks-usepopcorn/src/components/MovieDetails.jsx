@@ -49,13 +49,17 @@ export function MovieDetails({
     onCloseMovie();
   }
 
+  // ERROR:L simulating violation of the Rules of Hook
+  // /* eslint-disable */
+  // if (imdbRating > 8) [isTop, setIsTop] = useState(true);
+  // if (imdbRating > 8) return <p>Greatest ever!</p>;
+
   useEffect(
     function () {
       function callback(e) {
         if (e.code === 'Escape') {
           onCloseMovie();
           // console.log('Closing');
-          
         }
       }
 
