@@ -1048,6 +1048,8 @@ from the Q&A: Lecture 170
 "I tried finding the solution to this problem by googling and I came across the useCallback hook read the documentation and I think I found the solution is this correct?"
 
 `const handleCloseMovie = useCallback(() => setSelectedID(null), []);`
+
+`Copilot` refers this to `memoization` of a function inside of a `useEffet`
 <!---
 [comment]: it works with text, you can rename it how you want
 
