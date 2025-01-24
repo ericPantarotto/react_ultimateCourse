@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
+import { useKey } from '../hooks/useKey';
 import { Loader } from './Loader';
 import StarRating from './StarRating';
 
@@ -69,23 +70,25 @@ export function MovieDetails({
   // if (imdbRating > 8) [isTop, setIsTop] = useState(true);
   // if (imdbRating > 8) return <p>Greatest ever!</p>;
 
-  useEffect(
-    function () {
-      function callback(e) {
-        if (e.code === 'Escape') {
-          onCloseMovie();
-          // console.log('Closing');
-        }
-      }
+  // NOTE: replacing with custom useKey hook
+  // useEffect(
+  //   function () {
+  //     function callback(e) {
+  //       if (e.code === 'Escape') {
+  //         onCloseMovie();
+  //         // console.log('Closing');
+  //       }
+  //     }
 
-      document.addEventListener('keydown', callback);
+  //     document.addEventListener('keydown', callback);
 
-      return function () {
-        document.removeEventListener('keydown', callback);
-      };
-    },
-    [onCloseMovie]
-  );
+  //     return function () {
+  //       document.removeEventListener('keydown', callback);
+  //     };
+  //   },
+  //   [onCloseMovie]
+  // );
+  useKey('Escape', onCloseMovie);
 
   useEffect(
     function () {

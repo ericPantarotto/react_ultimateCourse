@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { useKey } from '../hooks/useKey';
 
 // Structural
 export function NavBar({ children }) {
@@ -34,22 +35,28 @@ export function Search({ query, setQuery }) {
 
   const inputEl = useRef(null);
 
-  useEffect(
-    function () {
-      function callback(e) {
-        if (document.activeElement === inputEl.current) return; //NOTE: to avoid clearing the input is the active element.
+  // NOTE: replacing with custom useKey hook
+  // useEffect(
+  //   function () {
+  //     function callback(e) {
+  //       if (document.activeElement === inputEl.current) return; //NOTE: to avoid clearing the input is the active element.
 
-        if (e.code === 'Enter') {
-          inputEl.current.focus();
-          setQuery('');
-        }
-      }
+  //       if (e.code === 'Enter') {
+  //         inputEl.current.focus();
+  //         setQuery('');
+  //       }
+  //     }
 
-      document.addEventListener('keydown', callback);
-      return () => document.addEventListener('keydown', callback);
-    },
-    [setQuery]
-  );
+  //     document.addEventListener('keydown', callback);
+  //     return () => document.addEventListener('keydown', callback);
+  //   },
+  //   [setQuery]
+  // );
+  useKey('Enter', () => {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery('');
+  });
 
   return (
     <input
