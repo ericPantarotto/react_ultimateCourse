@@ -996,6 +996,22 @@ useEffect(function () {
 React is all about being declarative. And so manually selecting a dom element like this is not really the React way of doing things.
 
 To make the action of selecting an elements more declarative, such as everything else in React, we need the concept of `useRef`.
+
+### Refs to select DOM Elements
+
+Below the variable and html element are connected in a declarative way, without any `querySelector`.
+
+```javascript
+const inputEl = useRef(null);
+
+<input
+  onChange={(e) => setQuery(e.target.value)}
+  ref={inputEl}
+/>
+```
+
+**<span style='color: #495fcb'> Note:** we need to use an effect in order to use a ref that contains a DOM element because the ref only gets added to this DOM element, after the DOM has already loaded. And so therefore we can only access it in effect which also runs after the DOM has been loaded.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

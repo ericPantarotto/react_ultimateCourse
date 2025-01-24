@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 // Structural
 export function NavBar({ children }) {
@@ -26,12 +26,30 @@ function Logo() {
 
 // StateFul
 export function Search({ query, setQuery }) {
-  
-  useEffect(function () {
-    const el = document.querySelector(".search");
-    console.log(el);
-    el.focus();
-  }, []);
+  // useEffect(function () {
+  //   const el = document.querySelector(".search");
+  //   console.log(el);
+  //   el.focus();
+  // }, []);
+
+  const inputEl = useRef(null);
+
+  useEffect(
+    function () {
+      function callback(e) {
+        if (document.activeElement === inputEl.current) return; //NOTE: to avoid clearing the input is the active element.
+
+        if (e.code === 'Enter') {
+          inputEl.current.focus();
+          setQuery('');
+        }
+      }
+
+      document.addEventListener('keydown', callback);
+      return () => document.addEventListener('keydown', callback);
+    },
+    [setQuery]
+  );
 
   return (
     <input
@@ -40,6 +58,7 @@ export function Search({ query, setQuery }) {
       placeholder='Search movies...'
       value={query}
       onChange={(e) => setQuery(e.target.value)}
+      ref={inputEl}
     />
   );
 }
