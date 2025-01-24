@@ -1049,7 +1049,13 @@ from the Q&A: Lecture 170
 
 `const handleCloseMovie = useCallback(() => setSelectedID(null), []);`
 
-`Copilot` refers this to `memoization` of a function inside of a `useEffet`
+`Copilot` refers this to `memoization` of a function inside of a `useEffect`
+
+### Challenge1: useGeolocate
+
+When we create our own custom hooks, we take all the non-visual logic, so all the logic that contains some React hooks, and which is relevant to a certain thing and so in this case, that thing is to use geolocation.
+
+we took these three state variables and also this event handler function and then returned off that from our custom hook, and so then **we encapsulated all of those states and all the logic inside this custom hook!**
 <!---
 [comment]: it works with text, you can rename it how you want
 
