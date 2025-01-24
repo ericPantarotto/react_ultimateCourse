@@ -1001,6 +1001,8 @@ To make the action of selecting an elements more declarative, such as everything
 
 Below the variable and html element are connected in a declarative way, without any `querySelector`.
 
+**<span style='color: #a8c62c'> NavBar.jsx**
+
 ```javascript
 const inputEl = useRef(null);
 
@@ -1011,6 +1013,27 @@ const inputEl = useRef(null);
 ```
 
 **<span style='color: #495fcb'> Note:** we need to use an effect in order to use a ref that contains a DOM element because the ref only gets added to this DOM element, after the DOM has already loaded. And so therefore we can only access it in effect which also runs after the DOM has been loaded.
+
+### Refs to Persist Data Between Renders
+
+**<span style='color: #a8c62c'> MovieDetails.jsx**
+
+```javascript
+const countRef = useRef(0);
+
+useEffect(
+  function () {
+    if (userRating) countRef.current++;
+  },
+  [userRating]
+);
+```
+
+To update a ref, we use a `useEffect`, because we are not allowed to mutate the ref in render logic. So instead we need to use a `useEffect`.
+
+**<span style='color: #495fcb'> Note:** So with a `ref`, we don't have a set function but instead we simply mutate the current property which is in the ref.
+
+![image info](./13_sc3.png)
 
 <!---
 [comment]: it works with text, you can rename it how you want
