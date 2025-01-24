@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 // Structural
 export function NavBar({ children }) {
@@ -25,6 +26,13 @@ function Logo() {
 
 // StateFul
 export function Search({ query, setQuery }) {
+  
+  useEffect(function () {
+    const el = document.querySelector(".search");
+    console.log(el);
+    el.focus();
+  }, []);
+
   return (
     <input
       className='search'

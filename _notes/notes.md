@@ -980,6 +980,22 @@ And so that's because the `useState` hook also accepts a callback function inste
 when we delete a movie from here, and you see that it actually automatically got removed here from the local storage as well. it's because thanks to our effect here we have effectively synchronized the watched state with our local storage. So when the watched state changes, our local storage changes as well.
 
 **<span style='color: #495fcb'> Note:** And so this is a great advantage of having used the `useEffect` hook instead of setting local stage right in the event handler, because we would also have to manually set the local storage here as we deleted a movie.
+
+### How NOT to Select DOM Elements in React
+
+**<span style='color: #a8c62c'> NavBar.jsx**
+
+```javascript
+useEffect(function () {
+  const el = document.querySelector(".search");
+  console.log(el);
+  el.focus();
+}, []);
+```
+
+React is all about being declarative. And so manually selecting a dom element like this is not really the React way of doing things.
+
+To make the action of selecting an elements more declarative, such as everything else in React, we need the concept of `useRef`.
 <!---
 [comment]: it works with text, you can rename it how you want
 
