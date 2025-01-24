@@ -1035,6 +1035,19 @@ To update a ref, we use a `useEffect`, because we are not allowed to mutate the 
 
 ![image info](./13_sc3.png)
 
+### Creating our First Custom Hook: useMovies
+
+**<span style='color: #875c5c'>IMPORTANT:** Remember that **JavaScript hoisting** works with standard functions but not arrow functions, and is one of the reason why function declaration can be better.
+
+**<span style='color: #9e5231'>Error:**
+
+in our custom hook, if we update the dependency as suggested, we get an infinite reload : `[query, callback]`
+
+from the Q&A: Lecture 170
+
+"I tried finding the solution to this problem by googling and I came across the useCallback hook read the documentation and I think I found the solution is this correct?"
+
+`const handleCloseMovie = useCallback(() => setSelectedID(null), []);`
 <!---
 [comment]: it works with text, you can rename it how you want
 
