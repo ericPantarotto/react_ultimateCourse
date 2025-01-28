@@ -1066,6 +1066,15 @@ we took these three state variables and also this event handler function and the
 #### State with useReducer
 
 ![image info](./1_sc1.png)
+
+### Loading Questions from a fake API
+
+`npm run i json-server`
+
+in the `package.json`, add in the `dependencies` section : `"json-server": "^1.0.0-beta.3",`
+
+in the `Konsole`, you can get the ip address of the *localhost server*: `hostname -I`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
