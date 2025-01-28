@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Loader from './components/Loader';
 import Main from './components/Main';
 import StartScreen from './components/StartScreen';
+import Question from './components/Question';
 
 const initialState = { questions: [], status: 'loading' };
 
@@ -14,6 +15,11 @@ function reducer(state, action) {
       return { ...state, questions: action.payload, status: 'ready' };
     case 'dataFailed':
       return { ...state, status: 'error' };
+    case 'start':
+      return {
+        ...state,
+        status: 'active',
+      };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
@@ -22,7 +28,9 @@ function reducer(state, action) {
 function App() {
   const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
   const numQuestions = questions.length;
-
+  console.log(dispatch);
+  console.log(typeof dispatch);
+  
   useEffect(() => {
     setTimeout(() => {
       fetch('http://192.168.76.83:8000/questions')
@@ -38,7 +46,8 @@ function App() {
       <Main>
         {status === 'loading' && <Loader />}
         {status === 'error' && <Error />}
-        {status === 'ready' && <StartScreen numQuestions={numQuestions} />}
+        {status === 'ready' && <StartScreen numQuestions={numQuestions} dispatch={ dispatch} />}
+        {status === 'active' && <Question />}
       </Main>
     </div>
   );
