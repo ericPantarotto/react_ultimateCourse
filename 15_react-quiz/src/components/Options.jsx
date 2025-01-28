@@ -1,20 +1,22 @@
 import PropTypes from 'prop-types';
-import Options from './Options';
 
-function Question({ question }) {
+function Options({ question }) {
   return (
-    <div>
-      <h4>{question.question}</h4>
-      <Options question={question} />
+    <div className='options'>
+      {question.options.map((option) => (
+        <button className='btn btn-option' key={option}>
+          {option}
+        </button>
+      ))}
     </div>
   );
 }
 
-Question.propTypes = {
+Options.propTypes = {
   question: PropTypes.shape({
     question: PropTypes.string.isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     answer: PropTypes.string.isRequired,
   }).isRequired,
 };
-export default Question;
+export default Options;
