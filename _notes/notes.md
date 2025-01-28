@@ -1056,6 +1056,16 @@ from the Q&A: Lecture 170
 When we create our own custom hooks, we take all the non-visual logic, so all the logic that contains some React hooks, and which is relevant to a certain thing and so in this case, that thing is to use geolocation.
 
 we took these three state variables and also this event handler function and then returned off that from our custom hook, and so then **we encapsulated all of those states and all the logic inside this custom hook!**
+
+## The Advanced useReducer Hook
+
+### Managing State with Reducer
+
+**<span style='color: #875c5c'>IMPORTANT:** **useReducer decouples state logic from component.**
+
+#### State with useReducer
+
+![image info](./1_sc1.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 

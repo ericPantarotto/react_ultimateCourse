@@ -66,7 +66,21 @@ function DateCounter() {
         <button onClick={inc}>+</button>
       </div>
 
-      <p>{date.toDateString()}</p>
+      <div>
+        {count === 0 && <h3>Today is {date.toDateString()}</h3>}
+        {count > 0 && (
+          <h3>
+            {count} {count === 1 ? 'day' : 'days'} from today will be{' '}
+            {date.toDateString()}
+          </h3>
+        )}
+        {count < 0 && (
+          <h3>
+            {Math.abs(count)} {count === -1 ? 'day' : 'days'} ago was{' '}
+            {date.toDateString()}
+          </h3>
+        )}
+      </div>
 
       <div>
         <button onClick={reset}>Reset</button>
