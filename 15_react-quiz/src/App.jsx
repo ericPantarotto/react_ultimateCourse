@@ -1,7 +1,10 @@
 import { useEffect, useReducer } from 'react';
 import './App.css';
+import Error from './components/Error';
 import Header from './components/Header';
+import Loader from './components/Loader';
 import Main from './components/Main';
+import StartScreen from './components/StartScreen';
 
 const initialState = { questions: [], status: 'loading' };
 
@@ -17,22 +20,25 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
-  
-  useEffect(function () {
-    fetch('http://192.168.76.83:8000/questions')
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: 'dataReceived', payload: data }))
-      .catch(() => dispatch({ type: 'dataFailed' }));
+  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const numQuestions = questions.length;
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetch('http://192.168.76.83:8000/questions')
+        .then((res) => res.json())
+        .then((data) => dispatch({ type: 'dataReceived', payload: data }))
+        .catch((err) => dispatch({ type: 'dataFailed', payload: err.message }));
+    }, 500);
   }, []);
 
   return (
     <div className='app'>
       <Header />
       <Main>
-        <p>1/15</p>
-        <p>Question?</p>
+        {status === 'loading' && <Loader />}
+        {status === 'error' && <Error />}
+        {status === 'ready' && <StartScreen numQuestions={numQuestions} />}
       </Main>
     </div>
   );
