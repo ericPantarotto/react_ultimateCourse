@@ -1075,6 +1075,11 @@ in the `package.json`, add in the `dependencies` section : `"json-server": "^1.0
 
 in the `Konsole`, you can get the ip address of the *localhost server*: `hostname -I`
 
+### Handling new answers
+
+**<span style='color: #875c5c'>IMPORTANT:** whenever possible, we should try to put as much of the logic for calculating the next state right into the reducer.
+
+So it's better for this logic here to be in the reducer than in the place where the event is actually first handled.
 <!---
 [comment]: it works with text, you can rename it how you want
 
