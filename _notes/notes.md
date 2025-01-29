@@ -8,6 +8,8 @@
 
 **<span style='color: #a3842c'>Link:** (<https://github.com/jonasschmedtmann/ultimate-react-course>)
 
+**<span style='color: #a3842c'>Link:** (<https://www.svgrepo.com/>)
+
 ## A first Look at React
 
 ### React vs. Vanilla JavaScript
@@ -1080,6 +1082,20 @@ in the `Konsole`, you can get the ip address of the *localhost server*: `hostnam
 **<span style='color: #875c5c'>IMPORTANT:** whenever possible, we should try to put as much of the logic for calculating the next state right into the reducer.
 
 So it's better for this logic here to be in the reducer than in the place where the event is actually first handled.
+
+### Setting Up a Timer With useEffect
+
+We couldn't start the timer in the `App.jsx` component here because then the timer will start running as soon as the entire application mounts but that's not what we want.
+
+So we have to place this `useEffect` into one of the components that mounts as the game starts, i.e. the `Timer.jsx` component.
+
+#### Re-renders in large applications
+
+when one component re-renders, all its child components will re-render as well.
+
+So our state lives here in this global `App.jsx` component, and so therefore as our state re-renders so will re-render all of these child components.
+
+**<span style='color: #495fcb'> Note:** And so this could become a performance issue in a really large application with like a thousand components. So in that case, you probably shouldn't have your most parent component re-rendering every single second.
 <!---
 [comment]: it works with text, you can rename it how you want
 
