@@ -6,6 +6,7 @@ import Loader from './components/Loader';
 import Main from './components/Main';
 import Question from './components/Question';
 import StartScreen from './components/StartScreen';
+import NextButton from './components/NextButton';
 
 const initialState = {
   questions: [],
@@ -38,6 +39,12 @@ function reducer(state, action) {
             : state.points,
       };
     }
+    case 'nextQuestion':
+      return {
+        ...state,
+        index: state.index + 1,
+        answer: null,
+      };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
@@ -70,11 +77,15 @@ function App() {
           <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
         {status === 'active' && (
+          <>
+
           <Question
             question={questions[index]}
             dispatch={dispatch}
             answer={answer}
-          />
+            />
+            <NextButton dispatch={dispatch} answer={answer} />
+          </>
         )}
       </Main>
     </div>
