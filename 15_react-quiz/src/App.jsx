@@ -4,9 +4,10 @@ import Error from './components/Error';
 import Header from './components/Header';
 import Loader from './components/Loader';
 import Main from './components/Main';
+import NextButton from './components/NextButton';
+import Progress from './components/Progress';
 import Question from './components/Question';
 import StartScreen from './components/StartScreen';
-import NextButton from './components/NextButton';
 
 const initialState = {
   questions: [],
@@ -51,12 +52,15 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [{ questions, status, index, answer }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
     reducer,
     initialState
   );
   const numQuestions = questions.length;
-  console.log(questions);
+  const maxPossiblePoints = questions.reduce(
+    (acc, question) => acc + question.points,
+    0
+  );
 
   useEffect(() => {
     setTimeout(() => {
@@ -78,11 +82,17 @@ function App() {
         )}
         {status === 'active' && (
           <>
-
-          <Question
-            question={questions[index]}
-            dispatch={dispatch}
-            answer={answer}
+            <Progress
+              numQuestions={numQuestions}
+              index={index}
+              answer={answer}
+              points={points}
+              maxPossiblePoints={maxPossiblePoints}
+            />
+            <Question
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
             />
             <NextButton dispatch={dispatch} answer={answer} />
           </>
