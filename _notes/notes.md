@@ -1100,6 +1100,50 @@ So our state lives here in this global `App.jsx` component, and so therefore as 
 ### Challenge: Adding the highscore
 
 `curl -X GET -H "Content-Type: application/json"  "<http://localhost:9000/questions>"`
+
+## React Router: building Single-Page Applications (SPA)
+
+### Routing and Single-Page Applications (SPAs)
+
+#### What is Routing
+
+most front-end frameworks have these client side routing capabilities baked right into the framework.
+
+But React is different, because it relies on third party packages for many different functionalities, and routing is one of them.
+
+So in React, routing is usually handled by this third party package called `react-router`. And this is probably the most important and most used React third party library out there. So if you want to learn React development, you need to learn React Router.
+
+The reason for that is that routing is fundamental for building something that we call **single-page applications**.
+
+#### SPAs
+
+Single-page applications, or SPAs for short, are web applications that are executed entirely on the client, so only in the user's web browser.
+
+single-page applications rely heavily on the concept of routes where different URLs correspond to different views.
+
+Whenever a user clicks on a special link provided by the Router, the URL in the browser simply changes.
+
+In the case of React, this job is usually done by `react-router`.
+
+Now, changing the URL will then trigger the DOM to be updated as a result. And in single-page applications, it's always *JavaScript* that will update the DOM and therefore the page.
+
+So usually on a normal webpage, when we click on a link, the browser will load a completely new page and then show us that new page.
+
+But single-page applications are completely different. The page is simply updated by *JavaScript*, which means that **there will never be a complete page reload**. And that's the whole point of the single-page application. It's the entire app in just one page. So without any hard reloads.
+
+This makes the web application feel just like a native desktop or a mobile application, which is really a fantastic user experience.
+
+whenever the URL is changed, `react-router` and `React` itself will update the DOM by simply rendering the component that corresponds to the new URL. And then, of course, the whole cycle can be repeated as many times as necessary.
+
+So each time the user keeps clicking on a Router link, that will change the URL and the component that's being displayed on the screen, all without reloading the page.
+
+Now, it's quite common that some pages need to display some external data, but that's not a problem at all. Whenever that happens, a component can just load some additional data from a server, usually from some kind of web API. So while the single-page app itself runs entirely on the client, it can always communicate with a server in order to fetch some data that it needs, just like we have been doing before in other applications.
+
+What we cannot do is to load a completely new page, because then it would no longer be a single-page app.
+
+**<span style='color: #495fcb'> Note:** we could actually say that all React apps are in fact single-page applications, because all of them are never reloaded, so think of all the apps that we have built up until this point.
+
+However, in a professional application, that's just not enough. So big and complex applications rely on your URLs and need the routing capabilities because only then, they can become real single-page applications.
 <!---
 [comment]: it works with text, you can rename it how you want
 
