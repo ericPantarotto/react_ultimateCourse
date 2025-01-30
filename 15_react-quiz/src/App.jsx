@@ -26,8 +26,15 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'dataReceived':
-      return { ...state, questions: action.payload, status: 'ready' };
+    case 'dataReceived': {
+      const { questions, highscore } = action.payload;
+      return {
+        ...state,
+        questions: questions,
+        highscore: highscore.score,
+        status: 'ready',
+      };
+    }
     case 'dataFailed':
       return { ...state, status: 'error' };
     case 'start':
@@ -55,6 +62,14 @@ function reducer(state, action) {
         answer: null,
       };
     case 'finish':
+      fetch('http://localhost:9000/highscore', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ score: state.points }),
+      });
+
       return {
         ...state,
         status: 'finished',
@@ -66,6 +81,7 @@ function reducer(state, action) {
         ...initialState,
         questions: state.questions,
         status: 'ready',
+        highscore: state.highscore,
       };
     case 'tick':
       return {
@@ -89,12 +105,26 @@ function App() {
     0
   );
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     fetch('http://localhost:9000/questions')
+  //       .then((res) => res.json())
+  //       .then((data) => dispatch({ type: 'dataReceived', payload: data }))
+  //       .catch((err) => dispatch({ type: 'dataFailed', payload: err.message }));
+  //   }, 500);
+  // }, []);
+
   useEffect(() => {
-    setTimeout(() => {
-      fetch('http://localhost:9000/questions')
-        .then((res) => res.json())
-        .then((data) => dispatch({ type: 'dataReceived', payload: data }))
-        .catch((err) => dispatch({ type: 'dataFailed', payload: err.message }));
+    setTimeout(async () => {
+      const resQuestions = await fetch('http://localhost:9000/questions');
+      const dataQuestions = await resQuestions.json();
+      const resHighscore = await fetch('http://localhost:9000/highscore');
+      const dataHighscore = await resHighscore.json();
+
+      dispatch({
+        type: 'dataReceived',
+        payload: { questions: dataQuestions, highscore: dataHighscore },
+      });
     }, 500);
   }, []);
 
@@ -105,7 +135,11 @@ function App() {
         {status === 'loading' && <Loader />}
         {status === 'error' && <Error />}
         {status === 'ready' && (
-          <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
+          <StartScreen
+            numQuestions={numQuestions}
+            dispatch={dispatch}
+            highscore={highscore}
+          />
         )}
         {status === 'active' && (
           <>

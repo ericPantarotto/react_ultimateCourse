@@ -1096,6 +1096,10 @@ when one component re-renders, all its child components will re-render as well.
 So our state lives here in this global `App.jsx` component, and so therefore as our state re-renders so will re-render all of these child components.
 
 **<span style='color: #495fcb'> Note:** And so this could become a performance issue in a really large application with like a thousand components. So in that case, you probably shouldn't have your most parent component re-rendering every single second.
+
+### Challenge: Adding the highscore
+
+`curl -X GET -H "Content-Type: application/json"  "<http://localhost:9000/questions>"`
 <!---
 [comment]: it works with text, you can rename it how you want
 
