@@ -1,6 +1,9 @@
+import PageNav from '../components/PageNav';
+
 export default function Pricing() {
   return (
     <main>
+      <PageNav />
       <section>
         <div>
           <h2>

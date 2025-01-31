@@ -1,12 +1,17 @@
+import { Link } from "react-router-dom";
+import PageNav from "../components/PageNav";
+
 export default function Homepage() {
   return (
     <main>
+      <PageNav />
       <section>
         <h1>
           You travel the world.
           <br />
           WorldWise keeps track of your adventures.
         </h1>
+        <Link to='/product'>Get started</Link>
         <h2>
           A world map that tracks your footsteps into every city you can think
           of. Never forget your wonderful experiences, and show your friends how
