@@ -1208,6 +1208,32 @@ a.ctaLink:link,
 a.ctaLink:visited { }
 ```
 
+### Nested Routes and Index Route
+
+*Nested routes* help to implement a behavior  where we show a part of the *UI* based on some part of the *URL*.
+
+A nested route influences what component is rendered inside this bigger component, for example.
+
+you use the `<Outlet />` element inside of a component to display the component/jsx code defined of a nested route. it's similar to the `{children}`, with the difference that we are not using `elements`, but `routes`.
+
+to show a default content in an `Outlet`, you can use an **index route**. And so an index route is basically the default child route that is going to be matched if none of these other routes here matches.
+
+**<span style='color: #495fcb'> Note:** we can also define our root path `/` by using this `index` property in a route.
+
+**<span style='color: #a8c62c'> App.jsx**
+
+```javascript
+{/* <Route path='/' element={<Homepage />} /> */}
+<Route index element={<Homepage />} />
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** It is actually very similar to something like a tabs component, we built before, but implemented in a very different way.
+
+So before, we would've implemented that using the `useState` hook to manage the currently active tab.
+
+But here with `react-router-dom`, we do the same thing, but in a very different way. So instead of using the `useState` hook to manage state, **we basically allow React Router and the url to store that state of the active tab**.
+
+**<span style='color: #495fcb'> Note:** what we learnt before is not lost, as we still build components like accordions or tabbed components using the useState hook all the time. But from now on, the overall navigation of the application is in the real world always managed by something like React Router. And so that includes a small sub navigation like this one.
 <!---
 [comment]: it works with text, you can rename it how you want
 
