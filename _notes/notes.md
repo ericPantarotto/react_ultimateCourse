@@ -1164,6 +1164,45 @@ if you would have to declare some **global** styling inside a *module.css* file,
 the `.active` class is given to us by `react-router` and so then if we want to style that, we need to use `global`.
 
 **<span style='color: #875c5c'>IMPORTANT:** otherwise if we just want to define some global classes, we wouldn't do it inside a module but just inside our global CSS file.
+
+### Building the Pages
+
+we will use images from the `public` folder.
+
+When using the `assets` folder, you must directly import the files into our JavaScript code.
+
+**<span style='color: #495fcb'> Note:** we do have **global classes**
+
+**<span style='color: #a8c62c'> index.css**
+
+```css
+cta:link,
+.cta:visited { }
+```
+
+#### global styling
+
+**<span style='color: #a8c62c'> PageNav.jsx:** our `react-router-dom NavLink` component does in fact return an `HTML anchor element`.
+
+![image info](./17_sc1.png)
+
+**<span style='color: #a8c62c'> PageNav.module.css:** in the dedicated *css module*, we make reference to an `anchor` element when applying styling when it is the active tab. Remember that `NavLink` automatically adds an `active` class on the `li` element active of an `ul`.
+
+```CSS
+.nav a:global(.active) {
+  color: var(--color-brand--2);
+}
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** Below we are using the javascript way (*ctaLink*) of writing the variable instead of css (*cta-link*), as a classname with css convention would be harder to get into our `.jsx` file. It's a convention when writing `css modules` to define variable name that way.
+
+**<span style='color: #a8c62c'> PageNav.module.css**
+
+```css
+a.ctaLink:link,
+a.ctaLink:visited { }
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
