@@ -1144,6 +1144,26 @@ What we cannot do is to load a completely new page, because then it would no lon
 **<span style='color: #495fcb'> Note:** we could actually say that all React apps are in fact single-page applications, because all of them are never reloaded, so think of all the apps that we have built up until this point.
 
 However, in a professional application, that's just not enough. So big and complex applications rely on your URLs and need the routing capabilities because only then, they can become real single-page applications.
+
+### Using CSS Modules
+
+if you would have to declare some **global** styling inside a *module.css* file, you can use this syntax:
+
+```css
+:global(.test){
+    background-color: red;
+}
+
+.nav a:global(.active) {
+  color: var(--color-brand--2);
+}
+```
+
+**<span style='color: #495fcb'> Note:** this *global* function is usually mostly important when we are working with some classes that are provided from external sources.
+
+the `.active` class is given to us by `react-router` and so then if we want to style that, we need to use `global`.
+
+**<span style='color: #875c5c'>IMPORTANT:** otherwise if we just want to define some global classes, we wouldn't do it inside a module but just inside our global CSS file.
 <!---
 [comment]: it works with text, you can rename it how you want
 
