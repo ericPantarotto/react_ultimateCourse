@@ -10,6 +10,11 @@
 
 **<span style='color: #a3842c'>Link:** (<https://www.svgrepo.com/>)
 
+**<span style='color: #a3842c'>Snippets:**
+
+- `CTRL+ Shift+ P; Snippets: Configure Snippets`, choose from the list *ecr.code-snippets*
+- `home/ecr/.config/Code/User/snippets/ecr.code-snippets`
+
 ## A first Look at React
 
 ### React vs. Vanilla JavaScript
