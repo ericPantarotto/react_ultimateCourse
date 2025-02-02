@@ -1261,6 +1261,20 @@ Notable differences with v0.17
 - use _per_page with _page instead of limitfor pagination
 - use Chrome's Network tab > throtling to delay requests instead of --delay CLI option
 
+### Storing State in the Url
+
+The URL is an easy way to store state in a global place that is easily accessible to all components in the app.
+
+So before, if we wanted state to be accessible everywhere, we would have to store it in a parent component and then pass it all the way down to all child components using props.
+
+But if we place state in the URL, we can easily just read the value from there, wherever the component is in the component tree. So basically we can move some state management from React to the URL.
+
+Also, placing state in the URL is, in many situations, a good way to pass data from one page into the next page without having to store that data in some temporary place inside the app.
+
+**<span style='color: #875c5c'>IMPORTANT:**
+
+- `params`, which stands for parameters are very useful to pass data to the next page
+- `query string` is useful to store some global state that should be accessible everywhere
 <!---
 [comment]: it works with text, you can rename it how you want
 
