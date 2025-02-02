@@ -1301,6 +1301,59 @@ import { useSearchParams } from 'react-router-dom';
 we can demonstrate one of the great advantages of having all the state stored in the URL that we talked about earlier, which is that now we can just take this URL and then for example, share it with someone.
 
 And so with this, we made the application more shareable and also *book-markable*.
+
+### Programmatic Navigation with useNavigate
+
+we use programmatic navigation, in our case when the user will click in the map container, it will activate the form component in the left component. Note that this could not be acheived with `<Link/>`.
+
+**<span style='color: #a8c62c'> Map.jsx**
+
+`<div className={styles.mapContainer} onClick={() => navigate('form')}>`: this is programmatic navigation where we basically in an **imperative way** navigate to this URL.
+
+**<span style='color: #a8c62c'> AppNav.jsx**
+
+`<NavLink to='cities'>Cities</NavLink>`: we also navigate to another page, but in a declarative way because we just declare this component in our JSX and that will then do the work.
+
+**<span style='color: #495fcb'> Note:** We have to use the imperative way in some situations:
+
+- after clicking event
+- after submitting a form
+- navigate back cannot be done with some links
+
+**<span style='color: #a8c62c'> components/Button.jsx**
+
+To pass dynamically to our generic `Button` component some pre-defined styles, we have to use the syntax: `styles[type]`.
+
+```javascript
+function Button({ children, onClick, type }) {
+  return (
+    <button onClick={onClick} className={`${styles.btn} ${styles[type]}`}>
+      {children}
+    </button>
+  );
+}
+
+Button.propTypes = {
+  type: PropTypes.oneOf(['primary', 'back', 'position']),
+};
+```
+
+*<span style='color: #a8c62c'> components/Form.jsx**
+
+as we are inside of a *HTML form*, we have first to prevent default
+
+```javascript
+<Button
+  type='back'
+  onClick={(e) => {
+    e.preventDefault();
+    navigate(-1);
+  }}
+>
+  &larr; Back
+</Button>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
