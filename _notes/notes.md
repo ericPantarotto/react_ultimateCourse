@@ -1275,6 +1275,12 @@ Also, placing state in the URL is, in many situations, a good way to pass data f
 
 - `params`, which stands for parameters are very useful to pass data to the next page
 - `query string` is useful to store some global state that should be accessible everywhere
+
+### Dynamic Routes with URL Parameters
+
+**<span style='color: #875c5c'>IMPORTANT:** Below we only append to the current url of the page we are the `id`, that's why we don't use `/`.
+
+`<Link to={`${id}`} className={styles.cityItem}>`
 <!---
 [comment]: it works with text, you can rename it how you want
 
