@@ -1354,6 +1354,30 @@ as we are inside of a *HTML form*, we have first to prevent default
 </Button>
 ```
 
+### Programmatic Navigation with <Navigate/>
+
+since we have React hook `useNavigate`, the `<Navigate />` component is not so much used anymore, but there is still one very important use case for it, which is **inside nested routes**.
+
+For example if we want to navigate immediately to the `<CityList />` component after clicking *Start tracking now* button of the root page.
+
+**<span style='color: #a8c62c'> App.jsx**
+
+```javascript
+  <Route
+    index
+    element={<Navigate to='cities' replace/>}
+    // element={<CityList cities={cities} isLoading={isLoading} />}
+  />
+<Route
+  path='cities'
+  element={<CityList cities={cities} isLoading={isLoading} />}
+/>
+```
+
+**<span style='color: #495fcb'> Note:** this `<Navidate />` can be thought as a **redirect** (from index to cities here)
+
+However the back button of our browser would not work anymore, for that it's important to add the `replace` option, which will then replace the current element in the history stack.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
