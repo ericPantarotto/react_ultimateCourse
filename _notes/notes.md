@@ -1281,6 +1281,26 @@ Also, placing state in the URL is, in many situations, a good way to pass data f
 **<span style='color: #875c5c'>IMPORTANT:** Below we only append to the current url of the page we are the `id`, that's why we don't use `/`.
 
 `<Link to={`${id}`} className={styles.cityItem}>`
+
+### Reading and Setting a Query string
+
+**<span style='color: #a8c62c'> compnents/Map.jsx**
+
+```javascript
+import { useSearchParams } from 'react-router-dom';
+
+<button
+  onClick={() => setSearchParams({ lat: '40.7128', lng: '-74.0060' })}
+>
+  Change Pos. Test
+</button>
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** Notice how actually this `state` has updated everywhere, and so that is really powerful. So it changed not only of course in the URL, but also everywhere in the application where this data is read.
+
+we can demonstrate one of the great advantages of having all the state stored in the URL that we talked about earlier, which is that now we can just take this URL and then for example, share it with someone.
+
+And so with this, we made the application more shareable and also *book-markable*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
