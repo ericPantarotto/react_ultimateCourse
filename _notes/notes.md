@@ -15,6 +15,12 @@
 - `CTRL+ Shift+ P; Snippets: Configure Snippets`, choose from the list *ecr.code-snippets*
 - `home/ecr/.config/Code/User/snippets/ecr.code-snippets`
 
+#### Firefox not centering vertically
+
+**<span style='color: #9e5231'>Error:** in project such as 17. WorldWise, in `CityItem.module.css`, i added this css to the class attached to my button element:
+
+`font-family: inherit;` using a standard font, rather than the imported google font also works `font-family: inherit;`.
+
 ## A first Look at React
 
 ### React vs. Vanilla JavaScript
@@ -1234,6 +1240,27 @@ So before, we would've implemented that using the `useState` hook to manage the 
 But here with `react-router-dom`, we do the same thing, but in a very different way. So instead of using the `useState` hook to manage state, **we basically allow React Router and the url to store that state of the active tab**.
 
 **<span style='color: #495fcb'> Note:** what we learnt before is not lost, as we still build components like accordions or tabbed components using the useState hook all the time. But from now on, the overall navigation of the application is in the real world always managed by something like React Router. And so that includes a small sub navigation like this one.
+
+### Implementing the Cities List
+
+we again use `npm i json-server`, note that that `--delay` cli option is deprecated.
+
+**<span style='color: #a8c62c'> package.json**
+
+```json
+"scripts": {
+    "server": "json-server --watch data/cities.json --port 8001"
+  },
+```
+
+**<span style='color: #a3842c'>Link:** [https://www.npmjs.com/package/json-server]
+
+Notable differences with v0.17
+
+- id is always a string and will be generated for you if missing
+- use _per_page with _page instead of limitfor pagination
+- use Chrome's Network tab > throtling to delay requests instead of --delay CLI option
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
