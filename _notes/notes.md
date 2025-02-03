@@ -1378,6 +1378,15 @@ For example if we want to navigate immediately to the `<CityList />` component a
 
 However the back button of our browser would not work anymore, for that it's important to add the `replace` option, which will then replace the current element in the history stack.
 
+## Advanced State Management: the Context API
+
+### Creating and Providing a Context
+
+`createContext()` returns a `Component` so it's convention to start the name of that variable with a capital letter.
+
+**<span style='color: #495fcb'> Note:** usually, we create one context per state domain.
+
+in our case So, basically, we would have one context only for the posts and then another context only for the search data.
 <!---
 [comment]: it works with text, you can rename it how you want
 
