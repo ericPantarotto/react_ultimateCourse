@@ -1387,6 +1387,12 @@ However the back button of our browser would not work anymore, for that it's imp
 **<span style='color: #495fcb'> Note:** usually, we create one context per state domain.
 
 in our case So, basically, we would have one context only for the posts and then another context only for the search data.
+
+### Consuming the Context
+
+the context API allows to make component more reusable and more standalone, before if you wanted to use a component that was just passing props to a child component, when reusing it you would also to replicate that prop-drilling.
+
+You can place a component anywhere even if its parent doesn't receive the previously requested props.
 <!---
 [comment]: it works with text, you can rename it how you want
 
