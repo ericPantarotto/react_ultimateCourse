@@ -1,11 +1,51 @@
-import { useEffect, useState } from 'react';
-import { PostProvider } from './context/PostProvider';
-import { usePosts } from './context/usePosts';
-import { createRandomPost } from './data/fakerPosts';
+import { faker } from '@faker-js/faker';
+import { createContext, useContext, useEffect, useState } from 'react';
+
+function createRandomPost() {
+  return {
+    title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
+    body: faker.hacker.phrase(),
+  };
+}
+
+const PostContext = createContext();
 
 function App() {
+  const [posts, setPosts] = useState(() =>
+    Array.from({ length: 30 }, () => createRandomPost())
+  );
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isFakeDark, setIsFakeDark] = useState(false);
+  // Derived state. These are the posts that will actually be displayed
+  const searchedPosts =
+    searchQuery.length > 0
+      ? posts.filter((post) =>
+          `${post.title} ${post.body}`
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
+        )
+      : posts;
+
+  function handleAddPost(post) {
+    setPosts((posts) => [post, ...posts]);
+  }
+
+  function handleClearPosts() {
+    setPosts([]);
+  }
+
   return (
-    <PostProvider>
+    <PostContext.Provider
+      value={{
+        posts: searchedPosts,
+        onClearPosts: handleClearPosts,
+        onAddPost: handleAddPost,
+        searchQuery,
+        setSearchQuery,
+        isFakeDark,
+        setIsFakeDark,
+      }}
+    >
       <section>
         <DarkerMode />
 
@@ -14,12 +54,12 @@ function App() {
         <Archive />
         <Footer />
       </section>
-    </PostProvider>
+    </PostContext.Provider>
   );
 }
 
 function DarkerMode() {
-  const { isFakeDark, setIsFakeDark } = usePosts();
+  const { isFakeDark, setIsFakeDark } = useContext(PostContext);
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   useEffect(
     function () {
@@ -39,7 +79,7 @@ function DarkerMode() {
 }
 
 function Header() {
-  const { onClearPosts } = usePosts();
+  const { onClearPosts } = useContext(PostContext);
 
   return (
     <header>
@@ -56,7 +96,7 @@ function Header() {
 }
 
 function SearchPosts() {
-  const { searchQuery, setSearchQuery } = usePosts();
+  const { searchQuery, setSearchQuery } = useContext(PostContext);
 
   return (
     <input
@@ -68,7 +108,7 @@ function SearchPosts() {
 }
 
 function Results() {
-  const { posts } = usePosts();
+  const { posts } = useContext(PostContext);
   return <p>🚀 {posts.length} atomic posts found</p>;
 }
 
@@ -92,7 +132,7 @@ function Posts() {
 function FormAddPost() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const { onAddPost } = usePosts();
+  const { onAddPost } = useContext(PostContext);
 
   const handleSubmit = function (e) {
     e.preventDefault();
@@ -120,7 +160,7 @@ function FormAddPost() {
 }
 
 function List() {
-  const { posts } = usePosts();
+  const { posts } = useContext(PostContext);
 
   return (
     <ul>
@@ -142,7 +182,7 @@ function Archive() {
   );
 
   const [showArchive, setShowArchive] = useState(false);
-  const { onAddPost } = usePosts();
+  const { onAddPost } = useContext(PostContext);
 
   return (
     <aside>

@@ -1393,6 +1393,33 @@ in our case So, basically, we would have one context only for the posts and then
 the context API allows to make component more reusable and more standalone, before if you wanted to use a component that was just passing props to a child component, when reusing it you would also to replicate that prop-drilling.
 
 You can place a component anywhere even if its parent doesn't receive the previously requested props.
+
+### Advanced Pattern: A Custom Provider and Hook
+
+**<span style='color: #495fcb'> Note:** Below would return an `undefined` object, because we try to use the context here inside of `App` but the context only provides the value to all its children components. So only to all of these that are below the provider.
+
+![image info](./18_sc1.png)
+
+```javascript
+function App(){
+    const ctx = usePosts();
+}
+```
+
+That's why it's a good practise to `throw new Error()` for such case:
+
+**<span style='color: #a8c62c'> context/usePosts.jsx**
+
+```javascript
+export function usePosts() {
+  const context = useContext(PostContext);
+  if (context === undefined) {
+    throw new Error('usePost must be used within a PostProvider');
+  }
+  return context;
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
