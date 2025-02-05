@@ -1435,6 +1435,9 @@ export function usePosts() {
 
 ![image info](./18_sc3.png)
 
+### Back to "WorldWise": Creating a CitiesContext
+
+As you start using all these libraries then the *component tree* isn't as clean as we were used to from before.
 <!---
 [comment]: it works with text, you can rename it how you want
 
