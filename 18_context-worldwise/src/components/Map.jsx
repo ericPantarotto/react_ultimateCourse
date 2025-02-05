@@ -15,7 +15,7 @@ function Map() {
       </h2>
       <button
         onClick={(ev) => {
-          ev.stopPropagation(); //HACK: to prevent the click event from bubbling up to the parent
+          ev.stopPropagation(); //HACK: to prevent the click event from bubbling up to the parent div
           setSearchParams({ lat: '40.7128', lng: '-74.0060' });
         }}
       >
