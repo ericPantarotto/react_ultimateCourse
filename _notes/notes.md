@@ -15,6 +15,11 @@
 - `CTRL+ Shift+ P; Snippets: Configure Snippets`, choose from the list *ecr.code-snippets*
 - `home/ecr/.config/Code/User/snippets/ecr.code-snippets`
 
+**<span style='color: #a3842c'>NPM:**
+
+- `npm outdated`
+- to update an outdated version: `npm i react@latest`
+
 #### Firefox not centering vertically
 
 **<span style='color: #9e5231'>Error:** in project such as 17. WorldWise, in `CityItem.module.css`, i added this css to the class attached to my button element:
@@ -1471,6 +1476,22 @@ So we get a new `id` which we then read here into the `City` component. So then 
 
 The `getCity` function, which will then immediately start fetching the city data for that `id`. Then when that arrives it gets stored here into the `setCurrentCity` state. This state variable `currentCity`, which we also paste into the context value. And so then immediately here
 this `City` component receives that value as it updates, and then gets destructured and displayed in the UI.
+
+### Including a Map With the Leaflet Library
+
+**<span style='color: #a3842c'>Links:**
+
+- [https://react-leaflet.js.org/]
+- [https://leafletjs.com/examples/quick-start/]
+- [https://react-leaflet.js.org/docs/start-installation/]
+- [https://react-leaflet.js.org/docs/start-setup/]
+
+**<span style='color: #a8c62c'> index.css**
+
+```css
+@import 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
