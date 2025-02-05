@@ -1420,6 +1420,21 @@ export function usePosts() {
 }
 ```
 
+### Thinking In React: Advanced State Management
+
+#### State Placement Options
+
+![image info](./18_sc2.png)
+
+**<span style='color: #495fcb'> Note:**
+
+- the URL is yet another excellent place where we can store global state that we want to make easily shareable and bookmarkable or that we just want to pass between pages.
+- sometimes we need to store some data inside the user's browser. And in that case, we can use local storage, session storage. Now just like refs, this is state that won't actually re-render any components but it's still technically application state
+
+#### State Management Tool Options
+
+![image info](./18_sc3.png)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
