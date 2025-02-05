@@ -1492,6 +1492,42 @@ this `City` component receives that value as it updates, and then gets destructu
 @import 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
 ```
 
+### Displaying City Markers on Map
+
+**<span style='color: #a8c62c'> Map.module.css**
+
+To style the marker as we want, we use the default classnames provided by `react-leaflet` and then use our `"global(.classname)` identifier so that they can be matched and overriden.
+
+```css
+:global(.leaflet-popup .leaflet-popup-content-wrapper) {
+  background-color: var(--color-dark--1);
+  color: var(--color-light--2);
+  border-radius: 5px;
+  padding-right: 0.6rem;
+}
+
+:global(.leaflet-popup .leaflet-popup-content) {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+:global(.leaflet-popup .leaflet-popup-content span:first-child) {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+:global(.leaflet-popup .leaflet-popup-tip) {
+  background-color: var(--color-dark--1);
+}
+
+:global(.leaflet-popup-content-wrapper) {
+  border-left: 5px solid var(--color-brand--2);
+}
+
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
