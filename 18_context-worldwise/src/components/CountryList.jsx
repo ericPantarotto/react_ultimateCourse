@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useCities } from '../contexts/CitiesContext';
 import CountryItem from './CountryItem';
 import styles from './CountryList.module.css';
@@ -30,8 +29,4 @@ function CountryList() {
   );
 }
 
-CountryList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
 export default CountryList;

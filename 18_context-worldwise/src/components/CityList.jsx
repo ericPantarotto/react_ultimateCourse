@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useCities } from '../contexts/CitiesContext';
 import CityItem from './CityItem';
 import styles from './CityList.module.css';
@@ -7,7 +6,7 @@ import Spinner from './Spinner';
 
 function CityList() {
   const { cities, isLoading } = useCities();
-  
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -25,8 +24,4 @@ function CityList() {
   );
 }
 
-CityList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
 export default CityList;

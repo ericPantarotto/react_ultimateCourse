@@ -1438,6 +1438,39 @@ export function usePosts() {
 ### Back to "WorldWise": Creating a CitiesContext
 
 As you start using all these libraries then the *component tree* isn't as clean as we were used to from before.
+
+### Finishing the City View
+
+**<span style='color: #495fcb'> Note:** you might be wondering why we actually need to do that if we could simply get this object out of the array that we already have. And that's actually true in this small application. So technically we wouldn't have to create a new HTTP request and fetch this data from the server again because we do actually already have it in the cities array.
+
+However, in real world web applications, it's quite common that the single objects have a lot more data than the entire collection. So basically the array returned from a *GET All* request  would only have a small amount of data in each object while then the objects that we get individually from the API have really all the data.
+
+After we visited one of these cities when we then go back, it marks the last visited city with a green border, which means that this `CityItem` component also uses this same piece of state `currentCity` just like the `City.jsx` component.
+
+And therefore it is a good idea to actually place the **global state** `const [currentCity, setCurrentCity] = useState({})` inside our **context**, rather than the `City` component.
+
+**<span style='color: #a8c62c'> City.jsx**
+
+```javascript
+function City() {
+  const { id } = useParams();
+  const { getCity, currentCity, isLoading } = useCities();
+
+  useEffect(() => {
+    getCity(id);
+  }, [id]);
+
+  const { cityName, emoji, date, notes } = currentCity;
+// ....
+}
+```
+
+So when we click here on this link displayed in `CityList` component, the URL will change.
+
+So we get a new `id` which we then read here into the `City` component. So then we have this `id` and we use it to call the `getCity` function **as the component mounts**. So immediately after mounting, we start calling this function which is coming from our **context**.
+
+The `getCity` function, which will then immediately start fetching the city data for that `id`. Then when that arrives it gets stored here into the `setCurrentCity` state. This state variable `currentCity`, which we also paste into the context value. And so then immediately here
+this `City` component receives that value as it updates, and then gets destructured and displayed in the UI.
 <!---
 [comment]: it works with text, you can rename it how you want
 
