@@ -1532,7 +1532,7 @@ To style the marker as we want, we use the default classnames provided by `react
 
 **<span style='color: #a8c62c'> Map.jsx**
 
-Below, `useEffect()` is used as a **synchronisation mechanism**, which is one of its common use.
+Below, `useEffect()` is used as a **synchronization mechanism**, which is one of its common use.
 
 ```javascript
  useEffect(
@@ -1555,6 +1555,32 @@ function DetectClick() {
 }
 ```
 
+### Setting Map Position With Geolocation
+
+To synchronize the `mapPosition` state variable:
+
+- use another `useEffect()`, just as we did when a city of the `<CityList>` is clicked
+- we could pass a setter function to our custom hook `useGeolocation.js`
+
+**<span style='color: #495fcb'> Note:** because in React there's right now a push to write as little effects as possible, the first solution could be seen preferable.
+
+**<span style='color: #a8c62c'> Map.jsx**
+
+```javascript
+useEffect(
+  function () {
+    if (geolocationPosition)
+      setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+  },
+  [geolocationPosition]
+);
+```
+
+at the beginning, the `geolocationPosition` will by default still be null, and so then the `setMapPosition` code won't run.
+
+But then, as we click our *USE YOUR LOCATION* button, the geolocation will get retrieved, and then of course the `geolocationPosition` state will update. And so then this effect will run, which will then in turn set the `mapPosition`, which will re-render the whole component once more, and then finally the map can move to that new position.
+
+So basically this effect here introduces another render, which is one of the reasons why we should avoid having too many effects.
 <!---
 [comment]: it works with text, you can rename it how you want
 
