@@ -1581,6 +1581,20 @@ at the beginning, the `geolocationPosition` will by default still be null, and s
 But then, as we click our *USE YOUR LOCATION* button, the geolocation will get retrieved, and then of course the `geolocationPosition` state will update. And so then this effect will run, which will then in turn set the `mapPosition`, which will re-render the whole component once more, and then finally the map can move to that new position.
 
 So basically this effect here introduces another render, which is one of the reasons why we should avoid having too many effects.
+
+### Creating a New City
+
+**<span style='color: #a3842c'>Link:** [https://www.npmjs.com/package/react-datepicker]
+
+**<span style='color: #875c5c'>IMPORTANT:** using the terminology we're gonna keep the UI state in sync with remote state.
+
+Now, this is usually not the way to go but in a small application like this one it is perfectly fine of doing this. And then the next big application we will then learn how to better do this, using `React Query`, which will make it so that whenever we add something new to the remote state that data will then automatically get re-fetched into our application.
+
+**<span style='color: #a8c62c'> contexts/CitiesContext.js**
+
+```javascript
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

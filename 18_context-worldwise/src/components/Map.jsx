@@ -16,7 +16,7 @@ import Button from './Button';
 import styles from './Map.module.css';
 
 function Map() {
-  const { cities } = useCities();
+  const { cities, setCurrentCity } = useCities();
   const [mapPosition, setMapPosition] = useState([40, 0]);
 
   const {
@@ -36,10 +36,12 @@ function Map() {
 
   useEffect(
     function () {
-      if (geolocationPosition)
+      if (geolocationPosition) {
         setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+        setCurrentCity({});
+      }
     },
-    [geolocationPosition]
+    [geolocationPosition, setCurrentCity]
   );
 
   return (
