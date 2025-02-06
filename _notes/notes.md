@@ -1528,6 +1528,33 @@ To style the marker as we want, we use the default classnames provided by `react
 
 ```
 
+### Interacting with the Map
+
+**<span style='color: #a8c62c'> Map.jsx**
+
+Below, `useEffect()` is used as a **synchronisation mechanism**, which is one of its common use.
+
+```javascript
+ useEffect(
+    function () {
+      if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
+    },
+    [mapLat, mapLng]
+  );
+```
+
+**<span style='color: #495fcb'> Note:** `e` is of course not the native event object that is created by the DOM or by React, but instead this is really coming from the **Leaflet** library (left click event).
+
+```javascript
+function DetectClick() {
+  const navigate = useNavigate();
+
+  useMapEvents({
+    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+  });
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
