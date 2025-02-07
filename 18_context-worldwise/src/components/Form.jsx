@@ -59,7 +59,6 @@ function Form() {
       }
 
       setTimeout(() => fetchCityData(), 250);
-      console.log('it ran');
     },
     [lat, lng]
   );
