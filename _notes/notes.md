@@ -1646,6 +1646,62 @@ useEffect(
 );
 ```
 
+### Adding Fake Authentication: Protecting a Route
+
+We need to wrap our application inside of our `ProtectedRoute` component. There are two places where we could do that:
+
+- the first one is here in the `AppLayout`, and wrap the entire `return()` block, as basically our entire application is rendered there.
+- in the `App` component, and wrap our `element={<AppLayout />}`
+
+```javascript
+ <Route
+  path='app'
+  element={
+    <ProtectedRoute>
+      <AppLayout />
+    </ProtectedRoute>
+  }
+>
+```
+
+So in case that we are going to any of the URLs in the application:
+
+- `app/cities`
+- `app/cities/:id`
+- `app/countries`
+- `app/form`
+
+So in all those situations, this `app` layout component here is rendered. And then in there is where each of these components are also rendered.
+
+And so the idea is to wrap this entire component into the protected route. And so this will then check whether the user is currently logged in or not. And if not, it will simply redirect the user back here to the homepage `/`.
+
+**<span style='color: #9e5231'>Error:** we still get an error with null property on our `user` object in `User.jsx`
+
+Remember how our effect is actually only executed after the component has already been rendered. nd so that is actually the key to understanding why this happens. **Our component will actually initially render the children**, which does of course include the user. And so then of course everything that the user is trying to read, from the user object does not exist. So that's why we get this error.
+
+But in that split second, we are still rendering the `User` component.
+
+**<span style='color: #875c5c'>IMPORTANT:** And so again, that then gives us that error because again, this effect is only executed after the render has already happened.
+
+**<span style='color: #a8c62c'> ProtectedRoute.jsx**
+
+```javascript
+function ProtectedRoute({ children }) {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+ 
+ useEffect(
+    function () {
+      if (!isAuthenticated) navigate('/');
+    },
+    [isAuthenticated, navigate]
+  );
+
+  return isAuthenticated ? children : null;
+  //ERROR: return children;
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
