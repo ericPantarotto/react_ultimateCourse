@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useNavigate } from 'react-router-dom';
-import { useUrlPosition } from '../../hooks/useUrlPosition';
+import { useUrlPosition } from '../hooks/useUrlPosition';
 import { useCities } from '../contexts/CitiesContext';
 import { convertToEmoji } from '../utils';
 import BackButton from './BackButton';

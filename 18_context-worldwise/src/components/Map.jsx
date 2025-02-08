@@ -9,10 +9,10 @@ import {
   useMapEvents,
 } from 'react-leaflet';
 import { useNavigate } from 'react-router-dom';
-import { useGeolocation } from '../../hooks/useGeolocation';
-import { useUrlPosition } from '../../hooks/useUrlPosition';
 import { useCities } from '../contexts/CitiesContext';
 import Button from './Button';
+import { useGeolocation } from '../hooks/useGeolocation';
+import { useUrlPosition } from '../hooks/useUrlPosition';
 import styles from './Map.module.css';
 
 function Map() {
