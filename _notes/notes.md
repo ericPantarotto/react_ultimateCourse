@@ -1702,6 +1702,14 @@ function ProtectedRoute({ children }) {
 }
 ```
 
+### CHALLENGE #2: Refactoring "React Quiz" to Context API
+
+In the `QuizProvider` where we pass all these different state values, **plus the dispatch function**, into the context, which is quite different to what we did earlier in the *WorldWise* application.
+
+**<span style='color: #875c5c'>IMPORTANT:** In *WorldWise*, we didn't pass the dispatch function but really just the event handler functions. But that was because we were dealing with **asynchronous code**, which here is not the case.
+
+And so in *ReactQuiz*, we don't need any intermediary event handler functions. We can simply dispatch this function so that we can then dispatch events in the components.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

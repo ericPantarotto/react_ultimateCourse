@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { useQuiz } from '../contexts/QuizContext';
 
-function Timer({ secondsRemaining , dispatch }) {
+function Timer() {
+  const { secondsRemaining, dispatch } = useQuiz();
   const mins = Math.floor(secondsRemaining / 60);
   const seconds = secondsRemaining % 60;
 
@@ -24,10 +25,5 @@ function Timer({ secondsRemaining , dispatch }) {
     </div>
   );
 }
-
-Timer.propTypes = {
-  secondsRemaining: PropTypes.number.isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
 
 export default Timer;

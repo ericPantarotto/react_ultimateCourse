@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
+import { useQuiz } from '../contexts/QuizContext';
 
-function Options({ question, dispatch, answer }) {
+function Options({ question }) {
+  const { answer, dispatch } = useQuiz();
   const hasAnswered = answer !== null;
 
   const getButtonClass = (index) => {
@@ -32,14 +34,12 @@ function Options({ question, dispatch, answer }) {
   );
 }
 
+export default Options;
+
 Options.propTypes = {
   question: PropTypes.shape({
     question: PropTypes.string.isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     correctOption: PropTypes.number.isRequired,
   }).isRequired,
-  dispatch: PropTypes.func.isRequired,
-  answer: PropTypes.number,
 };
-
-export default Options;
