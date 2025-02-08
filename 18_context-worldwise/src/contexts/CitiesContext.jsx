@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { CitiesContext } from './CitiesProvider';
+// import { CitiesContext } from './CitiesProvider';
+import { CitiesContext } from './CitiesProvider-reducer';
 
 export function useCities() {
   const ctxValue = useContext(CitiesContext);

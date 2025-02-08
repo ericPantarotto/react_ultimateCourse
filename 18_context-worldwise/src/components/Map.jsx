@@ -16,7 +16,8 @@ import Button from './Button';
 import styles from './Map.module.css';
 
 function Map() {
-  const { cities, setCurrentCity } = useCities();
+  // const { cities, setCurrentCity } = useCities();
+  const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([40, 0]);
 
   const {
@@ -38,10 +39,11 @@ function Map() {
     function () {
       if (geolocationPosition) {
         setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
-        setCurrentCity({});
+        // setCurrentCity({});
       }
     },
-    [geolocationPosition, setCurrentCity]
+    [geolocationPosition]
+    // [geolocationPosition, setCurrentCity]
   );
 
   return (

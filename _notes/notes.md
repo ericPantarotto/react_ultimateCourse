@@ -282,7 +282,7 @@ When we don' use the `useState setter` function, we are directly mutating the st
 
 ### React Developer Tools
 
-you can change the value of the hooks inside the `Component` view. This can be convinient to change some state variables not accessible via the UI.
+you can change the value of the hooks inside the `Component` view. This can be convenient to change some state variables not accessible via the UI.
 
 ### Updating State based on Current State
 
@@ -366,7 +366,7 @@ Child updating parent state = data flowing up
 
 ### Sorting Items
 
-To display the items sorted by whatever criteria we selected, we will just create a new *varialbe* which is then sorted by that criteria. **So we are not going to manipulate the original items array**. That state should stay unchanged. We will **not** create a *new state variable* here because that's totally unnecessary.
+To display the items sorted by whatever criteria we selected, we will just create a new *variable* which is then sorted by that criteria. **So we are not going to manipulate the original items array**. That state should stay unchanged. We will **not** create a *new state variable* here because that's totally unnecessary.
 
 ### The Children Prop: Making a Reusable Button
 
@@ -454,11 +454,11 @@ we now need to define a good **public API**  for this *star* component. This is 
 
 ### PropTypes
 
-So with proptypes, we can basically specify the type of value that we expect the consumer of the component to pass in for each of the props.
+So with propTypes, we can basically specify the type of value that we expect the consumer of the component to pass in for each of the props.
 
 Now, if you really care about this, you should actually just use **TypeScript** instead of JavaScript.  Developers these days don't really use `PropTypes` anymore but moved to `TypeScript`.
 
-there's no need to install this `proptypes` package because *vite / create-React-App* already comes with this package pre-installed.
+there's no need to install this `propTypes` package because *vite / create-React-App* already comes with this package pre-installed.
 
 ```javascript
 <StarRating
@@ -596,7 +596,7 @@ React now views this as a completely different instance of `tabContent`. And we 
 - **render logic must produce no side effects**
 >
 
-### State Update Batching in practise
+### State Update Batching in practice
 
 **<span style='color: #a8c62c'> App.jsx / TabContent**
 
@@ -718,7 +718,7 @@ export default function App() {
 
   fetch(`http://omdbapi.com/?apikey=${KEY}&s=interstellar`)
     .then((res) => res.json())
-    .then((data) => setMovies(data['Search'])); // ERROR: Infinite loop of http resquests
+    .then((data) => setMovies(data['Search'])); // ERROR: Infinite loop of http requests
     // .then((data) => console.log(data));
 
   return (
@@ -773,7 +773,7 @@ useEffect(function () {
     const data = res.json();
     
     setMovies(data['Search']);
-    // console.log(movies); //ERROR: above line is asyncrhonous, so we will get the prev. value of movies
+    // console.log(movies); //ERROR: above line is asynchronous, so we will get the prev. value of movies
     console.log(data['Search']); //NOTE: OK
   }
 
@@ -799,7 +799,7 @@ And, the reasons why effect work this way is that effects may contain long-runni
 
 `C` will be logged first when the component mounts, as this is read during the *render* step, component logic is indeed read/processed during the render phase, while `A` & `B` will be logged after, when the browser has repainted.
 
-**<span style='color: #495fcb'> Note:** if we type new text in the searchBar, then only `C` and `B` are logged again, but not `A`, which has an empty dependency while `B`, with no dependency defined will be executed/synchronised on each render, which is indeed triggered when `states` or `props` of a component change.
+**<span style='color: #495fcb'> Note:** if we type new text in the searchBar, then only `C` and `B` are logged again, but not `A`, which has an empty dependency while `B`, with no dependency defined will be executed/synchronized on each render, which is indeed triggered when `states` or `props` of a component change.
 
 These labels would clearly describe the above logic:
 
@@ -1263,8 +1263,8 @@ we again use `npm i json-server`, note that that `--delay` cli option is depreca
 Notable differences with v0.17
 
 - id is always a string and will be generated for you if missing
-- use _per_page with _page instead of limitfor pagination
-- use Chrome's Network tab > throtling to delay requests instead of --delay CLI option
+- use _per_page with _page instead of *limitfor* pagination
+- use Chrome's Network tab > throttling to delay requests instead of --delay CLI option
 
 ### Storing State in the Url
 
@@ -1289,7 +1289,7 @@ Also, placing state in the URL is, in many situations, a good way to pass data f
 
 ### Reading and Setting a Query string
 
-**<span style='color: #a8c62c'> compnents/Map.jsx**
+**<span style='color: #a8c62c'> components/Map.jsx**
 
 ```javascript
 import { useSearchParams } from 'react-router-dom';
@@ -1305,11 +1305,11 @@ import { useSearchParams } from 'react-router-dom';
 
 we can demonstrate one of the great advantages of having all the state stored in the URL that we talked about earlier, which is that now we can just take this URL and then for example, share it with someone.
 
-And so with this, we made the application more shareable and also *book-markable*.
+And so with this, we made the application more shareable and also *bookmarkable*.
 
 ### Programmatic Navigation with useNavigate
 
-we use programmatic navigation, in our case when the user will click in the map container, it will activate the form component in the left component. Note that this could not be acheived with `<Link/>`.
+we use programmatic navigation, in our case when the user will click in the map container, it will activate the form component in the left component. Note that this could not be achieved with `<Link/>`.
 
 **<span style='color: #a8c62c'> Map.jsx**
 
@@ -1379,7 +1379,7 @@ For example if we want to navigate immediately to the `<CityList />` component a
 />
 ```
 
-**<span style='color: #495fcb'> Note:** this `<Navidate />` can be thought as a **redirect** (from index to cities here)
+**<span style='color: #495fcb'> Note:** this `<Navigate />` can be thought as a **redirect** (from index to cities here)
 
 However the back button of our browser would not work anymore, for that it's important to add the `replace` option, which will then replace the current element in the history stack.
 
@@ -1411,7 +1411,7 @@ function App(){
 }
 ```
 
-That's why it's a good practise to `throw new Error()` for such case:
+That's why it's a good practice to `throw new Error()` for such case:
 
 **<span style='color: #a8c62c'> context/usePosts.jsx**
 
@@ -1496,7 +1496,7 @@ this `City` component receives that value as it updates, and then gets destructu
 
 **<span style='color: #a8c62c'> Map.module.css**
 
-To style the marker as we want, we use the default classnames provided by `react-leaflet` and then use our `"global(.classname)` identifier so that they can be matched and overriden.
+To style the marker as we want, we use the default classnames provided by `react-leaflet` and then use our `"global(.classname)` identifier so that they can be matched and overridden.
 
 ```css
 :global(.leaflet-popup .leaflet-popup-content-wrapper) {
@@ -1590,11 +1590,42 @@ So basically this effect here introduces another render, which is one of the rea
 
 Now, this is usually not the way to go but in a small application like this one it is perfectly fine of doing this. And then the next big application we will then learn how to better do this, using `React Query`, which will make it so that whenever we add something new to the remote state that data will then automatically get re-fetched into our application.
 
-**<span style='color: #a8c62c'> contexts/CitiesContext.js**
+### Context + useReducer
+
+Inside our **reducer** function, remember that we should put as many logic as possible so that we have this central place that handles all the business logic and basically all the state transitions.
+
+Now the problem in this case here is that **reducers need to be pure functions**, which means that we cannot do these API requests inside the reducer function. So all we can do is to still make these fetch requests in a separate function in the useEffect, and then after the data has already been received then we can dispatch actions to the reducer.
+
+So what this means is that when asynchronous data and asynchronous code is involved, then we don't get that nice benefit where we can simply pass the dispatch function into the context value.
+
+**<span style='color: #a8c62c'> contexts/CitiesProvider-context.jsx**
+
+**<span style='color: #875c5c'>IMPORTANT:** Basically what we do here is to keep the remote state in sync with our UI state:
+
+Adding the new new city to our API:
 
 ```javascript
+const res = await fetch(`${BASE_URL}/cities`, {
+  method: 'POST',
+  body: JSON.stringify(newCity),
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+const data = await res.json();
 ```
 
+And below adding it to our local state:
+
+```javascript
+dispatch({ type: 'city/created', payload: data });
+```
+
+**<span style='color: #495fcb'> Note:** The power of `useReducer` is to easily change several pieces of states on a certain event, for example when adding a new city and we want to set this added city as the new `currentCity`, you can achieve that very easily inside your reducer `type: 'city/created'`, same for the deletion event.
+
+**<span style='color: #495fcb'> Note:** `if (Number(id) === currentCity.id) return;`:  the  `id` from `City.jsx` component is coming from from the URL. And everything coming from the URL will automatically be a string. And so if you want to do any comparisons like this then you always need to convert this to a number.
+
+And so now if we then load two times the same city in a row then it should be instantaneous. In order to load the city it of course needs to load from the API, but if we then click the same again, it doesn't do that.
 <!---
 [comment]: it works with text, you can rename it how you want
 
