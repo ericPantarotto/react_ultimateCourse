@@ -1626,6 +1626,26 @@ dispatch({ type: 'city/created', payload: data });
 **<span style='color: #495fcb'> Note:** `if (Number(id) === currentCity.id) return;`:  the  `id` from `City.jsx` component is coming from from the URL. And everything coming from the URL will automatically be a string. And so if you want to do any comparisons like this then you always need to convert this to a number.
 
 And so now if we then load two times the same city in a row then it should be instantaneous. In order to load the city it of course needs to load from the API, but if we then click the same again, it doesn't do that.
+
+### Adding Fake Authentication: Implementing Login
+
+**<span style='color: #9e5231'>Error:** should never have a fake user in your code which contains the plain word password, because with this, everyone who inspects your code can get access to your application.
+
+All the code that you write inside your React application will be available on the front end, so the browsers will download it. And so, any malicious attacker will be able to find this combination of email and password in your source code. And so then, they will get access to your application.
+
+Once we are logged in, if we try to go back (browser), it will automatically redirect us to the route `app/cities`, as we are still authenticated. to avoid such behavior, you need to pass the `replace` option (it will replace the login page in the history stack )
+
+**<span style='color: #a8c62c'> Login.jsx**
+
+```javascript
+useEffect(
+  function () {
+    if (isAuthenticated) navigate('/app', { replace: true });
+  },
+  [isAuthenticated, navigate]
+);
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

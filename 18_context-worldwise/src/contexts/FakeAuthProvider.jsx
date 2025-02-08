@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import { createContext, useReducer } from 'react';
 
 const FAKE_USER = {
-  name: 'Jack',
-  email: 'jack@example.com',
+  name: 'Eric',
+  email: 'eric.carlier@gmail.com',
   password: 'qwerty',
-  avatar: 'https://i.pravatar.cc/100?u=zz',
+  // avatar: 'https://i.pravatar.cc/100?u=zz',
+  avatar: 'ecr.svg',
 };
 
 const AuthContext = createContext();
@@ -13,28 +14,38 @@ const AuthContext = createContext();
 const initialState = {
   user: null,
   isAuthenticated: false,
+  authenticationError: '',
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case 'login':
-      return { ...state, user: action.payload, isAuthenticated: true };
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+        authenticationError: '',
+      };
     case 'logout':
       return { ...state, user: null, isAuthenticated: false };
+    case 'error':
+      return { ...state, authenticationError: action.payload };
     default:
       throw new Error('Unknown action');
   }
 }
 
 function AuthProvider({ children }) {
-  const [{ user, isAuthenticated }, dispatch] = useReducer(
+  const [{ user, isAuthenticated, authenticationError }, dispatch] = useReducer(
     reducer,
     initialState
   );
 
   function login(email, password) {
     if (email === FAKE_USER.email && password === FAKE_USER.password)
-      dispatch({ type: 'login', payload: FAKE_USER });
+      return dispatch({ type: 'login', payload: FAKE_USER });
+
+    return dispatch({ type: 'error', payload: 'We could not log you in.' });
   }
 
   function logout() {
@@ -42,7 +53,9 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, authenticationError, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
