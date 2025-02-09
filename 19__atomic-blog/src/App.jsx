@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { PostProvider } from './context/PostProvider';
 import { usePosts } from './context/usePosts';
 import { createRandomPost } from './data/fakerPosts';
+import Test from './Test';
 
 function App() {
   return (
@@ -132,6 +133,8 @@ function List() {
           </li>
         ))}
       </ul>
+
+      <Test />
     </>
   );
 }

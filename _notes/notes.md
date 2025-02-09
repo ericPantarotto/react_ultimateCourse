@@ -1731,6 +1731,60 @@ We get a Flamegraph & Ranked graph, providing a representation of the component 
 When hovering over we get the reason why a component did re-render.
 
 You can access the list of different commits, or in other words, each of them here is one re-render.
+
+### A Surprising Optimization Trick With children
+
+**<span style='color: #a8c62c'> Test.jsx**
+
+the idea here is that this simulates a very SlowComponent, and it takes 1/2 second until the *increase* button updates.
+
+each time we click on the button, this `count` state updates, and so this entire component needs to get re-rendered. And so therefore this SlowComponent is also nre-rendered each time that we click the `increase` button even though this actually isn't really dependent on the state.
+
+So the `SlowComponent` does not need the state at all but still it is being re-rendered simply because it is inside this `Test` component.
+
+```javascript
+export default function Test() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h1>Slow counter?!?</h1>
+      <button onClick={() => setCount((c) => c + 1)}>Increase: {count}</button>
+
+      <SlowComponent />
+    </div>
+  );
+}
+```
+
+to solve this issue: we pass the `SlowComponent` as a `{children}`, and as this component exists already since the initial render, and is not affected by the state, it doesn't need to be re-rendered.
+
+```javascript
+function Counter({ children }) {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h1>Slow counter?!?</h1>
+      <button onClick={() => setCount((c) => c + 1)}>Increase: {count}</button>
+
+      {children}
+    </div>
+  );
+}
+
+export default function Test() {
+  return (
+    <div>
+      <Counter>
+        <SlowComponent />
+      </Counter>
+    </div>
+  );
+}
+```
+
+**<span style='color: #495fcb'> Note:** You could use any `prop` name , instead of the reserved `children` prop, that would work the same way.
+
+That's why when using the *search posts* functionality, components like `Main` and `Posts` which are passed as `children` and not affected by any states are not re-rendered (using the *Profiler*)
 <!---
 [comment]: it works with text, you can rename it how you want
 
