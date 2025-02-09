@@ -1797,6 +1797,25 @@ if the arguments are exactly the same as before, it means that in a pure functio
 #### the Memo function
 
 only use `memo` when the component is heavy (slow rendering), re-renders often and with the same props.
+
+### Memo in practice
+
+If we set the number of archived posts to 30k, the problem is that this will slow down the entire page.
+
+So what happens when I type something into the search bar? notice how this created a big lag, only when the archive is shown.
+
+![image info](./19_sc2.png)
+
+The first render is extremely fast when i enter a key in the searchBar, 1 ms, the second box is the time it took to load the archive, but the third render is when i used again the searchBar, which took more than 350ms, just the rendering itself, so painting to the DOM took even longer than this!
+
+**<span style='color: #875c5c'>IMPORTANT:** the `Archive` is a child component of the `App` component, which is where that state actually lives. And so if we update the state in the app component, that will then trigger a re-render in all the child components and so that includes the archive. so this `Archive` component is a perfect candidate for memorization
+
+`const Archive = memo( function Archive({ show }) {...}`
+
+once the component is memorized, it did not render again when the state of the search bar changed, which is because the prop that it received
+was still the same as before `show={true}`. And so then this component didn't have to re-render as the parent re-rendered.
+
+**<span style='color: #9e5231'>Error:**  if we pass an **object instead of a boolean**, we are now back to basically re-rendering this component even though it is memorized and even though it looks as though our prop hasn't changed.
 <!---
 [comment]: it works with text, you can rename it how you want
 
