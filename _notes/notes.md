@@ -1785,6 +1785,18 @@ export default function Test() {
 **<span style='color: #495fcb'> Note:** You could use any `prop` name , instead of the reserved `children` prop, that would work the same way.
 
 That's why when using the *search posts* functionality, components like `Main` and `Posts` which are passed as `children` and not affected by any states are not re-rendered (using the *Profiler*)
+
+### Understanding memo
+
+#### What is Memoization
+
+if the arguments are exactly the same as before, it means that in a pure function, the output will be the same. So the result on the first call of the function can be cached, and the function won't be executed again, and the cached result can be read.
+
+### Understanding Memo
+
+#### the Memo function
+
+only use `memo` when the component is heavy (slow rendering), re-renders often and with the same props.
 <!---
 [comment]: it works with text, you can rename it how you want
 
