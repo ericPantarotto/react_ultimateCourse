@@ -1710,6 +1710,27 @@ In the `QuizProvider` where we pass all these different state values, **plus the
 
 And so in *ReactQuiz*, we don't need any intermediary event handler functions. We can simply dispatch this function so that we can then dispatch events in the components.
 
+## Performance Optimization and Advanced useEffect
+
+### The Profiler Developer Tool
+
+So with the `Profiler`, we can basically analyze renders and re-renders. So we can see which components have rendered, see why they're rendered, and also how long each render took.
+
+![image info](./19_sc1.png)
+
+And so basically, once enabled this will give us one of the three reasons, of why each component has re-rendered:
+
+- state update
+- context update
+- a parent re-rendering
+
+We get a Flamegraph & Ranked graph, providing a representation of the component tree.
+
+**Grey components** are actually the one that did not render while the application re-rendered. The more yellow the color the longer it took.
+
+When hovering over we get the reason why a component did re-render.
+
+You can access the list of different commits, or in other words, each of them here is one re-render.
 <!---
 [comment]: it works with text, you can rename it how you want
 
