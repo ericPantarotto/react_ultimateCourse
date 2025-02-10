@@ -1999,6 +1999,10 @@ So each time that we click here on this button, it will set the duration and it 
 **<span style='color: #9e5231'>Error:** this combination of `useCallback` and `useEffect` has now introduced 2 bugs, the sound is played and our time is changed when click on the sound toggler. the reason is that when click on the sound icon, , the `allowSound` state changes, and the function `playSound` gets recreated, and since this function is in the dependency array, it will run the effect again.
 
 **<span style='color: #875c5c'>IMPORTANT:** The solution is to create a new separate effect which will be responsible for playing the sound.
+
+### Closures in Effects
+
+a stale closure / an outdated closure occurs when the function has captured the values from the closure of the function, but has changed since then.
 <!---
 [comment]: it works with text, you can rename it how you want
 
