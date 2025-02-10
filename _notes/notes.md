@@ -1987,6 +1987,18 @@ We shouldn't use the `useEffect` hook to keep state variables in sync with all t
 when changing any of our inputs, state variables (sets, speed, break), this trigger a render, but which then also trigger the useEffect hook, which only runs after the render has already happened, and so as we set the state inside of useEffect, we get a second render.
 
 This is something to keep in mind when using useEffect for that reason,But when you have so many state variables that influence the value of another state, then you can do this.
+
+### Using Helper Functions In Effects
+
+So each time that we click here on this button, it will set the duration and it will play the sound. Now updating the state will of course re-render the component, which will recreate this function here. So React will see a brand new function. And since this function is part of the dependency array of this effect, it will then run this effect as well. Also our timer doesn't update anymore.
+
+- So the best strategy is always to move a function like this out of the component. However, that doesn't work because this function is of course a reactive value that depends on the prop `allowSound` and so we cannot move it outside.
+- Then the other strategy would be to take the function and move it into the useEffect. But then the problem with that would be that we could no longer use it in our `handleInc/dec` functions
+- And so then what we have to do is to memorize the function. And so then the function will not be recreated between these renders, using `useCallback`
+
+**<span style='color: #9e5231'>Error:** this combination of `useCallback` and `useEffect` has now introduced 2 bugs, the sound is played and our time is changed when click on the sound toggler. the reason is that when click on the sound icon, , the `allowSound` state changes, and the function `playSound` gets recreated, and since this function is in the dependency array, it will run the effect again.
+
+**<span style='color: #875c5c'>IMPORTANT:** The solution is to create a new separate effect which will be responsible for playing the sound.
 <!---
 [comment]: it works with text, you can rename it how you want
 

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import Calculator from './Calculator';
+// import Calculator from './Calculator';
+import Calculator from './Calculator-ok';
 import ToggleSounds from './ToggleSounds';
 
 function formatTime(date) {
