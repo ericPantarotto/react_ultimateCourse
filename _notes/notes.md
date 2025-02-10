@@ -1897,6 +1897,21 @@ And so, again, this is not ideal and it's the reason why in the beginning I told
 So we would have one `Post` context and one `searchQuery` context.
 
 And so, in that situation, whenever we updated for example, the search Query, then all the components that consume the posts would not get re-rendered. While in this case, all of them are because it is enough for one value here to change to re-render the entire thing.
+
+### Back to The "WorldWise" App
+
+using the `profiler dev tools`, in order to identify some really bad performing components, it's best to come to the ranked tab.
+
+**<span style='color: #a8c62c'> City.jsx / getCity**
+
+So here we see that issue where *eslint* is telling us to add the *getCity* to the dependencies, but remember that this created an infinite loop of HTTP requests to our API. And indeed, immediately we get like a thousand requests (devTools / network / number of requests & from the profiler very numbers of renders in a few seconds confirm too)
+
+**<span style='color: #495fcb'> Explanation:**
+
+- now that we have this `getCity` function in our dependency array, the `useEffect` effect will rerun each time that it `getCity` function gets updated, or in other words, that it gets recreated.
+- Now, when does this function get recreated? Well, since it lives in the context, it is created in this `CitiesProvider`
+- But the problem is that this `getCity` function will update the state each time that it is executed, which will then end up in an infinite loop. When we call the `getCity` function, that function will then update the state in the `CitiesProvider` component, which will then re-render, which will then recreate the `getCity` function. And as the function gets recreated, since it is here in the dependency array, then `getCity` will get called again, which then again will update a state, which will re-render, which will cause the effect to run over.
+- And the way to solve the issue is to use the `useCallback` hook
 <!---
 [comment]: it works with text, you can rename it how you want
 
