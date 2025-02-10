@@ -1816,6 +1816,26 @@ once the component is memorized, it did not render again when the state of the s
 was still the same as before `show={true}`. And so then this component didn't have to re-render as the parent re-rendered.
 
 **<span style='color: #9e5231'>Error:**  if we pass an **object instead of a boolean**, we are now back to basically re-rendering this component even though it is memorized and even though it looks as though our prop hasn't changed.
+
+### useMemo in Practice
+
+**<span style='color: #a8c62c'> App-memo.jsx**
+
+```javascript
+const archiveOptions = useMemo(() => {
+  return {
+    show: false,
+    // title: 'Post archive in addition to main posts',
+    title: `Post archive in addition to ${posts.length} main posts`,
+  };
+}, [posts.length]) 
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** If we didn't pass `post.length` as a dependency to `useMemo`, React is still using the **stale value of this Posts state**.
+
+we are in the presence of stale state and of a stale closure.
+
+So a stale closure because this function was created initially and from there on, it now remembers all the variables that are referenced inside of it as they were at the time that the function was created. So that's what a closure is, and it is a stale closure because it never run again, and so it is still remembering the old values.
 <!---
 [comment]: it works with text, you can rename it how you want
 
