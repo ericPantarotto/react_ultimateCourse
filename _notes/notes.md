@@ -1836,6 +1836,27 @@ const archiveOptions = useMemo(() => {
 we are in the presence of stale state and of a stale closure.
 
 So a stale closure because this function was created initially and from there on, it now remembers all the variables that are referenced inside of it as they were at the time that the function was created. So that's what a closure is, and it is a stale closure because it never run again, and so it is still remembering the old values.
+
+### useCallback in Practice
+
+if we use our profiler, the first time we use the night color button, it's very quick but if we expand our `Archive`, so we are back again to having our memorized component re-render even though it is memorized.
+
+**<span style='color: #9e5231'>Error:** And so now, we have the same problem but with a function `<Archive archiveOptions={archiveOptions} onAddPost={handleAddPost} />`. the solution is to memoize the function.
+
+```javascript
+const handleAddPost = useCallback(
+  (post) => setPosts((posts) => [post, ...posts]),
+  []
+);
+```
+
+**<span style='color: #495fcb'> Note:** Using one of these functions here, like useCallback, actually has a cost as well. React needs to run this function and needs to store the function in memory. And so, that only makes sense if we actually see some improvement here in our application.
+
+React team is currently researching a compiler that would basically automatically memorize all the values that need memorization behind the scenes.
+
+**<span style='color: #875c5c'>IMPORTANT:** React guarantees that the **setter functions** of the `useState` hook always have a stable identity, which means that they will not change on renders. **We can basically think of these state setter functions as being automatically memorized**.
+
+And in fact, this is also the reason why it's completely okay to omit them from the dependency array of all these hooks, `useEffect, useCallback, useMemo`.
 <!---
 [comment]: it works with text, you can rename it how you want
 

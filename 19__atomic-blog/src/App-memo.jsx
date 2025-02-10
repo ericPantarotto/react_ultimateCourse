@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import PropTypes from 'prop-types';
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 function createRandomPost() {
   return {
@@ -26,9 +26,13 @@ function App() {
         )
       : posts;
 
-  function handleAddPost(post) {
-    setPosts((posts) => [post, ...posts]);
-  }
+  const handleAddPost = useCallback(
+    (post) => setPosts((posts) => [post, ...posts]),
+    []
+  );
+  // function handleAddPost(post) {
+  //   setPosts((posts) => [post, ...posts]);
+  // }
 
   function handleClearPosts() {
     setPosts([]);
@@ -48,7 +52,7 @@ function App() {
       // title: 'Post archive in addition to main posts',
       title: `Post archive in addition to ${posts.length} main posts`,
     };
-  }, [posts.length]) 
+  }, [posts.length]);
 
   return (
     <section>
@@ -68,7 +72,8 @@ function App() {
       <Main posts={searchedPosts} onAddPost={handleAddPost} />
       {/* <Archive onAddPost={handleAddPost} /> */}
       {/* <Archive show={false} /> */}
-      <Archive archiveOptions={archiveOptions} />
+      {/* <Archive archiveOptions={archiveOptions} /> */}
+      <Archive archiveOptions={archiveOptions} onAddPost={handleAddPost} />
       <Footer />
     </section>
   );
@@ -166,7 +171,7 @@ function List({ posts }) {
 }
 
 //NOTE: OK! const Archive = memo( function Archive({ show }) {
-const Archive = memo(function Archive({ archiveOptions }) {
+const Archive = memo(function Archive({ archiveOptions, onAddPost }) {
   const [posts] = useState(() =>
     // 💥 WARNING: This might make your computer slow! Try a smaller `length` first
     Array.from({ length: 30000 }, () => createRandomPost())
@@ -189,7 +194,7 @@ const Archive = memo(function Archive({ archiveOptions }) {
               <p>
                 <strong>{post.title}:</strong> {post.body}
               </p>
-              {/* <button onClick={() => onAddPost(post)}>Add as new post</button> */}
+              <button onClick={() => onAddPost(post)}>Add as new post</button>
             </li>
           ))}
         </ul>
@@ -246,4 +251,5 @@ Archive.propTypes = {
     show: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
   }),
+  onAddPost: PropTypes.func.isRequired,
 };
