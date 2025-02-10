@@ -1978,6 +1978,15 @@ for `Calculator`, one of the prop is an array, essentially a JavaScript object, 
 
 also the function `formatTime` that is inside the component `App` doesn't actually use any reactive value. And so there's no need to recreate this function on every render. So we can move outside of the component.
 
+### Setting State Based on Other State Updates
+
+We shouldn't use the `useEffect` hook to keep state variables in sync with all these other state variables. However this can be accepted when many state variables are involved, and would be impractical to use all state setters functions inside of an event.
+
+#### Problem with using useEffect to update states
+
+when changing any of our inputs, state variables (sets, speed, break), this trigger a render, but which then also trigger the useEffect hook, which only runs after the render has already happened, and so as we set the state inside of useEffect, we get a second render.
+
+This is something to keep in mind when using useEffect for that reason,But when you have so many state variables that influence the value of another state, then you can do this.
 <!---
 [comment]: it works with text, you can rename it how you want
 
