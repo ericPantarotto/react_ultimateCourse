@@ -1912,6 +1912,64 @@ So here we see that issue where *eslint* is telling us to add the *getCity* to t
 - Now, when does this function get recreated? Well, since it lives in the context, it is created in this `CitiesProvider`
 - But the problem is that this `getCity` function will update the state each time that it is executed, which will then end up in an infinite loop. When we call the `getCity` function, that function will then update the state in the `CitiesProvider` component, which will then re-render, which will then recreate the `getCity` function. And as the function gets recreated, since it is here in the dependency array, then `getCity` will get called again, which then again will update a state, which will re-render, which will cause the effect to run over.
 - And the way to solve the issue is to use the `useCallback` hook
+
+### Optimizing Bundle Size With Code Splitting
+
+We've talked a lot about optimizing wasted renders and overall app performance.
+
+However, probably the most important thing that we can and should optimize is the **bundle size**.
+
+So whenever some user navigates to our application, they're basically visiting a website that is hosted on some server. Now, once the user actually navigates to the app, the server will send back a huge JavaScript file to the client that is requesting it. And this file is the bundle.
+
+**So the bundle is simply a JavaScript file that contains the entire code of the application.** And it is called a bundle because a **tool like Vite or Webpack has bundled all our development files** into one huge bundle which contains all the application code.
+
+This means that once the code has been downloaded, the entire React application is loaded at once, which essentially turns it into a single-page application that is running entirely on the client. So whenever the URL changes in the app, the client just renders a new React component but without loading any new files from the server because all the JavaScript code is already there in the bundle.
+
+**<span style='color: #875c5c'>IMPORTANT:** **code splitting** basically takes the bundle and, as the name says, splits it into multiple parts. So instead of just having one huge JavaScript file, we will have multiple smaller files which can then be downloaded over time as they become necessary for the application. **And this process of loading code sequentially is called lazy loading**.
+
+this `lazy loading` feature has nothing to do with *React Router*. So any component can be lazy loaded.
+
+`const Homepage = lazy(() => import('./pages/Homepage'));`
+
+#### Suspense
+
+Suspense is a **concurrent feature** that is part of modern React, and that allows certain components to suspend, which basically means that it allows them to wait for something to happen.
+
+in our case, basically these lazy components are gonna be suspended while they're loading. And so we can then use the built-in `Suspense` component to show a fallback, which is gonna be that loading indicator
+
+#### Bundle without lazy loading
+
+![image info](./19_sc4.png)
+
+#### Bundle WITH lazy loading
+
+![image info](./19_sc5.png)
+
+### Summary
+
+really nice feature powered by:
+
+- the bundler, so Vite or Webpack
+- and the lazy function provided by React
+- plus the import function provided by JavaScript
+- and then also this Suspense component
+
+#### Bug to import from Public folder
+
+**<span style='color: #9e5231'>Error:** you have to prefix with `/`
+
+```javascript
+const FAKE_USER = {
+  name: 'Eric',
+  // avatar: 'https://i.pravatar.cc/100?u=zz',
+  avatar: '/ecr.svg',
+};
+```
+
+#### Bug with Suspense fallback - breaking change
+
+From reading [Bug] [https://github.com/remix-run/react-router/issues/10568]: Suspense around router not render fallback since v6.12.0 (breaking-change) · Issue #10568 · remix-run/react-router, it looks like this was an intended change by the developers.  Following some guidance in the discussion, I was able to get something to work.  It requires adding a top-level route that directs to a component which wraps an Outlet with the Suspense.  In addition, this component uses the useLocation() hook to provide a key to the Suspense so that a new instance is created.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

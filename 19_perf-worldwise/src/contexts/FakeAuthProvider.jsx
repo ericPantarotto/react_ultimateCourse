@@ -6,7 +6,7 @@ const FAKE_USER = {
   email: 'eric.carlier@gmail.com',
   password: 'qwerty',
   // avatar: 'https://i.pravatar.cc/100?u=zz',
-  avatar: 'ecr.svg',
+  avatar: '/ecr.svg',
 };
 
 const AuthContext = createContext();
