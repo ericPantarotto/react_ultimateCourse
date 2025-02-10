@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import clickSound from './ClickSound.m4a';
+import { memo, useState } from 'react';
+// import clickSound from './ClickSound.m4a';
 
 function Calculator({ workouts, allowSound }) {
   const [number, setNumber] = useState(workouts.at(0).numExercises);
@@ -11,11 +11,11 @@ function Calculator({ workouts, allowSound }) {
   const mins = Math.floor(duration);
   const seconds = (duration - mins) * 60;
 
-  const playSound = function () {
-    if (!allowSound) return;
-    const sound = new Audio(clickSound);
-    sound.play();
-  };
+  // const playSound = function () {
+  //   if (!allowSound) return;
+  //   const sound = new Audio(clickSound);
+  //   sound.play();
+  // };
 
   return (
     <>
@@ -78,4 +78,4 @@ function Calculator({ workouts, allowSound }) {
   );
 }
 
-export default Calculator;
+export default memo(Calculator);

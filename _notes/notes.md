@@ -1970,6 +1970,14 @@ const FAKE_USER = {
 
 From reading [Bug] [https://github.com/remix-run/react-router/issues/10568]: Suspense around router not render fallback since v6.12.0 (breaking-change) · Issue #10568 · remix-run/react-router, it looks like this was an intended change by the developers.  Following some guidance in the discussion, I was able to get something to work.  It requires adding a top-level route that directs to a component which wraps an Outlet with the Suspense.  In addition, this component uses the useLocation() hook to provide a key to the Suspense so that a new instance is created.
 
+### CHALLENGE #1: Fix Performance Issues in "Workout Timer"
+
+once we have memoized our 2 components, `ToggleSounds` doesn't re-render anymore as its props are either primitives, and a state setter function for which React guarantees such functions won't change between renders.
+
+for `Calculator`, one of the prop is an array, essentially a JavaScript object, which then gets recreated on each render. we need to use `useMemo()` hook and pass the reactive value `partOfDay` used inside the array as a dependency.
+
+also the function `formatTime` that is inside the component `App` doesn't actually use any reactive value. And so there's no need to recreate this function on every render. So we can move outside of the component.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
