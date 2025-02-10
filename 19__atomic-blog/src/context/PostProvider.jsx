@@ -44,6 +44,21 @@ function PostProvider({ children }) {
       {children}
     </PostContext.Provider>
   );
+
+  // const value = useMemo(() => {
+  //   return {
+  //     posts: searchedPosts,
+  //     onClearPosts: handleClearPosts,
+  //     onAddPost: handleAddPost,
+  //     searchQuery,
+  //     setSearchQuery,
+  //     isFakeDark,
+  //     setIsFakeDark,
+  //   };
+  // }, [isFakeDark, searchQuery, searchedPosts]);
+
+  // return (
+  //   <PostContext.Provider value={value}>{children}</PostContext.Provider>);
 }
 
 export { PostContext, PostProvider };

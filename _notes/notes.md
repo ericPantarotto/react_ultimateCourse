@@ -1857,6 +1857,46 @@ React team is currently researching a compiler that would basically automaticall
 **<span style='color: #875c5c'>IMPORTANT:** React guarantees that the **setter functions** of the `useState` hook always have a stable identity, which means that they will not change on renders. **We can basically think of these state setter functions as being automatically memorized**.
 
 And in fact, this is also the reason why it's completely okay to omit them from the dependency array of all these hooks, `useEffect, useCallback, useMemo`.
+
+### Optimizing Context Re-Renders
+
+You can either:
+
+- pass the components as `{children}` to the `Context.Provider`
+- memoize the components
+
+And this `PostProvider` is a child element of the app component. And so therefore, when the app component re-renders then this post provider re-renders, as well and therefore, this context-provider object will be recreated. And so, if this object will be recreated it means that the context value has changed and therefore, all the components that consume that context are going to be re-rendered.
+
+that's why if we use `setIsFakeDark`, the state of the `App` component change, hence the context gets recreated and components like `List` are re-rendered. **To avoid such behavior we can memoize with `useCallback` the value of our `PostContext.Provider`.**
+
+#### avoiding re-render due to context changes
+
+![image info](./19_sc3.png)
+
+**<span style='color: #a8c62c'> PostProvider.jsx**
+
+```javascript
+const value = useMemo(() => {
+    return {
+      posts: searchedPosts,
+      onClearPosts: handleClearPosts,
+      onAddPost: handleAddPost,
+      searchQuery,
+      setSearchQuery,
+    };
+  }, [searchQuery, searchedPosts]);
+
+  return (
+    <PostContext.Provider value={value}>{children}</PostContext.Provider>)
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** as soon as you change one of these states for example, the `Post` or the `searchQuery` then all of the components that read at least one of these five values will get re-rendered.
+
+And so, again, this is not ideal and it's the reason why in the beginning I told you that we usually create one context per state.
+
+So we would have one `Post` context and one `searchQuery` context.
+
+And so, in that situation, whenever we updated for example, the search Query, then all the components that consume the posts would not get re-rendered. While in this case, all of them are because it is enough for one value here to change to re-render the entire thing.
 <!---
 [comment]: it works with text, you can rename it how you want
 
