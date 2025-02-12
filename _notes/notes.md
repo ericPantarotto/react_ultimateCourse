@@ -2018,6 +2018,12 @@ a stale closure / an outdated closure occurs when the function has captured the 
 After creating the `reducer` function, we now install `Redux`, `npm i redux`
 
 **<span style='color: #495fcb'> Note:** `createStore` has now been deprecated (import is striked through), and the new modern way of writing Redux is `Redux Toolkit`.
+
+### Working With Action Creators
+
+**Action creators are nothing more than simply functions, that return actions**. So they are really not a Redux thing, and Redux would work perfectly fine without them, but they are a useful convention that Redux developers use.
+
+One of the reason/advantage to use action creators is that it's a lot more reusable than always writing the object here by hand.
 <!---
 [comment]: it works with text, you can rename it how you want
 
