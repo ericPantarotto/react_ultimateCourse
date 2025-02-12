@@ -2024,6 +2024,20 @@ After creating the `reducer` function, we now install `Redux`, `npm i redux`
 **Action creators are nothing more than simply functions, that return actions**. So they are really not a Redux thing, and Redux would work perfectly fine without them, but they are a useful convention that Redux developers use.
 
 One of the reason/advantage to use action creators is that it's a lot more reusable than always writing the object here by hand.
+
+### Adding more state: Customer
+
+**<span style='color: #495fcb'> Note:** `createdAt: new Date().toISOString()` would create a side-effect within the reducer, so even though most logic should be in the reducer, in that case it must stay within the action creator.
+
+```javascript
+function createCustomer(fullName, nationalID) {
+  return {
+    type: 'customer/createCustomer',
+    payload: { fullName, nationalID, createdAt: new Date().toISOString() },
+  };
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
