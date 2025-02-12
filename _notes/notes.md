@@ -2003,6 +2003,15 @@ So each time that we click here on this button, it will set the duration and it 
 ### Closures in Effects
 
 a stale closure / an outdated closure occurs when the function has captured the values from the closure of the function, but has changed since then.
+
+## Redux and Modern Redux Toolkit (with Thunks)
+
+### Creating a Reducer: Bank Account
+
+`default:` case:
+
+- with *useReducer*, `throw new Error()`
+- with *Redux*, `retunr state;`
 <!---
 [comment]: it works with text, you can rename it how you want
 
