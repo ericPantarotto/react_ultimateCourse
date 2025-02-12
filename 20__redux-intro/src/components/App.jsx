@@ -3,7 +3,10 @@ import BalanceDisplay from './BalanceDisplay';
 import CreateCustomer from './CreateCustomer';
 import Customer from './Customer';
 
+import '../stores/bank-store'
+
 function App() {
+  
   return (
     <div>
       <h1>🏦 The React-Redux Bank ⚛️</h1>

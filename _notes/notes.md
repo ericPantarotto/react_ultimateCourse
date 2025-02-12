@@ -2012,6 +2012,12 @@ a stale closure / an outdated closure occurs when the function has captured the 
 
 - with *useReducer*, `throw new Error()`
 - with *Redux*, `retunr state;`
+
+### Creating a Redux Store
+
+After creating the `reducer` function, we now install `Redux`, `npm i redux`
+
+**<span style='color: #495fcb'> Note:** `createStore` has now been deprecated (import is striked through), and the new modern way of writing Redux is `Redux Toolkit`.
 <!---
 [comment]: it works with text, you can rename it how you want
 
