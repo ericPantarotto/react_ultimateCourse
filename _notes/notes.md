@@ -2040,6 +2040,11 @@ function createCustomer(fullName, nationalID) {
 }
 ```
 
+### Back to React! Connecting our Redux App With React
+
+`npm i react-redux`, we then need to import from that package the Provider.
+
+we can wrap our entire application in that `Provider`, just like we do with the React `Context` API.
 <!---
 [comment]: it works with text, you can rename it how you want
 
