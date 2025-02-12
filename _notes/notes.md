@@ -2045,6 +2045,21 @@ function createCustomer(fullName, nationalID) {
 `npm i react-redux`, we then need to import from that package the Provider.
 
 we can wrap our entire application in that `Provider`, just like we do with the React `Context` API.
+
+### The Legacy Way of Connecting Components to Redux
+
+**<span style='color: #a8c62c'> BalanceDisplay.jsx**
+
+`export default connect(mapStateToProps)(BalanceDisplay);` connect() will create a new function to which `BalanceDisplay` will passed as an argument , and this will return a component.
+
+Below function maps the props and that's the name that we will destructure into our `BalanceDisplay` function/component
+
+```javascript
+function mapStateToProps(state) {
+  return { balance: state.account.balance };
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

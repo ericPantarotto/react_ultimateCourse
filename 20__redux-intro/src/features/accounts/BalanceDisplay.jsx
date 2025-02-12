@@ -1,12 +1,23 @@
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 function formatCurrency(value) {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "USD",
+  return new Intl.NumberFormat('en', {
+    style: 'currency',
+    currency: 'USD',
   }).format(value);
 }
 
-function BalanceDisplay() {
-  return <div className="balance">{formatCurrency(123456)}</div>;
+function BalanceDisplay({ balance }) {
+  return <div className='balance'>{formatCurrency(balance)}</div>;
 }
 
-export default BalanceDisplay;
+function mapStateToProps(state) {
+  return { balance: state.account.balance };
+}
+
+export default connect(mapStateToProps)(BalanceDisplay);
+
+BalanceDisplay.propTypes = {
+  balance: PropTypes.number.isRequired,
+};
