@@ -2011,13 +2011,15 @@ a stale closure / an outdated closure occurs when the function has captured the 
 `default:` case:
 
 - with *useReducer*, `throw new Error()`
-- with *Redux*, `retunr state;`
+- with *Redux*, `return state;`
+
+**<span style='color: #495fcb'> Note:** if you want to run the reducer, you can simply `import './stores/bank-store';` in the `App` component.
 
 ### Creating a Redux Store
 
 After creating the `reducer` function, we now install `Redux`, `npm i redux`
 
-**<span style='color: #495fcb'> Note:** `createStore` has now been deprecated (import is striked through), and the new modern way of writing Redux is `Redux Toolkit`.
+**<span style='color: #495fcb'> Note:** `createStore` has now been deprecated, and the new modern way of writing Redux is `Redux Toolkit`.
 
 ### Working With Action Creators
 
