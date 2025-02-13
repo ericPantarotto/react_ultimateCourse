@@ -2060,6 +2060,23 @@ function mapStateToProps(state) {
 }
 ```
 
+### Redux Middleware and Thunks
+
+a Redux store doesn't know anything about performing asynchronous logic like this. It only knows how to synchronously dispatch actions and update the state. Therefore, any asynchronous operations like that API call need to happen outside a reducer.
+
+we could also fetch the data inside the component and then dispatch an action to the store with that received data? it's not an ideal solution and the reason for that is that we usually want to keep our components clean and free of data fetching and we also want our important data fetching logic encapsulated somewhere, so all in one place and not have it spread all over the application. **Therefore, fetching data inside components, like we have been doing all this time, is not ideal.**
+
+#### Redux Middleware
+
+in Redux, Middleware is basically a function that sits between the dispatching and the store. This means that a Middleware allows developers to run some code after dispatching an action, but before that action reaches the reducer in the store.
+
+usually after we dispatch, the action immediately reaches the reducer and the state is updated. But with a Middleware, we can do something with the action before that action actually gets into the reducer. **therefore, this is the perfect place for our asynchronous API call, as well as other operations.**
+
+**<span style='color: #875c5c'>IMPORTANT:** Middleware is the go-to place for side effects in the Redux cycle.
+
+we can write Middleware functions ourselves, but usually, we just use some third party package. And in the case of asynchronous operations, the most popular Middleware in Redux is called **Redux Thunk**.
+
+data fetching is performed in the middleware, and as soon as the data arrives, we place it into the actions payload and then we finally dispatch the action into the store.
 <!---
 [comment]: it works with text, you can rename it how you want
 
