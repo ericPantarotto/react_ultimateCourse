@@ -2145,6 +2145,11 @@ Redux Toolkit allows us to write a lot less code to achieve the exact same resul
 ### Creating the Store With RTK
 
 `npm i @redux/toolkit`
+
+### Creating the Account Slice
+
+**<span style='color: #495fcb'> Note:** Automatically created action creators with `redux-toolkit` only accept one single argument. And so this is basically one of the limitations of having this opinionated structure. **what we have to do is to prepare the data before it reaches the reducer.**
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
