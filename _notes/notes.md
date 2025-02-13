@@ -2150,6 +2150,10 @@ Redux Toolkit allows us to write a lot less code to achieve the exact same resul
 
 **<span style='color: #495fcb'> Note:** Automatically created action creators with `redux-toolkit` only accept one single argument. And so this is basically one of the limitations of having this opinionated structure. **what we have to do is to prepare the data before it reaches the reducer.**
 
+### Back to Thunks
+
+**Thunks** actually automatically work out of the box. And so that's because Thunks are automatically provided in Redux Toolkit, so we don't have to install anything, and this will simply already work. So no setup required.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
