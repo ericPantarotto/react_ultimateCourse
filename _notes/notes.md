@@ -2077,6 +2077,33 @@ usually after we dispatch, the action immediately reaches the reducer and the st
 we can write Middleware functions ourselves, but usually, we just use some third party package. And in the case of asynchronous operations, the most popular Middleware in Redux is called **Redux Thunk**.
 
 data fetching is performed in the middleware, and as soon as the data arrives, we place it into the actions payload and then we finally dispatch the action into the store.
+
+### Making an API Call With Redux Thunks
+
+`npm i redux-thunk`
+
+**<span style='color: #a8c62c'> features/accounts/accountSlice.js**
+
+```javascript
+export function deposit(amount, currency) {
+  if (currency === 'USD') return { type: 'account/deposit', payload: amount };
+
+  return async function (dispatch, getState) {
+    dispatch({ type: 'account/convertingCurrency' });
+
+    const res = await fetch(
+      `https://api.frankfurter.app/latest?amount=${amount}&from=${currency}&to=USD`
+    );
+    const data = await res.json();
+    const converted = data.rates.USD;
+
+    dispatch({ type: 'account/deposit', payload: converted });
+  };
+}
+```
+
+if the currency is <> USD, we will dispatch a function. And so when Redux sees that, it will know that that function is the thunk. And so it will then execute that function and not immediately dispatch the action to the store.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
