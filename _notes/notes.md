@@ -2104,6 +2104,40 @@ export function deposit(amount, currency) {
 
 if the currency is <> USD, we will dispatch a function. And so when Redux sees that, it will know that that function is the thunk. And so it will then execute that function and not immediately dispatch the action to the store.
 
+### The Redux DevTools
+
+`npm i @redux-devtools/extension`
+
+**<span style='color: #9e5231'>Error:** Deprecated: `npm i redux-devtools-extension`
+
+From the [redux-toolkit](https://redux-toolkit.js.org/api/configureStore) documentation:
+
+```javascript
+/**
+   * Whether to enable Redux DevTools integration. Defaults to `true`.
+   *
+   * Additional configuration can be done by passing Redux DevTools options
+*/
+devTools?: boolean | DevToolsOptions
+```
+
+**<span style='color: #a8c62c'> stores/bank-store.js**
+
+```javascript
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+  // eslint-disable-next-line no-undef
+  devTools: process.env.NODE_ENV !== 'production',
+});
+```
+
+FireFox / Chrome DevTools  - new tab `Redux`
+
+**<span style='color: #495fcb'> Note:** You can dispatch your own actions from the console.
+
+![image info](./20_sc1.png)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
