@@ -2138,6 +2138,9 @@ FireFox / Chrome DevTools  - new tab `Redux`
 
 ![image info](./20_sc1.png)
 
+### What is Redux Toolkit (RTK)?
+
+Redux Toolkit allows us to write a lot less code to achieve the exact same result as before. So we say that we need a lot less boilerplate code, which is basically code that only sets things up but doesn't really do anything meaningful. And so Redux Toolkit hides all that stuff.
 <!---
 [comment]: it works with text, you can rename it how you want
 
