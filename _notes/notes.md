@@ -2163,6 +2163,14 @@ in our previous app *WorldWise* we used `BrowserRouter`, `Routes` and `Route` co
 With `createBrowserRouter` it is done in a more imperative way. So we're declaring the router outside of the JSX and using this JavaScript array right here.
 
 **<span style='color: #875c5c'>IMPORTANT:** This is necessary in React Router 6.4 (or later) to use this new syntax in order to enable data ew powerful APIs like data loaders, data actions, or data features of *react-router*.
+
+### Building the App Layout
+
+we created this `appLayout` component which we will want to use as the parent route of every single other route that we have in our application.
+
+we made all the other routes child routes of the `appLayout`. So they are all nested routes. And then inside the parent route, we can use the `Outlet` component to render whatever is the current nested route.
+
+**<span style='color: #495fcb'> Note:** when a route doesn't have a path, it is technically called in *React Router* a layout route.
 <!---
 [comment]: it works with text, you can rename it how you want
 
