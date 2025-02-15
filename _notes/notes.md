@@ -2171,6 +2171,14 @@ we created this `appLayout` component which we will want to use as the parent ro
 we made all the other routes child routes of the `appLayout`. So they are all nested routes. And then inside the parent route, we can use the `Outlet` component to render whatever is the current nested route.
 
 **<span style='color: #495fcb'> Note:** when a route doesn't have a path, it is technically called in *React Router* a layout route.
+
+### Fetching Data With React Router "Loaders": Pizza Menu
+
+When using then `loader:` property, `react-router` will actually start fetching the data at the same time as it starts rendering the correct route.
+
+**<span style='color: #495fcb'> Note:** What we did when using `useEffect`, was always a **fetch on render approach**. We rendered the component first, and then after the component was already rendered is when we then would start to fetch the data, a so-called **data loading waterfall**.
+
+React Router is no longer only responsible for matching component to URLs in the browser but to also provide the data that is necessary for each page.
 <!---
 [comment]: it works with text, you can rename it how you want
 
