@@ -2179,6 +2179,10 @@ When using then `loader:` property, `react-router` will actually start fetching 
 **<span style='color: #495fcb'> Note:** What we did when using `useEffect`, was always a **fetch on render approach**. We rendered the component first, and then after the component was already rendered is when we then would start to fetch the data, a so-called **data loading waterfall**.
 
 React Router is no longer only responsible for matching component to URLs in the browser but to also provide the data that is necessary for each page.
+
+### Handling Errors With Error Elements
+
+it's important to notice that errors (including API requests) will bubble up to the parent route unless it is actually handled in the route itself, which is done by placing error element right on the route where the error might happen.
 <!---
 [comment]: it works with text, you can rename it how you want
 
