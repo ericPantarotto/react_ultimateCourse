@@ -2154,6 +2154,15 @@ Redux Toolkit allows us to write a lot less code to achieve the exact same resul
 
 **Thunks** actually automatically work out of the box. And so that's because Thunks are automatically provided in Redux Toolkit, so we don't have to install anything, and this will simply already work. So no setup required.
 
+## React Router with Data loading
+
+### A new way of implementing Routes
+
+in our previous app *WorldWise* we used `BrowserRouter`, `Routes` and `Route` components with which routes were declared in a more declarative way.
+
+With `createBrowserRouter` it is done in a more imperative way. So we're declaring the router outside of the JSX and using this JavaScript array right here.
+
+**<span style='color: #875c5c'>IMPORTANT:** This is necessary in React Router 6.4 (or later) to use this new syntax in order to enable data ew powerful APIs like data loaders, data actions, or data features of *react-router*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
