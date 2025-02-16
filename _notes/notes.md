@@ -2251,6 +2251,14 @@ Prettier  Plugin for Tailwind CSS (dev-dependency `-D`), that will always organi
 You can apply Tailwind CSS styling to your `.jsx` files but also to the HTML elements of root html files such as `index.html`
 
 you can apply arbitrary values to most classes when the pre-defined class are not what you need: `<Link to='/' className='tracking-[2rem]'>`
+
+### Responsive Design
+
+All default classes; without any prefix, are the **mobile-first classes**. So they apply only if there is no breakpoint overriding them.
+
+for example `<div className='my-10 text-center sm:my-16'>`, the `sm:my-16` means that margin top & bottom gets applied from the `sm` value on; which is *640px* for that breakpoint.
+
+**<span style='color: #495fcb'> Note:** You can customize your own breakpoints which aligns with CSS rule that they should match the values when your application breaks rather than pre-fixed values.
 <!---
 [comment]: it works with text, you can rename it how you want
 
