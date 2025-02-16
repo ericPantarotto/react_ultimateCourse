@@ -1,30 +1,24 @@
 // import { useState } from "react";
-import { Form } from "react-router-dom";
-
-// https://uibakery.io/regex-library/phone-number
-// const isValidPhone = (str) =>
-//   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-//     str
-//   );
+import { Form, useActionData, useNavigation } from 'react-router-dom';
 
 const fakeCart = [
   {
     pizzaId: 12,
-    name: "Mediterranean",
+    name: 'Mediterranean',
     quantity: 2,
     unitPrice: 16,
     totalPrice: 32,
   },
   {
     pizzaId: 6,
-    name: "Vegetale",
+    name: 'Vegetale',
     quantity: 1,
     unitPrice: 13,
     totalPrice: 13,
   },
   {
     pizzaId: 11,
-    name: "Spinach and Mushroom",
+    name: 'Spinach and Mushroom',
     quantity: 1,
     unitPrice: 15,
     totalPrice: 15,
@@ -32,7 +26,10 @@ const fakeCart = [
 ];
 
 function CreateOrder() {
-  // const [withPriority, setWithPriority] = useState(false);
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
+  const formErrors = useActionData();
+  
   const cart = fakeCart;
 
   return (
@@ -43,6 +40,11 @@ function CreateOrder() {
         <div>
           <label>First Name</label>
           <input type='text' name='customer' required />
+          {formErrors?.phone && (
+            <p className='mt-2 rounded-md bg-red-100 p-2 text-xs text-red-700'>
+              {formErrors.phone}
+            </p>
+          )}
         </div>
 
         <div>
@@ -71,8 +73,10 @@ function CreateOrder() {
         </div>
 
         <div>
-          <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <button>Order now</button>
+          <input type='hidden' name='cart' value={JSON.stringify(cart)} />
+          <button disabled={isSubmitting}>
+            {isSubmitting ? 'Placing order....' : 'Order now '}
+          </button>
         </div>
       </Form>
     </div>

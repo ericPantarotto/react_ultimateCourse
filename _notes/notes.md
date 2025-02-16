@@ -2227,6 +2227,12 @@ What matters is that behind the scenes, all of this really works with the web AP
 `orderAction.js`: `return redirect(`/order/${newOrder.id}`);`
 
 a `Post` request returning the new `id` in the response can then be used to redirect `GET` request to the `/order/:id` route/path.
+
+### Error Handling in Form Actions
+
+in the component that is connected to this action, we can get access to whatever was returned from that action in case there was no submission.
+
+`orderAction.js`: `const formErrors = useActionData();`
 <!---
 [comment]: it works with text, you can rename it how you want
 
