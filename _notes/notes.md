@@ -2183,6 +2183,10 @@ React Router is no longer only responsible for matching component to URLs in the
 ### Handling Errors With Error Elements
 
 it's important to notice that errors (including API requests) will bubble up to the parent route unless it is actually handled in the route itself, which is done by placing error element right on the route where the error might happen.
+
+### Fetching Orders
+
+`useParams` is a hook and only works inside components, not within regular *JavaScript* function, however *react-router* provides the `{params}` prop.
 <!---
 [comment]: it works with text, you can rename it how you want
 

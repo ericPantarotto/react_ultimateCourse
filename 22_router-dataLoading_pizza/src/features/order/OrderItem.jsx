@@ -1,4 +1,7 @@
-function OrderItem({ item, isLoadingIngredients, ingredients }) {
+import PropTypes from 'prop-types';
+import { formatCurrency } from '../../utils/helpers';
+
+function OrderItem({ item }) {
   const { quantity, name, totalPrice } = item;
 
   return (
@@ -12,5 +15,12 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
     </li>
   );
 }
+OrderItem.propTypes = {
+  item: PropTypes.shape({
+    quantity: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    totalPrice: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default OrderItem;
