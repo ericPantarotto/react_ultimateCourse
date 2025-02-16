@@ -2245,6 +2245,12 @@ VSCode Extension: Tailwind CSS IntelliSense
 Prettier  Plugin for Tailwind CSS (dev-dependency `-D`), that will always organize your classes in the same order in your *html, jsx* files: `npm install -D prettier prettier-plugin-tailwindcss`
 
 **<span style='color: #a3842c'>Prettier JSX Single Quote:** [https://prettier.io/docs/options#jsx-quotes]
+
+### Styling Text
+
+You can apply Tailwind CSS styling to your `.jsx` files but also to the HTML elements of root html files such as `index.html`
+
+you can apply arbitrary values to most classes when the pre-defined class are not what you need: `<Link to='/' className='tracking-[2rem]'>`
 <!---
 [comment]: it works with text, you can rename it how you want
 
