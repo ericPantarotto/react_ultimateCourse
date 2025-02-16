@@ -2216,7 +2216,7 @@ We only need to connect the action to a specific URL.
 
 We can use an *hidden <Input>* to get data into the action.
 
-Once the new order data return by our API repsonse on the `POST createOrder` endpoint, is actually returned, we can immediately redirect the page to the `/order/:id`, showing the user all the information about that new order.
+Once the new order data return by our API response on the `POST createOrder` endpoint, is actually returned, we can immediately redirect the page to the `/order/:id`, showing the user all the information about that new order.
 
 **<span style='color: #9e5231'>Error:** we cannot use the navigate function comes from the `useNavigate` hook, as we cannot call hooks inside this function. So hooks can only be called inside components. And so here we need to use another function, which is called `redirect`, another function that is provided by *react-router*,which basically will just create a new response or a new request.
 
