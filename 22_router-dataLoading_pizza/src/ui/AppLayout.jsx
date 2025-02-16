@@ -10,7 +10,6 @@ function AppLayout() {
   return (
     <div className='layout'>
       {isLoading && <Loader />}
-      {isLoading && console.log('loading')}
       <Header />
 
       <div>

@@ -2187,6 +2187,46 @@ it's important to notice that errors (including API requests) will bubble up to 
 ### Fetching Orders
 
 `useParams` is a hook and only works inside components, not within regular *JavaScript* function, however *react-router* provides the `{params}` prop.
+
+### Writing data with react-router actions
+
+**<span style='color: #a8c62c'> features/order/CreateOrder.jsx**
+
+So while the loaders that we used earlier are to read data, actions are used to write data or to mutate data.
+
+To make this form work nicely with `react-router`, we need to replace this with a `<Form />` component that `react-router` gives us.
+
+We could also specify the action where we could then write the path that this form should be submitted to `<Form method='POST' action='/order/new'>` but this is not going to be necessary, because by default, `react-router` will simply match the closest route.
+
+**<span style='color: #495fcb'> Note:** in your `createBrowserRouter` function, once you have added the `action` option, whenever there will be a new form submission on the route/path `/order/new`, then action `createOrderAction` that we specified here will be called.
+
+```javascript
+{
+  path: '/order/new',
+  element: <CreateOrder />,
+  action: createOrderAction,
+},
+```
+
+This entire `<Form />` works completely without any JavaScript, without any state variables and without any onSubmit handlers. So all we have is this `<Form />` component, and then *react-router* takes care of the rest.
+
+we didn't even have to create a loading state. So React Router will do all of this automatically without us having to do anything. And the idea behind all this is to basically allow us to go back to the basics, so to the way HTML used to work back in the day before everyone started using JavaScript for the front end. So back then, we simply created HTML forms similar to this one, and then when we submitted them, a request was sent to the server.
+
+We only need to connect the action to a specific URL.
+
+We can use an *hidden <Input>* to get data into the action.
+
+Once the new order data return by our API repsonse on the `POST createOrder` endpoint, is actually returned, we can immediately redirect the page to the `/order/:id`, showing the user all the information about that new order.
+
+**<span style='color: #9e5231'>Error:** we cannot use the navigate function comes from the `useNavigate` hook, as we cannot call hooks inside this function. So hooks can only be called inside components. And so here we need to use another function, which is called `redirect`, another function that is provided by *react-router*,which basically will just create a new response or a new request.
+
+What matters is that behind the scenes, all of this really works with the web API's standard request and response API's.
+
+![image info](./22_sc1.png)
+
+`orderAction.js`: `return redirect(`/order/${newOrder.id}`);`
+
+a `Post` request returning the new `id` in the response can then be used to redirect `GET` request to the `/order/:id` route/path.
 <!---
 [comment]: it works with text, you can rename it how you want
 
