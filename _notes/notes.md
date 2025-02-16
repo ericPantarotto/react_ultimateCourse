@@ -2233,6 +2233,18 @@ a `Post` request returning the new `id` in the response can then be used to redi
 in the component that is connected to this action, we can get access to whatever was returned from that action in case there was no submission.
 
 `orderAction.js`: `const formErrors = useActionData();`
+
+## Tailwind CSS Crash Course: Styling the App
+
+### Setting Up Tailwind CSS
+
+**<span style='color: #a3842c'>Link:** [https://tailwindcss.com/docs/installation/using-vite]
+
+VSCode Extension: Tailwind CSS IntelliSense
+
+Prettier  Plugin for Tailwind CSS (dev-dependency `-D`), that will always organize your classes in the same order in your *html, jsx* files: `npm install -D prettier prettier-plugin-tailwindcss`
+
+**<span style='color: #a3842c'>Prettier JSX Single Quote:** [https://prettier.io/docs/options#jsx-quotes]
 <!---
 [comment]: it works with text, you can rename it how you want
 
