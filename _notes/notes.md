@@ -2263,6 +2263,10 @@ for example `<div className='my-10 text-center sm:my-16'>`, the `sm:my-16` means
 ### Using Flexbox
 
 `<div className='hidden text-sm font-semibold md:block'>Eric</div>;` will hide by default or show the user name once a certain screen size breakpoint (`md`) is reached.
+
+### Using CSS Grid
+
+Implementing CSS Grid will allow to easily push the overview all the way to the bottom of the screen.
 <!---
 [comment]: it works with text, you can rename it how you want
 
