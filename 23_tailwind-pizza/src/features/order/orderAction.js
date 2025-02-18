@@ -18,7 +18,6 @@ export async function action({ request }) {
       'Please give us your correct phone number. We might need it to contact you.';
 
   if (Object.keys(errors).length > 0) return errors;
-
   const newOrder = await createOrder(order);
 
   return redirect(`/order/${newOrder.id}`);
