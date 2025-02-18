@@ -2267,6 +2267,12 @@ for example `<div className='my-10 text-center sm:my-16'>`, the `sm:my-16` means
 ### Using CSS Grid
 
 Implementing CSS Grid will allow to easily push the overview all the way to the bottom of the screen.
+
+### Reusing Styles With @apply
+
+**<span style='color: #495fcb'> Note:** we should not start using `@apply` technique all over the place for all our elements because then we would simply go back to writing *CSS* in the old school way. So this should really be treated as an exception here when there are so many classes that we are using all at the same time.
+
+**<span style='color: #875c5c'>IMPORTANT:** the actual better solution would be to reuse all of this by creating a React component.
 <!---
 [comment]: it works with text, you can rename it how you want
 

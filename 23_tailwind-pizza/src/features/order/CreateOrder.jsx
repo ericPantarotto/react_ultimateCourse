@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import { Form, useActionData, useNavigation } from 'react-router-dom';
+import Button from '../../ui/components/Button';
 
 const fakeCart = [
   {
@@ -39,7 +40,7 @@ function CreateOrder() {
       <Form method='POST'>
         <div>
           <label>First Name</label>
-          <input type='text' name='customer' required />
+          <input type='text' name='customer' required className='input' />
           {formErrors?.phone && (
             <p className='mt-2 rounded-md bg-red-100 p-2 text-xs text-red-700'>
               {formErrors.phone}
@@ -50,19 +51,14 @@ function CreateOrder() {
         <div>
           <label>Phone number</label>
           <div>
-            <input type='tel' name='phone' required />
+            <input type='tel' name='phone' required className='input' />
           </div>
         </div>
 
         <div>
           <label>Address</label>
           <div>
-            <input
-              type='text'
-              name='address'
-              required
-              className='w-full rounded-full border border-stone-200 px-4 py-2 text-sm transition-all duration-300 focus:ring focus:ring-yellow-400 focus:outline-none md:px-6 md:py-3'
-            />
+            <input type='text' name='address' required className='input' />
           </div>
         </div>
 
@@ -80,12 +76,9 @@ function CreateOrder() {
 
         <div>
           <input type='hidden' name='cart' value={JSON.stringify(cart)} />
-          <button
-            disabled={isSubmitting}
-            className='focus: inline-block rounded-full bg-yellow-400 px-4 py-3 font-semibold tracking-wide text-stone-700 uppercase transition-colors duration-300 hover:bg-yellow-300 focus:ring focus:ring-yellow-300 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed'
-          >
+          <Button disabled={isSubmitting}>
             {isSubmitting ? 'Placing order....' : 'Order now '}
-          </button>
+          </Button>
         </div>
       </Form>
     </div>
