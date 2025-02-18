@@ -20,6 +20,10 @@
 - `npm outdated`
 - to update an outdated version: `npm i react@latest`
 
+**<span style='color: #a3842c'>Tailwind CSS:** To avoid warnings in your `index.css` file, you need to change the VSCode intellisense to `Tailwind CSS`
+
+![image info](./1_sc1.png)
+
 #### Firefox not centering vertically
 
 **<span style='color: #9e5231'>Error:** in project such as 17. WorldWise, in `CityItem.module.css`, i added this css to the class attached to my button element:
