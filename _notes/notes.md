@@ -2273,6 +2273,37 @@ Implementing CSS Grid will allow to easily push the overview all the way to the 
 **<span style='color: #495fcb'> Note:** we should not start using `@apply` technique all over the place for all our elements because then we would simply go back to writing *CSS* in the old school way. So this should really be treated as an exception here when there are so many classes that we are using all at the same time.
 
 **<span style='color: #875c5c'>IMPORTANT:** the actual better solution would be to reuse all of this by creating a React component.
+
+### Configuring Tailwind: Custom Font Family
+
+**<span style='color: #a3842c'>Tailwind Default theme variable reference:** [https://tailwindcss.com/docs/theme]
+
+If we want to use the Google font in specific space we update the `index.css` file and in our components reuse the created font name `<header className='font-roboto'>`
+
+**<span style='color: #a8c62c'> index.css**
+
+```css
+@theme {
+  --font-roboto: 'Roboto Mono', 'monospace';
+}
+```
+
+To apply it as a default font to all our components, you need to use the `--font-sans` option:
+
+```css
+@theme {
+  --font-sans: 'Roboto Mono', 'monospace';
+}
+```
+
+To extend Tailwind color palette:
+
+```css
+@theme {
+  --color-pizza: #439ECB
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
