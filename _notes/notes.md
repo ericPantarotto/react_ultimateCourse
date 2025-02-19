@@ -2313,6 +2313,29 @@ To extend Tailwind color palette:
 ### Modeling the "User" State With Redux Toolkit
 
 Let's just use Redux in order to store that global state. Of course we could also just create a state variable right here, so inside `App.jsx` and then I guess we could somehow pass that into the components.
+
+### Reading and Updating the User State
+
+it is a very bad practice to connect an input field right to the Redux store.
+
+So as we change the username here, so as we type a new input, we should really update a local state variable and not always update the Redux store.
+
+**<span style='color: #a8c62c'> CreateOrder.jsx**
+
+`defaultValue` allows us to set a default value at the beginning but which we can then still change, while `value` would be static.
+
+**<span style='color: #495fcb'> Note:** this is not a controlled element but it's simply a normal HTML element which happens to have a default value, that you can still change.
+
+```javascript
+<input
+  type='text'
+  name='customer'
+  defaultValue={username}
+  required
+  className='input grow'
+/>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
