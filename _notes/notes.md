@@ -2308,6 +2308,11 @@ To extend Tailwind color palette:
 }
 ```
 
+## Adding Redux and Advanced React Router
+
+### Modeling the "User" State With Redux Toolkit
+
+Let's just use Redux in order to store that global state. Of course we could also just create a state variable right here, so inside `App.jsx` and then I guess we could somehow pass that into the components.
 <!---
 [comment]: it works with text, you can rename it how you want
 
