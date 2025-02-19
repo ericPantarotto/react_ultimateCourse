@@ -24,6 +24,8 @@
 
 ![image info](./1_sc1.png)
 
+**<span style='color: #a3842c'>VSCode Basic Editing (search):** [https://code.visualstudio.com/docs/editor/codebasics]
+
 #### Firefox not centering vertically
 
 **<span style='color: #9e5231'>Error:** in project such as 17. WorldWise, in `CityItem.module.css`, i added this css to the class attached to my button element:
@@ -2335,6 +2337,12 @@ So as we change the username here, so as we type a new input, we should really u
   className='input grow'
 />
 ```
+
+### Modeling the "Cart" State
+
+**<span style='color: #875c5c'>IMPORTANT:** remember that with *Redux* we can actually mutate the state directly.
+
+with *traditional state management*, we would do: `function handleAddItems(item) {  setItems((items) => [...items, item]);}`
 
 <!---
 [comment]: it works with text, you can rename it how you want
