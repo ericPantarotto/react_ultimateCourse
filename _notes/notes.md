@@ -26,6 +26,8 @@
 
 **<span style='color: #a3842c'>VSCode Basic Editing (search):** [https://code.visualstudio.com/docs/editor/codebasics]
 
+**<span style='color: #a3842c'>HTML Entities:** [https://developer.mozilla.org/en-US/docs/Glossary/Character_reference]
+
 #### Firefox not centering vertically
 
 **<span style='color: #9e5231'>Error:** in project such as 17. WorldWise, in `CityItem.module.css`, i added this css to the class attached to my button element:
