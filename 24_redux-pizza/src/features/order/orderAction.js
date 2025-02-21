@@ -1,6 +1,8 @@
 import { redirect } from 'react-router-dom';
 import { createOrder } from '../../services/apiRestaurant';
 import { isValidPhone } from '../../utils/helpers';
+import store from '../../stores/store'
+import { clearCart } from '../cart/cartSlice';
 
 export async function action({ request }) {
   const formData = await request.formData();
@@ -9,7 +11,7 @@ export async function action({ request }) {
   const order = {
     ...data,
     cart: JSON.parse(data.cart),
-    priority: data.priority === 'on',
+    priority: data.priority === 'true',
   };
 
   const errors = {};
@@ -19,6 +21,9 @@ export async function action({ request }) {
 
   if (Object.keys(errors).length > 0) return errors;
   const newOrder = await createOrder(order);
+
+  // Do NOT overuse
+  store.dispatch(clearCart());
 
   return redirect(`/order/${newOrder.id}`);
 }

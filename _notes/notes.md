@@ -2362,6 +2362,26 @@ function CartOverview() {
 **<span style='color: #495fcb'> Note:** *Redux* recommends to place such functions right into the **slice**.
 
 **<span style='color: #495fcb'> Note:** To improve peformance of the selectors (inside slices), you can use the `redux reselect` library: [https://github.com/reduxjs/reselect]
+
+### Using the Cart for New Orders
+
+For dispatching, we need to call the `useDispatch` hook, which is only available in components and not in a regular function like this one.
+
+So the hack to use if you need to dispatch within a **regular function .js like Redux actions**, and which we should really, really not overuse is to directly import the store object and then dispatch directly on that store.
+
+**<span style='color: #a8c62c'> features/order/orderAction.js**
+
+```javascript
+export async function action({ request }) {
+// ...
+
+  // Do NOT overuse
+  store.dispatch(clearCart());
+
+  return redirect(`/order/${newOrder.id}`);
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
