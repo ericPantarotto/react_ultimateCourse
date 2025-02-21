@@ -2344,6 +2344,22 @@ So as we change the username here, so as we type a new input, we should really u
 
 with *traditional state management*, we would do: `function handleAddItems(item) {  setItems((items) => [...items, item]);}`
 
+### Building the Cart Overview With Redux Selectors
+
+Redux actually recommends that we do data manipulation right inside the selector function and not out in a component.
+
+```javascript
+function CartOverview() {
+  const totalCartQuantity = useSelector((state) =>
+    state.cart.cart.reduce((sum, item) => (sum += item.quantity), 0),
+  );
+// ...
+}
+```
+
+**<span style='color: #495fcb'> Note:** *Redux* recommends to place such functions right into the **slice**.
+
+**<span style='color: #495fcb'> Note:** To improve peformance of the selectors (inside slices), you can use the `redux reselect` library: [https://github.com/reduxjs/reselect]
 <!---
 [comment]: it works with text, you can rename it how you want
 
