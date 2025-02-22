@@ -28,6 +28,8 @@
 
 **<span style='color: #a3842c'>HTML Entities:** [https://developer.mozilla.org/en-US/docs/Glossary/Character_reference]
 
+**<span style='color: #a3842c'>Google Chrome override location:** DevTools / `...` / More Tools / Sensors
+
 #### Firefox not centering vertically
 
 **<span style='color: #9e5231'>Error:** in project such as 17. WorldWise, in `CityItem.module.css`, i added this css to the class attached to my button element:
@@ -2422,6 +2424,10 @@ it's done using the `extraReducers` option, where you define your case, like `fu
 **<span style='color: #a8c62c'> user/fetchAddress/fulfilled**
 
 ![image info](./24_sc2.png)
+
+### Integrating Geolocation
+
+when nesting our *get position* button inside of the form, it would automatically submit the form with the `onClick` event, we need to prevent that default behavior.
 <!---
 [comment]: it works with text, you can rename it how you want
 

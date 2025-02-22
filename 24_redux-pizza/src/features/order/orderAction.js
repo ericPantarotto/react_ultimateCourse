@@ -1,7 +1,7 @@
 import { redirect } from 'react-router-dom';
 import { createOrder } from '../../services/apiRestaurant';
+import store from '../../stores/store';
 import { isValidPhone } from '../../utils/helpers';
-import store from '../../stores/store'
 import { clearCart } from '../cart/cartSlice';
 
 export async function action({ request }) {
@@ -13,6 +13,8 @@ export async function action({ request }) {
     cart: JSON.parse(data.cart),
     priority: data.priority === 'true',
   };
+
+  // console.log(order);
 
   const errors = {};
   if (!isValidPhone(order.phone))
