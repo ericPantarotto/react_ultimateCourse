@@ -2433,6 +2433,19 @@ when nesting our *get position* button inside of the form, it would automaticall
 
 `useFetcher` allows you to fetch data without going to the page where the data is actually coming from, in this example `loader()` from `menuLoader.js` is called within `Order.jsx`.
 
+### Updating Data Without Navigation
+
+Redux will connect our `updateOrderAction` to the child component of `Order`, which is `UpdateOrder.jsx`.
+
+```javascript
+{
+  path: '/order/:orderId',
+  element: <Order />,
+  loader: orderLoader,
+  errorElement: <Error />,
+  action: updateOrderAction,
+},
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 

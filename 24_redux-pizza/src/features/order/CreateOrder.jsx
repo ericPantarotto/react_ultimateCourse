@@ -19,7 +19,9 @@ function CreateOrder() {
     address,
     error: errorAddress,
   } = useSelector((state) => state.user);
+
   const isLoadingAddress = addressStatus === 'loading';
+  console.log(isLoadingAddress, addressStatus);
 
   const dispatch = useDispatch();
 
@@ -66,7 +68,7 @@ function CreateOrder() {
           <div className='grow'>
             <input
               disabled={isLoadingAddress}
-              defaultValue={address}
+              defaultValue={isLoadingAddress ? 'Loading...' : address}
               type='text'
               name='address'
               required
@@ -120,8 +122,8 @@ function CreateOrder() {
                 : ''
             }
           />
-          
-          <Button type='primary' disabled={isSubmitting}>
+
+          <Button type='primary' disabled={isSubmitting || isLoadingAddress}>
             {isSubmitting
               ? 'Placing order....'
               : `Order now from ${formatCurrency(totalPrice)}`}
