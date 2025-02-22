@@ -2428,6 +2428,11 @@ it's done using the `extraReducers` option, where you define your case, like `fu
 ### Integrating Geolocation
 
 when nesting our *get position* button inside of the form, it would automatically submit the form with the `onClick` event, we need to prevent that default behavior.
+
+### Fetching Data Without Navigation: useFetcher
+
+`useFetcher` allows you to fetch data without going to the page where the data is actually coming from, in this example `loader()` from `menuLoader.js` is called within `Order.jsx`.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
