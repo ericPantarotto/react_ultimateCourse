@@ -2382,6 +2382,46 @@ export async function action({ request }) {
 }
 ```
 
+### Redux Thunks With createAsyncThunk
+
+**<span style='color: #a8c62c'> userSlice.jsx**
+
+`async function fetchAddress() {}` is an *async* function which means that we cannot just call this function directly inside a *Redux reducer* because remember Redux is by nature completely synchronous, and so that's why we now need to use `Thunks`.
+
+**<span style='color: #875c5c'>IMPORTANT:** a Thunk is a middleware that sits between the dispatching and the reducer itself.
+
+**<span style='color: #495fcb'> Note:** we name our async thunk function `export const fetchAddress = createAsyncThunk(){}` and not something like `getAddress` which are reserved for selectors.
+
+in this example, we used the Redux Toolkit way of creating a Thunk function with `createAsyncThunk`. We passed in:
+
+- the action type name `'user/fetchAddress'`, which we will never manually use, but still Redux needs this internally, as a first argument
+- and as a second argument, we pass in the actual Thunk function, the code that we want to execute as soon as this action here will be dispatched
+
+`createAsyncThunk` will basically produce three additional action types:
+
+- one for the ending promise state
+- one for the fulfilled state
+- and one for the rejected state
+
+And so now we need to handle these cases separately back in our reducers.
+
+it's done using the `extraReducers` option, where you define your case, like `fulfilled`, and then pass your reducer `(state, action) => {...}`
+
+```javascript
+.addCase(fetchAddress.fulfilled, (state, action) => {
+  state.position = action.payload.position;
+  state.address = action.payload.address;
+  state.status = 'idle';
+})
+```
+
+**<span style='color: #a8c62c'> user/fetchAddress/pending**
+
+![image info](./24_sc1.png)
+
+**<span style='color: #a8c62c'> user/fetchAddress/fulfilled**
+
+![image info](./24_sc2.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
