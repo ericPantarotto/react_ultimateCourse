@@ -2511,6 +2511,15 @@ const Heading = styled.h1`${test}`;
 **<span style='color: #875c5c'>IMPORTANT:** we can pass a special prop to our components to tell them as which HTML element they should be rendered, and that special prop is called the `as` prop.
 
 Any prop can be used, but if you want your markup to be semantically correct you have to use the `as` prop.
+
+### Building More Reusable Styled Components
+
+**<span style='color: #a8c62c'> ui/Row.jsx**
+
+With React, we can define default props this below which is useful with styled componts where we can use the usual `function Foo({prop = 'test'}){}`:
+
+**<span style='color: #9e5231'>Error:**  `defaultProps` is deprecated and `attrs` should be used instead.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
