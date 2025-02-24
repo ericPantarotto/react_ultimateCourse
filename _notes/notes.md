@@ -2529,6 +2529,12 @@ const StyledNavLink = styled(NavLink)`...`
 ```
 
 **<span style='color: #a3842c'>Third Party Library for React Icons:** [https://react-icons.github.io/react-icons/]
+
+## Supabase Crash Course: Building a Back-end
+
+### Creating a new database
+
+**<span style='color: #a3842c'>Link:** [https://supabase.com/dashboard/project/yljpcegklwdkugjneisu]
 <!---
 [comment]: it works with text, you can rename it how you want
 
