@@ -2466,7 +2466,6 @@ function App() {
 
 this CSS is of course only scoped to this exact component `App.jsx`, which eliminates all the problems of global CSS that we talked about earlier such as name collisions between class names, or for example another developer changing the class without some other developer knowing about that which would create all sorts of problems.
 
-
 ```javascript
 const Button = styled.button`
     font-size: 1.4rem;
@@ -2493,6 +2492,25 @@ So without us having to do any additional work, where before if we were to creat
 **<span style='color: #495fcb'> Note:** You can also created `Themes` with styled components.
 
 **<span style='color: #a3842c'>Link:** [https://styled-components.com/docs/advanced]
+
+### Styled Component Props and the "css" Function
+
+As Styled Components are written using template literals, you can leverage a lot of JavaScript tools such as ternaries for example
+
+to apply specific logic outside of a component, you can import `css` from styled components:
+
+```javascript
+const test = css`
+  text-align: center;
+  ${10 > 5 && "background-color: yellow"}
+`;
+
+const Heading = styled.h1`${test}`;
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** we can pass a special prop to our components to tell them as which HTML element they should be rendered, and that special prop is called the `as` prop.
+
+Any prop can be used, but if you want your markup to be semantically correct you have to use the `as` prop.
 <!---
 [comment]: it works with text, you can rename it how you want
 
