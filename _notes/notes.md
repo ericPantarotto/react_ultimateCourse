@@ -2365,7 +2365,7 @@ function CartOverview() {
 
 **<span style='color: #495fcb'> Note:** *Redux* recommends to place such functions right into the **slice**.
 
-**<span style='color: #495fcb'> Note:** To improve peformance of the selectors (inside slices), you can use the `redux reselect` library: [https://github.com/reduxjs/reselect]
+**<span style='color: #495fcb'> Note:** To improve performance of the selectors (inside slices), you can use the `redux reselect` library: [https://github.com/reduxjs/reselect]
 
 ### Using the Cart for New Orders
 
@@ -2485,6 +2485,14 @@ const Button = styled.button`
 ```
 
 So without us having to do any additional work, where before if we were to create our own button component then we would have to manually accept the `onClick` prop and then pass it to the regular HTML element, but with *styled Components*, we don't need to do that.
+
+### Global Styles With Styled Components
+
+`GlobalStyles` component doesn't accept any children. So it's a self-closing component, and it needs to be, then, a sibling of all the other components.
+
+**<span style='color: #495fcb'> Note:** You can also created `Themes` with styled components.
+
+**<span style='color: #a3842c'>Link:** [https://styled-components.com/docs/advanced]
 <!---
 [comment]: it works with text, you can rename it how you want
 
