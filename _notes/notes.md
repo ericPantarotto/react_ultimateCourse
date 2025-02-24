@@ -2520,6 +2520,15 @@ With React, we can define default props this below which is useful with styled c
 
 **<span style='color: #9e5231'>Error:**  `defaultProps` is deprecated and `attrs` should be used instead.
 
+### Building the Sidebar and Main Navigation
+
+To be able to style a third-party library component such as `NavLink` of `react-router-dom`, we use the following syntax provided by `styled-components`:
+
+```javascript
+const StyledNavLink = styled(NavLink)`...`
+```
+
+**<span style='color: #a3842c'>Third Party Library for React Icons:** [https://react-icons.github.io/react-icons/]
 <!---
 [comment]: it works with text, you can rename it how you want
 
