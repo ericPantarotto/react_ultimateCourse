@@ -30,6 +30,8 @@
 
 **<span style='color: #a3842c'>Google Chrome override location:** DevTools / `...` / More Tools / Sensors
 
+**<span style='color: #a3842c'>Syntax highlighting for styled-components:** vscode-styled-components
+
 #### Firefox not centering vertically
 
 **<span style='color: #9e5231'>Error:** in project such as 17. WorldWise, in `CityItem.module.css`, i added this css to the class attached to my button element:
@@ -2446,6 +2448,43 @@ Redux will connect our `updateOrderAction` to the child component of `Order`, wh
   action: updateOrderAction,
 },
 ```
+
+## Setting up our biggest project + Styled Components
+
+### Introduction to Styled Components
+
+```javascript
+function App() {
+  const H1 = styled.h1`
+    font-size: 2rem;
+    font-weight: 600;
+  `;
+
+  return <H1>Hello</H1>;
+}
+```
+
+this CSS is of course only scoped to this exact component `App.jsx`, which eliminates all the problems of global CSS that we talked about earlier such as name collisions between class names, or for example another developer changing the class without some other developer knowing about that which would create all sorts of problems.
+
+
+```javascript
+const Button = styled.button`
+    font-size: 1.4rem;
+    padding: 1.2rem 1.6rem;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  `;
+
+  return (
+    <>
+      <Button onClick={() => console.log('clicked')}>Check in</Button>
+    </>
+  );
+```
+
+So without us having to do any additional work, where before if we were to create our own button component then we would have to manually accept the `onClick` prop and then pass it to the regular HTML element, but with *styled Components*, we don't need to do that.
 <!---
 [comment]: it works with text, you can rename it how you want
 
