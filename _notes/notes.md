@@ -32,6 +32,8 @@
 
 **<span style='color: #a3842c'>Syntax highlighting for styled-components:** vscode-styled-components
 
+**<span style='color: #a3842c'>AI Images:** [https://www.journeyfree.ai/login]
+
 #### Firefox not centering vertically
 
 **<span style='color: #9e5231'>Error:** in project such as 17. WorldWise, in `CityItem.module.css`, i added this css to the class attached to my button element:
@@ -2561,6 +2563,10 @@ npm i @supabase/supabase-js
 **<span style='color: #875c5c'>IMPORTANT:** You might be wondering that if we are exposing our supabase key on the client, that then some malicious user might be able to hack our database. And the answer Would actually be true if we didn't activate row level security. But since we did anyone who has this key can only do whatever we allowed in the row level security policies.
 
 So even though we said earlier that we were not going to do side effects inside pages, let's just do this as an experiment and use our `apiCabins` inside of `Cabins.jsx`
+
+### Setting Up Storage Buckets
+
+`Storage` menu in the left sidebar.
 <!---
 [comment]: it works with text, you can rename it how you want
 
