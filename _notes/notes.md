@@ -2535,6 +2535,22 @@ const StyledNavLink = styled(NavLink)`...`
 ### Creating a new database
 
 **<span style='color: #a3842c'>Link:** [https://supabase.com/dashboard/project/yljpcegklwdkugjneisu]
+
+### Adding Security Policies (RLS)
+
+in the left Sidebar `API Docs`: Supabase automatically creates an entire API documentation for all of our tables
+
+You can choose your tables and get a Javascript snippet or bash `curl` command to read all rows for example, **after changing the API key to Anon/public**, instead of hidden.
+
+**<span style='color: #495fcb'> Note:** You would get an empty array because of RLS, *Role Level Security*.
+
+#### RLS policies
+
+So if it wasn't for the role level security or RLS policies then whoever had this key here could really, for example, delete our database or edit whatever they wanted. So of course, we don't want that to happen. We only want certain operations to be allowed, and so that's what we can set these RLS policies for.
+
+You set them under `Authentication/Policies`
+
+**<span style='color: #495fcb'> Note:** And by the way, if you're wondering why we didn't create that users table for authentication, it's because we will do that separately. So the Supabase authentication feature doesn't require us to manually create a table, but instead, Supabase will do that automatically.
 <!---
 [comment]: it works with text, you can rename it how you want
 
