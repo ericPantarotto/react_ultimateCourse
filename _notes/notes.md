@@ -2551,6 +2551,16 @@ So if it wasn't for the role level security or RLS policies then whoever had thi
 You set them under `Authentication/Policies`
 
 **<span style='color: #495fcb'> Note:** And by the way, if you're wondering why we didn't create that users table for authentication, it's because we will do that separately. So the Supabase authentication feature doesn't require us to manually create a table, but instead, Supabase will do that automatically.
+
+### Connecting Supabase With Our React App
+
+```bash
+npm i @supabase/supabase-js  
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** You might be wondering that if we are exposing our supabase key on the client, that then some malicious user might be able to hack our database. And the answer Would actually be true if we didn't activate row level security. But since we did anyone who has this key can only do whatever we allowed in the row level security policies.
+
+So even though we said earlier that we were not going to do side effects inside pages, let's just do this as an experiment and use our `apiCabins` inside of `Cabins.jsx`
 <!---
 [comment]: it works with text, you can rename it how you want
 
