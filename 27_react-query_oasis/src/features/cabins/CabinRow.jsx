@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { deleteCabin } from '../../services/apiCabins';
 import { formatCurrency } from '../../utils/helpers';
+import toast from 'react-hot-toast';
 
 const TableRow = styled.div`
   display: grid;
@@ -59,9 +60,10 @@ function CabinRow({ cabin }) {
   const { mutate, isLoading: isDeleting } = useMutation({
     mutationFn: async (id) => deleteCabin(id),
     onSuccess: () => {
+      toast.success('Cabin deleted successfully', { icon: '✅' });
       queryClient.invalidateQueries('cabins');
     },
-    onError: (err) => console.error(err.message),
+    onError: (err) => toast(err.message || 'An error occurred', { icon: '❌' }),
   });
 
   return (

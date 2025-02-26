@@ -2638,6 +2638,9 @@ to simulate an error , we update in `supabase.js` the `supabaseUrl` and indeed w
   });
 ```
 
+`npm i react-hot-toast`
+
+**<span style='color: #a3842c'>React Hot Toast:** <https://react-hot-toast.com/>
 <!---
 [comment]: it works with text, you can rename it how you want
 
