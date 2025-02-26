@@ -2567,6 +2567,14 @@ So even though we said earlier that we were not going to do side effects inside 
 ### Setting Up Storage Buckets
 
 `Storage` menu in the left sidebar.
+
+## React Query: Managing Remote State
+
+### What is React Query?
+
+we need a library with all these features because remote state is fundamentally different from UI state. It's asynchronous and usually shared by many users of the app, which makes it so that applications running in different browsers can very easily get out of sync with the remote data that is stored on a server.
+
+remote state has many special needs, and so that's the reason why we use something like *React Query*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
