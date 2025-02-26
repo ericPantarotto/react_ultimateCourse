@@ -2585,6 +2585,13 @@ remote state has many special needs, and so that's the reason why we use somethi
 `staleTime` is basically the amount of time that the data in the cache will stay fresh so that it will stay valid until it is refetched again.
 
 **<span style='color: #495fcb'> Note:** So just like `Redux`, `React Query` also has some excellent Dev Tools.
+
+### Make sure to use React Query v4
+
+If you want to use React Query **v5**, there are only two small things to change in the project:
+
+- `isLoading` is now called `isPending`
+- The `cacheTime` option is now called `gcTime`
 <!---
 [comment]: it works with text, you can rename it how you want
 
