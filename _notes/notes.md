@@ -2611,6 +2611,33 @@ But by specifying the role, we then make sure that the browser knows that this a
 **<span style='color: #875c5c'>IMPORTANT:** if we changed a data table, say `discount` to 200, if the data is still `fresh`, it will not immediately re-fetch the page. if on the opposite, the data is marked as `stale`, if we come back to the tab, it will automatically re-fetch/refresh the data.
 
 And the time that it takes until the data becomes old, so until it becomes stale, is exactly that stale time that we defined in `const queryClient = new QueryClient({..})`.
+
+### Mutations: Deleting a Cabin
+
+**<span style='color: #495fcb'> Note:** once we've added `deleteCabin` to our `apiCabins.js` file, we also need to update our `RLS` in `Supbase`
+
+**<span style='color: #875c5c'>IMPORTANT:** Make sure to pass a SQL condition that enables to all; such as `true`
+
+![image info](./27_sc1.png)
+
+![image info](./27_sc2.png)
+
+to simulate an error , we update in `supabase.js` the `supabaseUrl` and indeed we get the exact error message defined inside our `apiCabins` file.
+
+![image info](./27_sc3.png)
+
+**<span style='color: #a8c62c'> features/cabins/CabinRow.jsx**
+
+```javascript
+  const { mutate, isLoading: isDeleting } = useMutation({
+    mutationFn: async (id) => deleteCabin(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries('cabins');
+    },
+    onError: (err) => console.error(err.message),
+  });
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
