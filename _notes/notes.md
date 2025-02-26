@@ -2592,6 +2592,25 @@ If you want to use React Query **v5**, there are only two small things to change
 
 - `isLoading` is now called `isPending`
 - The `cacheTime` option is now called `gcTime`
+
+### Fetching Cabin Data
+
+**<span style='color: #a8c62c'> features/cabins/CabinTable.jsx**
+
+Below will actually function as a table, but we don't implement it using the table HTML elements, but instead using `Table / divs` and `TableHeader / header`.
+
+But by specifying the role, we then make sure that the browser knows that this actually should be a table and a row.
+
+```javascript
+<Table role='table'>
+  <TableHeader role='row'>
+```
+
+**<span style='color: #495fcb'> Note:** we also use in our `utils/helpers` file a third-party library: `npm i data-fns`
+
+**<span style='color: #875c5c'>IMPORTANT:** if we changed a data table, say `discount` to 200, if the data is still `fresh`, it will not immediately re-fetch the page. if on the opposite, the data is marked as `stale`, if we come back to the tab, it will automatically re-fetch/refresh the data.
+
+And the time that it takes until the data becomes old, so until it becomes stale, is exactly that stale time that we defined in `const queryClient = new QueryClient({..})`.
 <!---
 [comment]: it works with text, you can rename it how you want
 
