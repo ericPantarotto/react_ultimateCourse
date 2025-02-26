@@ -2641,6 +2641,14 @@ to simulate an error , we update in `supabase.js` the `supabaseUrl` and indeed w
 `npm i react-hot-toast`
 
 **<span style='color: #a3842c'>React Hot Toast:** <https://react-hot-toast.com/>
+
+### Introducing Another Library: React Hook Form
+
+When using `npm i react-hook-form`, you don't have state variable attached to any of the input elements; i.e. *controlled elements*,  because now we will handle everything about this form using this library.
+
+**<span style='color: #495fcb'> Note:** once we've added `<Input type="text" id="name" {...register("name")} />` to our `input` elements within `CreateCabinform`, new props such as `onChange` are automatically added.
+
+![image info](./1_sc1.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
