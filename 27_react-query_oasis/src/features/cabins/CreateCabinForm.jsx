@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { createCabin } from '../../services/apiCabins';
@@ -9,7 +10,7 @@ import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
 import Textarea from '../../ui/Textarea';
 
-function CreateCabinForm() {
+function CreateCabinForm({ showForm }) {
   const queryClient = useQueryClient();
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
@@ -26,7 +27,9 @@ function CreateCabinForm() {
 
   function onSubmit(data) {
     // console.log(data);
-    mutate(data);
+    // mutate(data);
+    mutate({ ...data, image: data.image[0] });
+    showForm(false);
   }
 
   function onError(errors) {
@@ -96,7 +99,12 @@ function CreateCabinForm() {
       </FormRow>
 
       <FormRow label='Cabin photo'>
-        <FileInput id='image' accept='image/*' />
+        <FileInput
+          id='image'
+          accept='image/*'
+          disabled={isCreating}
+          {...register('image', { required: 'This field is required' })}
+        />
       </FormRow>
 
       <FormRow>
@@ -111,3 +119,7 @@ function CreateCabinForm() {
 }
 
 export default CreateCabinForm;
+
+CreateCabinForm.propTypes = {
+  showForm: PropTypes.func.isRequired,
+};
