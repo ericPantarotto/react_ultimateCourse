@@ -2518,7 +2518,7 @@ Any prop can be used, but if you want your markup to be semantically correct you
 
 **<span style='color: #a8c62c'> ui/Row.jsx**
 
-With React, we can define default props this below which is useful with styled componts where we can use the usual `function Foo({prop = 'test'}){}`:
+With React, we can define default props this below which is useful with styled components where we can use the usual `function Foo({prop = 'test'}){}`:
 
 **<span style='color: #9e5231'>Error:**  `defaultProps` is deprecated and `attrs` should be used instead.
 
@@ -2614,7 +2614,7 @@ And the time that it takes until the data becomes old, so until it becomes stale
 
 ### Mutations: Deleting a Cabin
 
-**<span style='color: #495fcb'> Note:** once we've added `deleteCabin` to our `apiCabins.js` file, we also need to update our `RLS` in `Supbase`
+**<span style='color: #495fcb'> Note:** once we've added `deleteCabin` to our `apiCabins.js` file, we also need to update our `RLS` in `Supabase`
 
 **<span style='color: #875c5c'>IMPORTANT:** Make sure to pass a SQL condition that enables to all; such as `true`
 
@@ -2646,9 +2646,15 @@ to simulate an error , we update in `supabase.js` the `supabaseUrl` and indeed w
 
 When using `npm i react-hook-form`, you don't have state variable attached to any of the input elements; i.e. *controlled elements*,  because now we will handle everything about this form using this library.
 
-**<span style='color: #495fcb'> Note:** once we've added `<Input type="text" id="name" {...register("name")} />` to our `input` elements within `CreateCabinform`, new props such as `onChange` are automatically added.
+**<span style='color: #495fcb'> Note:** once we've added `<Input type="text" id="name" {...register("name")} />` to our `input` elements within `CreateCabinForm`, new props such as `onChange` are automatically added.
 
 ![image info](./1_sc1.png)
+
+### Creating a New Cabin
+
+`data: cabins` state within `CabinTable` behind the scenes is going to be just *React state* in the end.
+
+And so whenever some new data is fetched by React Query, whenever that state updates, then the component will re-render.
 <!---
 [comment]: it works with text, you can rename it how you want
 
