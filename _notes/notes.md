@@ -2655,6 +2655,44 @@ When using `npm i react-hook-form`, you don't have state variable attached to an
 `data: cabins` state within `CabinTable` behind the scenes is going to be just *React state* in the end.
 
 And so whenever some new data is fetched by React Query, whenever that state updates, then the component will re-render.
+
+### Abstracting React Query Into Custom Hooks
+
+Abstracting  all the React query logic that we have written so far into a few custom hooks which is the best practice in a large application
+
+**<span style='color: #495fcb'> Note:** We placed our `useDeleteCabin` custom hook inside the `features/cabin` folder, as the `hook` folder is really only for hooks that are reusable across multiple features, but this one here really is related to the cabin's feature only.
+
+![image info](./27_sc5.png)
+
+We can call the `reset()` method of the `useForm` hook provided by `react-form` inside a  `.jxs` component, but not in a `.js` custom hook. To tackle this situation well thought by `react-query`.
+
+the `onSuccess` handler function; the result of `useMutation()` hook can be placed:
+
+- not only right inside the `useMutation()` itself, now living within the `useCreateCabin` custom hook
+- but also right in the function where the mutation actually happens `onSubmit()` function of `CreateCabinForm.jsx` component
+
+so all we need to do is to pass in an object of options and so then there we can do `onSuccess` and then here we can very simply call the `reset` function.
+
+**<span style='color: #a8c62c'> features/cabins/CreateCabinForm.jsx**
+
+```javascript
+if (isEditSession)
+  editCabin({ newCabinData: { ...data, image }, id: editId });
+else
+  createCabin(
+    { ...data, image: image },
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        reset();
+      },
+    }
+  );
+```
+
+Creating our custom hook makes very re-usable if we need data or mutation somewhere else in our application. we just need to copy `const { cabins, isLoading } = useCabins();` to get the cabins data as an example.
+
+A common example is to load data on the `homepage` and then our data will get into the cache and so then whenever we come to the a page next that uses the same data, they will already be cached. so that's one of the huge, maybe even the biggest advantage of *react-query*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
