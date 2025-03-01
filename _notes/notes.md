@@ -2740,6 +2740,10 @@ This `<List>` now no longer knows actually what it is rendering. It has no idea 
 And so now that this component doesn't know anymore what it is actually rendering, and it doesn't even care about what it is rendering, well, it then makes that very easy to reuse the component for other render props.
 
 **<span style='color: #495fcb'> Note:** the `render` prop used to be really the main way of sharing (indistinct) logic across multiple components. So that was before we had React hooks, but now that we do have them, the render props is not that used anymore except for situations like this one. **Custom hooks are now usually the way to go when we want to share logic.**
+
+### A Look at Higher-Order Components (HOC)
+
+Higher Order Component is simply a component that takes in another component and then returns a new component that is better, so an enhanced version of the initial component.
 <!---
 [comment]: it works with text, you can rename it how you want
 
