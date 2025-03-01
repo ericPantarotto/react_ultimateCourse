@@ -2693,6 +2693,53 @@ else
 Creating our custom hook makes very re-usable if we need data or mutation somewhere else in our application. we just need to copy `const { cabins, isLoading } = useCabins();` to get the cabins data as an example.
 
 A common example is to load data on the `homepage` and then our data will get into the cache and so then whenever we come to the a page next that uses the same data, they will already be cached. so that's one of the huge, maybe even the biggest advantage of *react-query*.
+
+## Advanced React Patterns
+
+### The Render Props pattern
+
+**<span style='color: #a8c62c'> App.jsx**
+
+```javascript
+export default function App() {
+  return (
+    <div>
+      <h1>Render Props Demo</h1>
+
+      <div className='col-2'>
+        <List
+          title='Products'
+          items={products}
+          render={(product) => (
+            <ProductItem key={product.productName} product={product} />
+          )}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+```javascript
+function List({ title, items, render }) {
+// ...
+    <ul className='list'>
+      
+      {/* {displayItems.map((product) => (
+        <ProductItem key={product.productName} product={product} />
+      ))} */}
+      {displayItems.map(render)}
+    </ul>
+}
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** we basically inverted the control of how it should render. So this is what we call **inversion of control** and it's an important principle in software development.
+
+This `<List>` now no longer knows actually what it is rendering. It has no idea what will happen here inside this map function for each of the display items. All that it knows is that it received a function `render`, and that it will call that function for each items in the array. That's it.
+
+And so now that this component doesn't know anymore what it is actually rendering, and it doesn't even care about what it is rendering, well, it then makes that very easy to reuse the component for other render props.
+
+**<span style='color: #495fcb'> Note:** the `render` prop used to be really the main way of sharing (indistinct) logic across multiple components. So that was before we had React hooks, but now that we do have them, the render props is not that used anymore except for situations like this one. **Custom hooks are now usually the way to go when we want to share logic.**
 <!---
 [comment]: it works with text, you can rename it how you want
 
