@@ -2744,6 +2744,12 @@ And so now that this component doesn't know anymore what it is actually renderin
 ### A Look at Higher-Order Components (HOC)
 
 Higher Order Component is simply a component that takes in another component and then returns a new component that is better, so an enhanced version of the initial component.
+
+### The Compound Component Pattern
+
+We use `useContext/createContext` to implement the compound component pattern.
+
+we need to place the children `Label, Increase, Decrease` on the counter component. And this is possible because this is simply a function. in JavaScript, we can add properties almost to everything. And so that includes functions.
 <!---
 [comment]: it works with text, you can rename it how you want
 
