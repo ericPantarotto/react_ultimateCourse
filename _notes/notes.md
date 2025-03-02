@@ -2750,6 +2750,26 @@ Higher Order Component is simply a component that takes in another component and
 We use `useContext/createContext` to implement the compound component pattern.
 
 we need to place the children `Label, Increase, Decrease` on the counter component. And this is possible because this is simply a function. in JavaScript, we can add properties almost to everything. And so that includes functions.
+
+### Building a Modal Window Using a React Portal
+
+**<span style='color: #495fcb'> Note:** Pages have to be as simple as possible. So we don't want them to have any state or any effects.
+
+If we would re-use our `createCabinForm` component in some place where it isn't contained in a modal, then it's not going to receive the `onCloseModal`, so we need to call this function conditionally, as it might not exist. To do that, **we create a callback, in the `onClick` event and call that function with the optional chaining operator.**
+
+`<Button variation='secondary' type='reset' onClick={() => onCloseModal?.()}>`
+
+So a React portal is a feature that essentially allows us to render an element outside of the parent component's DOM structure while still keeping the element in the original position of the component tree. So in other words, with a portal we can basically render a component in any place that we want inside the DOM tree but still leave the component at the same place in the React component tree.
+
+And so then things like props keep working normally. And so this is great and generally used for all elements that we want to stay on top of other elements. So things like modal windows, tool tips, menus and so on.
+
+if you choose `document.body` with `createPortal()`, the modal will become a direct child element of the *body element*. And the modal now  will leave completely outside of the DOM structure of the application which leaves inside of `root`. However `Modal` still has the same place in the React Component Tree, so we can pass the same props that we want.
+
+But now you might be wondering, this worked really great already in the beginning with just regular CSS positioning, so without the portal. And so why do we even need to use this portal? Well, the main reason why a portal becomes necessary is in order to avoid conflicts with the CSS property overflow set to hidden.
+
+So many times we build a component like a modal and it works just fine, but then some other developer will reuse it somewhere else and that somewhere else might be a place where the modal will get cut off by a overflow hidden set on the parent.
+
+So this is basically all about reusability and making sure that the component will never be cut off by an overflow property set to hidden on some parent element. And to avoid such situation we simply render the modal completely outside of the rest of the DOM (on top of the DOM tree).
 <!---
 [comment]: it works with text, you can rename it how you want
 

@@ -10,7 +10,7 @@ import Textarea from '../../ui/Textarea';
 import useCreateCabin from './useCreateCabin';
 import useUpdateCabin from './useUpdateCabin';
 
-function CreateCabinForm({ showForm, cabinToEdit = {} }) {
+function CreateCabinForm({ showForm, cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
 
@@ -36,6 +36,7 @@ function CreateCabinForm({ showForm, cabinToEdit = {} }) {
           onSuccess: (data) => {
             console.log(data);
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -46,6 +47,7 @@ function CreateCabinForm({ showForm, cabinToEdit = {} }) {
           onSuccess: (data) => {
             console.log(data);
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -59,7 +61,10 @@ function CreateCabinForm({ showForm, cabinToEdit = {} }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? 'modal' : 'regular'}
+    >
       <FormRow label='Cabin name' error={errors?.name?.message}>
         <Input
           type='text'
@@ -119,20 +124,26 @@ function CreateCabinForm({ showForm, cabinToEdit = {} }) {
         />
       </FormRow>
 
-      <FormRow label='Cabin photo'>
+      <FormRow label='Cabin photo' error={errors?.image?.message}>
         <FileInput
           id='image'
           accept='image/*'
           disabled={isProcessing}
           {...register('image', {
-            required: isEditSession ? false : 'This field is required',
+            required: isEditSession
+              ? false
+              : 'Please add an image when creating a new cabin',
           })}
         />
       </FormRow>
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation='secondary' type='reset'>
+        <Button
+          variation='secondary'
+          type='reset'
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isProcessing}>
@@ -156,4 +167,5 @@ CreateCabinForm.propTypes = {
     image: PropTypes.string.isRequired,
     description: PropTypes.string,
   }),
+  onCloseModal: PropTypes.func,
 };
