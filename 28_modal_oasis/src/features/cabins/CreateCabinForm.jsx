@@ -142,7 +142,10 @@ function CreateCabinForm({ showForm, cabinToEdit = {}, onCloseModal }) {
         <Button
           variation='secondary'
           type='reset'
-          onClick={() => onCloseModal?.()}
+          onClick={() => {
+            onCloseModal?.();
+            showForm?.(false);
+          }}
         >
           Cancel
         </Button>

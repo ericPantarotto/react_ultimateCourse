@@ -2770,6 +2770,20 @@ But now you might be wondering, this worked really great already in the beginnin
 So many times we build a component like a modal and it works just fine, but then some other developer will reuse it somewhere else and that somewhere else might be a place where the modal will get cut off by a overflow hidden set on the parent.
 
 So this is basically all about reusability and making sure that the component will never be cut off by an overflow property set to hidden on some parent element. And to avoid such situation we simply render the modal completely outside of the rest of the DOM (on top of the DOM tree).
+
+### Converting the Modal to a Compound Component
+
+this modal that we have built is really not ideal when it comes to the state management and to the way in which we actually render this modal. So remember how we render the modal right here based on this `isOpenModal` state.
+
+Now the problem with this is that we really do not want the component who uses the modal to be responsible for creating this piece of state and to keep track of whether the modal is open or not. So again, it shouldn't be the task of the AddCabin component here to track whether right now the modal should be displayed or not.
+
+So instead, the modal component itself should actually know whether it is currently open or not, and so it should keep this state internally. So it should track this basically encapsulated inside the component.
+
+**<span style='color: #a3842c'>React cloneElement:** [https://react.dev/reference/react/cloneElement]
+
+![image info](./28_sc1.png)
+
+Our 2 `Windows` are actually rendered in the React Component Tree, but they are not rendering anything. So they only start rendering something when this `openName` state equals the name of the window.
 <!---
 [comment]: it works with text, you can rename it how you want
 
