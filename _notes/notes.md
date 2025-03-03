@@ -2801,6 +2801,24 @@ we have to listen and so the way that we fix this is to **not** listen for these
 
 `document.addEventListener("click", handleClick, listenCapturing);`
 
+### Confirming Cabin Deletions
+
+**<span style='color: #a8c62c'> ui/ConfirmDelete.jsx**
+
+```javascript
+<Button
+  variation='secondary'
+  disabled={disabled}
+  onClick={() => onCloseModal?.()}
+>
+  Cancel
+</Button>
+```
+
+In `CreateCabinForm` component, we had to pass `onCloseModal` to the `onSuccess` event of `@tanstack/react-query` to make sure that the modal closes after inserting a new cabin.
+
+after deletion the modal window closes itself, which makes sense because after we delete the cabin, the row does no longer exist. And so, therefore, the modal component inside the row also no longer exists.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
