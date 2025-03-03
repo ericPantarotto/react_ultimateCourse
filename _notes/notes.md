@@ -2819,6 +2819,11 @@ In `CreateCabinForm` component, we had to pass `onCloseModal` to the `onSuccess`
 
 after deletion the modal window closes itself, which makes sense because after we delete the cabin, the row does no longer exist. And so, therefore, the modal component inside the row also no longer exists.
 
+## Implementing more features: authentication, dark mode
+
+### Client-Side Filtering: Filtering Cabins
+
+Now we will do this in practice by storing the value by which the table should be filtered in the URL again. Because this way the URL is gonna be easily shareable and bookmarkable. And since we can read that state from everywhere in the app, the filter component doesn't have to be close to the cabin table. So it can really be anywhere we want in the component tree.
 <!---
 [comment]: it works with text, you can rename it how you want
 
