@@ -2784,6 +2784,23 @@ So instead, the modal component itself should actually know whether it is curren
 ![image info](./28_sc1.png)
 
 Our 2 `Windows` are actually rendered in the React Component Tree, but they are not rendering anything. So they only start rendering something when this `openName` state equals the name of the window.
+
+### Declaring a click outside the Modal
+
+**<span style='color: #a8c62c'> hooks/useOutsideClick.jsx**
+
+```javascript
+if (ref.current && !ref.current.contains(e.target)) {
+    handler();
+}
+```
+
+Our Modal would automatically close as soon as we click on the *Add new cabin*, because of the way events work in JavaScript.
+
+we have to listen and so the way that we fix this is to **not** listen for these events on the bubbling phase, but on the capturing phase, so basically, as the event moves down the DOM tree and not up the DOM tree,
+
+`document.addEventListener("click", handleClick, listenCapturing);`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
