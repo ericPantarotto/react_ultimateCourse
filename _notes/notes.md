@@ -2824,6 +2824,20 @@ after deletion the modal window closes itself, which makes sense because after w
 ### Client-Side Filtering: Filtering Cabins
 
 Now we will do this in practice by storing the value by which the table should be filtered in the URL again. Because this way the URL is gonna be easily shareable and bookmarkable. And since we can read that state from everywhere in the app, the filter component doesn't have to be close to the cabin table. So it can really be anywhere we want in the component tree.
+
+### Client-side Sorting: Sorting Cabins
+
+By default `sort()` method sorts in an ascending way by default, so we apply a modifier conditionally to change the sort order.
+
+```javascript
+const [field, direction] = sortBy.split('-');
+const modifier = direction === 'asc' ? 1 : -1;
+
+const sortedCabins = filteredCabins.sort(
+    (a, b) => (a[field] - b[field]) * modifier
+  );
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
