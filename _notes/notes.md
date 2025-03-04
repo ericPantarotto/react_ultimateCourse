@@ -2855,6 +2855,34 @@ export async function getBookings() {
 
 ![image info](./29_sc1.png)
 
+### API-Side Filtering Bookings
+
+**<span style='color: #a8c62c'> features/bookings/useBookings.jsx**
+
+`queryKey: ['bookings', filter],` by passing a dynamic key of the `react-query` cached query, the data will re-fetched each time that key change, just like the dependency array of `useEffect()`. this `filter` is then passed to our function call of the API service `apiBookings`.
+
+```javascript
+const [searchParams] = useSearchParams();
+  // FILTER
+  const filterValue = searchParams.get('status');
+  const filter =
+    !filterValue || filterValue === 'all'
+      ? null
+      : { field: 'status', value: filterValue };
+  // { field: "totalPrice", value: 5000, method: "gte" };
+
+const {
+    isLoading,
+    data: bookings,
+    error,
+  } = useQuery({
+    queryKey: ['bookings', filter],
+    queryFn: () => getBookings({filter}),
+  });
+```
+
+**<span style='color: #495fcb'> Note:** To pass more complex query filters, you would need to pass an array to loop and build a more complex query within the `apiBookings`.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
