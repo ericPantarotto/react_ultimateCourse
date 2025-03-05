@@ -2883,6 +2883,43 @@ const {
 
 **<span style='color: #495fcb'> Note:** To pass more complex query filters, you would need to pass an array to loop and build a more complex query within the `apiBookings`.
 
+### API-Side Pagination: Paginating Bookings
+
+*Supabase* can provide you directly the count of data, within the `select` statement, when fetching data from a `get`request. This is more elegant than using `length` of an the data array.
+
+**<span style='color: #a8c62c'> services/apiBookings.js**
+
+```javascript
+let query = supabase
+  .from('bookings')
+  .select(
+    'id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)',
+    { count: 'exact' }
+);
+
+// ...
+const { data, error, count } = await query;
+return {data, count};
+```
+
+**<span style='color: #a8c62c'> features/bookings/useBookings.js**
+
+you of course need then to destructure the data differently in your `hook`.
+
+```javascript
+ const {
+    isLoading,
+    data: { data: bookings, count } = {}, //IMPORTANT
+    error,
+  } = useQuery({
+    queryKey: ['bookings', filter, sortBy],
+    queryFn: () => getBookings({ filter, sortBy }),
+  });
+
+  return { isLoading, error, bookings, count };
+```
+
+**<span style='color: #495fcb'> Note:** `query = query.range(from, to);` Supabase is 0 based !
 <!---
 [comment]: it works with text, you can rename it how you want
 
