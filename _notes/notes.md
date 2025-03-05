@@ -2949,7 +2949,31 @@ useQuery({
   });
 ```
 
+### Checking in a Booking
 
+**<span style='color: #a8c62c'> features/useCheckin.js**
+
+The mutation function has an `onSuccess` callback that receives the data returned by the `updateBooking` function of `services/apiBooking`, we can use it then inside the `onSuccess` callback:
+
+```javascript
+const { mutate: checkin, isLoading: isCheckingIn } = useMutation({
+    mutationFn: ({ bookingId }) =>
+      updateBooking(bookingId, {
+        status: "checked-in",
+        isPaid: true,
+      }),
+
+    onSuccess: (data) => {
+      toast.success(`Booking #${data.id} successfully checked in`);
+      queryClient.invalidateQueries({ active: true });
+      navigate("/");
+    },
+
+    onError: () => toast.error("There was an error while checking in"),
+  });
+```
+
+**<span style='color: #495fcb'> Note:** as alternative to invalidate queries by passing the *query key*, we can invalidate all *active queries* of the page: `queryClient.invalidateQueries({ active: true });`
 
 <!---
 [comment]: it works with text, you can rename it how you want
