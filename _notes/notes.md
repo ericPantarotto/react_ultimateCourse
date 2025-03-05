@@ -2840,7 +2840,7 @@ const sortedCabins = filteredCabins.sort(
 
 ### Building the Bookings Table
 
-when fetching data from *supabase* with foreign key, you need to reference the foreign table and fields you need if you don't want to retreive only the ids but some data themselves:
+when fetching data from *supabase* with foreign key, you need to reference the foreign table and fields you need if you don't want to retrieve only the ids but some data themselves:
 
 **<span style='color: #a8c62c'> services/apiBookings.js**
 
