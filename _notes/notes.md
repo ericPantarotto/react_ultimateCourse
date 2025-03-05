@@ -2920,6 +2920,14 @@ you of course need then to destructure the data differently in your `hook`.
 ```
 
 **<span style='color: #495fcb'> Note:** `query = query.range(from, to);` Supabase is 0 based !
+
+### Prefetching With React Query
+
+Prefetching is all about fetching some data that we know might become necessary before we actually need that data to render it on the user interface. And in the context of pagination, usually that means that we fetch the next page before it is actually displayed.
+
+The user will never see any loading spinner, meaning that this looks just as if the data would actually be paginated on the front end. While in reality we know that this data is indeed actually fetched from the server. But since it is prefetched we really do not notice it.
+
+**<span style='color: #495fcb'> Note:** As an alternative to prefetching and having pagination in the first place, would be to use infinite queries for infinite scroll with `react-query`. So React Query also has that feature built in.
 <!---
 [comment]: it works with text, you can rename it how you want
 
