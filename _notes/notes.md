@@ -2928,6 +2928,29 @@ Prefetching is all about fetching some data that we know might become necessary 
 The user will never see any loading spinner, meaning that this looks just as if the data would actually be paginated on the front end. While in reality we know that this data is indeed actually fetched from the server. But since it is prefetched we really do not notice it.
 
 **<span style='color: #495fcb'> Note:** As an alternative to prefetching and having pagination in the first place, would be to use infinite queries for infinite scroll with `react-query`. So React Query also has that feature built in.
+
+### Building the single Booking page
+
+**<span style='color: #875c5c'>IMPORTANT:** remember the rule that we set for ourselves in the beginning, which is that **a page should not fetch data and also not have any other side effects**.
+
+this is not a hard rule in React or in front end development, but it's a rule that I've seen many people use, and I also use it myself because this makes the `pages` folder a lot cleaner and then leaves much of the development work in the `features` folder.
+
+we can just implement a page, close the folder, and completely forget about it because all the things that are related to bookings will live here in the `features` folder.
+
+remember that by default, React Query will try to fetch data three times in case that it fails in the beginning, but sometimes that might not make so much sense.
+
+**<span style='color: #a8c62c'> features/useBooking.js**
+
+```javascript
+useQuery({
+    queryKey: ['booking'],
+    queryFn: () => getBooking(bookingId),
+    retry: false,
+  });
+```
+
+
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
