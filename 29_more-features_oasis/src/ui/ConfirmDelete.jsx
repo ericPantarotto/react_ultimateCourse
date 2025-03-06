@@ -30,7 +30,7 @@ function ConfirmDelete({ resourceName, onConfirm, disabled, onCloseModal }) {
   return (
     <StyledConfirmDelete>
       <Heading as='h3'>
-        Delete <span>Cabin {resourceName}</span>
+        Delete <span>{resourceName}</span>
       </Heading>
       <p>
         Are you sure you want to delete this {resourceName} permanently? This

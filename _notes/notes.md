@@ -2975,6 +2975,28 @@ const { mutate: checkin, isLoading: isCheckingIn } = useMutation({
 
 **<span style='color: #495fcb'> Note:** as alternative to invalidate queries by passing the *query key*, we can invalidate all *active queries* of the page: `queryClient.invalidateQueries({ active: true });`
 
+### Deleting a Booking
+
+**<span style='color: #495fcb'> Note:** We can also add `onSuccess`, or `onError` handlers, not only into the on *mutation hook* but only right into the individual *mutate functions*. we do not need to specify these handlers for all of the mutations, but we can also do it for individual mutations.
+
+This is very useful if we want to have a different behavior in each mutation as in `BookingRow,jsx` and `BookingDetail.jsx`.
+
+in the deletion of `BookingRow,jsx`, we want nothing to happen once it was successful but in `BookingDetail.jsx` deletion, we want to move back, we can then use the `onSuccess` handler there, rather than in the generic `useDeleteBooking` which would apply to both cases.
+
+**<span style='color: #495fcb'> Note:** You can either use `onSuccess` or `onSettled` which will run whether it is a success or not.
+
+**<span style='color: #a8c62c'> features/bookings/BookingDetail.jsx**
+
+```javascript
+<ConfirmDelete
+  resourceName={`booking ${bookingId}`}
+  disabled={isDeleting}
+  onConfirm={() =>
+    deleteBooking(bookingId, { onSettled: () => navigate(-1) })
+  }
+/>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
