@@ -2997,6 +2997,31 @@ in the deletion of `BookingRow,jsx`, we want nothing to happen once it was succe
 />
 ```
 
+### Authentication: User Login with Supabase
+
+**<span style='color: #495fcb'> Note:** Users are not stored in a table like *bookings, cabins*, but you need to go the `authentication` tab, where the user table is created by default.
+
+![image info](./29_sc2.png)
+
+Deactivate *confirm email* for dev purpose:
+
+![image info](./29_sc3.png)
+
+*Users* table / Add user: [ecr@test.com] - password: test1234
+
+#### API Docs / Authentication
+
+Behind the scenes, Supabase authentication is using JWT technology.
+
+#### API Docs / User Management
+
+Code snippets for sign up / login / password forgotten / log out / get current logged in user
+
+our `login` function within `services/apiAuth` will return a *session object* with an access and refresh tokens, that can be found in `Dev Tools / Storage / Local Storage`
+
+- access token
+- refresh token
+- user Object
 <!---
 [comment]: it works with text, you can rename it how you want
 
