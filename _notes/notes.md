@@ -3009,6 +3009,10 @@ Deactivate *confirm email* for dev purpose:
 
 *Users* table / Add user: [ecr@test.com] - password: test1234
 
+[test@test.com]  password: testabc1234  
+
+[uolm4l3te@mozmail.com] password: testabc
+
 #### API Docs / Authentication
 
 Behind the scenes, Supabase authentication is using JWT technology.
@@ -3078,6 +3082,20 @@ So just logging out from *Supabase api* `await supabase.auth.signOut()` will rem
 If un-logged we try to access the root which is unprotected: `http://localhost:5173` (no trailing /), it will store a null user, and this will then cause an issue when we then log in and in our `useUser` hook, where we run this test: `return { isLoading, user, isAuthenticated: user?.role === 'authenticated' };` as `user` will now be null, this will always return `false` and you won't be automatically navigated to *dashboard*.
 
 What needs to be used is instead: `queryClient.setQueryData(['user'], user.user);`
+
+### User Sign Up
+
+in *Supabase / Authentication / Emails*, you have the templated emails sent when you activate the *confirm email*.
+
+in *Supabase / Authentication / URL Configuration*,m we need to update our application URL, for having a redirect URL working
+
+![image info](./29_sc5.png)
+
+**<span style='color: #495fcb'> Note:** Just make sure to update these two URLs again once you deploy this application to a production server.
+
+The new user will now be created but the log in would not work until the *supabase* confirmation link has not been confirmed, that will bring us to our dashboard with the new logged in user.
+
+![image info](./29_sc6.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 

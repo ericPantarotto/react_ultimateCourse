@@ -7,6 +7,7 @@ import {
 } from 'react-icons/hi2';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSignup } from '../features/authentication/useSignup.js';
 import { useBookings } from '../features/bookings/useBookings.js';
 import useCabins from '../features/cabins/useCabins.js';
 import SpinnerMini from './SpinnerMini';
@@ -59,6 +60,7 @@ const StyledNavLink = styled(NavLink)`
 function MainNav() {
   const { isLoading: isLoadingCabins } = useCabins();
   const { isLoading: isLoadingBookings } = useBookings();
+  const { isLoading: isLoadingSignup } = useSignup();
 
   return (
     <nav>
@@ -87,6 +89,7 @@ function MainNav() {
           <StyledNavLink to='/users'>
             <HiOutlineUsers />
             <span>Users</span>
+            {isLoadingSignup && <SpinnerMini />}
           </StyledNavLink>
         </li>
         <li>
