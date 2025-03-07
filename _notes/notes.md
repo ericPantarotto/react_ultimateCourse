@@ -3096,6 +3096,34 @@ in *Supabase / Authentication / URL Configuration*,m we need to update our appli
 The new user will now be created but the log in would not work until the *supabase* confirmation link has not been confirmed, that will bring us to our dashboard with the new logged in user.
 
 ![image info](./29_sc6.png)
+
+### Authorization on Supabase: Protecting Database (RLS)
+
+Right now everyone could still fetch and mutate data from our API even if they cannot log into the applications UI that we have been building.  any malicious actor could very easily find out the URL to our API even if they cannot see this graphical user interface. So just from reading our front end code, they could figure that out and then they could, for example, delete all of our bookings, or all of our cabins, and really destroy our entire app.
+
+**<span style='color: #a3842c'>Supabase Authenticated & unauthenticated roles:** [https://supabase.com/docs/guides/database/postgres/row-level-security#authenticated-and-unauthenticated-roles]
+
+You can edit all *RLS* and change the `to` clause from `public` to `authenticated` under `Authentication / Policies / Edit Policy`.
+
+![image info](./29_sc7.png)
+
+**<span style='color: #a8c62c'> pages/Login.jsx** When you are not authenticated, you can manipulate the DOM and add components to have malicious effect on the **database without RLS on the database.**
+
+```javascript
+function Login() {
+  return (
+    <LoginLayout>
+      <Logo />
+      <Heading as='h4'>Log in to your account</Heading>
+      <LoginForm />
+
+      <CabinTable /> //ERROR: this would still retrieve the cabins , and you could also delete, even when not being authenticated
+    </LoginLayout>
+  );
+}
+```
+
+![image info](./29_sc8.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
