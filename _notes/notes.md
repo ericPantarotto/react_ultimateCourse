@@ -3144,6 +3144,9 @@ const { data, error } = await supabase.auth.signUp({
   });
 ```
 
+### Updating User Data and Password
+
+`const { register, formState, getValues, handleSubmit, reset } = useForm();`, the `reset` function of *react-hook-form*  will reset both the input field and the error associated, if any.
 <!---
 [comment]: it works with text, you can rename it how you want
 
