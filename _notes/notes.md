@@ -3071,6 +3071,13 @@ const { mutate: login, isLoading } = useMutation({
 
 So just logging out from *Supabase api* `await supabase.auth.signOut()` will remove the user from local storage and also from the server but it will stay inside the cache, that's why in our mutation we add: `queryClient.removeQueries();` (to remove all of them)
 
+### Fixing an Important Bug
+
+**<span style='color: #9e5231'>Error:** Initially the `useLogin` hook was using: `queryClient.setQueriesData(['user'], user);`
+
+If un-logged we try to access the root which is unprotected: `http://localhost:5173` (no trailing /), it will store a null user, and this will then cause an issue when we then log in and in our `useUser` hook, where we run this test: `return { isLoading, user, isAuthenticated: user?.role === 'authenticated' };` as `user` will now be null, this will always return `false` and you won't be automatically navigated to *dashboard*.
+
+What needs to be used is instead: `queryClient.setQueryData(['user'], user.user);`
 <!---
 [comment]: it works with text, you can rename it how you want
 

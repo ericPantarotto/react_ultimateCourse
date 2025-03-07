@@ -10,6 +10,7 @@ export function useLogin() {
   const { mutate: login, isLoading } = useMutation({
     mutationFn: ({ email, password }) => loginApi({ email, password }),
     onSuccess: (user) => {
+      // queryClient.setQueriesData(['user'], user); //ERROR: creating a bug in the useUser hook
       queryClient.setQueryData(['user'], user.user); //HACK: !!! allow redirection to dashboard right after login
       // console.log(user);
       navigate('/dashboard', { replace: true });
