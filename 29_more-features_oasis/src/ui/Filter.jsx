@@ -42,7 +42,7 @@ function Filter({ filterField, options }) {
   const page = searchParams.get('page');
 
   function handleClick(value) {
-    if (page) searchParams.delete('page'); //FIX: pagination bug when changing filter  
+    if (page) searchParams.delete('page'); //FIX: pagination bug when changing filter
     searchParams.set(filterField, value);
 
     setSearchParams(searchParams);
@@ -54,7 +54,7 @@ function Filter({ filterField, options }) {
         <FilterButton
           key={option.value}
           onClick={() => handleClick(option.value)}
-          active={option.value === currentFilter}
+          active={option.value === currentFilter ? 'true' : undefined}
           disabled={option.value === currentFilter}
         >
           {option.label}

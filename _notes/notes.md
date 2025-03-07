@@ -3051,7 +3051,7 @@ function ProtectedRoute({ children }) {
 }
 ```
 
-**<span style='color: #495fcb'> Note:** on `queryClient` on which we call `invalidateQueries, prefetchQuery`, we can also `setQueryData`, to manually set some data in the *react-query* cache.
+**<span style='color: #495fcb'> Note:** on `queryClient` on which we call `invalidateQueries, prefetchQuery`, we can also `setQueryData`, to manually set some data in the *react-query* cache. Remember that the first argument, the `queryKey` has to be an **array**!
 
 In our case, once the `useLogin` was called and it reached the `onSuccess` block, it will navigate to *dashboard*. And so our `useUser` hook will be called as it's part of the protected routes; within `AppLayout`. this `useUser` hook uses the same key `user`, and if we set it manually `queryClient.setQueryData(['user'], user.user);`, *react-query* will simply get this data from the cache, instead of refetching the data, and the navigation to *dashboard* will work. Without this line, it won't be available in the *react-query* cache, and `isAuthenticated` will be false, and the redirection will then be to *login* page, while we are effectively logged in.
 
@@ -3144,9 +3144,28 @@ const { data, error } = await supabase.auth.signUp({
   });
 ```
 
+**<span style='color: #495fcb'> Note:** You can either use:
+
+- [https://temp-mail.org/en/]
+- Mozilla FireFox Relay extension
+
 ### Updating User Data and Password
 
 `const { register, formState, getValues, handleSubmit, reset } = useForm();`, the `reset` function of *react-hook-form*  will reset both the input field and the error associated, if any.
+
+### Implementing Dark Mode with CSS Variables
+
+```css
+:root {
+  &.light-mode {
+  }
+}
+```
+
+`&.light-mode {...}` is equivalent to `:root.light-mode`
+
+to implement a default case if no light-mode or dark-mode has been passed to the root element which is `<html ...>`: `&, &.light-mode {..}`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
