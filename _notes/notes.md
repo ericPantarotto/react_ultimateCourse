@@ -3124,6 +3124,26 @@ function Login() {
 ```
 
 ![image info](./29_sc8.png)
+
+### Building The App Header
+
+for the new component `UserAvatar`, note that the user_metadata are created for users that were created subsequently when the `options` were created:
+
+**<span style='color: #a8c62c'> services/apiAuth.js**
+
+```javascript
+const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        fullName,
+        avatar: '',
+      },
+    },
+  });
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
