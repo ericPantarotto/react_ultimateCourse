@@ -3069,6 +3069,8 @@ const { mutate: login, isLoading } = useMutation({
 });
 ```
 
+So just logging out from *Supabase api* `await supabase.auth.signOut()` will remove the user from local storage and also from the server but it will stay inside the cache, that's why in our mutation we add: `queryClient.removeQueries();` (to remove all of them)
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
