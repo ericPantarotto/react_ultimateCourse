@@ -3022,6 +3022,53 @@ our `login` function within `services/apiAuth` will return a *session object* wi
 - access token
 - refresh token
 - user Object
+
+### Authorization: Protecting Routes
+
+**<span style='color: #9e5231'>Error:** You can only call a hook such as `useNavigate` inside another function such as a `callback` or a `useEffect`, **but not at the top level of a component**:
+
+**<span style='color: #a8c62c'> ui/ProtectedRoute.jsx**
+
+```javascript
+function ProtectedRoute({ children }) {
+  const navigate = useNavigate();
+
+  // 1. Load the authenticated user
+  const { isLoading, isAuthenticated } = useUser();
+
+  // 2. If there is NO authenticated user, redirect to the /login
+  useEffect(
+    function () {
+      if (!isAuthenticated && !isLoading) navigate('/login');
+    },
+    [isAuthenticated, isLoading, navigate]
+  );
+//...
+}
+```
+
+**<span style='color: #495fcb'> Note:** on `queryClient` on which we call `invalidateQueries, prefetchQuery`, we can also `setQueryData`, to manually set some data in the *react-query* cache.
+
+In our case, once the `useLogin` was called and it reached the `onSuccess` block, it will navigate to *dashboard*. And so our `useUser` hook will be called as it's part of the protected routes; within `AppLayout`. this `useUser` hook uses the same key `user`, and if we set it manually `queryClient.setQueryData(['user'], user.user);`, *react-query* will simply get this data from the cache, instead of refetching the data, and the navigation to *dashboard* will work. Without this line, it won't be available in the *react-query* cache, and `isAuthenticated` will be false, and the redirection will then be to *login* page, while we are effectively logged in.
+
+**<span style='color: #a8c62c'> features/authentication/useLogin.jsx**
+
+```javascript
+const { mutate: login, isLoading } = useMutation({
+    mutationFn: ({ email, password }) => loginApi({ email, password }),
+    onSuccess: (user) => {
+      queryClient.setQueryData(['user'], user.user); //HACK: !!! allow redirection to dashboard right after login
+      console.log(user);
+      navigate('/dashboard', { replace: true });
+    },
+    onError: (err) => {
+      console.log('ERROR', err);
+      toast.error('Provided email or password are incorrect');
+    },
+// ...
+});
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
