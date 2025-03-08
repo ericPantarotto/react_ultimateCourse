@@ -10,6 +10,8 @@ import styled from 'styled-components';
 import { useSignup } from '../features/authentication/useSignup.js';
 import { useBookings } from '../features/bookings/useBookings.js';
 import useCabins from '../features/cabins/useCabins.js';
+import { useRecentBookings } from '../features/dashboard/useRecentBookings.js';
+import { useRecentStays } from '../features/dashboard/useRecentStays.js';
 import SpinnerMini from './SpinnerMini';
 
 const NavList = styled.ul`
@@ -61,6 +63,8 @@ function MainNav() {
   const { isLoading: isLoadingCabins } = useCabins();
   const { isLoading: isLoadingBookings } = useBookings();
   const { isLoading: isLoadingSignup } = useSignup();
+  const { isLoading: isLoadingRecentBookings } = useRecentBookings();
+  const { isLoading: isLoadingStays } = useRecentStays();
 
   return (
     <nav>
@@ -69,6 +73,7 @@ function MainNav() {
           <StyledNavLink to='/dashboard'>
             <HiOutlineHome />
             <span>Home</span>
+            {(isLoadingRecentBookings || isLoadingStays) && <SpinnerMini />}
           </StyledNavLink>
         </li>
         <li>
