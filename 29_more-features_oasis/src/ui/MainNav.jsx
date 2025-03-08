@@ -73,7 +73,9 @@ function MainNav() {
           <StyledNavLink to='/dashboard'>
             <HiOutlineHome />
             <span>Home</span>
-            {(isLoadingRecentBookings || isLoadingStays) && <SpinnerMini />}
+            {(isLoadingRecentBookings || isLoadingStays || isLoadingCabins) && (
+              <SpinnerMini />
+            )}
           </StyledNavLink>
         </li>
         <li>
