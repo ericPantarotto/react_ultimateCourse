@@ -27,7 +27,7 @@ export async function logout() {
   if (error) throw new Error(error.message);
 }
 
-export async function signup({ fullName, email, password }) {
+export async function signup({ fullName, email, password, isAdmin }) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -35,6 +35,7 @@ export async function signup({ fullName, email, password }) {
       data: {
         fullName,
         avatar: '',
+        isAdmin,
       },
     },
   });

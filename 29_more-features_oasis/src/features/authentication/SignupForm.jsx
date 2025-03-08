@@ -12,9 +12,9 @@ function SignupForm() {
   const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
 
-  function onSubmit({ fullName, email, password }) {
+  function onSubmit({ fullName, email, password, isAdmin }) {
     signup(
-      { fullName, email, password },
+      { fullName, email, password, isAdmin },
       {
         onSettled: () => reset(),
       }
@@ -75,6 +75,15 @@ function SignupForm() {
             validate: (value) =>
               value === getValues().password || 'Passwords need to match',
           })}
+        />
+      </FormRow>
+
+      <FormRow label='Administrator role'>
+        <Input
+          type='checkbox'
+          id='isAdmin'
+          disabled={isLoading}
+          {...register('isAdmin')}
         />
       </FormRow>
 

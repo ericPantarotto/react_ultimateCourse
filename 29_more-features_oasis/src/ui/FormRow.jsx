@@ -1,11 +1,11 @@
-import styled from "styled-components";
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledFormRow = styled.div`
   display: grid;
   align-items: center;
   /* grid-template-columns: 24rem 1fr 1.2fr; */
-  grid-template-columns: 24rem 1fr .6fr;
+  grid-template-columns: 24rem 1fr 0.6fr;
   gap: 2.4rem;
 
   padding: 1.2rem 0;
@@ -26,6 +26,14 @@ const StyledFormRow = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 1.2rem;
+  }
+
+  & input[type='checkbox'] {
+    height: 2.4rem;
+    width: 2.4rem;
+    outline-offset: 2px;
+    transform-origin: 0;
+    accent-color: var(--color-brand-600);
   }
 `;
 

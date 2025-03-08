@@ -3007,11 +3007,8 @@ Deactivate *confirm email* for dev purpose:
 
 ![image info](./29_sc3.png)
 
-*Users* table / Add user: [ecr@test.com] - password: test1234
-
-[test@test.com]  password: testabc1234  
-
-[uolm4l3te@mozmail.com] password: testabc
+*Users* table / Add user: [ecr@test.com], [uolm4l3te@mozmail.com], [yovined130@oziere.com]  
+password: test1234
 
 #### API Docs / Authentication
 
@@ -3126,6 +3123,10 @@ function Login() {
 ![image info](./29_sc8.png)
 
 ### Building The App Header
+
+**<span style='color: #a3842c'>Supabase user-metadata:** [<https://supabase.com/docs/guides/auth/managing-user-data#adding-and-retrieving-user-metadata>]
+
+`select email, raw_user_meta_data from auth.users`
 
 for the new component `UserAvatar`, note that the user_metadata are created for users that were created subsequently when the `options` were created:
 
