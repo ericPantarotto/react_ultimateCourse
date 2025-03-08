@@ -3167,6 +3167,11 @@ const { data, error } = await supabase.auth.signUp({
 
 to implement a default case if no light-mode or dark-mode has been passed to the root element which is `<html ...>`: `&, &.light-mode {..}`
 
+### Displaying a Line Chart with the Recharts Library
+
+**<span style='color: #a3842c'>Recharts Library:** [https://recharts.org/en-US/]
+
+`npm install recharts`
 <!---
 [comment]: it works with text, you can rename it how you want
 
