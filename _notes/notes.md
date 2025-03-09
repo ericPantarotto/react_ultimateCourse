@@ -3214,6 +3214,20 @@ So **error boundaries** are like try-catch but for React rendering, which basica
 **<span style='color: #875c5c'>IMPORTANT:** these error boundaries really only catch errors while React is rendering.
 
 So bugs that occur in some event handlers, or in an effect or in some asynchronous code will not be caught by the error boundary. But for those, we many times have some other mechanisms, like for example, those errors that are usually returned from `useQuery()`.
+
+### Fixing Bugs
+
+if a user pass an unknow booking id, it would trigger an error boundary. To avoid this behavior, we update our `BookingDetail.jsx` with: `if (!booking) return <Empty resource='booking' />;`
+
+if there is no `isDarkMode` key already set in our *localStorage*, by passing the below **media query** to our `useLocalStorage` as the initial state, the first time we access the app, it would be in dark mode then. After the *localStorage* value would be used.
+
+```javascript
+useLocalStorageState(
+    window.matchMedia('(prefers-color-scheme: dark)').matches,
+    'isDarkMode'
+  );
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
