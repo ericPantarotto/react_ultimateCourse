@@ -16,7 +16,14 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
   const sales = bookings.reduce((acc, cur) => acc + cur.totalPrice, 0);
 
   // 3.
-  const checkins = confirmedStays.length;
+  // const checkins = confirmedStays.length;
+  const checkins = confirmedStays?.filter(
+    (stay) => stay.status === 'checked-in'
+  ).length;
+
+    const checkouts = confirmedStays?.filter(
+      (stay) => stay.status === 'checked-out'
+    ).length;
 
   // 4.
   const occupation =
@@ -43,6 +50,12 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
         color='indigo'
         icon={<HiOutlineCalendarDays />}
         value={checkins}
+      />
+      <Stat
+        title='Check outs'
+        color='indigo'
+        icon={<HiOutlineCalendarDays />}
+        value={checkouts}
       />
       <Stat
         title='Occupancy rate'

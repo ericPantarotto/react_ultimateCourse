@@ -18,7 +18,8 @@ const ChartBox = styled.div`
   border-radius: var(--border-radius-md);
 
   padding: 2.4rem 3.2rem;
-  grid-column: 3 / span 2;
+  /* grid-column: 3 / span 2; */
+  grid-column: auto / span 5;
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -150,7 +151,8 @@ function DurationChart({ confirmedStays }) {
   return (
     <ChartBox>
       <Heading as='h2'>Stay duration summary</Heading>
-      <ResponsiveContainer width='100%' height={240}>
+      {/* <ResponsiveContainer width='100%' height={240}> */}
+      <ResponsiveContainer width='100%' height='90%'>
         <PieChart>
           <Pie
             data={data}

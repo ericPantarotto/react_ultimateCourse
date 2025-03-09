@@ -1,6 +1,6 @@
+import { PAGE_SIZE } from '../utils/constants';
 import { getToday } from '../utils/helpers';
 import supabase from './supabase';
-import { PAGE_SIZE } from '../utils/constants';
 
 export async function getBookings({ filter, sortBy, page }) {
   let query = supabase
@@ -22,7 +22,7 @@ export async function getBookings({ filter, sortBy, page }) {
   if (page) {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE - 1;
-    query = query.range(from, to); //NOTE: 
+    query = query.range(from, to);
   }
 
   const { data, error, count } = await query;
@@ -73,7 +73,8 @@ export async function getStaysAfterDate(date) {
     // .select('*')
     .select('*, guests(fullName)')
     .gte('startDate', date)
-    .lte('startDate', getToday());
+    .lte('startDate', getToday())
+    .in('status', ['checked-in', 'checked-out']);
 
   if (error) {
     console.error(error);
@@ -93,7 +94,8 @@ export async function getStaysTodayActivity() {
     )
     .order('created_at');
 
-  // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
+  // With above supabase query, we only download the data we actually need,
+  // HACK: otherwise we would need ALL bookings ever created and apply below filters subsequently, but that would less efficient:
   // (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||
   // (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
 

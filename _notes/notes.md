@@ -3172,6 +3172,25 @@ to implement a default case if no light-mode or dark-mode has been passed to the
 **<span style='color: #a3842c'>Recharts Library:** [https://recharts.org/en-US/]
 
 `npm install recharts`
+
+### Displaying Stays for current day
+
+**<span style='color: #a8c62c'> features/check-in-out.jsx**
+
+```javascript
+<Button
+  size='small'
+  variation='primary'
+  as={Link}
+  to={`/checkin/${id}`}
+>
+  Check in
+</Button>
+```
+
+**<span style='color: #495fcb'> Note:** *React* extends *html* `button` with an `as` prop, which allows to easily turn a button into an html `link`, or directly to a React `Link` (which is an `anchor` element), by overriding the underlying HTML tag of the `Button.jsx` component, and handle external links. We of course specify the link with the `to` props.
+
+**<span style='color: #a3842c'>Link:** [https://whereisthemouse.com/how-to-use-button-as-link-in-react]
 <!---
 [comment]: it works with text, you can rename it how you want
 
