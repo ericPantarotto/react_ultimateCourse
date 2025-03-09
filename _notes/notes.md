@@ -3231,6 +3231,16 @@ useLocalStorageState(
 ### Additional features: create booking
 
 **<span style='color: #a3842c'>react-hook-form setValue:** [https://react-hook-form.com/docs/useform/setvalue]
+
+## Deployment with Netlify and Vercel
+
+### Deploying to Netlify
+
+`npm run build`
+
+You can select in the main menu *Add new Site / Manually*:  [https://app.netlify.com/drop]
+
+Site Settings / Change site name
 <!---
 [comment]: it works with text, you can rename it how you want
 
