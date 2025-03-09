@@ -3228,6 +3228,9 @@ useLocalStorageState(
   );
 ```
 
+### Additional features: create booking
+
+**<span style='color: #a3842c'>react-hook-form setValue:** [https://react-hook-form.com/docs/useform/setvalue]
 <!---
 [comment]: it works with text, you can rename it how you want
 
