@@ -22,7 +22,7 @@
 
 **<span style='color: #a3842c'>Tailwind CSS:** To avoid warnings in your `index.css` file, you need to change the VSCode intellisense to `Tailwind CSS`
 
-![image info](./1_sc1.png)
+![image info](./0_sc1.png)
 
 **<span style='color: #a3842c'>VSCode Basic Editing (search):** [https://code.visualstudio.com/docs/editor/codebasics]
 
@@ -33,6 +33,12 @@
 **<span style='color: #a3842c'>Syntax highlighting for styled-components:** vscode-styled-components
 
 **<span style='color: #a3842c'>AI Images:** [https://www.journeyfree.ai/login]
+
+**<span style='color: #a3842c'>CSS Grid Layout Guide:** [https://css-tricks.com/snippets/css/complete-guide-grid/]
+
+![image info](./css-grid-poster.png)
+
+**<span style='color: #a3842c'>CSS nth child:** [https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child]
 
 #### Firefox not centering vertically
 
@@ -3191,6 +3197,23 @@ to implement a default case if no light-mode or dark-mode has been passed to the
 **<span style='color: #495fcb'> Note:** *React* extends *html* `button` with an `as` prop, which allows to easily turn a button into an html `link`, or directly to a React `Link` (which is an `anchor` element), by overriding the underlying HTML tag of the `Button.jsx` component, and handle external links. We of course specify the link with the `to` props.
 
 **<span style='color: #a3842c'>Link:** [https://whereisthemouse.com/how-to-use-button-as-link-in-react]
+
+Shifting from grid template with 4 columns to 5 columns, and how to center *today's activity* and *stay duration* components (shifting to 10 columns grid)
+
+- **<span style='color: #a3842c'>CSS nth child:** [https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child]
+- **<span style='color: #a3842c'>Take half width in 3 columns CSS grid layout:** [https://stackoverflow.com/questions/63222551/take-half-width-in-3-columns-css-grid-layout]
+
+### Error Boundaries
+
+So all these times where we get a white screen in development when the app stops working, our users would also only get that white screen in production. And so that's just completely unacceptable, because then the user has no idea what to do.
+
+So **error boundaries** are like try-catch but for React rendering, which basically allows us to react to JavaScript errors in our render code, so in React render logic.
+
+**<span style='color: #a3842c'>react-error-boundary:** [https://www.npmjs.com/package/react-error-boundary]
+
+**<span style='color: #875c5c'>IMPORTANT:** these error boundaries really only catch errors while React is rendering.
+
+So bugs that occur in some event handlers, or in an effect or in some asynchronous code will not be caught by the error boundary. But for those, we many times have some other mechanisms, like for example, those errors that are usually returned from `useQuery()`.
 <!---
 [comment]: it works with text, you can rename it how you want
 

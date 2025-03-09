@@ -9,6 +9,7 @@ import { useBookings } from './useBookings';
 function BookingTable() {
   const { bookings, isLoading, count } = useBookings();
 
+  // ERROR: to simulate an error caught by error boundary, you can shift the order of these 2 lines
   if (isLoading) return <Spinner />;
   if (!bookings.length) return <Empty resource='bookings' />;
 
