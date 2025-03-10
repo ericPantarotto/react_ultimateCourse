@@ -5,6 +5,7 @@ const { renderToString } = require('react-dom/server');
 const { Home } = require('./starter.js');
 const { parse } = require('url');
 
+// eslint-disable-next-line no-undef
 const htmlTemplate = readFileSync(`${__dirname}/index.html`, 'utf-8');
 
 const server = createServer((req, res) => {

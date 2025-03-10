@@ -44,7 +44,13 @@
 
 **<span style='color: #9e5231'>Error:** in project such as 17. WorldWise, in `CityItem.module.css`, i added this css to the class attached to my button element:
 
-`font-family: inherit;` using a standard font, rather than the imported google font also works `font-family: inherit;`.
+`font-family: inherit;` using a standard font, rather than the imported google font also works `font-family: inherit`.
+
+#### ESLint - SSR with CommonJS
+
+`npm install eslint`
+
+![image info](./0_sc2.png)
 
 ## A first Look at React
 
@@ -3282,6 +3288,7 @@ Section *Integration* / *Applications* / *Installed GitHub Apps*: you can revoke
 **<span style='color: #9e5231'>Error:** Our buttons and all JavaScript code is not working and so that's exactly the big issue with server side rendered React, which again simply renders the whole thing as HTML or basically just as a string, but that JavaScript will of course not be there.
 
 To solve this, we need the another aspect of server-side rendering: **hydration**.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
