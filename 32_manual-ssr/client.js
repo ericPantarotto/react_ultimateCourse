@@ -1,5 +1,6 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+ReactDOM.hydrateRoot(document.getElementById('root'), <Home />);
+
+console.log('Client.js file being render on the client-side');
 
 const pizzas = [
   {
@@ -40,8 +41,6 @@ function Home() {
   );
 }
 
-module.exports = { Home };
-
 function Counter() {
   const [count, setCount] = React.useState(0);
   return (
@@ -62,10 +61,3 @@ function MenuItem({ pizza }) {
     </li>
   );
 }
-
-MenuItem.propTypes = {
-  pizza: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  }).isRequired,
-};

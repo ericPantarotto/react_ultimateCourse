@@ -3289,6 +3289,19 @@ Section *Integration* / *Applications* / *Installed GitHub Apps*: you can revoke
 
 To solve this, we need the another aspect of server-side rendering: **hydration**.
 
+### Implementing Hydration
+
+we duplicate our *react* code in the `client.js` file, normally you wouldn't have to do that, the bundler would inject what's necessary to both the server and what is sent to the client.
+
+Our .jsx components are not valid JavaScript on the client-side just like it was on the server-side, so we also need to add `babel` again, this time using the `cdn` version, into our `index.html` file.
+
+**<span style='color: #a3842c'>Babel cdn:** [https://babeljs.io/docs/babel-standalone]
+
+And then we're also going to need *React*!
+
+So again, React is only on the server right now, but we don't have any React anywhere on the client. All the code that we have on the client is the HTML string that is being sent from the server, and also all the code that is here in the client.js file that is also sent along.
+
+**<span style='color: #a3842c'>React cdn:** [https://legacy.reactjs.org/docs/cdn-links.html]
 <!---
 [comment]: it works with text, you can rename it how you want
 
