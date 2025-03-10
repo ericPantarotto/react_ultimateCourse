@@ -3217,7 +3217,7 @@ So bugs that occur in some event handlers, or in an effect or in some asynchrono
 
 ### Fixing Bugs
 
-if a user pass an unknow booking id, it would trigger an error boundary. To avoid this behavior, we update our `BookingDetail.jsx` with: `if (!booking) return <Empty resource='booking' />;`
+if a user pass an unknown booking id, it would trigger an error boundary. To avoid this behavior, we update our `BookingDetail.jsx` with: `if (!booking) return <Empty resource='booking' />;`
 
 if there is no `isDarkMode` key already set in our *localStorage*, by passing the below **media query** to our `useLocalStorage` as the initial state, the first time we access the app, it would be in dark mode then. After the *localStorage* value would be used.
 
@@ -3272,9 +3272,16 @@ Section *Integration* / *Applications* / *Installed GitHub Apps*: you can revoke
 
 **<span style='color: #a3842c'>Example app using Next.js 13 server components:** [https://tx.shadcn.com/]
 
-
 ## Overview Next.js with App Router
 
+### Experiment: Manual SSR With React DOM + Node.js
+
+`npm i -D @babel/core @babel/preset-env @babel/preset-react @babel/register`  
+`npm i react react-dom`
+
+**<span style='color: #9e5231'>Error:** Our buttons and all JavaScript code is not working and so that's exactly the big issue with server side rendered React, which again simply renders the whole thing as HTML or basically just as a string, but that JavaScript will of course not be there.
+
+To solve this, we need the another aspect of server-side rendering: **hydration**.
 <!---
 [comment]: it works with text, you can rename it how you want
 
