@@ -3241,6 +3241,40 @@ useLocalStorageState(
 You can select in the main menu *Add new Site / Manually*:  [https://app.netlify.com/drop]
 
 Site Settings / Change site name
+
+### CI/CD with Github & Netlify / Vercel
+
+**<span style='color: #a3842c'>OAuth Access list:** [https://github.com/settings/installations]
+
+Section *Integration* / *Applications* / *Installed GitHub Apps*: you can revoke oAuth access from that menu once you have selected the app.
+
+## Full-Stack React with Next.js
+
+### Useful Resources
+
+**<span style='color: #a3842c'>Next.js documentation:** [https://nextjs.org/docs]
+
+**<span style='color: #a3842c'>Server Components:** [https://react.dev/reference/rsc/server-components]
+
+**<span style='color: #a3842c'>How React server components work:** [https://www.plasmic.app/blog/how-react-server-components-work]
+
+**<span style='color: #a3842c'>Devtools for React Server Components:** [https://www.alvar.dev/blog/creating-devtools-for-react-server-components]
+
+**<span style='color: #a3842c'>Auth.js:** [https://authjs.dev/getting-started]
+
+**<span style='color: #a3842c'>28 advanced next.js features:** [https://codedrivendevelopment.com/posts/rarely-known-nextjs-features]
+
+**<span style='color: #a3842c'>Next.js Image Component:** [https://www.fullstackfoundations.com/blog/nextjs-image-component-tutorial]
+
+**<span style='color: #a3842c'>Next.js caching:** [https://blog.webdevsimplified.com/2024-01/next-js-app-router-cache/]
+
+**<span style='color: #a3842c'>Next.js static exports:** [https://nextjs.org/docs/app/building-your-application/deploying/static-exports]
+
+**<span style='color: #a3842c'>Example app using Next.js 13 server components:** [https://tx.shadcn.com/]
+
+
+## Overview Next.js with App Router
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
