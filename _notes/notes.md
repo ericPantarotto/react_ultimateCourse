@@ -3350,6 +3350,18 @@ even though we're server rendering, it feels again like a single page applicatio
 just like React Router, Next.js also provides us with some React hooks for programmatic navigation. However, these are not going to work in these page components, because they are server components and React hooks don't work there.
 
 **<span style='color: #9e5231'>Error:** When creating our `components` folder and `Navigation.js` file, then this would become a new page / route  in the application. Now that's actually not what we want, and so we will fix that a bit later when we will talk about how to organize or project with some better project architecture.
+
+### Creating a Layout
+
+So each and every Next.js app or website needs to have one global layout, which we call the **root layout**. That's why earlier when we tried to delete this layout.js file, Next.js would create a new one for us automatically.
+
+#### root layout
+
+the root layout (at the root of the `app` folder) will actually wrap the entire application. So it will apply to every single route in the app, and therefore it needs to contain the HTML and the body tag.
+
+**<span style='color: #875c5c'>IMPORTANT:** Layouts, just like all the pages, are actually something that we call **server components**. So there are components that run or are rendered right on the server.
+
+And that's something entirely new for us. It's a completely new paradigm in React.
 <!---
 [comment]: it works with text, you can rename it how you want
 
