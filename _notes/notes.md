@@ -66,6 +66,12 @@ You can then run `npm init @eslint/config@latest` to get the latest ESLint confi
 },
 ```
 
+#### Next.js Page convention
+
+To manage your different `Page` tabs within *VSCODE*; following Next.js convention to call the `export defautl function Page() {}`, you can go to `Manage / Settings / custom labels`
+
+![image info](./0_sc3.png)
+
 ## A first Look at React
 
 ### React vs. Vanilla JavaScript
@@ -3324,6 +3330,11 @@ Having this `app` folder here is what enables the App Router to be used.
 **<span style='color: #495fcb'> Note:** Remember that the `page.js` content has been executed on the server!
 
 if you right-click and do `page source`, this is really the source that was downloaded/ so what came directly from the server, the content of our `page.js` file. This was indeed **server-side rendered** and sent to the browser.
+
+### Defining Routes and Pages
+
+So each folder is responsible for each of the segments in this URL. So `app` folder is the root.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
