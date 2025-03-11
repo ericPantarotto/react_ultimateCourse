@@ -52,6 +52,20 @@
 
 ![image info](./0_sc2.png)
 
+#### ESLint - Next.js
+
+when going through the project set-up of `npx create-next-app@latest`, you can confirm you'll use `ESLint`.
+
+You can then run `npm init @eslint/config@latest` to get the latest ESLint configuration, and add your specific rules at the end of the `eslint.config.mjs` file, such as the `react/react-in-jsx-scope` set to `off` to avoid your editor to pop all sort of warnings with `jsx`:
+
+```json
+{
+  rules: {
+    'react/react-in-jsx-scope': 'off',
+  },
+},
+```
+
 ## A first Look at React
 
 ### React vs. Vanilla JavaScript
@@ -3302,6 +3316,14 @@ And then we're also going to need *React*!
 So again, React is only on the server right now, but we don't have any React anywhere on the client. All the code that we have on the client is the HTML string that is being sent from the server, and also all the code that is here in the client.js file that is also sent along.
 
 **<span style='color: #a3842c'>React cdn:** [https://legacy.reactjs.org/docs/cdn-links.html]
+
+### Setting up a Next.js project
+
+Having this `app` folder here is what enables the App Router to be used.
+
+**<span style='color: #495fcb'> Note:** Remember that the `page.js` content has been executed on the server!
+
+if you right-click and do `page source`, this is really the source that was downloaded/ so what came directly from the server, the content of our `page.js` file. This was indeed **server-side rendered** and sent to the browser.
 <!---
 [comment]: it works with text, you can rename it how you want
 
