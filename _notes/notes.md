@@ -3335,6 +3335,21 @@ if you right-click and do `page source`, this is really the source that was down
 
 So each folder is responsible for each of the segments in this URL. So `app` folder is the root.
 
+### Navigating between pages
+
+If we use `<a>` elements, we have a full hard reload as we move between pages in this way. Instead, we want our application to feel a bit like a single page application like we had before. And so that's why Next.js provides to us the `Link` (`next/link`) component.
+
+even though we're server rendering, it feels again like a single page application.
+
+**<span style='color: #495fcb'> Note:**So behind the scenes, what this does is to apply a few optimization techniques, provided by Next.js out of the box:
+
+- So first of all, it will actually prefetch all the routes that are linked on a certain page, even though that only works in production. So we cannot see that happening here in development.
+- What also happens is that each page is downloaded separately as a separate chunk, which will also improve performance again.
+- And finally, each page that we visit in the browser will actually be cached right in the browser as well. So it will be stored there temporarily. And then as we move around, all these pages will not have to be refetched again.
+
+just like React Router, Next.js also provides us with some React hooks for programmatic navigation. However, these are not going to work in these page components, because they are server components and React hooks don't work there.
+
+**<span style='color: #9e5231'>Error:** When creating our `components` folder and `Navigation.js` file, then this would become a new page / route  in the application. Now that's actually not what we want, and so we will fix that a bit later when we will talk about how to organize or project with some better project architecture.
 <!---
 [comment]: it works with text, you can rename it how you want
 
