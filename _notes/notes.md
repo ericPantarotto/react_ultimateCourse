@@ -68,7 +68,7 @@ You can then run `npm init @eslint/config@latest` to get the latest ESLint confi
 
 #### Next.js Page convention
 
-To manage your different `Page` tabs within *VSCODE*; following Next.js convention to call the `export defautl function Page() {}`, you can go to `Manage / Settings / custom labels`
+To manage your different `Page` tabs within *VSCODE*; following Next.js convention to call the `export default function Page() {}`, you can go to `Manage / Settings / custom labels`
 
 ![image info](./0_sc3.png)
 
@@ -3362,6 +3362,147 @@ the root layout (at the root of the `app` folder) will actually wrap the entire 
 **<span style='color: #875c5c'>IMPORTANT:** Layouts, just like all the pages, are actually something that we call **server components**. So there are components that run or are rendered right on the server.
 
 And that's something entirely new for us. It's a completely new paradigm in React.
+
+### What are React Server Components? (RSC – Part 1)
+
+#### Client-side App
+
+React apps require a lot of JavaScript to be downloaded to the user's computer, which can have huge impacts on performance and is always a constraint for us developers that we have to constantly think about when we're building our apps.
+
+And a client-server waterfall is a problem that happens when multiple components on a page need to fetch different data one after another. So when data from one component depends on the data fetched in another component, this is a very common problem in large applications, caused by the fact that we have to fetch data on the client when we have a 100% client-side app.
+
+#### Server-side App
+
+Now the alternative it seems is to have a 100% server-side rendered app. What we did have was an easy and fast way to fetch data directly from the data source, for example, from a database. Therefore there was no need to build an API to communicate between frontend and backend, because we were always on the backend anyway.
+
+And for displaying all this data, no JavaScript was needed at all, meaning faster page load for our users.
+
+#### Best of both worlds
+
+What if we could take the best of both worlds having React components both on the server and on the client, and therefore being able to be either interactive or to be close to the data source and ship no JavaScript at all?
+
+The answer to all this is a completely new React paradigm, a completely new way of building React apps that changes everything and **it's called React Server Components**.
+
+#### What are React server components
+
+React Server Components is a completely new full-stack architecture for building React apps.
+
+The term *React Server Components*, which you'll often see abbreviated as RSC, is the name of this whole new paradigm, this new architecture.
+
+The term *server component* alone is then the name of the new type of component that RSC introduces.
+
+- And these are components that are only rendered on the server, never on the client.
+- They're usually responsible for fetching data right on the server.
+- Now, since server components run only on the server, they have no interactivity, so no state, which means that they require exactly zero JavaScript in the downloadable bundle to do their job. And this is one of the main advantages of this model besides server components,
+
+#### Client components
+
+Of course we still have our old regular components that we already know and that run entirely on the client. Therefore these are called client components and they are responsible for the interactivity.
+
+client and server components allow us to write frontend code, right next to backend code in a way that feels completely natural because it feels just like the regular React apps that we've been building so far, we're still using just components and can even compose server and client components together to build full-stack apps that are really entirely controlled by React.
+
+React Server Components are not active by default in new React apps. if we just start a new React project in Vite like we did earlier, we will not get this architecture. And this makes sense because there is no server involved in a Vite application.
+
+### Next.js
+
+So the server needs to be somewhere, it needs to be integrated into this whole idea. And so that's where full-stack frameworks like Next.js or Remix finally come into the picture again.
+
+So basically, React provides this architecture and frameworks can then choose to adopt and to implement it if they want. And that's exactly what Next.js did in the app router. So any app that we built in the Next.js app folder will use this new RSC architecture in which server components become the default components actually.
+
+so we need to specifically tell a component that it should be a client component if that's what we need `use client;`
+
+#### Client or Server components
+
+**<span style='color: #495fcb'> Note:** if a component is not interactive and its data needed to be fetched from somewhere, which means that this is a great candidate for a *server component* because in this new model, whenever possible, data should be fetched right on the server for the first render to be faster and to avoid client-server waterfalls.
+
+And starting again in the header, we have this *DarkMode* toggle that we can click, and therefore this one cannot be rendered on the server. It needs to be a client component. And the same happens with the filter and the SortBy components. The user actually needs to interact with these in order to make them work.
+
+we're already starting to see that our component tree now contains backend code as well as frontend code, all mixed together and all controlled by React with the client components usually appearing at the end of the tree, so as the last children.
+
+#### server-client boundary
+
+child components of components that are already *client components* don't need to specify `use client` again, the reason for that is that these children are already inside the so-called server-client boundary. And this boundary is another super important concept in the RSC architecture.
+
+So React Server Components is all about boundaries because they are what marks the split points between code that runs on the server and code that runs on the client. we use, `use client`, in order to create these **client-server boundaries, which in turn will create client sub-trees**. So sub-trees that will only be executed in the browser.
+
+and technically SortBy and DarkMode are also sub-trees, but just very small ones.
+
+#### Server components vs. client components
+
+Functions and classes are examples of data structures that are not serializable, and so we cannot pass those as props from server to client components.
+
+with **import**, we mean that the component module imports another module using the import syntax.
+
+On the other hand, with **render**, what we mean is that one component calls another one, so it uses another component inside its own JSX body.
+
+server components can import both client and server components.
+
+client components however can only import other client components but not server components. Once the client-server boundary has been passed, there is no way of going back to the server again. what is possible though is for client components to render server components, as long as these have been passed to them as props.
+
+when does this component type re-render? Well for client components it's very simple. It's whenever its own state or a parent state changes. So we've been using that idea throughout the entire course.
+
+So do server components ever get re-rendered? Well, as it turns out, the answer is yes, server components are executed again each time that the URL changes, so when the user navigates to the URL that has the server component in question, that's because usually server components are tied to specific routes in the framework, so in our case, Next.js. So when the URL changes and the framework moves to another route, all server components associated with that route re-render, so they are executed again and might even fetch data again.
+
+#### Props Bridge
+
+So server and client components are essentially connected by props. They are like the **bridge across the client-server boundary**.
+
+So we have two types of components that contribute to the same view, but by using different mechanisms. One type of component runs on the client and one on the server, and they can even be connected by props.
+
+#### RSC Architecture
+
+the biggest selling point of the RSC model is that we can now write **React components on the frontend and on the backend**, meaning that we can now encapsulate all server-side concerns right into components as well. And by doing so, we can compose entire full-stack applications by only writing components, with one single codebase for front and back-end of an app.
+
+Also, we don't even have to build an API in order to access our data on the frontend in many situations, our server components are already on the backend, so they have a direct access to the data source.
+
+For example, we can directly grab some data from a database right in a server component and then simply send the already rendered page to the browser, so instead of sending only the data as JSON.
+
+Plus, if we need to access a third party API, we no longer need to worry about securely storing our API keys, which is always a problem in a pure client-side app.
+
+Cons:
+
+- Then once we understand server components, using them is actually pretty easy and natural in practice, they have no state or effects, no stale closures or memorization-like client components, and therefore they're actually pretty easy to reason about. At some point we completely forget that we're even working on the server in some components. Now, some more practical cons are the fact that APIs like the **context API don't work on server components just like all other hooks**.
+- we need to make more decisions all the time. Things like should this be a client or a server component? Should I fetch this data on the server or on the client and so on. This again, comes from the added complexity of this architecture, but I believe it's still a good trade-off.
+- Also, if on top of a web app, you also need a mobile app, you'll probably still need to build an API, even if you don't need one for the web application where you can just get data directly from the data source in server components.
+- And finally, one thing that many people don't like about React Server Components is the fact that they can only be implemented and used within a framework. So you cannot just set up a Vite app and implement RSC yourself. And as a consequence, you always have to buy into a framework if you want to use the power of server components.
+
+### Fetching Data in a Page
+
+**<span style='color: #a3842c'>JSON Placeholder:** [https://jsonplaceholder.typicode.com/]
+
+we use the `users` resource.
+
+**<span style='color: #a3842c'>How to Fetch API Data in React:** [https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/]
+
+**<span style='color: #a8c62c'> components/cabins.js**
+
+```javascript
+const res = await fetch('https://jsonplaceholder.typicode.com/users');
+const data = await res.json();
+console.log(data);
+
+return (
+    <div>
+      <h1>Cabins page</h1>
+
+      <ul>
+        {data.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+```
+
+**<span style='color: #495fcb'> Note:** the console log prints in the server terminal, validating that such data are coming from the server.
+
+Also since latest Next.js versions, it also prints in the browser's console (client), with the `server` tag!
+
+If we inspect the page source, our names generated from this API call, would already be in the HTML downloaded from the server. and in the DevTools of Firefox, we wouldn't see any HTTP request to *[https://jsonplaceholder.typicode.com/]* endpoint. So it's not being fetched from the client.
+
+So the data fetching really happens on the server. Then everything is assembled into this HTML page that we see here and sent off to the browser. And so that is the power of server components.  all while still using React components that we already know.
+
+**<span style='color: #495fcb'> Note:** if we reload the page and then click on cabins, it'll take some time for the rendering. But that's simply because this data still needs to be fetched on the server, which of course takes some time. And only after that data has been fetched, so after that time, then the HTML can be generated and sent to the browser. So again, that's why it takes some time when we go to the cabins page for the first time. **but then if we go back there afterwards, the data has been cached in the browser's Next.js cache.**
 <!---
 [comment]: it works with text, you can rename it how you want
 
