@@ -3515,6 +3515,14 @@ This is a good solution: at least the user could see the most important informat
 **<span style='color: #875c5c'>IMPORTANT:** on the initial render, all the components are first rendered on the client and then sent as HTML to the client,  no matter if it's a server or a client component.
 
 But here we already have the practical effect that this string `<p>There are {users.length} users</p>` was rendered on the server, and we could see it here immediately, even though the React bundle, which contains this client component, was still being downloaded.
+
+### Displaying a Loading Indicator
+
+when we create a global loading file, so `loading.js` in the root `app` folder, this will be a global loader because this one will actually apply to any page that is in our application.
+
+Now, behind the scenes, this loading.js file actually activates streaming. So basically this data right here will be streamed from the server to the client automatically and not sent in one go (`renderToReadableStream`)
+
+**<span style='color: #495fcb'> Note:** this feature actually needs JavaScript to be enabled in the browser. And so that means that streaming will not work when the user has JavaScript disabled. So if you want that your website works without JavaScript,
 <!---
 [comment]: it works with text, you can rename it how you want
 
