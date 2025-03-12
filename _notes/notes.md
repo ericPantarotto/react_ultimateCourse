@@ -3598,6 +3598,24 @@ Even if in your Next.js template you have chosen tailwind, to use it;
 Another very important thing for SEO  is a page description.
 
 Another Next.js convention for having an icon, is to paste the icon at the root, so in the `app` folder, and it has to be named `icon.png`
+
+### Loading and Optimizing Fonts
+
+So what Next.js allows us to do is to very easily and automatically self-host any Google font that we want, without that font being downloaded from Google, improving privacy, performance, and avoiding layout shifts.
+
+So maybe you're aware that if we use fonts from Google fonts, that is not good for privacy, and might even be a problem with the GDPR regulation.
+
+And it's not so good for performance, because that font or those files for the fonts will need to be downloaded from some Google server. And it's always best to actually have those files right on your own server, because that will make downloading them a lot faster and therefore improving performance and preventing layout shifts.
+
+`import { Josefin_Sans } from 'next/font/google';` is a function that we then call and pass some options:
+
+```javascript
+const josefin = Josefin_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+});
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
