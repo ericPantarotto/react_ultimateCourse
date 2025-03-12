@@ -1,7 +1,7 @@
+import Logo from '@/app/_components/Logo';
+import Navigation from '@/app/_components/Navigation';
+import '@/app/_styles/globals.css';
 import PropTypes from 'prop-types';
-import Logo from './components/Logo';
-import Navigation from './components/Navigation';
-import './globals.css';
 
 export const metadata = {
   title: 'The Wild Oasis',

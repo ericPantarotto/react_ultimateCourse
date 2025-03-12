@@ -3553,6 +3553,26 @@ In the RSD model, a server is just a computer different from the browser. So, a 
 Now, in a similar spirit, the React client also doesn't need to be a traditional web browser. The React client is simply the part of the protocol that basically consumes the rendered React App. And in the case of server-side rendering that consuming means to render the app not as DOM elements, but as HTML.
 
 both client and server components are rendered on the web server that Next.js provides in the two different environments on the React server components protocol: the React server and the React client. Both of these environments run on the server on the initial render, and therefore the output is not DOM nodes, but HTML.
+
+## Starting to build the Wild Oasis website
+
+### Project Organization
+
+#### _folder
+
+we can use a Next.js convention, which is to start a folder name with an underscore `_foldername`.
+
+So this will then basically make it private and opt this folder out of the router. So this means that no route will then be created for that given folder.
+
+#### using aliases
+
+You need to make sure that `jsconfig.json` `compilerOptions` was correctly set and can then use below syntax instead of `../../*`:
+
+```javascript
+// import Counter from '../_components/Counter';
+import Counter from '@/app/_components/Counter';
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
