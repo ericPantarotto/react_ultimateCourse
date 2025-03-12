@@ -3592,6 +3592,12 @@ Even if in your Next.js template you have chosen tailwind, to use it;
 #### React Icons
 
 `npm i @heroicons/react`
+
+### Adding Page Metadata and Favicon
+
+Another very important thing for SEO  is a page description.
+
+Another Next.js convention for having an icon, is to paste the icon at the root, so in the `app` folder, and it has to be named `icon.png`
 <!---
 [comment]: it works with text, you can rename it how you want
 
