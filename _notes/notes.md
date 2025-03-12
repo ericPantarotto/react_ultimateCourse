@@ -3523,6 +3523,24 @@ when we create a global loading file, so `loading.js` in the root `app` folder, 
 Now, behind the scenes, this loading.js file actually activates streaming. So basically this data right here will be streamed from the server to the client automatically and not sent in one go (`renderToReadableStream`)
 
 **<span style='color: #495fcb'> Note:** this feature actually needs JavaScript to be enabled in the browser. And so that means that streaming will not work when the user has JavaScript disabled. So if you want that your website works without JavaScript,
+
+### How RSC Works Behind the Scenes (RSC – Part 2)
+
+Client components are serialized; transformed as strings when sent from server to the client, remember that they are not executed on the server
+
+#### Re-renders
+
+whenever a server component re-renders and produces a new React element, that element can basically be merged seamlessly into the already  existing virtual DOM on the client. So again, when a server component is re-rendered, a new RSC payload is generated and sent to the client where React can then reconcile the current tree on the client with the new tree that's coming from the server.
+
+Being able to reconcile a new tree, with an existing tree on re-render, is really what React is all about at its core. And so this core idea should also work with server components. And it's actually extremely important that this works correctly, because it allows React to preserve UI state as a new tree comes in from the server.
+
+#### RSC Payload
+
+Now in the RSC architecture, the render process is split into two steps where the first step is to render only server components. The result of this is a virtual DOM of these already rendered server components, plus the un-rendered sub trees of client components. So server components are rendered and client components are not, and they both exist in the same data structure, which we call the RSC payload.
+
+Now in this RSC payload, there is some information for each client component that is essential for React to render these components on the client later.
+
+it is actually basically the same rendering process on both 'traditional' React and React with 'RCS', but split up between two different environments with the RSC payload bridging the gap between server and client.
 <!---
 [comment]: it works with text, you can rename it how you want
 
