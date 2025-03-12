@@ -3541,6 +3541,18 @@ Now in the RSC architecture, the render process is split into two steps where th
 Now in this RSC payload, there is some information for each client component that is essential for React to render these components on the client later.
 
 it is actually basically the same rendering process on both 'traditional' React and React with 'RCS', but split up between two different environments with the RSC payload bridging the gap between server and client.
+
+**<span style='color: #495fcb'> Note:** given this two-step process, UI is first a function of data and only then later of UI state => `UI = f(data)(state)`
+
+### RSC vs. SSR: How are They Related? (RSC – Part 3)
+
+So, the React server and React client are simply two different environments, two different parts of the RSC protocol.
+
+In the RSD model, a server is just a computer different from the browser. So, a computer that the developer has access to and can run code on. This means that in theory, React server components don't actually require a running web server. Instead, server and client components, could just be rendered once at build time in a process that we call static site generation.
+
+Now, in a similar spirit, the React client also doesn't need to be a traditional web browser. The React client is simply the part of the protocol that basically consumes the rendered React App. And in the case of server-side rendering that consuming means to render the app not as DOM elements, but as HTML.
+
+both client and server components are rendered on the web server that Next.js provides in the two different environments on the React server components protocol: the React server and the React client. Both of these environments run on the server on the initial render, and therefore the output is not DOM nodes, but HTML.
 <!---
 [comment]: it works with text, you can rename it how you want
 
