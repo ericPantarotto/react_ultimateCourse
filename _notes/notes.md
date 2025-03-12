@@ -3573,6 +3573,25 @@ You need to make sure that `jsconfig.json` `compilerOptions` was correctly set a
 import Counter from '@/app/_components/Counter';
 ```
 
+### Styling With Tailwind CSS
+
+Even if in your Next.js template you have chosen tailwind, to use it;
+
+**<span style='color: #a3842c'>Tailwind CSS in Next.js project** [https://tailwindcss.com/docs/installation/framework-guides/nextjs]
+
+- `npm install tailwindcss @tailwindcss/postcss postcss`
+- `global.css`: `@import "tailwindcss";`
+- -Prettier  Plugin for Tailwind CSS (dev-dependency `-D`), that will always organize your classes in the same order in your *html, jsx* files: `npm install -D prettier prettier-plugin-tailwindcss`
+- **<span style='color: #a3842c'>Prettier JSX Single Quote:** [https://prettier.io/docs/options#jsx-quotes]
+- add your `.prettierrc` for your configuration such as the single quote.
+
+![image info](./33_sc1.png)
+
+**<span style='color: #a3842c'>Tailwind CSS / customizing colors:** [https://tailwindcss.com/docs/colors#customizing-your-colors]
+
+#### React Icons
+
+`npm i @heroicons/react`
 <!---
 [comment]: it works with text, you can rename it how you want
 
