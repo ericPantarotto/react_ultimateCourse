@@ -3616,6 +3616,16 @@ const josefin = Josefin_Sans({
 });
 ```
 
+### Improving the Navigation and Root Layout
+
+To make sure that `<main>` element in our `layout.js` will occupy all the page we pass `grid flex-1`
+
+```CSS
+<div className='grid flex-1 px-8 py-12'>
+  <main className='mx-auto w-full max-w-7xl'>{children}</main>
+</div>
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
