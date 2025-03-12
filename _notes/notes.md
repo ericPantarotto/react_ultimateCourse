@@ -3503,6 +3503,18 @@ If we inspect the page source, our names generated from this API call, would alr
 So the data fetching really happens on the server. Then everything is assembled into this HTML page that we see here and sent off to the browser. And so that is the power of server components.  all while still using React components that we already know.
 
 **<span style='color: #495fcb'> Note:** if we reload the page and then click on cabins, it'll take some time for the rendering. But that's simply because this data still needs to be fetched on the server, which of course takes some time. And only after that data has been fetched, so after that time, then the HTML can be generated and sent to the browser. So again, that's why it takes some time when we go to the cabins page for the first time. **but then if we go back there afterwards, the data has been cached in the browser's Next.js cache.**
+
+### Adding Interactivity With Client Components
+
+there is actually hydration involved here. So if we load this page really slow again, maybe even Slow 3G. So then as we expect, the static HTML will be downloaded. So then nothing works as we click here.
+
+So in the background, the React bundle is now being downloaded, and once that kicks in, then the whole page will be hydrated, meaning that the event handlers will be added back and all the interactivity will be added back.
+
+This is a good solution: at least the user could see the most important information already. And then after everything has finished loading and the React bundle has been downloaded, then this button became interactive.
+
+**<span style='color: #875c5c'>IMPORTANT:** on the initial render, all the components are first rendered on the client and then sent as HTML to the client,  no matter if it's a server or a client component.
+
+But here we already have the practical effect that this string `<p>There are {users.length} users</p>` was rendered on the server, and we could see it here immediately, even though the React bundle, which contains this client component, was still being downloaded.
 <!---
 [comment]: it works with text, you can rename it how you want
 
