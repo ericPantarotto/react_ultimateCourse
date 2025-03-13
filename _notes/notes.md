@@ -3643,9 +3643,27 @@ if you don't want to specifiy the width and height you need to import the image 
 
 for a responsive image, a background image taking the entire screen size, you can pass the option `fill` to the `next/Image` component and you don't need to specify the height and width,
 
-`placeholder='blur'` allows to show a low quality preview of the image while it's loading !
+`placeholder='blur'` allows to show a low quality preview of the image while it's loading ! **<span style='color: #495fcb'> Note:** it can only be used with statically imported images.
 
 **<span style='color: #495fcb'> Note:** `next/Image` is optimizing the image on demand. As the page is loaded, next.js will figure out what the image should look like and what size it should be. So this is really amazing how much bandwidth this saves.
+
+### Building the About Page With Responsive Images
+
+to have an automatic resizing of the `next/Image` component, you can:
+
+- import statically the image: `import image1 from '@/public/about-1.jpg';`
+- you place the image inside a container set to `relative` & `aspect-square` corresponding to CSS `aspect-ratio: 1 / 1`, and use the `fill` property and add the `object-cover` class, if the image is not imported statically, but would come from a url /database and would be passed
+
+```javascript
+<div className='relative col-span-2 aspect-square'>
+  <Image
+    src='/about-2.jpg'
+    fill
+    className='object-cover'
+    alt='Family that manages The Wild Oasis'
+  />
+</div>
+```
 
 <!---
 [comment]: it works with text, you can rename it how you want
