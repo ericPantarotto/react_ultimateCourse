@@ -3626,6 +3626,19 @@ To make sure that `<main>` element in our `layout.js` will occupy all the page w
 </div>
 ```
 
+### Optimizing Images with Next.js
+
+So optimizing images is hugely important because images are always one of the biggest factors that contribute to page size. So usually, they have huge impacts on loading speeds, and therefore, being able to optimize images with Next.js is a huge advantage of this framework.
+
+Next.js provides us with their own `<Image>` components that we can use instead of the native HTML `<image/>`
+
+if you don't want to specifiy the width and height you need to import the image that way, and the default size of the image would be applied, and you can also apply a `quality={1}` option with 1 being the lowest possible quality, hence smallest image download size.
+
+```javascript
+{/* <Image src='/logo.png' height='60' width='60' alt='The Wild Oasis logo' /> */}
+<Image src={logo} alt='The Wild Oasis logo' />
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
