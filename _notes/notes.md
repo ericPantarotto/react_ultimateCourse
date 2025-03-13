@@ -3639,6 +3639,14 @@ if you don't want to specifiy the width and height you need to import the image 
 <Image src={logo} alt='The Wild Oasis logo' />
 ```
 
+### Building the Home Page
+
+for a responsive image, a background image taking the entire screen size, you can pass the option `fill` to the `next/Image` component and you don't need to specify the height and width,
+
+`placeholder='blur'` allows to show a low quality preview of the image while it's loading !
+
+**<span style='color: #495fcb'> Note:** `next/Image` is optimizing the image on demand. As the page is loaded, next.js will figure out what the image should look like and what size it should be. So this is really amazing how much bandwidth this saves.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
