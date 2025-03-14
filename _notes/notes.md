@@ -3665,6 +3665,12 @@ to have an automatic resizing of the `next/Image` component, you can:
 </div>
 ```
 
+### Active Link of the navbar
+
+**<span style='color: #a3842c'>Nextjs/app-router:** [https://nextjs.org/docs/app/api-reference/functions/use-router]
+
+**<span style='color: #495fcb'> Note:** You need to make your `Navigation` component a client component.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
