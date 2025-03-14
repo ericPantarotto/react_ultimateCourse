@@ -3632,7 +3632,7 @@ So optimizing images is hugely important because images are always one of the bi
 
 Next.js provides us with their own `<Image>` components that we can use instead of the native HTML `<image/>`
 
-if you don't want to specifiy the width and height you need to import the image that way, and the default size of the image would be applied, and you can also apply a `quality={1}` option with 1 being the lowest possible quality, hence smallest image download size.
+if you don't want to specify the width and height you need to import the image that way, and the default size of the image would be applied, and you can also apply a `quality={1}` option with 1 being the lowest possible quality, hence smallest image download size.
 
 ```javascript
 {/* <Image src='/logo.png' height='60' width='60' alt='The Wild Oasis logo' /> */}
@@ -3679,7 +3679,7 @@ to have an automatic resizing of the `next/Image` component, you can:
 
 #### Environment variables
 
-`.env.local` file at the root of the project and retreived with syntax: `process.env.SUPABASE_URL`
+`.env.local` file at the root of the project and retrieved with syntax: `process.env.SUPABASE_URL`
 
 So one key thing, is that by default, environment variables will not leak to the browser. So they're only really available inside this environment where the application is running, on the server basically.
 
@@ -3695,6 +3695,53 @@ whoever has this **service_role** key has full access to all your data. So you n
 
 And if we need the data on the client as well, we can just fetch it in a server component as well, and then pass it down to a client component as props.
 
+### Fetching and Displaying Cabin List
+
+**<span style='color: #a8c62c'> cabins/page.js**
+
+```javascript
+export default async function Page() {
+  const cabins = await getCabins();
+    return (...page content)
+}
+```
+
+The page will only be displayed once the await piece of code is finished.
+
+So again, this might look pretty crazy for you if you're not yet used to React server components, but this is really great.
+
+- we don't need any `useEffect`
+- We don't need `state` to store that data into.
+- And we don't even need any separate data fetching libraries.
+- All we do is await the data fetching function right here in an async function. **and all this happens on the server And then the already rendered HTML is what will be sent to the browser**.
+
+**<span style='color: #495fcb'> Note:**
+
+- One of the great thing about this pattern; React server components, is that we are really close to the data source right here on the server, and many times don't even need the API layer.
+- Now in this case, since we're using an external service, which relies on an API, we actually do still have an API layer here. It's just hidden from us because these supabase functions here, they abstract the API away from us, but we're still grabbing the data right here behind the scenes from the supabase API.
+
+#### next/image un-configured host
+
+**<span style='color: #9e5231'>Error - next/image Un-configured Host:** [https://nextjs.org/docs/messages/next-image-unconfigured-host]
+
+you have to update the `next.config.mjs`
+
+#### Image / Fill property
+
+with the `fill` property passed to `next/Image` component,  it will fill the entire view port if we don't have any parent element that has the `position` attribute, to `relative` for example, and also set to the `Image` the `object-fit: cover` attribute.
+
+```javascript
+<div className='relative flex-1'>
+  <Image
+    src={image}
+    fill
+    alt={`Cabin ${name}`}
+    className='border-primary-800 border-r object-cover'
+  />
+</div>
+```
+
+Our image will be responsive, optimized and fitting its container.
 <!---
 [comment]: it works with text, you can rename it how you want
 
