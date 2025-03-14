@@ -26,7 +26,8 @@ export default function RootLayout({ children }) {
         <Header />
 
         <div className='grid flex-1 px-8 py-12'>
-          <main className='mx-auto w-full max-w-7xl'>{children}</main>
+          {/* <main className='mx-auto w-full max-w-7xl'>{children}</main> */}
+          <main className='mx-auto w-full max-w-75%'>{children}</main>
         </div>
       </body>
     </html>
