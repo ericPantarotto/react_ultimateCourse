@@ -3671,6 +3671,30 @@ to have an automatic resizing of the `next/Image` component, you can:
 
 **<span style='color: #495fcb'> Note:** You need to make your `Navigation` component a client component.
 
+## Data Fetching, Caching, and Rendering
+
+### Setting up Supabase
+
+`npm i @supabase/supabase-js`
+
+#### Environment variables
+
+`.env.local` file at the root of the project and retreived with syntax: `process.env.SUPABASE_URL`
+
+So one key thing, is that by default, environment variables will not leak to the browser. So they're only really available inside this environment where the application is running, on the server basically.
+
+However, Next.js also allows us to make this public to the client; i.e. leak to the client. And all we need for that is to just prefix the variable with `NEXT_PUBLIC_`, and then some variable name.
+
+**<span style='color: #495fcb'> Note:** So remember how in Supabase, we could just use this public key, even on the front end without worrying that someone might do something to our database that we don't want. Because in order to protect our database, **we would activate row level security**.
+
+**<span style='color: #9e5231'>Error:** we have allowed only authenticated users to view cabin information, but we actually want everyone to be able to see information on the cabins without being authenticated, And so basically we need a way of bypassing this row level security policy here because we do not want to remove it for our other application, developed in part IV.
+
+what we want to do is to not use this public key, but instead, use this **service role key**, `Settings / Data API / Project API Keys`. And again, that is completely fine because we can just store this secret key right here as an environment variable without ever worrying that it will leak to the client. it will only stay on our server where it's secure, so where no one has access to.
+
+whoever has this **service_role** key has full access to all your data. So you need to be very, very careful with it and making sure that it doesn't leak to the client.
+
+And if we need the data on the client as well, we can just fetch it in a server component as well, and then pass it down to a client component as props.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
