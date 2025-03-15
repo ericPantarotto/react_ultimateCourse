@@ -3776,6 +3776,11 @@ The idea is to wrap the asynchronous component, that is in charge of the data fe
 the `Suspense` component and its `Spinner` fallback now overwrites the `loading.js` we had created in `app/cabins/loading.js`
 
 we can remove the `async` from our `cabins/page.js` as it's no longer an async component: `export default function Page() {}`
+
+### Dynamic Routes Segment: Building the cabin page
+
+**<span style='color: #495fcb'> Note:** `loading.js` defined as a fallback within the `Suspense` of `cabins/page.js`  Loading.js file will apply to the current route segment, plus all of the child segments, such as `cabins/id`
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
