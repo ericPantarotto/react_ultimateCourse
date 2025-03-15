@@ -3742,6 +3742,12 @@ with the `fill` property passed to `next/Image` component,  it will fill the ent
 ```
 
 Our image will be responsive, optimized and fitting its container.
+
+### Streaming Route Segments With loading.js File
+
+**<span style='color: #a3842c'>Next.js Streaming:** [https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#what-is-streaming]
+
+![image info](./34_sc1.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
