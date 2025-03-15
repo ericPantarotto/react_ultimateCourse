@@ -3748,6 +3748,18 @@ Our image will be responsive, optimized and fitting its container.
 **<span style='color: #a3842c'>Next.js Streaming:** [https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#what-is-streaming]
 
 ![image info](./34_sc1.png)
+
+### What is React Suspense?
+
+When using `Suspense` component, we implement a React native way to support and handle asynchronous operations like data fetching **in a declarative way**. **declarative means that we can use components in our JSX instead of imperative render logic**.
+
+In this case, all we have to do is to just wrap a component that an asynchronous operation into a `Suspense`. So we'll no longer need `isLoading` states and ternaries in our render logic, which will make our components so much simpler.
+
+**<span style='color: #875c5c'>IMPORTANT:**
+
+- The whole `Suspense` architecture is extremely complex and manually integrating asynchronous operations with Suspense is very hard. And so we leave this work to libraries and frameworks
+- thankfully for us Suspense works out of the box if we use something like *react-query*, *remix*, or of course *Next.js*.
+- Also, Suspense works just as advertised when combined with `React.lazy`
 <!---
 [comment]: it works with text, you can rename it how you want
 
