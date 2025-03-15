@@ -3760,6 +3760,22 @@ In this case, all we have to do is to just wrap a component that an asynchronous
 - The whole `Suspense` architecture is extremely complex and manually integrating asynchronous operations with Suspense is very hard. And so we leave this work to libraries and frameworks
 - thankfully for us Suspense works out of the box if we use something like *react-query*, *remix*, or of course *Next.js*.
 - Also, Suspense works just as advertised when combined with `React.lazy`
+
+### Streaming UI With Suspense: Cabin List
+
+The idea is to wrap the asynchronous component, that is in charge of the data fetching and that will suspend at some point,  i.e. `<CabinList />`, into the `<Suspense>`
+
+**<span style='color: #a8c62c'> CabinList.js**
+
+```javascript
+<Suspense fallback={<Spinner />}>
+  <CabinList />
+</Suspense>
+```
+
+the `Suspense` component and its `Spinner` fallback now overwrites the `loading.js` we had created in `app/cabins/loading.js`
+
+we can remove the `async` from our `cabins/page.js` as it's no longer an async component: `export default function Page() {}`
 <!---
 [comment]: it works with text, you can rename it how you want
 
