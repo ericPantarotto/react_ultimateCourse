@@ -3781,6 +3781,12 @@ we can remove the `async` from our `cabins/page.js` as it's no longer an async c
 
 **<span style='color: #495fcb'> Note:** `loading.js` defined as a fallback within the `Suspense` of `cabins/page.js`  Loading.js file will apply to the current route segment, plus all of the child segments, such as `cabins/id`
 
+### Dynamic APIs are Asynchronous
+
+**<span style='color: #9e5231'>Error:** Dynamic APIs are Asynchronous
+
+**<span style='color: #a3842c'>Next.js Dynamic Parameters:** [https://nextjs.org/docs/messages/sync-dynamic-apis]
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

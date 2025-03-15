@@ -4,7 +4,8 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 export default async function Page({ params }) {
-  const cabin = await getCabin(params.cabinId);
+  const { cabinId } = await params;
+  const cabin = await getCabin(cabinId);
 
   // const { id, name, maxCapacity, regularPrice, discount, image, description } =
   //   cabin;
