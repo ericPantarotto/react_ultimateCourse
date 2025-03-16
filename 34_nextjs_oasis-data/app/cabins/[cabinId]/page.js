@@ -46,6 +46,8 @@ export default async function Page({ params }) {
               <UsersIcon className='text-primary-600 h-5 w-5' />
               <span className='text-lg'>
                 For up to <span className='font-bold'>{maxCapacity}</span>{' '}
+                {/*HACK: to test error boundary */}
+                {/* For up to <span className='font-bold'>{createError}</span>{' '} */}
                 guests
               </span>
             </li>

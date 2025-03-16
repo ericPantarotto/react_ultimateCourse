@@ -3790,6 +3790,22 @@ we can remove the `async` from our `cabins/page.js` as it's no longer an async c
 ### Generating Dynamic Metadata
 
 `export async function generateMetadata({ params }) {}`: this conventional function `generateMetadata` also gets access to the `{params}` of the page/component.
+
+### Error Handling: Setting Up Error Boundaries
+
+```javascript
+"use client";
+
+export default function Error({ error, reset }) { }
+```
+
+**<span style='color: #875c5c'>IMPORTANT:**
+
+- Error Boundary always has to be a **client component**.
+- when we manually set up an error boundary, this works for all errors and exceptions that happen anywhere in the app, **but only in rendering**. So any errors that will happen in callback functions will actually not be caught by a React error boundary.
+- Error.js boundary does not catch errors that might happen in the root layout.
+
+we can for example fetch data in the *root layout*, which is something perfectly fine, because this is just another server component. But if that data fetching would create some error, then our error boundary would not catch that. To catch *rendering errors in the root layout*, then we would need to create a file called `global-error.js`.
 <!---
 [comment]: it works with text, you can rename it how you want
 
