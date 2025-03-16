@@ -3787,6 +3787,9 @@ we can remove the `async` from our `cabins/page.js` as it's no longer an async c
 
 **<span style='color: #a3842c'>Next.js Dynamic Parameters:** [https://nextjs.org/docs/messages/sync-dynamic-apis]
 
+### Generating Dynamic Metadata
+
+`export async function generateMetadata({ params }) {}`: this conventional function `generateMetadata` also gets access to the `{params}` of the page/component.
 <!---
 [comment]: it works with text, you can rename it how you want
 
