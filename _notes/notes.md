@@ -3887,6 +3887,61 @@ the next.js `<Images />` components won't work, because these images are optimiz
 
 **<span style='color: #a3842c'>Next.js Static export - Image optimization - Cloudinary:** [https://nextjs.org/docs/app/building-your-application/deploying/static-exports#image-optimization]
 
+### Experimenting with Caching and ISR
+
+to simulate a production environment, `npm run build && npm run start` or add a script, called `prod: next build && next start` to our `package.json`
+
+**<span style='color: #495fcb'> Note:** it will not listen for changes in our code. So whenever we do something in our code and want to see it live basically on this production server, we need to quit this process and run it all over again.
+
+#### initial cache behavior
+
+if we change the price of a cabin directly on *supabase*, and refresh our page it won't be reflected.  **It is actually because of the data cache and therefore, of the full route cache**. this page has been statically generated. And so this means that this route here has now been cached with this data, so with the data that was in place when the page was statically generated.
+
+all the data from our website was set in stone and will now be used for all the users who will visit our page until we revalidate that data.
+
+Now, that is great for something where the content is really static, for example, like a blog, but it doesn't work for any data-intensive app.
+
+#### test1: opting out of data cache
+
+by opting out of the data cache, which will automatically also opt out of the full route cache, this means that we will make the `/cabins` route dynamic.
+
+**<span style='color: #a8c62c'> cabins/Page.js** `export const revalidate = 0;`
+
+![image info](./34_sc4.png)
+
+Each price change directly in the *supabase* would be reflected when we refresh the page, as the page is now regenerated for each request, and always the fresh data out of the database. *we can perfectly imagine why that is not always ideal in all circumstances.*
+
+that's the reason why static rendering is actually the default in Next.js, because then we don't always have to go to the database when the data doesn't need to be queried so often.
+
+#### ISR: Incremental Static Regeneration
+
+**<span style='color: #495fcb'> Note:** in many situations, what we actually need is kind of a middle ground between these two strategies. So between completely static rendering and dynamic rendering. So incremental static regeneration will regenerate a static page and fetch fresh data for it from time to time.
+
+**<span style='color: #a8c62c'> cabins/Page.js** `export const revalidate = 3600;` (in seconds)
+
+an acceptable approach could be to refresh the *overview* page once per hour, and on the individual pages we could refetch the data more often so that when the user wants to really book the cabin, then they really always get the freshest data.
+
+So for some time, the page is still static. And so that's exactly the middle ground that we want. And this is of course especially important for pages that get a lot of traffic. So all the traffic in the meantime, so during that time where the data is still cached, doesn't have to come from the database and is instead basically read from the data cache and full route cache.
+
+#### revalidation at component level
+
+**<span style='color: #a8c62c'> cabins/CabinList.js** Below would make the entire page rendered dynamically again.
+
+```javascript
+import { unstable_noStore } from 'next/cache';
+
+export default async function CabinList() {
+  unstable_noStore(); //NOTE: with partial pre-rendering
+// ...
+}
+```
+
+in practice, opting out one of the components of the page out of the data cache, is basically telling that it should not cache any data and will opt out the entire route out of the data cache because it will dynamically generate this entire route. So why should we ever do this here instead of just always revalidating the entire route?
+
+But if we think about partial pre-rendering, it actually makes a lot of sense. So in that scenario, this entire shell of the page would still be static. but then, the `CabinList`, since it's already wrapped in a suspense, would then become the dynamic hole, which would be rendered in the background, and then be streamed in as soon as it's ready while this fallback would be rendered in the beginning.
+
+With partial pre-rendering, you can have part of your page that is static, which we call the *static shell*, and another part of the page is the *dynamic hole*.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

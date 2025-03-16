@@ -2,6 +2,9 @@ import Loading from '@/app/cabins/loading';
 import { Suspense } from 'react';
 import CabinList from '../_components/CabinList';
 
+// export const revalidate = 0; //NOTE: Dynamic page
+export const revalidate = 3600; //NOTE: Incremental Static Regeneration
+
 export const metadata = {
   title: 'Cabins',
 };
