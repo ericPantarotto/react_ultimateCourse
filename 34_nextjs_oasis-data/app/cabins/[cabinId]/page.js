@@ -30,6 +30,7 @@ export default async function Page({ params }) {
             src={image}
             fill
             className='object-cover'
+            sizes='100%'
             alt={`Cabin ${name}`}
           />
         </div>

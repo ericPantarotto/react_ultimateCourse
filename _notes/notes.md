@@ -3806,6 +3806,26 @@ export default function Error({ error, reset }) { }
 - Error.js boundary does not catch errors that might happen in the root layout.
 
 we can for example fetch data in the *root layout*, which is something perfectly fine, because this is just another server component. But if that data fetching would create some error, then our error boundary would not catch that. To catch *rendering errors in the root layout*, then we would need to create a file called `global-error.js`.
+
+### Error Handling: "Not Found" Errors
+
+in case the parameter of a dynamic route doesn't exist, it won't trigger by default the not found page, but the error page. To change this behavior, we can manually call our `not-found.js` function
+
+```javascript
+import { notFound } from 'next/navigation';
+
+export async function getCabin(id) {
+  //...
+
+  if (error) {
+    console.error(error);
+    notFound();
+  }
+}
+```
+
+**<span style='color: #495fcb'> Note:** You can also create dedicated *not-found* pages for each url endpoint of your app, bu adding the file in the corresponding folder.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
