@@ -3826,6 +3826,18 @@ export async function getCabin(id) {
 
 **<span style='color: #495fcb'> Note:** You can also create dedicated *not-found* pages for each url endpoint of your app, bu adding the file in the corresponding folder.
 
+### Different Types of SSR: Static vs. Dynamic Rendering
+
+#### Content Delivery network
+
+most hosting providers like *Vercel or Netlify or render.com* will automatically host all your website's static assets on a **global CDN**
+
+#### Serverless computing
+
+- *Next.js* app is not simply one huge *Node.js* app that's running on a server, but instead a collection of serverless functions with the servers automatically managed by Vercel (for example)
+- For example, if one of our routes gets a huge sudden boost in traffic, Vercel will automatically provide more resources for that serverless function in order to handle all that additional load.
+
+**<span style='color: #495fcb'> Note:** if we only have static routes, then none of this applies. Because in that case, all of these static routes will simply be built on build time and will then be hosted on a *CDN*.
 <!---
 [comment]: it works with text, you can rename it how you want
 
