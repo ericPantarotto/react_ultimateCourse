@@ -3848,9 +3848,25 @@ it's basically Next.js who decides how each of our routes are rendered. So wheth
 
 Now to see how each route is actually rendered, we need to build the site, basically using the `npm run build` command
 
-![image info](./34_sc1.png)
+![image info](./34_sc2.png)
 
 Only our `cabins/[cabinId]` route is rendered dynamically, as it has this dynamic segment, `cabinId` which cannot be known by Next.js at build time,and cannot pre-render the HTML as static content.
+
+### Making Dynamic Pages Static With generateStaticParams
+
+We can use the `generateStaticParams` function to let *Next.js* know about all the possible values of a dynamic URL segment so that we can then export those pages as static pages.
+
+If all pages of an app will be *static* and we could then export or we could generate the entire site as a static site and deploy it very easily on any static hosting provider that we want.
+
+We just have to export a function name predefined by *Next.js* `export async function generateStaticParams()`
+
+**<span style='color: #495fcb'> Note:** we need to return an object which has that name of the dynamic segment, `cabinId`, i.e. the name of the folder.
+
+`npm run build` now returns 18 pages
+
+![image info](./34_sc3.png)
+
+**<span style='color: #495fcb'> Note:** if an app has a finite set of values for a dynamic segment of a URL, it's always a good idea to tell Next.js about those by using degenerate static params function. this way, this route can then be entirely statically generated, which is a lot better for performance. and since all of our routes are static, we can actually do **static site generation.**
 <!---
 [comment]: it works with text, you can rename it how you want
 
