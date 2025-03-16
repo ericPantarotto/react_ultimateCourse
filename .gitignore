@@ -39,6 +39,8 @@ packages/react-devtools-shell/dist
 packages/react-devtools-timeline/dist
 
 # nextjs
+out
+
 # Logs
 logs
 *.log

@@ -3867,6 +3867,26 @@ We just have to export a function name predefined by *Next.js* `export async fun
 ![image info](./34_sc3.png)
 
 **<span style='color: #495fcb'> Note:** if an app has a finite set of values for a dynamic segment of a URL, it's always a good idea to tell Next.js about those by using degenerate static params function. this way, this route can then be entirely statically generated, which is a lot better for performance. and since all of our routes are static, we can actually do **static site generation.**
+
+### Static Site Generation (SSG)
+
+`next.config.mjs`: add `output: 'export'`. the default folder name is `out`.
+
+**<span style='color: #9e5231'>Error:** we would get an error if some pages were not static and we had set the output to *export*, when building the app.
+
+so usually deploying a Next.js application is a bit complicated if you do not use **Vercel**, but for static deployment, it's really easy. You can place this on *GitHub pages or on Netlify, on render.com*, or really, all these other services out there.
+
+if you open that folder in VSCode, and us *LiveServer / GoLive*, the website will build except the images will be missing.
+
+in order for this to work, notice how we have these text files; for each of the HTML files, what we have is actually a real **React Server Components payload - RSC payload**.
+
+the next.js `<Images />` components won't work, because these images are optimized behind the scenes by Vercel on the Vercel server using their own image optimization API, so that optimization basically happens dynamically on a server, which we now no longer have, so therefore, we cannot use this Vercel service anymore,
+
+- we could not optimize images and go back to HTML `<img />`
+- create our own custom loader that will then use a different service, for example, *Cloudinary*. [https://cloudinary.com/]
+
+**<span style='color: #a3842c'>Next.js Static export - Image optimization - Cloudinary:** [https://nextjs.org/docs/app/building-your-application/deploying/static-exports#image-optimization]
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
