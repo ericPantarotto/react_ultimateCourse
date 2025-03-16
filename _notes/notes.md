@@ -3838,6 +3838,19 @@ most hosting providers like *Vercel or Netlify or render.com* will automatically
 - For example, if one of our routes gets a huge sudden boost in traffic, Vercel will automatically provide more resources for that serverless function in order to handle all that additional load.
 
 **<span style='color: #495fcb'> Note:** if we only have static routes, then none of this applies. Because in that case, all of these static routes will simply be built on build time and will then be hosted on a *CDN*.
+
+### Analyzing Rendering in Our App
+
+it's basically Next.js who decides how each of our routes are rendered. So whether each of the routes is going to be:
+
+- a dynamic route
+- or a static route.
+
+Now to see how each route is actually rendered, we need to build the site, basically using the `npm run build` command
+
+![image info](./34_sc1.png)
+
+Only our `cabins/[cabinId]` route is rendered dynamically, as it has this dynamic segment, `cabinId` which cannot be known by Next.js at build time,and cannot pre-render the HTML as static content.
 <!---
 [comment]: it works with text, you can rename it how you want
 
