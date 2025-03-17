@@ -4037,6 +4037,14 @@ And then as we click on each of the *filter* buttons, we just use the router.rep
 - as a result of the navigation, then the `cabins/page.js` server component will re-render.
 - that will then of course re-render the `CabinList` because it's a child component. And so just like in client-side React, in server-side React, also the entire child component tree will re-render.
 - And so then this CabinList will just re fetch the data because the whole component will run again.
+
+### Advanced: Server Components in Client Components
+
+If nest a server component `SelectCountry` inside a client component `UpdateProfileForm`, it will fail as the fetching code `getCountries` won't work as the environment variables won't be found. It need to be run as a server component but this will not work as it is below the server/client boundary, and it will just become a client component.
+
+**<span style='color: #875c5c'>IMPORTANT:** the only way in which we can render a server component in a client component is by passing it as a prop, or as a children prop.
+
+We will now import a sever component `<SelectCountry />` inside a server component `account/profile/page.js`, so it will already create the component instance, and only that instance, this already executed component basically is then being passed into the client component, which is allowed, because all the work in has already happened:  the data fetching has happened on the server, all the JSX has run and so basically this just becomes a React element and so then that React element is what's gonna be passed into the client component.
 <!---
 [comment]: it works with text, you can rename it how you want
 

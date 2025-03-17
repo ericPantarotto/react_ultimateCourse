@@ -1,9 +1,9 @@
-// import { getCountries } from '@/app/_lib/data-service';
+import { getCountries } from '@/app/_lib/data-service';
 import PropTypes from 'prop-types';
 
 async function SelectCountry({ defaultCountry, name, id, className }) {
-  // const countries = await getCountries();
-  const countries = [];
+  const countries = await getCountries();
+  
   const flag =
     countries.find((country) => country.name === defaultCountry)?.flag ?? '';
 
