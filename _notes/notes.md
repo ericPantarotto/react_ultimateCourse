@@ -3963,6 +3963,24 @@ The parent component needs to import both the child client component, and the 2n
 **<span style='color: #875c5c'>IMPORTANT:** we should always, whenever possible, move Client Components as low into the component tree as possible, because as we already know, all child components of Client Components will be Client Components by default, and so they will then not be server rendered, even if they could be rendered on the server perfectly fine.
 
 We just use the term `components` to make it a bit easier to talk, but we should refer to `component instance`.
+
+### Highlighting Current Side Navigation Link
+
+in our *DevTools / components*, we can see which components instances are server rendered, and which one are not, like the `TextExpander`.
+
+![image info](./35_sc1.png)
+
+**<span style='color: #495fcb'> Note:** this component was first rendered on the server and then it has been hydrated here on the client:
+
+![image info](./35_sc2.png)
+
+We can manually interact with components, for example if we set `Suspended: true` in the *DevTools/ Components* then the spinner appears until we set it back to false:
+
+![image info](./35_sc3.png)
+
+#### Adding styling to the SideNavigation
+
+It might have seemed that we could add this functionality; i.e. adding the highlighting of the current menu already on the server, but we need to actually use a **React hook**, even though this doesn't seem like a very dynamic feature. So what this means is that sometimes we just need to **switch to a client component** only in order to be able to use a React hook.
 <!---
 [comment]: it works with text, you can rename it how you want
 

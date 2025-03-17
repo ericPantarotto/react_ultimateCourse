@@ -21,7 +21,7 @@ export default function Navigation() {
             <li key={href}>
               <Link
                 href={href}
-                className={`hover:text-accent-400 transition-colors ${isActive ? 'text-accent-400' : ''}`}
+                className={`hover:text-accent-400 transition-colors ${isActive ? 'text-accent-400 underline' : ''}`}
               >
                 {name}
               </Link>
