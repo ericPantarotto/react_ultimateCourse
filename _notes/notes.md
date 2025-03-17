@@ -3957,6 +3957,12 @@ with *React server components*, there is this mixing of server and client **'Kni
 **<span style='color: #495fcb'> Note:** we can render a server component inside a client component if we pass the server component as a prop. And this can be the children prop or any other regular prop.
 
 The parent component needs to import both the child client component, and the 2nd rank child server component too, this is the dependence tree, showing modules imported by other modules, and is different from the component tree.
+
+### Client Components in Server Components
+
+**<span style='color: #875c5c'>IMPORTANT:** we should always, whenever possible, move Client Components as low into the component tree as possible, because as we already know, all child components of Client Components will be Client Components by default, and so they will then not be server rendered, even if they could be rendered on the server perfectly fine.
+
+We just use the term `components` to make it a bit easier to talk, but we should refer to `component instance`.
 <!---
 [comment]: it works with text, you can rename it how you want
 
