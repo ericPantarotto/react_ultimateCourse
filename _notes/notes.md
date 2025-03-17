@@ -3981,6 +3981,62 @@ We can manually interact with components, for example if we set `Suspended: true
 #### Adding styling to the SideNavigation
 
 It might have seemed that we could add this functionality; i.e. adding the highlighting of the current menu already on the server, but we need to actually use a **React hook**, even though this doesn't seem like a very dynamic feature. So what this means is that sometimes we just need to **switch to a client component** only in order to be able to use a React hook.
+
+### Sharing State Between Client and Server: The URL
+
+**<span style='color: #875c5c'>IMPORTANT:** **how can we pass data from the client back to the server?**
+
+it is very easy to basically share state *from server to client*, we just need to pass it as a prop.
+
+the most obvious and easiest, and I would say best way of doing that is to **store the state right in the URL**.
+
+So basically what we're gonna do is as the user clicks on the filter, that will then add the filter term to the URL. And then in the server component, we can read that data from the URL and filter accordingly.
+
+when using `{searchParams}` prop, it needs to be awaited !
+
+  **<span style='color: #a8c62c'> cabins/Page.js**
+
+```javascript
+export default async function Page({ searchParams }) {
+  const params = await searchParams;
+// ...
+}
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** one important thing about `searchParams`, which can not be known at runtime, which means is that whenever we make use of the searchParams, the page can no longer be statically rendered.
+
+We can then remove `export const revalidate = 3600;` which we had set previously, and `revalidate` only applies to static pages, i.e. **there's no need to revalidate a page that is dynamic anyway**.
+
+`const router = useRouter();` allows to do programmatic navigation between routes in *Next.js*. This is the imperative way of navigating, while `<Link />` is the declarative way of navigating.
+
+#### Spinner doesn't appear anymore
+
+**<span style='color: #9e5231'>Error:** the reason that a spinner is not rendered in the meantime is that a navigation in Next.js is always wrapped in a React transition. And in a transition, the suspense will not hide the content that has already been rendered earlier. So that's just the default behavior of suspense that we're seeing here.
+
+Next.js automatically wraps these page transitions or navigation, and as we're getting a new URL, we are indeed doing a navigation. And so in that case, since it is wrapped in a transition, suspense will not hide the already rendered content, it will just wait and swap it out as soon as the new content comes in.
+
+To fix this, we pass in a unique key to `<Suspense />`, in our case the `filter` itself is the value we can use a unique key!
+
+**<span style='color: #a8c62c'> cabins/Page.js**
+
+```javascript
+<Suspense fallback={<Loading />} key={filter}>
+  <CabinList filter={filter} />
+</Suspense>
+```
+
+**<span style='color: #495fcb'> Note:** the `<Filter>` component created within the `Filter.js` file will automatically be a client component, as we have the `use client` directive at the top fo this file.
+
+#### Summary
+
+And then as we click on each of the *filter* buttons, we just use the router.replace function to navigate to that new URL. And so thanks to Next.js, this will create a nice client site navigation. So there's not gonna be any full page reloads here.
+
+**<span style='color: #875c5c'>IMPORTANT:** whenever the `searchParams` changes, which is a result of the URL changing, the server component here will re-render. **A server component re-renders whenever there is a navigation**.
+
+- when we click on one of the filters, we have a navigation. So the URL changes.
+- as a result of the navigation, then the `cabins/page.js` server component will re-render.
+- that will then of course re-render the `CabinList` because it's a child component. And so just like in client-side React, in server-side React, also the entire child component tree will re-render.
+- And so then this CabinList will just re fetch the data because the whole component will run again.
 <!---
 [comment]: it works with text, you can rename it how you want
 
