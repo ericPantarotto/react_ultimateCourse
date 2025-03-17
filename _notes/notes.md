@@ -3942,6 +3942,21 @@ But if we think about partial pre-rendering, it actually makes a lot of sense. S
 
 With partial pre-rendering, you can have part of your page that is static, which we call the *static shell*, and another part of the page is the *dynamic hole*.
 
+## Client and Server Interactions
+
+### Blurring the Boundary Between Server and Client (RSC – Part 4)
+
+with *React server components*, there is this mixing of server and client **'Knitting'**:
+
+- one immediate consequence of all this is that in many cases we no longer need to even build an API that acts as an intermediary between back-end and front-end.
+- we don't need an artificial API boundary to fetch and mutate data.
+- in the RSC model, for fetching data, as we already know, we can simply get some data into a server component, for example, reading straight from a database and then render the data directly in the server component.
+- Or as an alternative, if we need that data on the front-end, we can just send it to a client component in the form of props. Again, no need for an API here.
+- to do mutations in *Next.js*,  as part of React's full stack architecture vision, we have something called **server actions** that we can use *to mutate data on the server directly from client components*.
+
+**<span style='color: #495fcb'> Note:** we can render a server component inside a client component if we pass the server component as a prop. And this can be the children prop or any other regular prop.
+
+The parent component needs to import both the child client component, and the 2nd rank child server component too, this is the dependence tree, showing modules imported by other modules, and is different from the component tree.
 <!---
 [comment]: it works with text, you can rename it how you want
 
