@@ -102,6 +102,8 @@ export async function getBookings(guestId) {
 }
 
 export async function getBookedDatesByCabinId(cabinId) {
+  await new Promise((r) => setTimeout(() => r(), 2500)); //NOTE: to test streaming of reservation comp. of the page/id component
+
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();

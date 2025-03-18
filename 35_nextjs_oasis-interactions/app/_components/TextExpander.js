@@ -5,9 +5,9 @@ import { useState } from 'react';
 
 function TextExpander({ children }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  console.log(
-    "it's a client component, this log will appear in the browser, not in the server console.",
-  );
+  // console.log(
+  //   "it's a client component, this log will appear in the browser, not in the server console.",
+  // );
 
   const displayText = isExpanded
     ? children

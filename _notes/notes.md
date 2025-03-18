@@ -72,6 +72,10 @@ To manage your different `Page` tabs within *VSCODE*; following Next.js conventi
 
 ![image info](./0_sc3.png)
 
+#### Grid / Flex not occupying vertical space
+
+if a grid in columns, the child `divs` don't occupy the vertical space, you need to overwrite in *tailwind* with `flex-grow`*
+
 ## A first Look at React
 
 ### React vs. Vanilla JavaScript
@@ -4045,6 +4049,24 @@ If nest a server component `SelectCountry` inside a client component `UpdateProf
 **<span style='color: #875c5c'>IMPORTANT:** the only way in which we can render a server component in a client component is by passing it as a prop, or as a children prop.
 
 We will now import a sever component `<SelectCountry />` inside a server component `account/profile/page.js`, so it will already create the component instance, and only that instance, this already executed component basically is then being passed into the client component, which is allowed, because all the work in has already happened:  the data fetching has happened on the server, all the JSX has run and so basically this just becomes a React element and so then that React element is what's gonna be passed into the client component.
+
+### Data Fetching Strategies for the Reservation Section
+
+Instead of fetching all the data here on the parent page, with `Promise.all()`, we can just create a bunch of different components and then have each component fetch all the data that it needs, and then those components can be streamed in as they become ready.
+
+**<span style='color: #a8c62c'> cabins/[cabinId]/page.js** Instead of passing `cabin` as a prop, we could use request memoization and also do the `getCabin` request inside of `<Reservation />` component, and with this caching mechanism provided by *Nest.js*, that request wouldn't be duplicated.
+
+```javascript
+export default async function Page({ params }) {
+  const { cabinId } = await params;
+  const cabin = await getCabin(cabinId);
+// ...
+  <Suspense fallback={<Spinner />}>
+    <Reservation cabin={cabin} />
+  </Suspense>
+}
+```
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
