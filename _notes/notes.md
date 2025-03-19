@@ -4113,6 +4113,12 @@ So, this reservation provider lives at the top of the tree. And so, of course, o
 - we can also aggregate different *supabase* data sources into one single *JSON response*.
 
 **<span style='color: #495fcb'> Note:** these *Next.js custom endpoints* are not that common and not that useful anymore, because now we have **server actions**.
+
+## Authentication with NextAuth
+
+### Setting up NextAuth
+
+**<span style='color: #a3842c'>NextAuth.js:** [https://next-auth.js.org/]
 <!---
 [comment]: it works with text, you can rename it how you want
 
