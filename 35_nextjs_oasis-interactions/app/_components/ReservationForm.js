@@ -24,8 +24,9 @@ function ReservationForm({ cabin }) {
       </div>
 
       {range?.from && range?.to && (
-        <p>
-          {String(range.from)} to {String(range.to)}
+        <p className='bg-primary-900 text-primary-300 flex items-center justify-between px-16 py-2'>
+          Booked Dates: {String(range.from.toLocaleDateString())} to{' '}
+          {String(range.to.toLocaleDateString())}
         </p>
       )}
 
