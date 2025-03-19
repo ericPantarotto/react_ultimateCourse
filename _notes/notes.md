@@ -4105,6 +4105,14 @@ If the user selects dates and decides to change cabins, the dates will still be 
 
 So, this reservation provider lives at the top of the tree. And so, of course, once we leave this page, the data will still be there. we can also add a nice reminder `<ReservationReminder />` at the `cabins/page.js` level.
 
+### Creating an API Endpoint With Route Handlers
+
+[http://192.168.1.30:3000/api/cabins/39] matches the structure/folder in our app: `app/api/cabins/[cabinId]`
+
+- *Next.js* allows us to create an easy-to-use abstraction for someone who might want to consume our data in a custom way, and still keep our API keys private.
+- we can also aggregate different *supabase* data sources into one single *JSON response*.
+
+**<span style='color: #495fcb'> Note:** these *Next.js custom endpoints* are not that common and not that useful anymore, because now we have **server actions**.
 <!---
 [comment]: it works with text, you can rename it how you want
 
