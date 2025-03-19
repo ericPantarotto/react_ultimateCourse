@@ -1,7 +1,9 @@
 'use client';
 import PropTypes from 'prop-types';
+import { useReservation } from '../contexts/ReservationContext';
 
 function ReservationForm({ cabin }) {
+  const { range } = useReservation();
   const { maxCapacity } = cabin;
 
   return (
@@ -20,6 +22,12 @@ function ReservationForm({ cabin }) {
           <p>{user.name}</p>
         </div> */}
       </div>
+
+      {range?.from && range?.to && (
+        <p>
+          {String(range.from)} to {String(range.to)}
+        </p>
+      )}
 
       <form className='bg-primary-900 flex flex-grow flex-col gap-5 px-16 py-10 text-lg'>
         <div className='space-y-2'>

@@ -4067,6 +4067,44 @@ export default async function Page({ params }) {
 }
 ```
 
+### Using the Context API for State Management
+
+Remember  the filter component that we built earlier. So, whenever we clicked on one of the buttons there, the page would navigate to a different URL, which would then re-render the server component. And re-rendering the server component will then re-fetch all the data that's on the page. And so that then creates a significant delay.
+
+**Storing in the URL** the calendar dates from our `DayPicker`  makes no sense at all. if we were to click, then store the date right here in the URL, then it would re-fetch all the data that is necessary in this server component page.
+
+The second option would be to create a parent component and then **lift the state up** like we are already used to doing.
+
+let's use the third option, which is to use the **context API**. just keep in mind that the context API is only going to work for **client components** because only those, can use the hooks that are necessary to read the values out of the context. So, if we wanted to share a state between client and server, then we would have to use the URL.
+
+**<span style='color: #495fcb'> Note:** `ReservationContext.js` uses the react `useContext` hook so it needs to be a client component.
+
+**<span style='color: #875c5c'>IMPORTANT:**  let's consider that usually a provider should always be placed as deep down as possible in the component tree in order to not cause unnecessary re-renders.
+
+In this case, the parent component `<Reservation/>` of `DateSelector` and `ReservationForm` would be ideal. However, let's pretend that we also need this data/state  in some other places of the app. So, let's say that we want to provide this state here to our entire application tree, at least the client portion of that tree. And so, a good place to place this context is our **global  layout** around the `<main>` HTML element.
+
+**<span style='color: #a8c62c'> app/layout.js**
+
+```javascript
+<main className='max-w-75% mx-auto w-full'>
+  <ReservationProvider>{children}</ReservationProvider>
+</main>
+```
+
+The `ReservationProvider` is actually a *client component*. And this `children` is the page component of whatever page that we're visiting, so this is actually a *server component*. So, we're passing in a server component into a client component, as we did with the `SelectCountry` component.
+
+**<span style='color: #495fcb'> Note:** it is no problem, because these `{children}` have already been generated and have already been rendered on the server. So this result, the React elements have been created, and so that's what we pass now into this client component.
+
+**<span style='color: #9e5231'>Error:** We could not use `ReservationContext.Provider` directly in the layout, because those are indeed client features and the root layout needs to be a server component. So, in order to use the *context API* in a *Next.js* application, we need to do it that way.
+
+We can see that our context now holds the dates selected:
+
+![image info](./35_sc4.png)
+
+If the user selects dates and decides to change cabins, the dates will still be selected. So, this is another nice bonus of having the context. So, of having the state stored in a global object that doesn't reset as soon as the user leaves this page.
+
+So, this reservation provider lives at the top of the tree. And so, of course, once we leave this page, the data will still be there. we can also add a nice reminder `<ReservationReminder />` at the `cabins/page.js` level.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 

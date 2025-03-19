@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { Suspense } from 'react';
 import CabinList from '../_components/CabinList';
 import Filter from '../_components/Filter';
+import ReservationReminder from '../_components/ReservationReminder';
 
 // export const revalidate = 3600; //NOTE: Incremental Static Regeneration
 
@@ -34,6 +35,7 @@ export default async function Page({ searchParams }) {
 
       <Suspense fallback={<Loading />} key={filter}>
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );

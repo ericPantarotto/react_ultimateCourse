@@ -1,21 +1,20 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 // import { DayPicker } from 'react-day-picker';
 import { DayPicker, getDefaultClassNames } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
+import { useReservation } from '../contexts/ReservationContext';
 
 // function DateSelector({ settings, bookedDates, cabin }) {
 function DateSelector({ settings }) {
-  const [selected, setSelected] = useState();
+  const { range, setRange, resetRange } = useReservation();
   const defaultClassNames = getDefaultClassNames();
   // CHANGE
   const regularPrice = 23;
   const discount = 23;
   const numNights = 23;
   const cabinPrice = 23;
-  const range = { from: null, to: null };
 
   // SETTINGS
   const { minBookingLength, maxBookingLength } = settings;
@@ -41,12 +40,12 @@ function DateSelector({ settings }) {
         startMonth={new Date()}
         endMonth={new Date(new Date().getFullYear() + 5, new Date().getMonth())}
         captionLayout='dropdown'
-        selected={selected}
-        onSelect={setSelected}
+        selected={range}
+        onSelect={setRange}
         footer={
-          selected
-            ? selected.from && selected.to
-              ? `${selected.from.toLocaleDateString()} - ${selected.to.toLocaleDateString()}`
+          range
+            ? range.from && range.to
+              ? `${range.from.toLocaleDateString()} - ${range.to.toLocaleDateString()}`
               : 'Pick departure.'
             : 'Pick arrival .'
         }
@@ -81,11 +80,12 @@ function DateSelector({ settings }) {
           ) : null}
         </div>
 
-        {range.from || range.to ? (
-          <button className='border-primary-800 border px-4 py-2 text-sm font-semibold'>
-            Clear
-          </button>
-        ) : null}
+        <button
+          className='border-primary-800 border px-4 py-2 text-sm font-semibold'
+          onClick={resetRange}
+        >
+          Clear
+        </button>
       </div>
     </div>
   );
