@@ -4118,7 +4118,77 @@ So, this reservation provider lives at the top of the tree. And so, of course, o
 
 ### Setting up NextAuth
 
-**<span style='color: #a3842c'>NextAuth.js:** [https://next-auth.js.org/]
+**<span style='color: #a3842c'>NextAuth.js:** [https://next-auth.js.org/] is the old library until v4. with the v5, which works with many frameworks and not only *Next.js*, it is [https://authjs.dev] it's yet a **beta version**.
+
+#### .env.local
+
+- NEXTAUTH_URL='<http://localhost:3000>'
+- NEXTAUTH_SECRET with [https://string-gen.vercel.app/]
+
+#### Google developer console
+
+- [https://console.cloud.google.com/], from **Chrome**
+- New Project *wild-oasis* then select this project
+- OAuth Consent screen to set up the screen that's displayed when using a google account to login an app.
+  - app-name: *The Wild Oasis*, support-email: [eric.xxx@gmail.com], audience: external
+  - Branding: add the logo
+  - Audience: add test-user: [eric.xxx@gmail.com]
+- APIs & Services (if no direct access, go to dashboard, and search for *explore APIs*) / **Credentials**
+  - Create Credentials - OAuth Client id (re-directs to Clients sub-menu)
+    - Application-type: Web application
+    - Authorized JavaScript Origin / Add URI / paste the *NEXTAUTH_URL* value of the `.env.local` [http://localhost:3000]
+    - from the documentation [https://next-auth.js.org/providers/google], add [http://localhost:3000/api/auth/callback/google] to Authorized redirect URIs
+    - from the pop-up window confirming the OAuth creation, paste in your `.env.local`
+      - the *client ID* with key: AUTH_GOOGLE_ID
+      - *client secret* with key: AUTH_GOOGLE_SECRET
+      - above access disclaimer: *OAuth access is restricted to the test users  listed on your OAuth consent screen*
+
+when everything was set-up:
+
+![image info](./36_sc0.png)
+
+#### NPM
+
+from [https://authjs.dev/getting-started/installation?framework=Next.js], for *Next.js* framework: `npm install next-auth@beta`
+
+### _lib/auth.js
+
+**<span style='color: #a3842c'>Auth.js/Google provider:** [https://authjs.dev/getting-started/providers/google]
+
+the catch-all segment `api/auth/[...nextauth]` means that all URLs that start with `/api/auth`, and then slash whatever, will be handled by this `auth.js`; so for example, */auth/providers* or */auth/signin*, or */auth/signout*.
+
+**<span style='color: #a8c62c'> app/_lib/auth.js**
+
+```javascript
+import NextAuth from 'next-auth';
+import Google from 'next-auth/providers/google';
+
+const authConfig = {
+  providers: [
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+    }),
+  ],
+};
+
+export const {
+  auth,
+  handlers: { GET, POST },
+} = NextAuth(authConfig);
+```
+
+**<span style='color: #a8c62c'> app/api/auth/[...nextauth]/route.js**
+
+```javascript
+export { GET, POST } from "@/app/_lib/auth";
+```
+
+![image info](./36_sc1.png)
+
+![image info](./36_sc2.png)
+
+**<span style='color: #495fcb'> Note:** this works here because behind the scenes, *Next.js* has created all these relevant API routes that start with `/api/auth` so that the API requests can be entirely handled by *Next.js*, and so this way, our `auth.js` stays in charge of the whole application authentication flow.
 <!---
 [comment]: it works with text, you can rename it how you want
 
