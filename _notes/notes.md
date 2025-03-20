@@ -4258,6 +4258,26 @@ we can pass data to this `authorized({auth, request} {...})` function:
 
 out-of-the-box is to redirect to the signin page `api/auth/signin` the unauthorized user.
 
+### Building a Custom Sign In Page
+
+**<span style='color: #875c5c'>IMPORTANT:** the entire flow; clicking on the `SignInButton` and its action is gonna stay on the server, and so therefore this `SignInButton` cannot be a client component.
+
+And so since this is a server component, we actually cannot use `onClick` event on this button, because we cannot have any interactivity in a server component.
+
+So instead, what we need to do is to create something called a **server action**. **they allow us to add interactivity also to server components, and usually to forms**.
+
+So the idea is to connect a server action with a form, so basically  wrapping the button in the form. once the button will be clicked, then the form will automatically get submitted and when the submission is happening, the action prop that we passed gets executed. we can now pass in a special function which is called **a server action**.
+
+**<span style='color: #a8c62c'> _lib/actions.js**
+
+```javascript
+export async function signInAction() {
+  await signIn('google', { redirectTo: '/account' });
+}
+```
+
+- the first parameter `google` that we pass to the `signIn` function can be found in `http://localhost:3000/api/auth/providers`. as we have a single provider, we can pass it manually.
+- And then as the second argument, we can pass in an object of some options. And the one we want to specify is the `redirectTo`. And so what's gonna happen is that we want the login to then redirect to the account page as soon as it has been successful, similar to an `onSuccess`. Only when the user successfully logs in to the Google provider, they will get redirected to our account route, which is a protected page.
 <!---
 [comment]: it works with text, you can rename it how you want
 
