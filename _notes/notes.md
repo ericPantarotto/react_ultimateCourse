@@ -4204,6 +4204,60 @@ Reading cookies actually switches the route to dynamic rendering because, of cou
 
 - authentication, which is basically getting the right information about the current user and making sure that the user actually is who they claim to be.
 - So authorization is basically to only allow access of certain areas of our website or application to users that are actually logged in and have the right privilege to visit that part. So in this case, to visit a route.
+
+### Protecting Routes With NextAuth Middleware
+
+**<span style='color: #a8c62c'> middleware.js**
+
+below, both `/cabins` and `/account` would redirect to `/about` as we defined that rule through our custom middleware and `matcher`.
+
+```javascript
+import { NextResponse } from 'next/server';
+
+export function middleware(request) {
+  console.log(request);
+
+  return NextResponse.redirect(new URL('/about', request.url));
+}
+
+export const config = {
+  matcher: ['/account', '/cabins'],
+};
+```
+
+#### next-auth
+
+The `auth` function of `next-auth` package, that we are using in our `app/lib/auth.js` has many different functionalities.
+
+- it serves to get to current session
+- but it also serves as a middleware function.
+
+and below is all we have to do to protect a route defined in the `matcher`
+
+```javascript
+import { auth } from '@/app/_lib/auth';
+export const middleware = auth;
+
+export const config = {
+  matcher: ['/account'],
+};
+```
+
+we also add a **callback** object into the config we pass to `NextAuth()` function.
+
+We pass an `authorized()` function that returns either true or false.
+
+If we return true, then the current user is authorized to go through onto that route that is being protected. But if we return false, then not. So *NextAuth* is going to call this function whenever one user tries to access this route `/account` that has been protected when added to the `matcher`.
+
+we can pass data to this `authorized({auth, request} {...})` function:
+
+- the first one is called `auth`, but which is actually the current session
+- we also get access to the request object
+
+**<span style='color: #495fcb'> Note:** to return a boolean from `auth.user` we can use this syntax: `!!auth?.user`
+
+out-of-the-box is to redirect to the signin page `api/auth/signin` the unauthorized user.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
