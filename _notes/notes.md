@@ -4295,7 +4295,7 @@ this callback here actually runs before the actual sign-up process happens. And 
 
 it's like middleware, if you think about it. It happens after the user has put in their credentials, but before they're actually like really logged into the application.
 
-after a new user has been created, or the existing user has been retreived, we're going to need the `guestId` so that we can: 
+after a new user has been created, or the existing user has been retrieved, we're going to need the `guestId` so that we can:
 
 - create new reservations,
 - see our current reservations,
@@ -4318,6 +4318,18 @@ async session({ session }) {
 **<span style='color: #495fcb'> Note:** if we do a `console.log(session)` in the `app/account/page.js`, we get our object and can now access the guestId, which has been added as we mutated our `session.user` inside our `session` callback:
 
 ![image info](./36_sc3.png)
+
+## Mutations with Server Actions + Modern React Hooks
+
+### What are Server Actions?
+
+So each Server Action basically gets its own URL, which is sent to the client.
+
+**<span style='color: #875c5c'>IMPORTANT:** it's important to note that the function itself never reaches the client, only the URL. This means that the code itself will always stay on the server and therefore, in Server Actions, it's safe to directly connect to databases, use secret API keys and so on. Again, because it's impossible that the code is leaked to the browser.
+
+whenever a Server Action is invoked, so when it's called as a result of a user interaction, behind the scenes, a POST request will be made to the endpoint and all inputs that are sent along the request will be serialized. But as developers, we never see or use an API endpoint or a URL. It's all abstracted away in the Server Action. So all we see and use is the function itself, which looks just like any other regular function.
+
+So we don't need to deal with the API that Next.js creates behind the scenes.
 <!---
 [comment]: it works with text, you can rename it how you want
 
