@@ -4278,6 +4278,15 @@ export async function signInAction() {
 
 - the first parameter `google` that we pass to the `signIn` function can be found in `http://localhost:3000/api/auth/providers`. as we have a single provider, we can pass it manually.
 - And then as the second argument, we can pass in an object of some options. And the one we want to specify is the `redirectTo`. And so what's gonna happen is that we want the login to then redirect to the account page as soon as it has been successful, similar to an `onSuccess`. Only when the user successfully logs in to the Google provider, they will get redirected to our account route, which is a protected page.
+
+### Building a Custom Sign Out Button
+
+we need to wire our `signOutAction()` function to the `SignOutButton.js` component.
+
+**<span style='color: #875c5c'>IMPORTANT:** remember that the `signOuButton` is part of the `sideNavigation`, which is  a client component, meaning that the `signOutButton` component will also be a client component, and we can now use the `onClick` prop, rather than wrapping it in a form and pass a server action to the wrapper form `action` prop.
+
+**<span style='color: #495fcb'> Note:** we can also pass the server action, which would work even with a client component. that's a special thing about **server actions, they can even be called from the client and will still only be executed on the server**.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
