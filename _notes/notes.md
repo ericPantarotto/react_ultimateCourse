@@ -4287,6 +4287,37 @@ we need to wire our `signOutAction()` function to the `SignOutButton.js` compone
 
 **<span style='color: #495fcb'> Note:** we can also pass the server action, which would work even with a client component. that's a special thing about **server actions, they can even be called from the client and will still only be executed on the server**.
 
+### Creating a new guest on first sign in
+
+`async signIn` can be added as a new callback within the `authConfig` of `next-auth`.
+
+this callback here actually runs before the actual sign-up process happens. And so that means that we can perform all kinds of operations here that are associated with the signing in process.
+
+it's like middleware, if you think about it. It happens after the user has put in their credentials, but before they're actually like really logged into the application.
+
+after a new user has been created, or the existing user has been retreived, we're going to need the `guestId` so that we can: 
+
+- create new reservations,
+- see our current reservations,
+- and update our profile.
+
+we could go fetch that ID in all those different places manually, but we can also do it just in one central place by specifying and by *writing another callback*. it will be the `session` callback, which runs after the sign in callback, and also each time that the session is checked out.
+
+we will get the current logged in user and mutate the `session user`, and of course return the session otherwise the whole session would be broken once we call off.
+
+**<span style='color: #a8c62c'> app/_lib/auth.js**
+
+```javascript
+async session({ session }) {
+  const guest = await getGuest(session.user.email);
+  session.user.guestId = guest.id; //NOTE: mutating the session user object
+  return session;
+},
+```
+
+**<span style='color: #495fcb'> Note:** if we do a `console.log(session)` in the `app/account/page.js`, we get our object and can now access the guestId, which has been added as we mutated our `session.user` inside our `session` callback:
+
+![image info](./36_sc3.png)
 <!---
 [comment]: it works with text, you can rename it how you want
 
