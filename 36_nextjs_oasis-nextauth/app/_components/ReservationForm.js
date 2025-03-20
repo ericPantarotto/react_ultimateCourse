@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import { useReservation } from '../contexts/ReservationContext';
 
-function ReservationForm({ cabin }) {
+function ReservationForm({ cabin, user }) {
   const { range } = useReservation();
   const { maxCapacity } = cabin;
 
@@ -11,7 +11,7 @@ function ReservationForm({ cabin }) {
       <div className='bg-primary-800 text-primary-300 flex items-center justify-between px-16 py-2'>
         <p>Logged in as</p>
 
-        {/* <div className='flex gap-4 items-center'>
+        <div className='flex items-center gap-4'>
           <img
             // Important to display google profile images
             referrerPolicy='no-referrer'
@@ -20,7 +20,7 @@ function ReservationForm({ cabin }) {
             alt={user.name}
           />
           <p>{user.name}</p>
-        </div> */}
+        </div>
       </div>
 
       {range?.from && range?.to && (
@@ -78,4 +78,8 @@ export default ReservationForm;
 
 ReservationForm.propTypes = {
   cabin: PropTypes.object,
+  user: PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+  }),
 };

@@ -4189,6 +4189,21 @@ export { GET, POST } from "@/app/_lib/auth";
 ![image info](./36_sc2.png)
 
 **<span style='color: #495fcb'> Note:** this works here because behind the scenes, *Next.js* has created all these relevant API routes that start with `/api/auth` so that the API requests can be entirely handled by *Next.js*, and so this way, our `auth.js` stays in charge of the whole application authentication flow.
+
+### Getting the User Session
+
+One important is that whenever we use `auth()` function from `next-auth` in a component, it will actually make the entire route dynamic because this authentication works with **cookies and headers** This auth function needs to read these cookies from the incoming request.
+
+Reading cookies actually switches the route to dynamic rendering because, of course, these cookies can only be known at runtime, so never at build time. So if we just statically built this site, we cannot know all the users that might eventually be logged in. So, of course, this needs to be dynamic.
+
+**<span style='color: #875c5c'>IMPORTANT:** since we're calling this auth function in the navigation, which is part of the layout, so it is part of every single route, this makes that our entire website becomes dynamic. So every single route here is now dynamic, because of this image/ user info, coming from the `auth()` function call!
+
+**<span style='color: #495fcb'> Note:** `reservation.js` is the server component that includes these `reservationForm`, itself a client component. there is a way of using auth.js on client components. it's highly beneficial to only deal with logged in and logged out users right **on the server**.
+
+#### Authentication & Authorization
+
+- authentication, which is basically getting the right information about the current user and making sure that the user actually is who they claim to be.
+- So authorization is basically to only allow access of certain areas of our website or application to users that are actually logged in and have the right privilege to visit that part. So in this case, to visit a route.
 <!---
 [comment]: it works with text, you can rename it how you want
 
