@@ -4330,6 +4330,40 @@ So each Server Action basically gets its own URL, which is sent to the client.
 whenever a Server Action is invoked, so when it's called as a result of a user interaction, behind the scenes, a POST request will be made to the endpoint and all inputs that are sent along the request will be serialized. But as developers, we never see or use an API endpoint or a URL. It's all abstracted away in the Server Action. So all we see and use is the function itself, which looks just like any other regular function.
 
 So we don't need to deal with the API that Next.js creates behind the scenes.
+
+we can write server actions:
+
+- inside the component of a server component
+- a standalone module
+  - `use server;` directive, which is a bridge from going to the client back to the server. So, this is not for defining server components, but really only to define server actions. any *async functions* exported from such module will become server actions.
+
+### Updating the Profile Using a Server Action
+
+**<span style='color: #a8c62c'> app/components/UpdateProfileForm.js**
+
+```javascript
+<form
+  action={updateGuest}
+  className='bg-primary-900 flex flex-col gap-6 px-12 py-8 text-lg'
+>
+```
+
+we don't need any additional JavaScript above and no additional state at all. This form will simply automatically pass all the `formData` right into the `updateGuest` server action function, using the native `formData API`.
+
+**<span style='color: #495fcb'> Note:** All our `input` fields need a name so that the `formData` can identify each fields by the name property.
+
+**<span style='color: #495fcb'> Note:** when we select a country, the `SelectCountry` component, encodes both the country name and the flag URL separated by a *%*:   `<option key={c.name} value={`${c.name}%${c.flag}`}>`, which is what the native `formData` API will send to our server action
+
+**<span style='color: #875c5c'>IMPORTANT:** within *Server Actions*, keep in mind that here we are now really on the backend. So, we're doing basically backend development.
+
+And so, we need to always make sure of two things:
+
+- First, that the user who is invoking the server action actually has the authorization of doing the action that the server action is supposed to do.
+- second, we also need to always treat all the inputs as unsafe
+
+it's a common practice in server actions, not to use a try catch declaration, but instead, we simply throw errors in the function body, and they will then just be caught by the closest error boundary, like `profile.js` or `account.js` in this example.
+
+Once our update request is successful, the updated data will not appear because of the **browser cache** or also called the Router cache. The previous data will still be stored in the browser cache, and will only refresh after the time that the browser cache stores dynamic pages or the data of dynamic routes (30 seconds).
 <!---
 [comment]: it works with text, you can rename it how you want
 
