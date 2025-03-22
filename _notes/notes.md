@@ -4370,6 +4370,12 @@ Once our update request is successful, the updated data will not appear because 
 what we do want is that the data always stays fresh in our user interface. So we need to clear the cache and then refill it with the fresh data.
 
 **<span style='color: #9e5231'>Error:** the country update would fail in Next.js15 🤔, while working with the flag. Add a `key` to the `<select>` HTML element of  `<SelectCountry/>` component solved the issue.
+
+### Displaying a Loading Indicator: The useFormStatus Hook
+
+how can we let this form that has called the form action , that it is still doing some work, that it's performing an asynchronous action?
+
+`useFormStatus` is a new *react-dom* hook that must be used in a component that's rendered inside a form.
 <!---
 [comment]: it works with text, you can rename it how you want
 

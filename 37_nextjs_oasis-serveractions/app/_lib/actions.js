@@ -10,6 +10,7 @@ export async function signInAction() {
 
 export async function signOutAction() {
   await signOut({ redirectTo: '/' });
+  revalidatePath('/account/profile');
 }
 
 export async function updateGuest(formData) {
