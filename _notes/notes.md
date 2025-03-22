@@ -4413,7 +4413,16 @@ we can see:
 
 ![image info](./37_sc1.png)
 
-we then need to protect that route in the action and make sure that the user can only delete his ids. 
+we then need to protect that route in the action and make sure that the user can only delete his ids.
+
+### Another Loading Indicator: The useTransition Hook
+
+So at the core, `useTransition` allows us to mark a state update as a so-called transition.
+
+And when a state update is marked as a transition by using the useTransition hook, that state update will happen without blocking the UI, which means that the UI will stay responsive during a re-render, and we also get an indication that a state transition is happening.
+
+- this can be useful in vanilla React for state updates
+- in Next.js, we can actually use this hook to mark a server action as a transition too,
 <!---
 [comment]: it works with text, you can rename it how you want
 
