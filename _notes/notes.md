@@ -4376,6 +4376,44 @@ what we do want is that the data always stays fresh in our user interface. So we
 how can we let this form that has called the form action , that it is still doing some work, that it's performing an asynchronous action?
 
 `useFormStatus` is a new *react-dom* hook that must be used in a component that's rendered inside a form.
+
+### Deleting a Reservation
+
+in our `<DeleteReservation />` component, we could add directly a server action inside the component marked with the `use server;` directive.
+
+```javascript
+function DeleteReservation({ bookingId }) {
+  function deleteReservationAction() {
+    'use server';
+    // code...
+  }
+    
+  return ()
+}
+```
+
+**<span style='color: #875c5c'>IMPORTANT:** we cannot know if this `<DeleteReservation />` will be a client or a server component.
+
+Even if it doesn't have the use client directive here at the top, if this was imported by a client component, then the whole component would become a client component. **And so we need to make sure that a server action always stays on the server, and always need the `'use server';` directive**
+
+That's also why keeping all actions in a central place where the `'use server';` has been added once, and cannot be forgotten when adding new functions, is better overall.
+
+#### malicious operation
+
+in our *Devtools / Network* tab, if we look for the delete/post request , we can do `copy value / copy as cURL` and paste it in a terminal
+
+we can see:
+
+- the URL
+- the cookie showing that we are authenticated on the server
+- Next.js uniquely identifies each action with an ID (the API endpoint automatically created)
+- `data-raw` which is the *bookingId*
+
+**<span style='color: #9e5231'>Error:** Now what this means is that if there was any malicious user that would be logged into application, he would be already authenticated (cookie) and  he could actually delete any booking that they wanted, not just their own bookings. All they'd have to do is to grab that code, so this request code, and then change the ID and then run this `curl` command.
+
+![image info](./37_sc1.png)
+
+we then need to protect that route in the action and make sure that the user can only delete his ids. 
 <!---
 [comment]: it works with text, you can rename it how you want
 
