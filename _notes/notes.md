@@ -4364,6 +4364,12 @@ And so, we need to always make sure of two things:
 it's a common practice in server actions, not to use a try catch declaration, but instead, we simply throw errors in the function body, and they will then just be caught by the closest error boundary, like `profile.js` or `account.js` in this example.
 
 Once our update request is successful, the updated data will not appear because of the **browser cache** or also called the Router cache. The previous data will still be stored in the browser cache, and will only refresh after the time that the browser cache stores dynamic pages or the data of dynamic routes (30 seconds).
+
+### Manual Cache Revalidation
+
+what we do want is that the data always stays fresh in our user interface. So we need to clear the cache and then refill it with the fresh data.
+
+**<span style='color: #9e5231'>Error:** the country update would fail in Next.js15 🤔, while working with the flag. Add a `key` to the `<select>` HTML element of  `<SelectCountry/>` component solved the issue.
 <!---
 [comment]: it works with text, you can rename it how you want
 
