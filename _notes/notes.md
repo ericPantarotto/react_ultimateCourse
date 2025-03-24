@@ -4460,6 +4460,31 @@ const [optimisticBookings, optimisticDelete] = useOptimistic(
 
 **<span style='color: #9e5231'>Error:** in *Next.js* documentation it says that the `loading.js` that we had in the root folder would be applied to a child routes, but apparently that is not the case.
 
+###
+
+When updating a booking, we also needed to pass in some additional data besides just the input fields.
+
+in that form, we solve this problem by adding a hidden field. And that's a great solution for the situation in which we only have few pieces of data because then we can just create one or two additional hidden fields.
+
+**<span style='color: #875c5c'>IMPORTANT:** the second alternative besides creating a hidden field is to use the **bind method**. So what the bind method does when you call it on a function is:
+
+- to basically set the `this` keyword of that function.
+- and plus, which is the part that interests us, is that it allows us to pass some additional arguments into the function, and we can then create a brand new function.
+
+`const createBookingWithData = createBooking.bind(null, bookingData);`
+
+**<span style='color: #495fcb'> Note:** the `formData` argument which is automatically passed from `<form action={...}>` must always be the last argument.
+
+**<span style='color: #495fcb'> Note:** *Zod.dev* is a very popular library to validate data.
+
+**<span style='color: #875c5c'>IMPORTANT:** we should actually also on the server side validate that no one has already booked these dates. we did that on the client side, so we can no longer select them here on the client side, but if some malicious user wanted, they could just remove the `disabled` prop , and then they would be selectable again.
+
+**<span style='color: #875c5c'>IMPORTANT:** remember that this on-demand revalidation `revalidatePath` clears:
+
+- the browser cache, which is also called the router cache,
+- but also at least for static sites, the data cache and full route cache, which are located on the server.
+
+But again, these only apply for statically generated pages, and this one is dynamic. And so in this case, this will only clear the browser cache, cause that's the only one that exists.
 <!---
 [comment]: it works with text, you can rename it how you want
 

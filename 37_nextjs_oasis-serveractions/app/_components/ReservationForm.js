@@ -1,21 +1,24 @@
 'use client';
+import { differenceInDays } from 'date-fns';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { updateBooking } from '../_lib/actions';
+import { createBooking, updateBooking } from '../_lib/actions';
 import { useReservation } from '../contexts/ReservationContext';
 import SubmitButton from './SubmitButton';
 
 function ReservationForm({ cabin, user, booking }) {
-  let { range, setRange } = {};
+  let { range, setRange, resetRange } = {};
   const pathname = usePathname();
   if (pathname.includes('cabins')) {
-    ({ range, setRange } = useReservation());
+    ({ range, setRange, resetRange } = useReservation());
   } else {
-    ({ rangeBooking: range, setRangeBooking: setRange } = useReservation());
+    ({
+      rangeBooking: range,
+      setRangeBooking: setRange,
+      resetRangeBooking: resetRange,
+    } = useReservation());
   }
-
-  const { maxCapacity } = cabin;
 
   useEffect(() => {
     if (booking) {
@@ -26,6 +29,23 @@ function ReservationForm({ cabin, user, booking }) {
     }
   }, []);
 
+  const { maxCapacity, regularPrice, discount, id } = cabin;
+  const numNights = differenceInDays(range?.to, range?.from);
+  const cabinPrice = numNights * (regularPrice - discount);
+
+  const bookingData = {
+    startDate: range?.from,
+    endDate: range?.to,
+    numNights,
+    cabinPrice,
+    cabinId: id,
+  };
+
+  const createBookingWithData = createBooking.bind(null, bookingData);
+  const updateBookingWithData = updateBooking.bind(null, bookingData);
+
+  console.log(bookingData);
+  
   return (
     <div className='flex scale-[1.01] flex-col justify-between'>
       <div className='bg-primary-800 text-primary-300 flex items-center justify-between px-16 py-2'>
@@ -52,7 +72,15 @@ function ReservationForm({ cabin, user, booking }) {
 
       <form
         className='bg-primary-900 flex flex-grow flex-col gap-5 px-16 py-10 text-lg'
-        action={updateBooking}
+        // action={
+        //   pathname.includes('cabins') ? createBookingWithData : updateBooking
+        // }
+        action={async (formData) => {
+          pathname.includes('cabins')
+            ? await createBookingWithData(formData)
+            : await updateBookingWithData(formData);
+          resetRange();
+        }}
       >
         <div>
           <input name='id' hidden defaultValue={booking?.id} />
@@ -122,7 +150,7 @@ function ReservationForm({ cabin, user, booking }) {
           )}
 
           <SubmitButton
-            pendingLabel='Updating...'
+            pendingLabel={booking ? 'Updating...' : 'Reserving...'}
             isDisabled={!range?.from || !range?.to}
           >
             {booking ? 'Update booking' : 'Reserve now'}
