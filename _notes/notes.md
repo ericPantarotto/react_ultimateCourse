@@ -4455,6 +4455,11 @@ const [optimisticBookings, optimisticDelete] = useOptimistic(
   },
 );
 ```
+
+#### loading.js child routes
+
+**<span style='color: #9e5231'>Error:** in *Next.js* documentation it says that the `loading.js` that we had in the root folder would be applied to a child routes, but apparently that is not the case.
+
 <!---
 [comment]: it works with text, you can rename it how you want
 
