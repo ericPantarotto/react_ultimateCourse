@@ -1,4 +1,5 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { updateBooking } from '../_lib/actions';
@@ -6,12 +7,19 @@ import { useReservation } from '../contexts/ReservationContext';
 import SubmitButton from './SubmitButton';
 
 function ReservationForm({ cabin, user, booking }) {
-  let { rangeBooking, setRangeBooking } = useReservation();
+  let { range, setRange } = {};
+  const pathname = usePathname();
+  if (pathname.includes('cabins')) {
+    ({ range, setRange } = useReservation());
+  } else {
+    ({ rangeBooking: range, setRangeBooking: setRange } = useReservation());
+  }
+
   const { maxCapacity } = cabin;
 
   useEffect(() => {
     if (booking) {
-      setRangeBooking({
+      setRange({
         from: new Date(booking.startDate),
         to: new Date(booking.endDate),
       });
@@ -35,10 +43,10 @@ function ReservationForm({ cabin, user, booking }) {
         </div>
       </div>
 
-      {rangeBooking?.from && rangeBooking?.to && (
+      {range?.from && range?.to && (
         <p className='bg-primary-900 text-primary-300 flex items-center justify-between px-16 py-2'>
-          Booked Dates: {String(rangeBooking.from.toLocaleDateString())} to{' '}
-          {String(rangeBooking.to.toLocaleDateString())}
+          Booked Dates: {String(range.from.toLocaleDateString())} to{' '}
+          {String(range.to.toLocaleDateString())}
         </p>
       )}
 
@@ -51,11 +59,11 @@ function ReservationForm({ cabin, user, booking }) {
           <input
             name='startDate'
             hidden
-            value={rangeBooking?.from ?? ''}
+            value={range?.from ?? ''}
             onChange={() =>
-              setRangeBooking((prev) => ({
+              setRange((prev) => ({
                 ...prev,
-                startDate: rangeBooking?.from,
+                startDate: range?.from,
               }))
             }
             readOnly
@@ -63,11 +71,11 @@ function ReservationForm({ cabin, user, booking }) {
           <input
             name='endDate'
             hidden
-            value={rangeBooking?.to ?? ''}
+            value={range?.to ?? ''}
             onChange={() =>
-              setRangeBooking((prev) => ({
+              setRange((prev) => ({
                 ...prev,
-                endDate: rangeBooking?.to,
+                endDate: range?.to,
               }))
             }
             readOnly
@@ -107,7 +115,7 @@ function ReservationForm({ cabin, user, booking }) {
         </div>
 
         <div className='flex items-center justify-end gap-6'>
-          {(!rangeBooking?.from || !rangeBooking?.to) && (
+          {(!range?.from || !range?.to) && (
             <p className='text-primary-300 ring-accent-500 border-accent-900 text-base ring ring-offset-1'>
               Start by selecting dates
             </p>
@@ -115,7 +123,7 @@ function ReservationForm({ cabin, user, booking }) {
 
           <SubmitButton
             pendingLabel='Updating...'
-            isDisabled={!rangeBooking?.from || !rangeBooking?.to}
+            isDisabled={!range?.from || !range?.to}
           >
             {booking ? 'Update booking' : 'Reserve now'}
           </SubmitButton>

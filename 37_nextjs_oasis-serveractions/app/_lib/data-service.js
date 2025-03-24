@@ -101,20 +101,29 @@ export async function getBookings(guestId) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId) {
+export async function getBookedDatesByCabinId(cabinId, guestId) {
   await new Promise((r) => setTimeout(() => r(), 1000)); //NOTE: to test streaming of reservation comp. of the page/id component
 
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
 
+  let { data, error } = { data: [], error: null };
   // Getting all bookings
-  const { data, error } = await supabase
-    .from('bookings')
-    .select('*')
-    .eq('cabinId', cabinId)
-    .or(`startDate.gte.${today},status.eq.checked-in`);
-
+  if (!guestId) {
+    ({ data, error } = await supabase
+      .from('bookings')
+      .select('*')
+      .eq('cabinId', cabinId)
+      .or(`startDate.gte.${today},status.eq.checked-in`));
+  } else {
+    ({ data, error } = await supabase
+      .from('bookings')
+      .select('*')
+      .eq('cabinId', cabinId)
+      .neq('guestId', guestId) //NOTE: exclude current guest
+      .or(`startDate.gte.${today},status.eq.checked-in`));
+  }
   if (error) {
     console.error(error);
     throw new Error('Bookings could not get loaded');

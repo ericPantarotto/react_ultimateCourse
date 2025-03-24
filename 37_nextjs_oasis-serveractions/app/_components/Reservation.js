@@ -8,7 +8,7 @@ import ReservationForm from './ReservationForm';
 async function Reservation({ cabin, booking }) {
   const [settings, bookedDates] = await Promise.all([
     getSettings(),
-    getBookedDatesByCabinId(cabin.id),
+    getBookedDatesByCabinId(cabin.id, booking?.guestId),
   ]);
   const session = await auth();
 

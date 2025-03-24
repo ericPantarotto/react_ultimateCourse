@@ -2,13 +2,28 @@
 
 import PropTypes from 'prop-types';
 // import { DayPicker } from 'react-day-picker';
+import {
+  differenceInDays,
+  isPast,
+  isSameDay,
+  isWithinInterval,
+} from 'date-fns';
 import { usePathname } from 'next/navigation';
 import { DayPicker, getDefaultClassNames } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { useReservation } from '../contexts/ReservationContext';
 
-// function DateSelector({ settings, bookedDates, cabin }) {
-function DateSelector({ settings }) {
+function isAlreadyBooked(range, datesArr) {
+  return (
+    range.from &&
+    range.to &&
+    datesArr.some((date) =>
+      isWithinInterval(date, { start: range.from, end: range.to }),
+    )
+  );
+}
+
+function DateSelector({ settings, bookedDates, cabin }) {
   let { range, setRange, resetRange } = {};
   const pathname = usePathname();
   if (pathname.includes('cabins')) {
@@ -21,13 +36,14 @@ function DateSelector({ settings }) {
     } = useReservation());
   }
 
+  const displayRange = isAlreadyBooked(range, bookedDates) ? {} : range;
+
   const defaultClassNames = getDefaultClassNames();
 
   // CHANGE
-  const regularPrice = 23;
-  const discount = 23;
-  const numNights = 23;
-  const cabinPrice = 23;
+  const { regularPrice, discount } = cabin;
+  const numNights = differenceInDays(displayRange?.to, displayRange?.from);
+  const cabinPrice = numNights * (regularPrice - discount);
 
   // SETTINGS
   const { minBookingLength, maxBookingLength } = settings;
@@ -35,7 +51,7 @@ function DateSelector({ settings }) {
   return (
     <div className='flex flex-col justify-center'>
       <DayPicker
-        // className='place-self-center pt-12'
+        className='place-self-center pt-10'
         classNames={{
           today: `border-amber-500`, // Add a border to today's date
           selected: `bg-accent-500 border-amber-500 text-white`, // Highlight the selected day
@@ -47,18 +63,22 @@ function DateSelector({ settings }) {
           // range_end: `border border-accent-500`,
         }}
         mode='range'
-        disabled={{ before: new Date() }}
+        // disabled={{ before: new Date() }}
+        disabled={(currDate) =>
+          isPast(currDate) ||
+          bookedDates.some((date) => isSameDay(date, currDate))
+        }
         min={minBookingLength + 1}
         max={maxBookingLength}
         startMonth={new Date()}
         endMonth={new Date(new Date().getFullYear() + 5, new Date().getMonth())}
         captionLayout='dropdown'
-        selected={range}
+        selected={displayRange}
         onSelect={setRange}
         footer={
-          range
-            ? range.from && range.to
-              ? `${range.from.toLocaleDateString()} - ${range.to.toLocaleDateString()}`
+          displayRange
+            ? displayRange.from && displayRange.to
+              ? `${displayRange.from.toLocaleDateString()} - ${displayRange.to.toLocaleDateString()}`
               : 'Pick departure.'
             : 'Pick arrival .'
         }
