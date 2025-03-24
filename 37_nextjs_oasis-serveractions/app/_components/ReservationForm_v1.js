@@ -1,12 +1,33 @@
 'use client';
 import { differenceInDays } from 'date-fns';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { createBooking } from '../_lib/actions';
+import { useEffect } from 'react';
+import { createBooking, updateBooking } from '../_lib/actions';
 import { useReservation } from '../contexts/ReservationContext';
 import SubmitButton from './SubmitButton';
 
-function ReservationForm({ cabin, user }) {
-  const { range, resetRange } = useReservation();
+function ReservationForm({ cabin, user, booking }) {
+  let { range, setRange, resetRange } = {};
+  const pathname = usePathname();
+  if (pathname.includes('cabins')) {
+    ({ range, setRange, resetRange } = useReservation());
+  } else {
+    ({
+      rangeBooking: range,
+      setRangeBooking: setRange,
+      resetRangeBooking: resetRange,
+    } = useReservation());
+  }
+
+  useEffect(() => {
+    if (booking) {
+      setRange({
+        from: new Date(booking.startDate),
+        to: new Date(booking.endDate),
+      });
+    }
+  }, []);
 
   const { maxCapacity, regularPrice, discount, id } = cabin;
   const numNights = differenceInDays(range?.to, range?.from);
@@ -21,7 +42,10 @@ function ReservationForm({ cabin, user }) {
   };
 
   const createBookingWithData = createBooking.bind(null, bookingData);
+  const updateBookingWithData = updateBooking.bind(null, bookingData);
 
+  console.log(bookingData);
+  
   return (
     <div className='flex scale-[1.01] flex-col justify-between'>
       <div className='bg-primary-800 text-primary-300 flex items-center justify-between px-16 py-2'>
@@ -52,10 +76,39 @@ function ReservationForm({ cabin, user }) {
         //   pathname.includes('cabins') ? createBookingWithData : updateBooking
         // }
         action={async (formData) => {
+          pathname.includes('cabins')
+            ? await createBookingWithData(formData)
+            : await updateBookingWithData(formData);
           resetRange();
-          await createBookingWithData(formData);
         }}
       >
+        <div>
+          <input name='id' hidden defaultValue={booking?.id} />
+          <input
+            name='startDate'
+            hidden
+            value={range?.from ?? ''}
+            onChange={() =>
+              setRange((prev) => ({
+                ...prev,
+                startDate: range?.from,
+              }))
+            }
+            readOnly
+          />
+          <input
+            name='endDate'
+            hidden
+            value={range?.to ?? ''}
+            onChange={() =>
+              setRange((prev) => ({
+                ...prev,
+                endDate: range?.to,
+              }))
+            }
+            readOnly
+          />
+        </div>
         <div className='space-y-2'>
           <label htmlFor='numGuests'>How many guests?</label>
           <select
@@ -63,6 +116,7 @@ function ReservationForm({ cabin, user }) {
             id='numGuests'
             className='bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 shadow-sm'
             required
+            defaultValue={booking?.numGuests}
           >
             <option value='' key=''>
               Select number of guests...
@@ -84,6 +138,7 @@ function ReservationForm({ cabin, user }) {
             id='observations'
             className='bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 shadow-sm'
             placeholder='Any pets, allergies, special requirements, etc.?'
+            defaultValue={booking?.observations}
           />
         </div>
 
@@ -95,10 +150,10 @@ function ReservationForm({ cabin, user }) {
           )}
 
           <SubmitButton
-            pendingLabel='Reserving...'
+            pendingLabel={booking ? 'Updating...' : 'Reserving...'}
             isDisabled={!range?.from || !range?.to}
           >
-            Reserve now
+            {booking ? 'Update booking' : 'Reserve now'}
           </SubmitButton>
         </div>
       </form>

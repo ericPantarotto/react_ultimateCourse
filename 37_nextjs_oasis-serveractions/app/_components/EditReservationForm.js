@@ -1,26 +1,35 @@
 'use client';
 import { differenceInDays } from 'date-fns';
 import PropTypes from 'prop-types';
-import { createBooking } from '../_lib/actions';
+import { useEffect } from 'react';
+import { updateBooking } from '../_lib/actions';
 import { useReservation } from '../contexts/ReservationContext';
 import SubmitButton from './SubmitButton';
 
-function ReservationForm({ cabin, user }) {
-  const { range, resetRange } = useReservation();
+export default function EditReservationForm({ cabin, user, booking }) {
+  const { rangeBooking, setRangeBooking, resetRangeBooking } = useReservation();
+
+  useEffect(
+    () =>
+      setRangeBooking({
+        from: new Date(booking.startDate),
+        to: new Date(booking.endDate),
+      }),
+    [],
+  );
 
   const { maxCapacity, regularPrice, discount, id } = cabin;
-  const numNights = differenceInDays(range?.to, range?.from);
+  const numNights = differenceInDays(rangeBooking?.to, rangeBooking?.from);
+
   const cabinPrice = numNights * (regularPrice - discount);
 
   const bookingData = {
-    startDate: range?.from,
-    endDate: range?.to,
+    startDate: rangeBooking?.from,
+    endDate: rangeBooking?.to,
     numNights,
     cabinPrice,
     cabinId: id,
   };
-
-  const createBookingWithData = createBooking.bind(null, bookingData);
 
   return (
     <div className='flex scale-[1.01] flex-col justify-between'>
@@ -39,23 +48,47 @@ function ReservationForm({ cabin, user }) {
         </div>
       </div>
 
-      {range?.from && range?.to && (
+      {rangeBooking?.from && rangeBooking?.to && (
         <p className='bg-primary-900 text-primary-300 flex items-center justify-between px-16 py-2'>
-          Booked Dates: {String(range.from.toLocaleDateString())} to{' '}
-          {String(range.to.toLocaleDateString())}
+          Booked Dates: {String(rangeBooking.from.toLocaleDateString())} to{' '}
+          {String(rangeBooking.to.toLocaleDateString())}
         </p>
       )}
 
       <form
         className='bg-primary-900 flex flex-grow flex-col gap-5 px-16 py-10 text-lg'
-        // action={
-        //   pathname.includes('cabins') ? createBookingWithData : updateBooking
-        // }
         action={async (formData) => {
-          resetRange();
-          await createBookingWithData(formData);
+          resetRangeBooking();
+          await updateBooking(bookingData, formData);
         }}
       >
+        <div>
+          <input name='id' hidden defaultValue={booking?.id} />
+          <input
+            name='startDate'
+            hidden
+            value={rangeBooking?.from ?? ''}
+            onChange={() =>
+              setRangeBooking((prev) => ({
+                ...prev,
+                startDate: rangeBooking?.from,
+              }))
+            }
+            readOnly
+          />
+          <input
+            name='endDate'
+            hidden
+            value={rangeBooking?.to ?? ''}
+            onChange={() =>
+              setRangeBooking((prev) => ({
+                ...prev,
+                endDate: rangeBooking?.to,
+              }))
+            }
+            readOnly
+          />
+        </div>
         <div className='space-y-2'>
           <label htmlFor='numGuests'>How many guests?</label>
           <select
@@ -63,6 +96,7 @@ function ReservationForm({ cabin, user }) {
             id='numGuests'
             className='bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 shadow-sm'
             required
+            defaultValue={booking?.numGuests}
           >
             <option value='' key=''>
               Select number of guests...
@@ -84,21 +118,22 @@ function ReservationForm({ cabin, user }) {
             id='observations'
             className='bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 shadow-sm'
             placeholder='Any pets, allergies, special requirements, etc.?'
+            defaultValue={booking?.observations}
           />
         </div>
 
         <div className='flex items-center justify-end gap-6'>
-          {(!range?.from || !range?.to) && (
+          {(!rangeBooking?.from || !rangeBooking?.to) && (
             <p className='text-primary-300 ring-accent-500 border-accent-900 text-base ring ring-offset-1'>
               Start by selecting dates
             </p>
           )}
 
           <SubmitButton
-            pendingLabel='Reserving...'
-            isDisabled={!range?.from || !range?.to}
+            pendingLabel='Updating...'
+            isDisabled={!rangeBooking?.from || !rangeBooking?.to}
           >
-            Reserve now
+            Update booking
           </SubmitButton>
         </div>
       </form>
@@ -106,9 +141,7 @@ function ReservationForm({ cabin, user }) {
   );
 }
 
-export default ReservationForm;
-
-ReservationForm.propTypes = {
+EditReservationForm.propTypes = {
   cabin: PropTypes.object,
   user: PropTypes.shape({
     image: PropTypes.string,

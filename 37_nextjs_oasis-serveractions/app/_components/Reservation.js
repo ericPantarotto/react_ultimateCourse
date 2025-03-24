@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { auth } from '../_lib/auth';
 import { getBookedDatesByCabinId, getSettings } from '../_lib/data-service';
 import DateSelector from './DateSelector';
+import EditReservationForm from './EditReservationForm';
 import LoginMessage from './LoginMessage';
 import ReservationForm from './ReservationForm';
 
@@ -20,7 +21,15 @@ async function Reservation({ cabin, booking }) {
         cabin={cabin}
       />
       {session?.user ? (
-        <ReservationForm cabin={cabin} user={session.user} booking={booking} />
+        booking ? (
+          <EditReservationForm
+            cabin={cabin}
+            user={session.user}
+            booking={booking}
+          />
+        ) : (
+          <ReservationForm cabin={cabin} user={session.user} />
+        )
       ) : (
         <LoginMessage />
       )}

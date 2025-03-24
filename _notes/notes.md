@@ -4485,6 +4485,24 @@ in that form, we solve this problem by adding a hidden field. And that's a great
 - but also at least for static sites, the data cache and full route cache, which are located on the server.
 
 But again, these only apply for statically generated pages, and this one is dynamic. And so in this case, this will only clear the browser cache, cause that's the only one that exists.
+
+#### resetRange() bug
+
+Just found an interesting issue with form submissions. If I put resetRange() after callback function, it won't run. But if I put resetRange() before callback function, it works.
+
+I am guess it is because that when the form submission succeeds, the page automatically navigates away, interrupting the JavaScript.
+
+```javascript
+action={async (formData) => {
+    resetRange();  //NOTE: OK !
+    await createBookingWithData(formData);  // Page navigates after this
+    // resetRange();  //ERROR: This never runs!
+}}
+```
+
+#### 3rd way of sending additional data to server action
+
+a bit easier and less complicated, You can also just add the bookingData to the server action as a new parameter inside the action call:  `action={(formData) => createBooking(bookingData, formData)}`
 <!---
 [comment]: it works with text, you can rename it how you want
 
