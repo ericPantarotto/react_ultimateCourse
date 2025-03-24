@@ -1,10 +1,23 @@
 'use client';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { updateBooking } from '../_lib/actions';
 import { useReservation } from '../contexts/ReservationContext';
+import SubmitButton from './SubmitButton';
 
-function ReservationForm({ cabin, user }) {
-  const { range } = useReservation();
+function ReservationForm({ cabin, user, booking }) {
+  let { range, setRange } = useReservation();
   const { maxCapacity } = cabin;
+
+  useEffect(
+    () =>
+      booking &&
+      setRange({
+        from: new Date(booking.startDate),
+        to: new Date(booking.endDate),
+      }),
+    [],
+  );
 
   return (
     <div className='flex scale-[1.01] flex-col justify-between'>
@@ -30,7 +43,31 @@ function ReservationForm({ cabin, user }) {
         </p>
       )}
 
-      <form className='bg-primary-900 flex flex-grow flex-col gap-5 px-16 py-10 text-lg'>
+      <form
+        className='bg-primary-900 flex flex-grow flex-col gap-5 px-16 py-10 text-lg'
+        action={updateBooking}
+      >
+        <div>
+          <input name='id' hidden defaultValue={booking?.id} />
+          <input
+            name='startDate'
+            hidden
+            value={range?.from ?? ''}
+            onChange={() =>
+              setRange((prev) => ({ ...prev, startDate: range?.from }))
+            }
+            readOnly
+          />
+          <input
+            name='endDate'
+            hidden
+            value={range?.to ?? ''}
+            onChange={() =>
+              setRange((prev) => ({ ...prev, endDate: range?.to }))
+            }
+            readOnly
+          />
+        </div>
         <div className='space-y-2'>
           <label htmlFor='numGuests'>How many guests?</label>
           <select
@@ -38,6 +75,7 @@ function ReservationForm({ cabin, user }) {
             id='numGuests'
             className='bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 shadow-sm'
             required
+            defaultValue={booking?.numGuests}
           >
             <option value='' key=''>
               Select number of guests...
@@ -59,15 +97,23 @@ function ReservationForm({ cabin, user }) {
             id='observations'
             className='bg-primary-200 text-primary-800 w-full rounded-sm px-5 py-3 shadow-sm'
             placeholder='Any pets, allergies, special requirements, etc.?'
+            defaultValue={booking?.observations}
           />
         </div>
 
         <div className='flex items-center justify-end gap-6'>
-          <p className='text-primary-300 text-base'>Start by selecting dates</p>
+          {(!range.from || !range.to) && (
+            <p className='text-primary-300 ring-accent-500 border-accent-900 text-base ring ring-offset-1'>
+              Start by selecting dates
+            </p>
+          )}
 
-          <button className='bg-accent-500 text-primary-800 hover:bg-accent-600 px-8 py-4 font-semibold transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'>
-            Reserve now
-          </button>
+          <SubmitButton
+            pendingLabel='Updating...'
+            isDisabled={!range.from || !range.to}
+          >
+            {booking ? 'Update booking' : 'Reserve now'}
+          </SubmitButton>
         </div>
       </form>
     </div>
@@ -81,5 +127,12 @@ ReservationForm.propTypes = {
   user: PropTypes.shape({
     image: PropTypes.string,
     name: PropTypes.string,
+  }),
+  booking: PropTypes.shape({
+    id: PropTypes.string,
+    numGuests: PropTypes.number,
+    observations: PropTypes.string,
+    startDate: PropTypes.string,
+    endDate: PropTypes.string,
   }),
 };

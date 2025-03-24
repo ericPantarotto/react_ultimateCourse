@@ -5,7 +5,7 @@ import DateSelector from './DateSelector';
 import LoginMessage from './LoginMessage';
 import ReservationForm from './ReservationForm';
 
-async function Reservation({ cabin }) {
+async function Reservation({ cabin, booking }) {
   const [settings, bookedDates] = await Promise.all([
     getSettings(),
     getBookedDatesByCabinId(cabin.id),
@@ -20,7 +20,7 @@ async function Reservation({ cabin }) {
         cabin={cabin}
       />
       {session?.user ? (
-        <ReservationForm cabin={cabin} user={session.user} />
+        <ReservationForm cabin={cabin} user={session.user} booking={booking} />
       ) : (
         <LoginMessage />
       )}
@@ -34,4 +34,5 @@ Reservation.propTypes = {
   cabin: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }).isRequired,
+  booking: PropTypes.object,
 };

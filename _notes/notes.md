@@ -4423,6 +4423,12 @@ And when a state update is marked as a transition by using the useTransition hoo
 
 - this can be useful in vanilla React for state updates
 - in Next.js, we can actually use this hook to mark a server action as a transition too,
+
+### CHALLENGE #1: Updating a Reservation
+
+Hiding the bookingId in the `<form/>` is necessary, because server actions do not have access to the URL.
+
+they're basically just API endpoints that run completely independently of the current URL and so we cannot really get any of the params that we get in a server component here in a server action.
 <!---
 [comment]: it works with text, you can rename it how you want
 
