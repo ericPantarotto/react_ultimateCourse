@@ -6,18 +6,17 @@ import { useReservation } from '../contexts/ReservationContext';
 import SubmitButton from './SubmitButton';
 
 function ReservationForm({ cabin, user, booking }) {
-  let { range, setRange } = useReservation();
+  let { rangeBooking, setRangeBooking } = useReservation();
   const { maxCapacity } = cabin;
 
-  useEffect(
-    () =>
-      booking &&
-      setRange({
+  useEffect(() => {
+    if (booking) {
+      setRangeBooking({
         from: new Date(booking.startDate),
         to: new Date(booking.endDate),
-      }),
-    [],
-  );
+      });
+    }
+  }, []);
 
   return (
     <div className='flex scale-[1.01] flex-col justify-between'>
@@ -36,10 +35,10 @@ function ReservationForm({ cabin, user, booking }) {
         </div>
       </div>
 
-      {range?.from && range?.to && (
+      {rangeBooking?.from && rangeBooking?.to && (
         <p className='bg-primary-900 text-primary-300 flex items-center justify-between px-16 py-2'>
-          Booked Dates: {String(range.from.toLocaleDateString())} to{' '}
-          {String(range.to.toLocaleDateString())}
+          Booked Dates: {String(rangeBooking.from.toLocaleDateString())} to{' '}
+          {String(rangeBooking.to.toLocaleDateString())}
         </p>
       )}
 
@@ -52,18 +51,24 @@ function ReservationForm({ cabin, user, booking }) {
           <input
             name='startDate'
             hidden
-            value={range?.from ?? ''}
+            value={rangeBooking?.from ?? ''}
             onChange={() =>
-              setRange((prev) => ({ ...prev, startDate: range?.from }))
+              setRangeBooking((prev) => ({
+                ...prev,
+                startDate: rangeBooking?.from,
+              }))
             }
             readOnly
           />
           <input
             name='endDate'
             hidden
-            value={range?.to ?? ''}
+            value={rangeBooking?.to ?? ''}
             onChange={() =>
-              setRange((prev) => ({ ...prev, endDate: range?.to }))
+              setRangeBooking((prev) => ({
+                ...prev,
+                endDate: rangeBooking?.to,
+              }))
             }
             readOnly
           />
@@ -102,7 +107,7 @@ function ReservationForm({ cabin, user, booking }) {
         </div>
 
         <div className='flex items-center justify-end gap-6'>
-          {(!range.from || !range.to) && (
+          {(!rangeBooking?.from || !rangeBooking?.to) && (
             <p className='text-primary-300 ring-accent-500 border-accent-900 text-base ring ring-offset-1'>
               Start by selecting dates
             </p>
@@ -110,7 +115,7 @@ function ReservationForm({ cabin, user, booking }) {
 
           <SubmitButton
             pendingLabel='Updating...'
-            isDisabled={!range.from || !range.to}
+            isDisabled={!rangeBooking?.from || !rangeBooking?.to}
           >
             {booking ? 'Update booking' : 'Reserve now'}
           </SubmitButton>

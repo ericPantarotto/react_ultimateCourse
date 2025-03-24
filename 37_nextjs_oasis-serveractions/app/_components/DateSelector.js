@@ -2,14 +2,27 @@
 
 import PropTypes from 'prop-types';
 // import { DayPicker } from 'react-day-picker';
+import { usePathname } from 'next/navigation';
 import { DayPicker, getDefaultClassNames } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { useReservation } from '../contexts/ReservationContext';
 
 // function DateSelector({ settings, bookedDates, cabin }) {
 function DateSelector({ settings }) {
-  const { range, setRange, resetRange } = useReservation();
+  let { range, setRange, resetRange } = {};
+  const pathname = usePathname();
+  if (pathname.includes('cabins')) {
+    ({ range, setRange, resetRange } = useReservation());
+  } else {
+    ({
+      rangeBooking: range,
+      setRangeBooking: setRange,
+      resetRangeBooking: resetRange,
+    } = useReservation());
+  }
+
   const defaultClassNames = getDefaultClassNames();
+
   // CHANGE
   const regularPrice = 23;
   const discount = 23;
