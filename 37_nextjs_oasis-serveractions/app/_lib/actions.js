@@ -41,6 +41,9 @@ export async function updateGuest(formData) {
 }
 
 export async function deleteBooking(bookingId) {
+  await new Promise((r) => setTimeout(() => r(), 3000));
+  // throw new Error('HACK to simulate optimistic delete'); //HACK: simulate optimistic delete
+
   const session = await auth();
   if (!session) throw new Error('You must be logged in');
 

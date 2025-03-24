@@ -102,7 +102,7 @@ export async function getBookings(guestId) {
 }
 
 export async function getBookedDatesByCabinId(cabinId) {
-  await new Promise((r) => setTimeout(() => r(), 2500)); //NOTE: to test streaming of reservation comp. of the page/id component
+  await new Promise((r) => setTimeout(() => r(), 1000)); //NOTE: to test streaming of reservation comp. of the page/id component
 
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
@@ -224,6 +224,7 @@ export async function updateBooking(id, updatedFields) {
 // DELETE
 
 export async function deleteBooking(id) {
+  await new Promise((r) => setTimeout(() => r(), 1000));
   const { data, error } = await supabase.from('bookings').delete().eq('id', id);
 
   if (error) {

@@ -4429,6 +4429,32 @@ And when a state update is marked as a transition by using the useTransition hoo
 Hiding the bookingId in the `<form/>` is necessary, because server actions do not have access to the URL.
 
 they're basically just API endpoints that run completely independently of the current URL and so we cannot really get any of the params that we get in a server component here in a server action.
+
+### Removing Reservations Immediately: The useOptimistic Hook
+
+with *optimistic update*, what we do is remove a booking from the UI immediately when the user clicks delete button.
+
+So while it is actually still being deleted in the background, we're being optimistic that the deletion will indeed be successful. And if it's not, then the state will simply return and the UI will come back to this current form.
+
+So the goal of this technique is to improve the user experience by a lot, because it makes the app feel so much faster and more responsive, without having all these loading spinners all over the place. React can help us implement this common pattern by using a new modern hook called `useOptimistic`.
+
+**<span style='color: #875c5c'>IMPORTANT:** since we're using a hook, of course we need a client component.
+
+We create the `ReservationList.js` client component, all we're doing now on the server is to grab the data and then we pass it onto the client, which is now responsible for rendering the reservations.
+
+with the `useOptimistic`, we always need to be thinking basically about two types of state:
+
+- one is the actual state, so the actual booking data,
+- and one is the optimistic state.
+
+```javascript
+const [optimisticBookings, optimisticDelete] = useOptimistic(
+  bookings, //NOTE: current state
+  (curBookings, bookingId) => {
+    return curBookings.filter((booking) => booking.id !== bookingId);
+  },
+);
+```
 <!---
 [comment]: it works with text, you can rename it how you want
 
