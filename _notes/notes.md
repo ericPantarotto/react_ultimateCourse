@@ -4460,11 +4460,11 @@ const [optimisticBookings, optimisticDelete] = useOptimistic(
 
 **<span style='color: #9e5231'>Error:** in *Next.js* documentation it says that the `loading.js` that we had in the root folder would be applied to a child routes, but apparently that is not the case.
 
-###
+### Creating a New Reservation
 
 When updating a booking, we also needed to pass in some additional data besides just the input fields.
 
-in that form, we solve this problem by adding a hidden field. And that's a great solution for the situation in which we only have few pieces of data because then we can just create one or two additional hidden fields.
+in that update form, we solve this problem by adding a hidden field. And that's a great solution for the situation in which we only have few pieces of data because then we can just create one or two additional hidden fields.
 
 **<span style='color: #875c5c'>IMPORTANT:** the second alternative besides creating a hidden field is to use the **bind method**. So what the bind method does when you call it on a function is:
 
@@ -4558,6 +4558,12 @@ in the end, this was not useful and the external library `date-fns/tz` was the m
   const startDate = new Date(formData.get('startDate'));
   const utcStartDate = new TZDate(startDate, 'Europe/Berlin');
 ```
+
+## Deployment with Vercel
+
+- create a dedicated public/private Github repository
+
+- **<span style='color: #a3842c'>Vercel:** [https://vercel.com/]
 
 <!---
 [comment]: it works with text, you can rename it how you want
