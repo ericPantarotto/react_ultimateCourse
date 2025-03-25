@@ -4561,10 +4561,26 @@ in the end, this was not useful and the external library `date-fns/tz` was the m
 
 ## Deployment with Vercel
 
+### Deploying to Vercel
+
 - create a dedicated public/private Github repository
 
 - **<span style='color: #a3842c'>Vercel:** [https://vercel.com/]
 
+### Updating Environment Variables and OAuth Credentials
+
+go to `Dashboard/Settings/Environment Variables` on the Vercel platform
+
+- NEXTAUTH_URL still points to `http://localhost:3000` and needs to be updated to `https://wild-oasis-website-rust.vercel.app/`
+- [https://vercel.com/ericpantarottos-projects/wild-oasis-website/settings/environment-variables]: Environment Variables
+
+In order to provide your Deployment with Environment Variables at Build and Runtime, you may enter them right here, for the Environment of your choice. **A new Deployment is required for your changes to take effect.**
+
+go to `Dashboard/Deployments`, then `...`, then Redeploy
+
+- [https://console.cloud.google.com/], then `APIs & Services`, `Credentials`, `OAuth 2.0 Client IDs`, `Add URI`:  (no ending `/`):
+  - `Authorized JavaScript origins`: [https://wild-oasis-website-rust.vercel.app]
+  - `Authorized redirect URIs`: [https://wild-oasis-website-rust.vercel.app/api/auth/callback/google]
 <!---
 [comment]: it works with text, you can rename it how you want
 
