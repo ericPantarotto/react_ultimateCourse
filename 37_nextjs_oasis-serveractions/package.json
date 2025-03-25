@@ -10,6 +10,7 @@
     "prod": "next build && next start"
   },
   "dependencies": {
+    "@date-fns/tz": "^1.2.0",
     "@heroicons/react": "^2.2.0",
     "@supabase/supabase-js": "^2.49.1",
     "date-fns": "^4.1.0",

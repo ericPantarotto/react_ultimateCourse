@@ -1,5 +1,6 @@
 'use server';
 
+import { TZDate } from '@date-fns/tz';
 import { differenceInDays } from 'date-fns';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -80,6 +81,7 @@ export async function updateBooking(bookingData, formData) {
   const observations = formData.get('observations').slice(0, 120);
   const startDate = new Date(formData.get('startDate'));
   const endDate = new Date(formData.get('endDate'));
+
   const numNights = differenceInDays(endDate, startDate);
 
   if (
@@ -93,8 +95,8 @@ export async function updateBooking(bookingData, formData) {
   const updateData = {
     numGuests,
     observations,
-    startDate,
-    endDate,
+    startDate: new TZDate(startDate, 'Europe/Berlin'),
+    endDate: new TZDate(endDate, 'Europe/Berlin'),
     numNights,
     cabinPrice: bookingData.cabinPrice,
     totalPrice: bookingData.cabinPrice,
